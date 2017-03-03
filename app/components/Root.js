@@ -3,6 +3,7 @@
 import React from 'react';
 import Component from './Component';
 import Text from './Text';
+import Start from './Start';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -28,26 +29,7 @@ export default class Root extends Component {
           <Text style={{padding: 20}}>follow us</Text>
         </View>
       :
-        <View>
-          <View style={style.header}>
-            <TouchableOpacity style={style.who} onPress={this.showAbout}>
-              <Text>who dis?</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={style.pay}>
-              <Text>pay</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={style.main}>
-            <TouchableOpacity onPress={this.startGame}>
-              <Text>start</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={style.footer}>
-            <TouchableOpacity>
-              <Text>footer</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+        <Start showAbout={this.showAbout} startGame={this.startGame} />
       }
     </View>
   )}
@@ -64,7 +46,6 @@ export default class Root extends Component {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
+    paddingTop: 20,
+  },
 })
