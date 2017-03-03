@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Component from './Component';
+import FollowUs from './FollowUs';
 import Text from './Text';
 import Start from './Start';
 import {
@@ -16,6 +17,7 @@ export default class Root extends Component {
     this.state = {}
     this.startGame = this.startGame.bind(this)
     this.showAbout = this.showAbout.bind(this)
+    this.showStart = this.showStart.bind(this)
   }
 
   render() { return (
@@ -25,9 +27,7 @@ export default class Root extends Component {
           <Text style={{padding: 20}}>Da Game</Text>
         </View>
       : this.state.aboutUs ?
-        <View>
-          <Text style={{padding: 20}}>follow us</Text>
-        </View>
+        <FollowUs back={this.showStart}/>
       :
         <Start showAbout={this.showAbout} startGame={this.startGame} />
       }
@@ -40,6 +40,10 @@ export default class Root extends Component {
 
   startGame() {
     this.setState({playing: true})
+  }
+
+  showStart() {
+    this.setState({aboutUs: false, playing: false,})
   }
 }
 

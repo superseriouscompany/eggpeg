@@ -1,6 +1,6 @@
 'use strict';
 
-import React from 'react';
+import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
 import PayButton from './PayButton';
@@ -11,6 +11,11 @@ import {
 } from 'react-native';
 
 export default class Start extends Component {
+  static propTypes = {
+    startGame: PropTypes.func.isRequired,
+    showAbout: PropTypes.func.isRequired,
+  }
+
   render() { return (
     <View style={{flex: 1}}>
       <View style={style.header}>
