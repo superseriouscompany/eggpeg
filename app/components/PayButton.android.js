@@ -17,7 +17,7 @@ export default class PayButton extends Component {
   }
 
   render() { return (
-    <TouchableOpacity style={style.pay} onPress={this.pay}>
+    <TouchableOpacity style={style.rightNav} onPress={this.pay}>
       <Text style={{fontStyle: 'italic'}}>we po&#39;</Text>
     </TouchableOpacity>
   )}
@@ -35,8 +35,10 @@ export default class PayButton extends Component {
 }
 
 const style = StyleSheet.create({
-  pay: {
-    position: 'absolute',
-    right: 0,
+  rightNav: {
+    width: 120,
+    padding: 20,
+    paddingTop: 18,
+    paddingLeft: 0
   },
 })
