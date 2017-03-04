@@ -36,7 +36,14 @@ export default class GameView extends Component {
               left: this.props.bullet.x,
               width: this.props.bullet.width,
               height: this.props.bullet.width}]} />
-          : null }
+          : this.props.bullet.shadow ?
+            <View style={[style.shadow, {
+              left: this.props.bullet.x,
+              width: this.props.bullet.width,
+              height: this.props.bullet.width}]} />
+
+          : null
+          }
         </View>
       </TouchableWithoutFeedback>
     )
@@ -58,5 +65,8 @@ const style = StyleSheet.create({
   },
   bullet: {
     backgroundColor: 'orange',
+  },
+  shadow: {
+    backgroundColor: 'turquoise',
   },
 })
