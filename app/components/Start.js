@@ -34,7 +34,7 @@ export default class Start extends Component {
       :
         <View style={{flex: 1}}>
           <View style={style.header}>
-            <TouchableOpacity style={style.who} onPress={this.props.showAbout}>
+            <TouchableOpacity style={style.leftNav} onPress={this.props.showAbout}>
               <Text style={{fontStyle: 'italic'}}>who dis?</Text>
             </TouchableOpacity>
             <PayButton payDialog={this.payDialog}/>
@@ -90,16 +90,27 @@ export default class Start extends Component {
 }
 
 const style = StyleSheet.create({
-  container: {
+  header: {
+    zIndex: 69,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  leftNav: {
+    width: 120,
     padding: 20,
-    paddingTop: 12,
+    paddingTop: 18,
+    paddingRight: 0
   },
   main: {
     flex: 1,
+    marginTop: -50,
     justifyContent: 'center',
     alignItems: 'center',
   },
   footer: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
     alignItems: 'center',
   }
 })
