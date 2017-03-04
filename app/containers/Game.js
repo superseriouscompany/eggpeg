@@ -24,10 +24,11 @@ class Game extends Component {
 
   gameLoop() {
     this.iterate();
-    setTimeout(this.gameLoop, 10)
+    requestAnimationFrame(this.gameLoop)
   }
 
   iterate() {
+    if( this.props.head.hit ) { return; }
     // update head position
     const {width, x}    = this.props.head
     const {windowWidth} = this.state
@@ -56,7 +57,7 @@ class Game extends Component {
     if( this.props.bullet.visible && isExpired ) {
       this.props.dispatch({type: 'bullet:hide'})
       if( !this.props.head.hit ) {
-        alert('You lose.')
+        alert('Nope.')
       }
     }
   }
