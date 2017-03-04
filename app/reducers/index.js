@@ -1,11 +1,17 @@
-import {createStore, combineReducers} from 'redux';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
+import createLogger from 'redux-logger';
 
 import bullet from './bullet'
+import head   from './head'
 
-const reducers = combineReducers([
+const reducers = combineReducers({
   bullet,
-])
+})
+const middleware = []
+if( __DEV__ ) {
+  middleware.push(createLogger())
+}
 
-const store = createStore(reducers)
+const store = createStore(reducers,applyMiddleware(...middleware))
 
 export default store

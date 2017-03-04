@@ -24,21 +24,16 @@ class Game extends Component {
         velocity: 1,
         width:    20,
       },
-      bullet: {
-        width:  5,
-        delay:  3000,
-        linger: 100,
-      }
     }
-    this.updateGameState = this.updateGameState.bind(this)
+    this.gameLoop = this.gameLoop.bind(this)
     this.shoot = this.shoot.bind(this)
   }
 
   componentDidMount() {
-    this.updateGameState();
+    this.gameLoop();
   }
 
-  updateGameState() {
+  gameLoop() {
     // update head position
     const {width, x} = this.state.head
     const windowWidth = this.state.window.width
@@ -53,48 +48,41 @@ class Game extends Component {
       }
     }
 
+    this.setState(state);
+
     // update bullet position
-    if( this.state.bullet.time ) {
-      const bulletFired = +new Date - this.state.bullet.time;
-      if( bulletFired > this.state.bullet.delay + this.state.bullet.linger ) {
+    if( this.props.bullet.time ) {
+      const bulletFired = +new Date - this.props.bullet.time;
+      if( bulletFired > this.props.bullet.delay + this.props.bullet.linger ) {
         return alert('Nope.')
-      } else if( this.state.bullet.visible ) {
+      } else if( this.props.bullet.visible ) {
         const left      = this.state.head.x;
         const right     = this.state.head.x + this.state.head.width;
-        const bullLeft  = this.state.bullet.x;
-        const bullRight = this.state.bullet.x + this.state.bullet.width;
+        const bullLeft  = this.props.bullet.x;
+        const bullRight = this.props.bullet.x + this.props.bullet.width;
         const hit       = left < bullLeft && bullLeft < right || left < bullRight && bullRight < right;
 
         if( hit ) {
           return alert('You win.')
         }
-      } else if( bulletFired >= this.state.bullet.delay ) {
-        state.bullet = {
-          ...this.state.bullet,
-          visible: true,
-        }
-      } else {
-        state.bullet = {
-          ...this.state.bullet,
-          visible: false,
-        }
+      } else if( bulletFired >= this.props.bullet.delay ) {
+        this.props.dispatch({type: 'bullet:show'})
+      } else if( this.props.bullet.visible ){
+        this.props.dispatch({type: 'bullet:hide'})
       }
     }
 
-    this.setState(state);
-
-    setTimeout(this.updateGameState, 10)
+    setTimeout(this.gameLoop, 10)
   }
 
   render() {
-    const bulletFired = +new Date - this.state.bullet.time;
     return (
       <TouchableWithoutFeedback onPress={this.shoot}>
         <View style={style.container} onPress={this.shoot}>
           <StatusBar hidden={true} />
           <View style={[style.head, {left: this.state.head.x, width: this.state.head.width, height: this.state.head.width}]} />
-          { this.state.bullet.visible ?
-            <View style={[style.bullet, {left: this.state.bullet.x, width: this.state.bullet.width, height: this.state.bullet.width}]} />
+          { this.props.bullet.visible ?
+            <View style={[style.bullet, {left: this.props.bullet.x, width: this.props.bullet.width, height: this.props.bullet.width}]} />
           : null }
         </View>
       </TouchableWithoutFeedback>
@@ -102,18 +90,7 @@ class Game extends Component {
   }
 
   shoot(event) {
-    this.props.dispatch({type: 'tick'})
-
-    const {nativeEvent} = event
-
-    console.warn(nativeEvent.pageX, nativeEvent.pageY, nativeEvent.locationX, nativeEvent.locationY)
-    this.setState({
-      bullet: {
-        ...this.state.bullet,
-        time: +new Date,
-        x: nativeEvent.pageX,
-      }
-    })
+    this.props.dispatch({type: 'bullet:fire', x: event.nativeEvent.pageX})
   }
 }
 
@@ -133,7 +110,7 @@ const style = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    cool: 'nice'
+    bullet: state.bullet,
   }
 }
 
