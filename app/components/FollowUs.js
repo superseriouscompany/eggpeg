@@ -19,10 +19,10 @@ export default class FollowUs extends Component {
   }
 
   render() { return (
-    <View style={[style.container, {flex: 1}]}>
+    <View style={{flex: 1}}>
       <View style={style.header}>
         <TouchableOpacity style={{padding: 20, paddingTop: 12}} onPress={this.props.back}>
-          <Text>x</Text>
+          <Text>&times;</Text>
         </TouchableOpacity>
       </View>
       <View style={style.main}>

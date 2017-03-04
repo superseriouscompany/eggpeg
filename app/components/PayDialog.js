@@ -4,6 +4,7 @@ import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
 import {
+  Image,
   NativeModules,
   StyleSheet,
   TouchableOpacity,
@@ -25,15 +26,24 @@ export default class PayDialog extends Component {
   render() {
     const {product} = this.props;
   return (
-    <View>
-      <TouchableOpacity onPress={this.props.back}>
-        <Text>&times;</Text>
-      </TouchableOpacity>
-      <Text>{product.title}</Text>
-      <Text>{product.description}</Text>
-      <TouchableOpacity onPress={this.purchase}>
-        <Text>Lose {product.priceString}</Text>
-      </TouchableOpacity>
+    <View style={{flex: 1}}>
+      <View style={style.header}>
+        <TouchableOpacity style={{padding: 20, paddingTop: 12}} onPress={this.props.back}>
+          <Text>&times;</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={style.main}>
+        <Image style={{marginBottom: 10}} source={require('../images/CartoonBabies.png')} />
+
+        <View>
+          <Text>{product.title}</Text>
+          <Text>{product.description}</Text>
+        </View>
+
+        <TouchableOpacity onPress={this.purchase}>
+          <Text>Lose {product.priceString}</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )}
 
@@ -51,5 +61,21 @@ export default class PayDialog extends Component {
 }
 
 const style = StyleSheet.create({
-
+  header: {
+    zIndex: 69,
+  },
+  main: {
+    marginTop: -55,
+    flex: 1,
+    paddingLeft: 20,
+    paddingRight: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  footer: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
+    alignItems: 'center',
+  }
 })

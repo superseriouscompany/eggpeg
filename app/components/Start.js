@@ -46,7 +46,7 @@ export default class Start extends Component {
           </View>
           <View style={style.footer}>
             <TouchableOpacity onPress={this.shareDialog}>
-              <Text style={{fontStyle: 'italic'}}>show your mom</Text>
+              <Text style={{fontStyle: 'italic'}}>show your dad</Text>
             </TouchableOpacity>
           </View>
         </View>
