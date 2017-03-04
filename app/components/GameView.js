@@ -3,6 +3,7 @@
 import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
+import Result from './Result'
 import {
   Dimensions,
   StatusBar,
@@ -14,48 +15,48 @@ import {
 export default class GameView extends Component {
   static propTypes = {
     shoot: PropTypes.func.isRequired,
-  }
-
-  constructor(props) {
-    super(props)
-    this.shoot = this.shoot.bind(this)
+    retry: PropTypes.func.isRequired,
   }
 
   render() {
     return (
-      <TouchableWithoutFeedback onPress={this.shoot}>
-        <View style={style.container}>
-          <StatusBar hidden={true} />
-          <View style={[style.head, {
-            marginLeft: this.props.head.x,
-            width: this.props.head.width,
-            height: this.props.head.width
-          }]} />
-          <View style={[style.bulletContainer, {
-            left:   this.props.bullet.x - this.props.bullet.width,
-            top:    this.props.bullet.y - this.props.bullet.width,
-            width:  this.props.bullet.width * 2,
-            height: this.props.bullet.width * 2,
-          }]}>
-            { this.props.bullet.visible ?
-              <View style={[style.bullet, {
-                width:  this.props.bullet.width,
-                height: this.props.bullet.width}]} />
-            : this.props.bullet.shadow > 0 ?
-              <View style={[style.shadow, {
-                width:  this.props.bullet.width * 2 * this.props.bullet.shadow,
-                height: this.props.bullet.width * 2 * this.props.bullet.shadow}]} />
+      <View style={{flex: 1}}>
+        <StatusBar hidden={true} />
 
-            : null
-            }
-          </View>
-        </View>
-      </TouchableWithoutFeedback>
+        { this.props.result.done ?
+          <Result win={this.props.result.win} retry={this.props.retry} />
+        :
+          <TouchableWithoutFeedback onPress={(e) => this.props.shoot(e.nativeEvent.pageX, e.nativeEvent.pageY)}>
+            <View style={style.container}>
+              <Text style={style.tries}>{this.props.chamber} {this.props.chamber == 1 ? 'try' : 'tries'} left</Text>
+              <View style={[style.head, {
+                marginLeft: this.props.head.x,
+                width: this.props.head.width,
+                height: this.props.head.width
+              }]} />
+              <View style={[style.bulletContainer, {
+                left:   this.props.bullet.x - this.props.bullet.width,
+                top:    this.props.bullet.y - this.props.bullet.width,
+                width:  this.props.bullet.width * 2,
+                height: this.props.bullet.width * 2,
+              }]}>
+                { this.props.bullet.visible ?
+                  <View style={[style.bullet, {
+                    width:  this.props.bullet.width,
+                    height: this.props.bullet.width}]} />
+                : this.props.bullet.shadow > 0 ?
+                  <View style={[style.shadow, {
+                    width:  this.props.bullet.width * 2 * this.props.bullet.shadow,
+                    height: this.props.bullet.width * 2 * this.props.bullet.shadow}]} />
+
+                : null
+                }
+              </View>
+            </View>
+          </TouchableWithoutFeedback>
+        }
+      </View>
     )
-  }
-
-  shoot(event) {
-    this.props.shoot(event.nativeEvent.pageX, event.nativeEvent.pageY)
   }
 }
 
@@ -63,6 +64,11 @@ const style = StyleSheet.create({
   container: {
     flex:           1,
     justifyContent: 'center',
+  },
+  tries: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
   },
   head: {
     backgroundColor: 'slateblue',

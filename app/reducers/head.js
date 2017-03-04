@@ -18,6 +18,11 @@ export default function head(state = config.head, action) {
         ...state,
         hit: true,
       }
+    case 'result:retry':
+      return {
+        ...state,
+        ...config.head,
+      }
     default:
       return state;
   }

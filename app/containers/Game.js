@@ -17,6 +17,7 @@ class Game extends Component {
     this.gameLoop = this.gameLoop.bind(this)
     this.iterate  = this.iterate.bind(this)
     this.shoot    = this.shoot.bind(this)
+    this.retry    = this.retry.bind(this)
   }
 
   componentDidMount() {
@@ -33,7 +34,7 @@ class Game extends Component {
   }
 
   iterate() {
-    if( this.props.head.hit ) { return; }
+    if( this.props.result.done ) { return; }
     // update head position
     const {width, x}    = this.props.head
     const {windowWidth} = this.state
@@ -60,14 +61,19 @@ class Game extends Component {
     // check for a hit
     if( !this.props.head.hit && isActive && isCollision(this.props.head, this.props.bullet) ) {
       this.props.dispatch({type: 'head:hit'})
-      alert('You win.')
+      this.props.dispatch({type: 'result:win'})
     }
 
     // check for expiry
     if( this.props.bullet.visible && isExpired ) {
       this.props.dispatch({type: 'bullet:hide'})
       if( !this.props.head.hit ) {
-        alert('Nope.')
+        this.props.dispatch({type: 'bullet:miss'})
+        if( this.props.hasBullets ) {
+          alert('Nope.')
+        } else {
+          this.props.dispatch({type: 'result:loss'})
+        }
       }
     }
   }
@@ -76,20 +82,26 @@ class Game extends Component {
     this.props.dispatch({type: 'bullet:fire', x: x, y: y})
   }
 
+  retry() {
+    this.props.dispatch({type: 'result:retry'})
+  }
+
   render() { return (
-    <GameView shoot={this.shoot} {...this.props} />
+    <GameView shoot={this.shoot} retry={this.retry} {...this.props} />
   )}
 }
 
 function mapStateToProps(state) {
   return {
-    bullet: state.bullet,
-    head:   state.head,
+    bullet:     state.bullet,
+    head:       state.head,
+    chamber:    state.chamber,
+    hasBullets: state.chamber > 0,
+    result:     state.result,
   }
 }
 
 function isCollision(a, b) {
-  debugger
   const aLeft   = a.x;
   const aRight  = a.x + a.width;
   const bLeft   = b.x;
@@ -101,6 +113,8 @@ function isCollision(a, b) {
 
   const isXCollision = aLeft < bLeft && bLeft < aRight || aLeft < bRight && bRight < aRight;
   const isYCollision = aTop < bTop && bTop < aBottom || aTop < bBottom && bBottom < aBottom;
+
+  console.log('checked collision', isXCollision, isYCollision, a, b);
 
   return isXCollision && isYCollision;
 }
