@@ -5,6 +5,7 @@ import Component from './Component';
 import Text from './Text';
 import {
   Dimensions,
+  StatusBar,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
@@ -20,12 +21,12 @@ export default class Game extends Component {
       head: {
         x:        0,
         velocity: 1,
-        width:    10,
+        width:    20,
       },
       bullet: {
         width:  5,
         delay:  3000,
-        linger: 3000,
+        linger: 100,
       }
     }
     this.updateGameState = this.updateGameState.bind(this)
@@ -86,16 +87,18 @@ export default class Game extends Component {
 
   render() {
     const bulletFired = +new Date - this.state.bullet.time;
-  return (
-    <TouchableWithoutFeedback onPress={this.shoot}>
-      <View style={style.container} onPress={this.shoot}>
-        <View style={[style.head, {left: this.state.head.x, width: this.state.head.width, height: this.state.head.width}]} />
-        { this.state.bullet.visible ?
-          <View style={[style.bullet, {left: this.state.bullet.x, width: this.state.bullet.width, height: this.state.bullet.width}]} />
-        : null }
-      </View>
-    </TouchableWithoutFeedback>
-  )}
+    return (
+      <TouchableWithoutFeedback onPress={this.shoot}>
+        <View style={style.container} onPress={this.shoot}>
+          <StatusBar hidden={true} />
+          <View style={[style.head, {left: this.state.head.x, width: this.state.head.width, height: this.state.head.width}]} />
+          { this.state.bullet.visible ?
+            <View style={[style.bullet, {left: this.state.bullet.x, width: this.state.bullet.width, height: this.state.bullet.width}]} />
+          : null }
+        </View>
+      </TouchableWithoutFeedback>
+    )
+  }
 
   shoot(event) {
     const {nativeEvent} = event
@@ -121,6 +124,6 @@ const style = StyleSheet.create({
     position: 'absolute',
   },
   bullet: {
-    backgroundColor: 'lawngreen',
+    backgroundColor: 'orange',
   },
 })
