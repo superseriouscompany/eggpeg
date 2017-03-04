@@ -10,7 +10,8 @@
     "react": "~15.4.1",
     "react-native": "0.42.0",
     "react-native-billing": "^2.3.0",
-    "react-native-branch": "^1.0.5"
+    "react-native-branch": "^1.0.5",
+    "react-native-in-app-utils": "^5.1.0"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",

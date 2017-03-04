@@ -4,6 +4,7 @@ import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
 import PayButton from './PayButton';
+import PayDialog from './PayDialog';
 import {
   Platform,
   Share,
@@ -20,27 +21,36 @@ export default class Start extends Component {
 
   constructor(props) {
     super(props)
-    this.shareDialog = this.shareDialog.bind(this)
+    this.state            = {}
+    this.shareDialog      = this.shareDialog.bind(this)
+    this.payDialog        = this.payDialog.bind(this)
+    this.dismissPayDialog = this.dismissPayDialog.bind(this)
   }
 
   render() { return (
     <View style={[style.container, {flex: 1}]}>
-      <View style={style.header}>
-        <TouchableOpacity style={style.who} onPress={this.props.showAbout}>
-          <Text style={{fontStyle: 'italic'}}>who dis?</Text>
-        </TouchableOpacity>
-        <PayButton />
-      </View>
-      <View style={style.main}>
-        <TouchableOpacity onPress={this.props.startGame}>
-          <Text style={{fontStyle: 'italic', fontSize: 32}}>start</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={style.footer}>
-        <TouchableOpacity onPress={this.shareDialog}>
-          <Text style={{fontStyle: 'italic'}}>show your mom</Text>
-        </TouchableOpacity>
-      </View>
+      { this.state.paying ?
+        <PayDialog back={() => this.setState({paying: false})} product={this.state.product}/>
+      :
+        <View style={{flex: 1}}>
+          <View style={style.header}>
+            <TouchableOpacity style={style.who} onPress={this.props.showAbout}>
+              <Text style={{fontStyle: 'italic'}}>who dis?</Text>
+            </TouchableOpacity>
+            <PayButton payDialog={this.payDialog}/>
+          </View>
+          <View style={style.main}>
+            <TouchableOpacity onPress={this.props.startGame}>
+              <Text style={{fontStyle: 'italic', fontSize: 32}}>start</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={style.footer}>
+            <TouchableOpacity onPress={this.shareDialog}>
+              <Text style={{fontStyle: 'italic'}}>show your mom</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      }
     </View>
   )}
 
@@ -57,6 +67,24 @@ export default class Start extends Component {
     }, {
       dialogTitle: 'Invite Friends',
       tintColor: 'blue'
+    })
+  }
+
+  payDialog(id, title, description, priceString) {
+    this.setState({
+      paying: true,
+      product: {
+        id,
+        title,
+        description,
+        priceString,
+      }
+    })
+  }
+
+  dismissPayDialog() {
+    this.setState({
+      paying: false,
     })
   }
 }
