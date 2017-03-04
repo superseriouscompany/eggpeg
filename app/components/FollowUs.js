@@ -4,7 +4,9 @@ import React from 'react';
 import Component from './Component';
 import Text from './Text';
 import {
+  Image,
   Linking,
+  StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -17,19 +19,30 @@ export default class FollowUs extends Component {
   }
 
   render() { return (
-    <View>
-      <TouchableOpacity onPress={this.props.back}>
-        <Text>&lt;</Text>
-      </TouchableOpacity>
-      <Text style={{padding: 20}}>follow us</Text>
+    <View style={[style.container, {flex: 1}]}>
+      <View style={style.header}>
+        <TouchableOpacity style={{padding: 20, paddingTop: 12}} onPress={this.props.back}>
+          <Text>x</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={style.main}>
+        <View>
+          <Text style={{fontSize: 14, textAlign: 'center'}}>this is a piece of poop by</Text>
+          <Text style={{fontSize: 32, textAlign: 'center', marginBottom: 5}}>Super Serious Company</Text>
+        </View>
 
-      <TouchableOpacity onPress={this.visitGram}>
-        <Text>Follow us on the gram</Text>
-      </TouchableOpacity>
+        <Image style={{marginBottom: 10}} source={require('../images/CartoonsWorking.png')} />
 
-      <TouchableOpacity onPress={this.visitSite}>
-        <Text>See our janky webpage</Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={this.visitGram}>
+          <Image source={require('../images/IGFollowButton.png')} />
+        </TouchableOpacity>
+      </View>
+
+      <View style={style.footer}>
+        <TouchableOpacity onPress={this.visitSite}>
+          <Text style={{fontStyle: 'italic'}}>el websito</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )}
 
@@ -41,3 +54,23 @@ export default class FollowUs extends Component {
     Linking.openURL('https://superseriouscompany.com')
   }
 }
+
+const style = StyleSheet.create({
+  header: {
+    zIndex: 69,
+  },
+  main: {
+    marginTop: -55,
+    flex: 1,
+    paddingLeft: 20,
+    paddingRight: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  footer: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
+    alignItems: 'center',
+  }
+})
