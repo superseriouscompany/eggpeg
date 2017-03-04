@@ -34,6 +34,14 @@ export default class GameView extends Component {
                 width: this.props.head.width,
                 height: this.props.head.width
               }]} />
+              { this.props.casings.map((c, key) => (
+                <View style={[style.casing, {
+                  left:   c.x - c.width / 2,
+                  top:    c.y - c.width / 2,
+                  width:  c.width,
+                  height: c.width,
+                }]} />
+              ))}
               <View style={[style.bulletContainer, {
                 left:   this.props.bullet.x - this.props.bullet.width,
                 top:    this.props.bullet.y - this.props.bullet.width,
@@ -77,8 +85,12 @@ const style = StyleSheet.create({
   bullet: {
     backgroundColor: 'orange',
   },
+  casing: {
+    position: 'absolute',
+    borderColor: 'indianred',
+    borderWidth: 1,
+  },
   bulletContainer: {
-    borderColor:    'red',
     justifyContent: 'center',
     alignItems:     'center',
     position:       'absolute',

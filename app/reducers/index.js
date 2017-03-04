@@ -2,14 +2,16 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 import createLogger from 'redux-logger';
 
 import bullet from './bullet'
-import head   from './head'
+import casings from './casings'
 import chamber from './chamber'
+import head   from './head'
 import result from './result'
 
 const reducers = combineReducers({
   bullet,
-  head,
+  casings,
   chamber,
+  head,
   result,
 })
 const middleware = []

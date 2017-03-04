@@ -70,7 +70,12 @@ class Game extends Component {
       if( !this.props.head.hit ) {
         this.props.dispatch({type: 'bullet:miss'})
         if( this.props.hasBullets ) {
-          alert('Nope.')
+          this.props.dispatch({
+            type:  'casing:drop',
+            x:     this.props.bullet.x,
+            y:     this.props.bullet.y,
+            width: this.props.bullet.width,
+          })
         } else {
           this.props.dispatch({type: 'result:loss'})
         }
@@ -98,6 +103,7 @@ function mapStateToProps(state) {
     chamber:    state.chamber,
     hasBullets: state.chamber > 0,
     result:     state.result,
+    casings:    state.casings,
   }
 }
 
