@@ -12,10 +12,17 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
+#import <Branch/Branch.h>
+#import <react-native-branch/RNBranch.h>
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  // Uncomment this line to use the test key instead of the live one.
+  // [RNBranch useTestInstance]
+  [RNBranch initSessionWithLaunchOptions:launchOptions isReferrable:YES]; // <-- add this
+
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
@@ -32,6 +39,18 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
+}
+
+// Add the openURL and continueUserActivity functions
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+  if (![RNBranch handleDeepLink:url]) {
+    // do other deep link routing for the Facebook SDK, Pinterest SDK, etc
+  }
+  return YES;
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler {
+  return [RNBranch continueUserActivity:userActivity];
 }
 
 @end

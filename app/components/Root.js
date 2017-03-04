@@ -5,6 +5,7 @@ import Component from './Component';
 import FollowUs from './FollowUs';
 import Text from './Text';
 import Start from './Start';
+import branch from 'react-native-branch';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -20,6 +21,33 @@ export default class Root extends Component {
     this.showStart = this.showStart.bind(this)
   }
 
+  componentDidMount() {
+    let branchUniversalObject = branch.createBranchUniversalObject(
+      `default`,
+      {
+        metadata: {
+          link_type: 'default',
+        }
+      }
+    )
+
+    let linkProperties = {
+      feature: 'friend-invitation',
+      channel: 'app'
+    }
+
+    let controlParams = {
+      '$ios_deepview': 'floats_deepview_vk8d',
+    }
+    controlParams = {};
+
+    branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((payload) => {
+      this.setState({
+        shareLink: payload.url,
+      })
+    })
+  }
+
   render() { return (
     <View style={style.container}>
       { this.state.playing ?
@@ -29,7 +57,7 @@ export default class Root extends Component {
       : this.state.aboutUs ?
         <FollowUs back={this.showStart}/>
       :
-        <Start showAbout={this.showAbout} startGame={this.startGame} />
+        <Start showAbout={this.showAbout} startGame={this.startGame} shareLink={this.state.shareLink}/>
       }
     </View>
   )}

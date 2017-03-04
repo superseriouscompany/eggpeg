@@ -5,6 +5,8 @@ import Component from './Component';
 import Text from './Text';
 import PayButton from './PayButton';
 import {
+  Platform,
+  Share,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -14,6 +16,11 @@ export default class Start extends Component {
   static propTypes = {
     startGame: PropTypes.func.isRequired,
     showAbout: PropTypes.func.isRequired,
+  }
+
+  constructor(props) {
+    super(props)
+    this.shareDialog = this.shareDialog.bind(this)
   }
 
   render() { return (
@@ -30,12 +37,28 @@ export default class Start extends Component {
         </TouchableOpacity>
       </View>
       <View style={style.footer}>
-        <TouchableOpacity onPress={this.shareLink}>
+        <TouchableOpacity onPress={this.shareDialog}>
           <Text style={{fontStyle: 'italic'}}>show your mom</Text>
         </TouchableOpacity>
       </View>
     </View>
   )}
+
+  shareDialog() {
+    this.shareTimeout && clearTimeout(this.shareTimeout);
+    if( !this.props.shareLink ) {
+      this.shareTimeout = setTimeout(this.shareDialog, 200);
+      return;
+    }
+
+    Share.share({
+      message: Platform.OS == 'android' ? `Download Sniper ${this.props.shareLink}` : 'Download Sniper',
+      url: this.props.shareLink,
+    }, {
+      dialogTitle: 'Invite Friends',
+      tintColor: 'blue'
+    })
+  }
 }
 
 const style = StyleSheet.create({
