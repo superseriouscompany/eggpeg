@@ -13,10 +13,12 @@ import {
   View,
 } from 'react-native';
 
+let playing = true;
+
 export default class Root extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = { playing: playing }
     this.startGame = this.startGame.bind(this)
     this.showAbout = this.showAbout.bind(this)
     this.showStart = this.showStart.bind(this)
