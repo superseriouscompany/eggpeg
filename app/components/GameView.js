@@ -27,23 +27,28 @@ export default class GameView extends Component {
         <View style={style.container}>
           <StatusBar hidden={true} />
           <View style={[style.head, {
-            left: this.props.head.x,
+            marginLeft: this.props.head.x,
             width: this.props.head.width,
             height: this.props.head.width
           }]} />
-          { this.props.bullet.visible ?
-            <View style={[style.bullet, {
-              left: this.props.bullet.x,
-              width: this.props.bullet.width,
-              height: this.props.bullet.width}]} />
-          : this.props.bullet.shadow ?
-            <View style={[style.shadow, {
-              left: this.props.bullet.x,
-              width: this.props.bullet.width,
-              height: this.props.bullet.width}]} />
+          <View style={[style.bulletContainer, {
+            marginLeft: this.props.bullet.x - this.props.bullet.width,
+            marginTop:  -this.props.bullet.width,
+            width:      this.props.bullet.width * 2,
+            height:     this.props.bullet.width * 2,
+          }]}>
+            { this.props.bullet.visible ?
+              <View style={[style.bullet, {
+                width:  this.props.bullet.width,
+                height: this.props.bullet.width}]} />
+            : this.props.bullet.shadow > 0 ?
+              <View style={[style.shadow, {
+                width:  this.props.bullet.width * 2 * this.props.bullet.shadow,
+                height: this.props.bullet.width * 2 * this.props.bullet.shadow}]} />
 
-          : null
-          }
+            : null
+            }
+          </View>
         </View>
       </TouchableWithoutFeedback>
     )
@@ -65,6 +70,11 @@ const style = StyleSheet.create({
   },
   bullet: {
     backgroundColor: 'orange',
+  },
+  bulletContainer: {
+    borderColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   shadow: {
     backgroundColor: 'turquoise',

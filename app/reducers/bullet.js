@@ -7,18 +7,23 @@ export default function bullet(state = config.bullet, action) {
         ...state,
         time: +new Date,
         x: action.x,
-        shadow: true,
+        shadow: 1,
       }
     case 'bullet:show':
       return {
         ...state,
         visible: true,
-        shadow: false,
+        shadow: 0,
       }
     case 'bullet:hide':
       return {
         ...state,
         visible: false,
+      }
+    case 'bullet:updateShadow':
+      return {
+        ...state,
+        shadow: action.size,
       }
     default:
       return state;

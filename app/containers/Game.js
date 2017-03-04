@@ -38,10 +38,15 @@ class Game extends Component {
     this.props.dispatch({type: 'head:move', velocity: velocity})
 
     if( !this.props.bullet.time ) { return; }
-    const bulletFired = +new Date - this.props.bullet.time;
-    const isExpired   = bulletFired >= this.props.bullet.delay + this.props.bullet.linger;
-    const isActive    = bulletFired >= this.props.bullet.delay && !isExpired;
+    const bulletFiredAgo = +new Date - this.props.bullet.time;
+    const isExpired      = bulletFiredAgo >= this.props.bullet.delay + this.props.bullet.linger;
+    const isActive       = bulletFiredAgo >= this.props.bullet.delay && !isExpired;
 
+    // update shadow
+    if( !isActive && !isExpired ) {
+      const shadowTime = (this.props.bullet.delay - bulletFiredAgo) / this.props.bullet.delay;
+      this.props.dispatch({type: 'bullet:updateShadow', size: shadowTime})
+    }
     // update bullet position
     if( !this.props.bullet.visible && isActive ) {
       this.props.dispatch({type: 'bullet:show'})
