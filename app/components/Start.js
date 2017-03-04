@@ -17,21 +17,21 @@ export default class Start extends Component {
   }
 
   render() { return (
-    <View style={{flex: 1}}>
+    <View style={[style.container, {flex: 1}]}>
       <View style={style.header}>
         <TouchableOpacity style={style.who} onPress={this.props.showAbout}>
-          <Text>who dis?</Text>
+          <Text style={{fontStyle: 'italic'}}>who dis?</Text>
         </TouchableOpacity>
         <PayButton />
       </View>
       <View style={style.main}>
         <TouchableOpacity onPress={this.props.startGame}>
-          <Text>start</Text>
+          <Text style={{fontStyle: 'italic', fontSize: 32}}>start</Text>
         </TouchableOpacity>
       </View>
       <View style={style.footer}>
         <TouchableOpacity onPress={this.shareLink}>
-          <Text>show your mom</Text>
+          <Text style={{fontStyle: 'italic'}}>show your mom</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -39,6 +39,10 @@ export default class Start extends Component {
 }
 
 const style = StyleSheet.create({
+  container: {
+    padding: 20,
+    paddingTop: 12,
+  },
   main: {
     flex: 1,
     justifyContent: 'center',

@@ -12,7 +12,7 @@ import {
 export default class PayButton extends Component {
   render() { return (
     <TouchableOpacity style={style.pay} onPress={this.pay}>
-      <Text>pay</Text>
+      <Text style={{fontStyle: 'italic'}}>we po&#39;</Text>
     </TouchableOpacity>
   )}
 }
