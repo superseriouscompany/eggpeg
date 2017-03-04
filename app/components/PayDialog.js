@@ -36,12 +36,12 @@ export default class PayDialog extends Component {
         <Image style={{marginBottom: 10}} source={require('../images/CartoonBabies.png')} />
 
         <View>
-          <Text>{product.title}</Text>
-          <Text>{product.description}</Text>
+          <Text style={{fontSize: 32, textAlign: 'center', marginBottom: 5}}>{product.title}</Text>
+          <Text style={{fontSize: 14, textAlign: 'center'}}>{product.description}</Text>
         </View>
 
-        <TouchableOpacity onPress={this.purchase}>
-          <Text>Lose {product.priceString}</Text>
+        <TouchableOpacity style={style.paymentButton} onPress={this.purchase}>
+          <Text style={{color: 'white', textAlign: 'center'}}>Lose {product.priceString}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -73,17 +73,20 @@ const style = StyleSheet.create({
     paddingRight: 0
   },
   main: {
-    marginTop: -55,
+    marginTop: -60,
     flex: 1,
     paddingLeft: 20,
     paddingRight: 20,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  footer: {
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingBottom: 20,
+  paymentButton: {
+    backgroundColor: '#9EB392',
+    width: 264,
+    height: 69,
+    borderRadius: 10,
+    marginTop: 20,
     alignItems: 'center',
-  }
+    justifyContent: 'center'
+  },
 })
