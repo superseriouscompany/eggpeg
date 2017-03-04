@@ -28,7 +28,7 @@ export default class PayDialog extends Component {
   return (
     <View style={{flex: 1}}>
       <View style={style.header}>
-        <TouchableOpacity style={{padding: 20, paddingTop: 12}} onPress={this.props.back}>
+        <TouchableOpacity style={style.leftNav} onPress={this.props.back}>
           <Text>&times;</Text>
         </TouchableOpacity>
       </View>
@@ -63,6 +63,14 @@ export default class PayDialog extends Component {
 const style = StyleSheet.create({
   header: {
     zIndex: 69,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  leftNav: {
+    width: 55,
+    padding: 20,
+    paddingTop: 18,
+    paddingRight: 0
   },
   main: {
     marginTop: -55,
