@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import { connect } from 'react-redux';
 import Component from './Component';
 import Text from './Text';
 import {
@@ -11,7 +12,7 @@ import {
   View,
 } from 'react-native';
 
-export default class Game extends Component {
+class Game extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -101,6 +102,8 @@ export default class Game extends Component {
   }
 
   shoot(event) {
+    this.props.dispatch({type: 'tick'})
+
     const {nativeEvent} = event
 
     console.warn(nativeEvent.pageX, nativeEvent.pageY, nativeEvent.locationX, nativeEvent.locationY)
@@ -127,3 +130,11 @@ const style = StyleSheet.create({
     backgroundColor: 'orange',
   },
 })
+
+function mapStateToProps(state) {
+  return {
+    cool: 'nice'
+  }
+}
+
+export default connect(mapStateToProps)(Game)

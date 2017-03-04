@@ -3,17 +3,18 @@
 import React from 'react';
 import Component from './Component';
 import FollowUs from './FollowUs';
-import Text from './Text';
 import Start from './Start';
 import Game from './Game';
+import {Provider} from 'react-redux'
 import branch from 'react-native-branch';
+import store from '../reducers'
 import {
   StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
 
-let playing = false;
+let playing = true;
 
 export default class Root extends Component {
   constructor(props) {
@@ -53,13 +54,15 @@ export default class Root extends Component {
 
   render() { return (
     <View style={style.container}>
-      { this.state.playing ?
-        <Game />
-      : this.state.aboutUs ?
-        <FollowUs back={this.showStart}/>
-      :
-        <Start showAbout={this.showAbout} startGame={this.startGame} shareLink={this.state.shareLink}/>
-      }
+      <Provider store={store}>
+        { this.state.playing ?
+          <Game />
+        : this.state.aboutUs ?
+          <FollowUs back={this.showStart}/>
+        :
+          <Start showAbout={this.showAbout} startGame={this.startGame} shareLink={this.state.shareLink}/>
+        }
+      </Provider>
     </View>
   )}
 
