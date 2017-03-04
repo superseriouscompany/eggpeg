@@ -4,7 +4,7 @@ import React from 'react';
 import Component from './Component';
 import FollowUs from './FollowUs';
 import Start from './Start';
-import Game from './Game';
+import Game from '../containers/Game';
 import {Provider} from 'react-redux'
 import branch from 'react-native-branch';
 import store from '../reducers'

@@ -8,6 +8,11 @@ export default function head(state = config.head, action) {
         x:        state.x + action.velocity,
         velocity: action.velocity,
       }
+    case 'head:hit':
+      return {
+        ...state,
+        hit: true,
+      }
     default:
       return state;
   }

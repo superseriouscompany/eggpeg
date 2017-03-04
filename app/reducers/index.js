@@ -9,7 +9,7 @@ const reducers = combineReducers({
   head,
 })
 const middleware = []
-if( __DEV__ ) {
+if( false && __DEV__ ) {
   middleware.push(createLogger())
 }
 
