@@ -32,10 +32,10 @@ export default class GameView extends Component {
             height: this.props.head.width
           }]} />
           <View style={[style.bulletContainer, {
-            marginLeft: this.props.bullet.x - this.props.bullet.width,
-            marginTop:  -this.props.bullet.width,
-            width:      this.props.bullet.width * 2,
-            height:     this.props.bullet.width * 2,
+            left:   this.props.bullet.x - this.props.bullet.width,
+            top:    this.props.bullet.y - this.props.bullet.width,
+            width:  this.props.bullet.width * 2,
+            height: this.props.bullet.width * 2,
           }]}>
             { this.props.bullet.visible ?
               <View style={[style.bullet, {
@@ -55,26 +55,27 @@ export default class GameView extends Component {
   }
 
   shoot(event) {
-    this.props.shoot(event.nativeEvent.pageX)
+    this.props.shoot(event.nativeEvent.pageX, event.nativeEvent.pageY)
   }
 }
 
 const style = StyleSheet.create({
   container: {
-    flex: 1,
+    flex:           1,
     justifyContent: 'center',
   },
   head: {
     backgroundColor: 'slateblue',
-    position: 'absolute',
+    position:        'absolute',
   },
   bullet: {
     backgroundColor: 'orange',
   },
   bulletContainer: {
-    borderColor: 'red',
+    borderColor:    'red',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems:     'center',
+    position:       'absolute',
   },
   shadow: {
     backgroundColor: 'turquoise',

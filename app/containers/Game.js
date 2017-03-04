@@ -11,7 +11,8 @@ class Game extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      windowWidth: Dimensions.get('window').width,
+      windowWidth:  Dimensions.get('window').width,
+      windowHeight: Dimensions.get('window').height,
     }
     this.gameLoop = this.gameLoop.bind(this)
     this.iterate  = this.iterate.bind(this)
@@ -19,6 +20,10 @@ class Game extends Component {
   }
 
   componentDidMount() {
+    this.props.dispatch({
+      type: 'head:setY',
+      y: (this.state.windowHeight - this.props.head.width) / 2
+    })
     this.gameLoop()
   }
 
@@ -67,8 +72,8 @@ class Game extends Component {
     }
   }
 
-  shoot(x) {
-    this.props.dispatch({type: 'bullet:fire', x: x})
+  shoot(x, y) {
+    this.props.dispatch({type: 'bullet:fire', x: x, y: y})
   }
 
   render() { return (
@@ -84,11 +89,20 @@ function mapStateToProps(state) {
 }
 
 function isCollision(a, b) {
-  const aLeft  = a.x;
-  const aRight = a.x + a.width;
-  const bLeft  = b.x;
-  const bRight = b.x + b.width;
-  return aLeft < bLeft && bLeft < aRight || aLeft < bRight && bRight < aRight;
+  debugger
+  const aLeft   = a.x;
+  const aRight  = a.x + a.width;
+  const bLeft   = b.x;
+  const bRight  = b.x + b.width;
+  const aTop    = a.y;
+  const aBottom = a.y + (a.height || a.width);
+  const bTop    = b.y;
+  const bBottom = b.y + (b.height || b.width);
+
+  const isXCollision = aLeft < bLeft && bLeft < aRight || aLeft < bRight && bRight < aRight;
+  const isYCollision = aTop < bTop && bTop < aBottom || aTop < bBottom && bBottom < aBottom;
+
+  return isXCollision && isYCollision;
 }
 
 export default connect(mapStateToProps)(Game);

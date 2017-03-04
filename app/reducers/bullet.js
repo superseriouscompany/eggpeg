@@ -7,6 +7,7 @@ export default function bullet(state = config.bullet, action) {
         ...state,
         time: +new Date,
         x: action.x,
+        y: action.y,
         shadow: 1,
       }
     case 'bullet:show':
