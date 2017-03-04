@@ -21,7 +21,7 @@ export default class FollowUs extends Component {
   render() { return (
     <View style={{flex: 1}}>
       <View style={style.header}>
-        <TouchableOpacity style={{padding: 20, paddingTop: 12}} onPress={this.props.back}>
+        <TouchableOpacity style={style.leftNav} onPress={this.props.back}>
           <Text>&times;</Text>
         </TouchableOpacity>
       </View>
@@ -58,9 +58,17 @@ export default class FollowUs extends Component {
 const style = StyleSheet.create({
   header: {
     zIndex: 69,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  leftNav: {
+    width: 55,
+    padding: 20,
+    paddingTop: 18,
+    paddingRight: 0
   },
   main: {
-    marginTop: -55,
+    marginTop: -60,
     flex: 1,
     paddingLeft: 20,
     paddingRight: 20,
