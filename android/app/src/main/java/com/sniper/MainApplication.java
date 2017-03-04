@@ -12,6 +12,10 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
+// import Branch and RNBranch
+import io.branch.rnbranch.*;
+import io.branch.referral.Branch;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -37,6 +41,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+      Branch.getAutoInstance(this);
     SoLoader.init(this, /* native exopackage */ false);
   }
 }
