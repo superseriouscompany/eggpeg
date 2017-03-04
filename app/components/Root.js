@@ -5,6 +5,7 @@ import Component from './Component';
 import FollowUs from './FollowUs';
 import Text from './Text';
 import Start from './Start';
+import Game from './Game';
 import branch from 'react-native-branch';
 import {
   StyleSheet,
@@ -51,9 +52,7 @@ export default class Root extends Component {
   render() { return (
     <View style={style.container}>
       { this.state.playing ?
-        <View>
-          <Text style={{padding: 20}}>Da Game</Text>
-        </View>
+        <Game />
       : this.state.aboutUs ?
         <FollowUs back={this.showStart}/>
       :
