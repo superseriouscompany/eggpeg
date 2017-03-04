@@ -20,8 +20,8 @@ export default function head(state = config.head, action) {
       }
     case 'result:retry':
       return {
-        ...state,
         ...config.head,
+        y: state.y,
       }
     default:
       return state;

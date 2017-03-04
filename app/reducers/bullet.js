@@ -26,6 +26,10 @@ export default function bullet(state = config.bullet, action) {
         ...state,
         shadow: action.size,
       }
+    case 'result:retry':
+      return {
+        ...config.bullet,
+      }
     default:
       return state;
   }
