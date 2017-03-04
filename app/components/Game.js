@@ -26,7 +26,7 @@ class Game extends Component {
       },
     }
     this.gameLoop = this.gameLoop.bind(this)
-    this.shoot = this.shoot.bind(this)
+    this.shoot    = this.shoot.bind(this)
   }
 
   componentDidMount() {
@@ -35,20 +35,12 @@ class Game extends Component {
 
   gameLoop() {
     // update head position
-    const {width, x} = this.state.head
+    const {width, x} = this.props.head
     const windowWidth = this.state.window.width
-    let {velocity} = this.state.head
+    let {velocity} = this.props.head
     if( velocity > 0 && (x + width) >= windowWidth ) { velocity *= -1 }
     if( velocity < 0 && x <= 0 ) { velocity *= -1 }
-    let state = {
-      head: {
-        ...this.state.head,
-        x: x + velocity,
-        velocity: velocity,
-      }
-    }
-
-    this.setState(state);
+    this.props.dispatch({type: 'head:move', velocity: velocity})
 
     // update bullet position
     if( this.props.bullet.time ) {
@@ -56,8 +48,8 @@ class Game extends Component {
       if( bulletFired > this.props.bullet.delay + this.props.bullet.linger ) {
         return alert('Nope.')
       } else if( this.props.bullet.visible ) {
-        const left      = this.state.head.x;
-        const right     = this.state.head.x + this.state.head.width;
+        const left      = this.props.head.x;
+        const right     = this.props.head.x + this.props.head.width;
         const bullLeft  = this.props.bullet.x;
         const bullRight = this.props.bullet.x + this.props.bullet.width;
         const hit       = left < bullLeft && bullLeft < right || left < bullRight && bullRight < right;
@@ -80,7 +72,7 @@ class Game extends Component {
       <TouchableWithoutFeedback onPress={this.shoot}>
         <View style={style.container} onPress={this.shoot}>
           <StatusBar hidden={true} />
-          <View style={[style.head, {left: this.state.head.x, width: this.state.head.width, height: this.state.head.width}]} />
+          <View style={[style.head, {left: this.props.head.x, width: this.props.head.width, height: this.props.head.width}]} />
           { this.props.bullet.visible ?
             <View style={[style.bullet, {left: this.props.bullet.x, width: this.props.bullet.width, height: this.props.bullet.width}]} />
           : null }
@@ -111,6 +103,7 @@ const style = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     bullet: state.bullet,
+    head:   state.head,
   }
 }
 

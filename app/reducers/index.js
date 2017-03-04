@@ -6,6 +6,7 @@ import head   from './head'
 
 const reducers = combineReducers({
   bullet,
+  head,
 })
 const middleware = []
 if( __DEV__ ) {

@@ -1,6 +1,6 @@
-import variables from '../variables'
+import config from '../config'
 
-export default function bullet(state = variables.bullet, action) {
+export default function bullet(state = config.bullet, action) {
   switch(action.type) {
     case 'bullet:fire':
       return {

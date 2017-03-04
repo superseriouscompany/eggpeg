@@ -4,4 +4,9 @@ export default {
     delay:  3000,
     linger: 100,
   },
+  head: {
+    x:        0,
+    velocity: 1,
+    width:    20,
+  },
 }
