@@ -34,32 +34,30 @@ export default class GameView extends Component {
                 width: this.props.head.width,
                 height: this.props.head.width
               }]} />
-              { this.props.casings.map((c, key) => (
-                <View style={[style.casing, {
-                  left:   c.x - c.width / 2,
-                  top:    c.y - c.width / 2,
-                  width:  c.width,
-                  height: c.width,
-                }]} />
+              { this.props.bullets.map((bullet, key) => (
+                <View key={key} style={[style.bulletContainer, {
+                  left:   bullet.x - bullet.width,
+                  top:    bullet.y - bullet.width,
+                  width:  bullet.width * 2,
+                  height: bullet.width * 2,
+                }]}>
+                  { bullet.visible ?
+                    <View style={[style.bullet, {
+                      width:  bullet.width,
+                      height: bullet.width}]} />
+                  : bullet.shadow > 0 ?
+                    <View style={[style.shadow, {
+                      width:  bullet.width * 2 * bullet.shadow,
+                      height: bullet.width * 2 * bullet.shadow}]} />
+                  : bullet.spent ?
+                    <View style={[style.casing, {
+                      width:  bullet.width,
+                      height: bullet.width,
+                    }]} />
+                  : null
+                  }
+                </View>
               ))}
-              <View style={[style.bulletContainer, {
-                left:   this.props.bullet.x - this.props.bullet.width,
-                top:    this.props.bullet.y - this.props.bullet.width,
-                width:  this.props.bullet.width * 2,
-                height: this.props.bullet.width * 2,
-              }]}>
-                { this.props.bullet.visible ?
-                  <View style={[style.bullet, {
-                    width:  this.props.bullet.width,
-                    height: this.props.bullet.width}]} />
-                : this.props.bullet.shadow > 0 ?
-                  <View style={[style.shadow, {
-                    width:  this.props.bullet.width * 2 * this.props.bullet.shadow,
-                    height: this.props.bullet.width * 2 * this.props.bullet.shadow}]} />
-
-                : null
-                }
-              </View>
             </View>
           </TouchableWithoutFeedback>
         }

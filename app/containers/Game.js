@@ -43,47 +43,26 @@ class Game extends Component {
     if( velocity < 0 && x <= 0 ) { velocity *= -1 }
     this.props.dispatch({type: 'head:move', velocity: velocity})
 
-    if( !this.props.bullet.time ) { return; }
-    const bulletFiredAgo = +new Date - this.props.bullet.time;
-    const isExpired      = bulletFiredAgo >= this.props.bullet.delay + this.props.bullet.linger;
-    const isActive       = bulletFiredAgo >= this.props.bullet.delay && !isExpired;
+    this.props.dispatch({type: 'tick'})
 
-    // update shadow
-    if( !isActive && !isExpired ) {
-      const shadowTime = (this.props.bullet.delay - bulletFiredAgo) / this.props.bullet.delay;
-      this.props.dispatch({type: 'bullet:updateShadow', size: shadowTime})
-    }
-    // update bullet position
-    if( !this.props.bullet.visible && isActive ) {
-      this.props.dispatch({type: 'bullet:show'})
-    }
+    this.props.bullets.forEach((bullet) => {
+      // check for a hit
+      if( !this.props.head.hit && bullet.visible && isCollision(this.props.head, bullet) ) {
+        this.props.dispatch({type: 'head:hit'})
+        this.props.dispatch({type: 'result:win'})
+      }
+    })
 
-    // check for a hit
-    if( !this.props.head.hit && isActive && isCollision(this.props.head, this.props.bullet) ) {
-      this.props.dispatch({type: 'head:hit'})
-      this.props.dispatch({type: 'result:win'})
-    }
-
-    // check for expiry
-    if( this.props.bullet.visible && isExpired ) {
-      this.props.dispatch({type: 'bullet:hide'})
-      if( !this.props.head.hit ) {
-        this.props.dispatch({type: 'bullet:miss'})
-        if( this.props.hasBullets ) {
-          this.props.dispatch({
-            type:  'casing:drop',
-            x:     this.props.bullet.x,
-            y:     this.props.bullet.y,
-            width: this.props.bullet.width,
-          })
-        } else {
-          this.props.dispatch({type: 'result:loss'})
-        }
+    if( !this.props.hasBullets ) {
+      const allSpent = !this.props.bullets.find((b) => { return !b.spent })
+      if( allSpent ) {
+        this.props.dispatch({type: 'result:loss'})
       }
     }
   }
 
   shoot(x, y) {
+    if( !this.props.hasBullets ) { return console.warn('No bullets'); }
     this.props.dispatch({type: 'bullet:fire', x: x, y: y})
   }
 
@@ -98,12 +77,12 @@ class Game extends Component {
 
 function mapStateToProps(state) {
   return {
-    bullet:     state.bullet,
+    bullet:     state.bullets[0],
+    bullets:    state.bullets,
     head:       state.head,
     chamber:    state.chamber,
     hasBullets: state.chamber > 0,
     result:     state.result,
-    casings:    state.casings,
   }
 }
 
