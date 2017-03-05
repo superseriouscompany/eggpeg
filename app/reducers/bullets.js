@@ -2,7 +2,7 @@ import config from '../config'
 
 export default function bullet(state = [], action) {
   switch(action.type) {
-    case 'bullet:fire':
+    case 'bullets:fire':
       return state.concat(
         {
           ...config.bullet,
@@ -15,10 +15,20 @@ export default function bullet(state = [], action) {
       )
     case 'result:retry':
       return []
+    case 'bullets:hit':
+      return state.map(hit(action.index))
     case 'tick':
       return state.map(tick)
     default:
       return state;
+  }
+}
+
+function hit(index) {
+  return function(bullet, i) {
+    if( i != index ) { return bullet; }
+    bullet.hit = true;
+    return bullet;
   }
 }
 

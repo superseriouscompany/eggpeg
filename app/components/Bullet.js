@@ -30,7 +30,7 @@ export default class Bullet extends Component {
       width:  Math.max(config.sizes.shadow, config.sizes.bullet),
       height: Math.max(config.sizes.shadow, config.sizes.bullet),
     }]}>
-      { bullet.visible ?
+      { bullet.visible || bullet.hit ?
         <View style={[style.bullet, {
           width:  bullet.width,
           height: bullet.width,

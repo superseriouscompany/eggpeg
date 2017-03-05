@@ -35,6 +35,6 @@ const style = StyleSheet.create({
     position:        'absolute',
   },
   hit: {
-    backgroundColor: 'gold',
+    backgroundColor: '#532D5A',
   },
 })

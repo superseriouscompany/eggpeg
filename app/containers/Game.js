@@ -47,10 +47,12 @@ class Game extends Component {
 
     this.props.bullets.filter((bullet) => {
       return bullet.visible
-    }).forEach((bullet) => {
+    }).forEach((bullet, bi) => {
       this.props.targets.forEach((target, index) => {
         if( !target.hit && isCollision(target, bullet) ) {
           this.props.dispatch({type: 'targets:hit', index: index})
+          console.log('dispatching bullet hit')
+          this.props.dispatch({type: 'bullets:hit', index: bi})
         }
       })
     })
@@ -72,7 +74,7 @@ class Game extends Component {
 
   shoot(x, y) {
     if( !this.props.hasBullets ) { return console.warn('No bullets'); }
-    this.props.dispatch({type: 'bullet:fire', x: x, y: y})
+    this.props.dispatch({type: 'bullets:fire', x: x, y: y})
   }
 
   retry() {

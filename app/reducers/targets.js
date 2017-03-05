@@ -40,6 +40,7 @@ function reset(target) {
 }
 
 function tick(target) {
+  if( target.hit ) { return target; }
   const {width, x, xMax} = target
   let   {velocity}       = target
 
