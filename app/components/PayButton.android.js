@@ -38,7 +38,7 @@ const style = StyleSheet.create({
   rightNav: {
     width: 120,
     padding: 20,
-    paddingTop: 18,
+    paddingTop: 20,
     paddingLeft: 0,
     backgroundColor: 'rgba(0, 0, 0, 0)'
   },

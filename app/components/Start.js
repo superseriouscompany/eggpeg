@@ -114,7 +114,7 @@ const style = StyleSheet.create({
   leftNav: {
     width: 120,
     padding: 20,
-    paddingTop: 18,
+    paddingTop: 20,
     paddingRight: 0,
     backgroundColor: 'rgba(0, 0, 0, 0)'
   },
@@ -125,15 +125,16 @@ const style = StyleSheet.create({
   },
   footer: {
     padding: 20,
+    paddingBottom: 25,
     alignItems: 'center',
   },
   startButton: {
     borderWidth: 1,
     borderColor: base.colors.grey,
-    borderRadius: 10,
-    width: 172,
-    height: 60,
-    paddingBottom: 4,
+    borderRadius: 5,
+    width: 200,
+    height: 75,
+    paddingBottom: 6,
     justifyContent: 'center',
     alignItems: 'center',
   },

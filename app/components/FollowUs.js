@@ -64,7 +64,7 @@ const style = StyleSheet.create({
   leftNav: {
     width: 55,
     padding: 20,
-    paddingTop: 18,
+    paddingTop: 20,
     paddingRight: 0
   },
   main: {
