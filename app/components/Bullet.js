@@ -64,6 +64,7 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     borderColor: 'black',
     borderWidth: 1,
+    zIndex: 3,
   },
   bullet: {
     backgroundColor: '#F5B140',

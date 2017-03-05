@@ -43,8 +43,8 @@ class Game extends Component {
 
   iterate() {
     if( this.props.level.done ) { return; }
-    if( this.props.level.winTime ) {
-      if( +new Date <= this.props.level.winTime ) { return; }
+    if( this.props.level.finishTime ) {
+      if( +new Date <= this.props.level.finishTime ) { return; }
       return this.props.dispatch({type: 'level:finish'})
     }
     this.props.dispatch({type: 'tick'})
@@ -75,6 +75,7 @@ class Game extends Component {
   }
 
   shoot(x, y) {
+    if( this.props.level.done || this.props.level.finishTime ) { return; }
     if( !this.props.hasBullets ) { return console.warn('No bullets'); }
     this.props.dispatch({type: 'bullets:fire', x: x, y: y})
   }

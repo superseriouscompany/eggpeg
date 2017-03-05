@@ -6,18 +6,18 @@ export default function(state={level: 0}, action) {
       return {
         ...state,
         win:     true,
-        winTime: +new Date + config.winDelay,
-      }
-    case 'level:finish':
-      return {
-        ...state,
-        winTime: null,
-        done: true,
+        finishTime: +new Date + config.winDelay,
       }
     case 'level:loss':
       return {
         ...state,
+        finishTime: +new Date + config.lossDelay,
         win: false,
+      }
+    case 'level:finish':
+      return {
+        ...state,
+        finishTime: null,
         done: true,
       }
     case 'level:clear':
