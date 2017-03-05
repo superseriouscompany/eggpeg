@@ -8,5 +8,9 @@ export default {
     target: 20,
     shadow: 26,
     bullet: 7,
+  },
+  score: {
+    max: 100,
+    penalty: 2,
   }
 }

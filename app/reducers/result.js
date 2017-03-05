@@ -1,5 +1,10 @@
 export default function(state={}, action) {
   switch(action.type) {
+    case 'bullets:hit':
+      return {
+        ...state,
+        score: (state.score || 0) + action.score,
+      }
     case 'result:win':
       return {
         ...state,
@@ -17,6 +22,7 @@ export default function(state={}, action) {
         ...state,
         done: false,
         win:  null,
+        score: 0,
       }
     default:
       return state

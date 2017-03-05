@@ -26,13 +26,6 @@ class Game extends Component {
       velocity: 1,
     })
 
-    this.props.dispatch({
-      type: 'targets:add',
-      x: 50,
-      y: (Dimensions.get('window').height - config.sizes.target) / 2,
-      xMax: Dimensions.get('window').width,
-      velocity: 1.2,
-    })
     this.gameLoop()
   }
 
@@ -45,14 +38,12 @@ class Game extends Component {
     if( this.props.result.done ) { return; }
     this.props.dispatch({type: 'tick'})
 
-    this.props.bullets.filter((bullet) => {
-      return bullet.visible
-    }).forEach((bullet, bi) => {
+    this.props.bullets.forEach((bullet, bi) => {
       this.props.targets.forEach((target, index) => {
-        if( !target.hit && isCollision(target, bullet) ) {
+        if( bullet.visible && !target.hit && isCollision(target, bullet) ) {
+          const score = Math.round(config.score.max - distance(target, bullet) * config.score.penalty);
           this.props.dispatch({type: 'targets:hit', index: index})
-          console.log('dispatching bullet hit')
-          this.props.dispatch({type: 'bullets:hit', index: bi})
+          this.props.dispatch({type: 'bullets:hit', index: bi, score: score})
         }
       })
     })
@@ -114,6 +105,21 @@ function isCollision(a, b) {
   console.log('checked collision', isXCollision, isYCollision, a, b);
 
   return isXCollision && isYCollision;
+}
+
+function distance(a, b) {
+  const aCenter = {
+    x: a.x + a.width / 2,
+    y: a.y + (a.height || a.width) / 2
+  };
+
+  const bCenter = {
+    x: b.x + b.width / 2,
+    y: b.y + (b.height || b.width) / 2
+  }
+
+  // https://en.wikipedia.org/wiki/Cartesian_coordinate_system#Distance_between_two_points
+  return Math.sqrt(Math.pow(aCenter.x - bCenter.x, 2) + Math.pow(aCenter.y - bCenter.y, 2))
 }
 
 export default connect(mapStateToProps)(Game);
