@@ -50,20 +50,23 @@ class Game extends Component {
     }
     this.props.dispatch({type: 'tick'})
 
-    let hits = 0
     this.props.bullets.forEach((bullet, bi) => {
+      let hits = []
       this.props.targets.forEach((target, index) => {
         if( bullet.visible && !target.hit && isCollision(target, bullet) ) {
           const score = Math.round(config.score.max - distance(target, bullet) * config.score.penalty);
           this.props.dispatch({type: 'targets:hit', index: index})
-          this.props.dispatch({type: 'bullets:hit', index: bi, score: score})
-          hits++
+          hits.push({score: score})
         }
       })
+      if( hits.length ) {
+        let score = hits.reduce((a, v) => { return a + v.score}, 0)
+        if( hits.length > 1 ) {
+          score *= config.multiplier.multihit * (hits.length - 1)
+        }
+        this.props.dispatch({type: 'bullets:hit', index: bi, score: score})
+      }
     })
-    if( hits > 1 ) {
-      this.props.dispatch({type: 'score:multihit', hits: hits})
-    }
 
     const allHit = !this.props.targets.find((t) => { return !t.hit })
     // check if all hit

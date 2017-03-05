@@ -17,8 +17,8 @@ const config = {
     max: 100,
     penalty: 2,
   },
-  bonus: {
-    multihit: 100,
+  multiplier: {
+    multihit: 2,
   }
 }
 

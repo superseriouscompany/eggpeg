@@ -30,8 +30,19 @@ export default class Bullet extends Component {
       width:  Math.max(config.sizes.shadow, config.sizes.bullet),
       height: Math.max(config.sizes.shadow, config.sizes.bullet),
     }]}>
-      { bullet.visible || bullet.hit ?
+      { bullet.hit ?
+        <View style={style.score}>
+          <Text>{bullet.score}</Text>
+        </View>
+      : null }
+      { bullet.hit || bullet.visible ?
         <View style={[style.bullet, bullet.hit ? style.hit : null, {
+          width:  bullet.width,
+          height: bullet.width,
+          borderRadius: bullet.width / 2,
+        }]} />
+      : bullet.visible ?
+        <View style={[style.bullet, {
           width:  bullet.width,
           height: bullet.width,
           borderRadius: bullet.width / 2,
@@ -67,6 +78,11 @@ const style = StyleSheet.create({
   },
   bullet: {
     backgroundColor: '#F5B140',
+  },
+  score: {
+    position: 'absolute',
+    top: -30,
+    zIndex: -1,
   },
   hit: {
     zIndex: -1,
