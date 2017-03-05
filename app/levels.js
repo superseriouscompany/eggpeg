@@ -4,43 +4,31 @@ import { Dimensions } from 'react-native'
 
 const {width, height} = Dimensions.get('window')
 
+const xcenter = (width - config.sizes.target)  / 2
+const ycenter = (height - config.sizes.target) / 2
+
 export default [
   {
     level: 1,
     targets: [
       {
-        x: (width - config.sizes.target) / 2,
-        y: (height - config.sizes.target) / 2,
-        xMax: width,
+        points: [
+          { x: xcenter, y: ycenter },
+        ],
         velocity: 0,
-      }
+      },
     ]
   },
   {
     level: 2,
     targets: [
       {
-        x: 0,
-        y: (height - config.sizes.target) / 2,
-        xMax: width,
+        points: [
+          { x: 0, y: ycenter },
+          { x: width, y: ycenter },
+          { x: 0, y: ycenter },
+        ],
         velocity: 1,
-      }
-    ]
-  },
-  {
-    level: 3,
-    targets: [
-      {
-        x: 0,
-        y: (height - config.sizes.target) / 2,
-        xMax: width,
-        velocity: 1,
-      },
-      {
-        x: width - config.sizes.target,
-        y: (height - config.sizes.target) / 2,
-        xMax: width,
-        velocity: 2,
       },
     ]
   },

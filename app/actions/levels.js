@@ -6,8 +6,8 @@ export function loadLevel(index) {
     console.log('loading level', index)
     levels[index].targets.forEach((target) => {
       dispatch({
-        ...target,
         type: 'targets:add',
+        target,
       })
     })
   }

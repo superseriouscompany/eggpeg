@@ -5,13 +5,10 @@ export default function targets(state = [], action) {
     case 'targets:add':
       return state.concat({
         ...config.target,
-        width:    config.sizes.target,
-        originX:  action.x,
-        originY:  action.y,
-        x:        action.x,
-        y:        action.y,
-        xMax:     action.xMax,
-        velocity: action.velocity,
+        ...action.target,
+        x: action.target.points[0].x,
+        y: action.target.points[0].y,
+        width: config.sizes.target,
       })
     case 'targets:hit':
       return state.map(hit(action.index))
@@ -41,12 +38,22 @@ function reset(target) {
 
 function tick(target) {
   if( target.hit ) { return target; }
-  const {width, x, xMax} = target
-  let   {velocity}       = target
+  if( !target.points || !target.points.length || target.points.length == 1 ) { return target; }
 
-  if( velocity > 0 && (x + width) >= xMax ) { velocity *= -1 }
-  if( velocity < 0 && x <= 0 ) { velocity *= -1 }
-  target.velocity = velocity;
-  target.x = target.x + target.velocity;
-  return target
+  if( target.pointIndex === undefined ) { target.pointIndex = 1; }
+  let point = target.points[target.pointIndex]
+  if( target.x == point.x && target.y == point.y ) {
+    target.pointIndex++
+    if( target.pointIndex == target.points.length ) { target.pointIndex = 0 }
+    point = target.points[target.pointIndex]
+    console.log('reset point index to ', target.pointIndex)
+  }
+
+  const dirx = target.x > point.x ? -1 : 1
+  const diry = target.y > point.y ? -1 : 1
+
+  target.x += target.velocity * dirx
+  target.y += target.velocity * diry
+
+  return target;
 }
