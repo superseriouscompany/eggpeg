@@ -25,7 +25,7 @@ export default class FollowUs extends Component {
 
       <View style={style.header}>
         <TouchableOpacity style={style.leftNav} onPress={this.props.back}>
-          <Text>&times;</Text>
+          <Text style={{fontStyle: 'italic'}}>esc</Text>
         </TouchableOpacity>
       </View>
       <View style={style.main}>
