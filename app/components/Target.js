@@ -33,8 +33,10 @@ const style = StyleSheet.create({
   target: {
     backgroundColor: 'white',
     position:        'absolute',
+    zIndex:          1,
   },
   hit: {
     backgroundColor: '#532D5A',
+    zIndex: 0,
   },
 })
