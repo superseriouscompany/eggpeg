@@ -35,7 +35,12 @@ export default class GameView extends Component {
           <View style={style.container}>
             <Victory
               score={this.props.score.total}
-              reset={this.props.reset} />
+              reset={this.props.reset}
+              highScores={[
+                { score: this.props.score.total + 10, time: new Date },
+                { score: this.props.score.total, time: new Date },
+                { score: this.props.score.total - 50, time: new Date },
+              ]} />
           </View>
         : this.props.level.done && !this.props.level.win ?
           <View style={style.container}>
