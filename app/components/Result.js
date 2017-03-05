@@ -19,9 +19,8 @@ export default class Result extends Component {
   render() { return (
     <TouchableOpacity onPress={this.props.nextLevel} style={style.container}>
       <View style={style.scoreContainer}>
-        <Text style={style.score}>{this.props.score}</Text>
+        <Text style={style.score}>{this.props.score}!</Text>
       </View>
-      <Text style={style.footer}>tap anywhere to continue</Text>
     </TouchableOpacity>
   )}
 }
@@ -40,9 +39,4 @@ const style = StyleSheet.create({
     color: '#8B5096',
     fontSize: 64,
   },
-  footer: {
-    textAlign: 'center',
-    marginBottom: 20,
-    color:        '#8B5096',
-  }
 })

@@ -14,7 +14,7 @@ import {
   View,
 } from 'react-native';
 
-let playing = false;
+let playing = true;
 
 export default class Root extends Component {
   constructor(props) {
