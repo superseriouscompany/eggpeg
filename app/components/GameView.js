@@ -6,6 +6,7 @@ import Text from './Text';
 import Result from './Result'
 import Bullet from './Bullet'
 import Target from './Target'
+import GameHeader from './GameHeader'
 import {
   Dimensions,
   StatusBar,
@@ -30,7 +31,7 @@ export default class GameView extends Component {
         :
           <TouchableWithoutFeedback onPress={(e) => this.props.shoot(e.nativeEvent.pageX, e.nativeEvent.pageY)}>
             <View style={style.container}>
-              <Text style={style.tries}>{this.props.chamber} {this.props.chamber == 1 ? 'try' : 'tries'} left</Text>
+              <GameHeader tries={this.props.chamber} score={69}/>
               { this.props.targets.map((target, key) => (
                 <Target key={key} target={target} />
               ))}
