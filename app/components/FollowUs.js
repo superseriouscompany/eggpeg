@@ -29,7 +29,7 @@ export default class FollowUs extends Component {
         </TouchableOpacity>
       </View>
       <View style={style.main}>
-        <Image style={{marginBottom: 10}} source={require('../images/CartoonsWorking.png')} />
+        <Image style={{marginBottom: 10}} source={require('../images/CartoonBabies.png')} />
 
         <TouchableOpacity onPress={this.visitGram}>
           <Image source={require('../images/IGFollowButton.png')} />
