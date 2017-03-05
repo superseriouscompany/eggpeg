@@ -21,7 +21,7 @@ class Game extends Component {
 
   componentDidMount() {
     this.gameLoop()
-    this.loadLevel(0)
+    this.reset()
   }
 
   gameLoop() {
@@ -50,15 +50,20 @@ class Game extends Component {
     }
     this.props.dispatch({type: 'tick'})
 
+    let hits = 0
     this.props.bullets.forEach((bullet, bi) => {
       this.props.targets.forEach((target, index) => {
         if( bullet.visible && !target.hit && isCollision(target, bullet) ) {
           const score = Math.round(config.score.max - distance(target, bullet) * config.score.penalty);
           this.props.dispatch({type: 'targets:hit', index: index})
           this.props.dispatch({type: 'bullets:hit', index: bi, score: score})
+          hits++
         }
       })
     })
+    if( hits > 1 ) {
+      this.props.dispatch({type: 'score:multihit', hits: hits})
+    }
 
     const allHit = !this.props.targets.find((t) => { return !t.hit })
     // check if all hit
@@ -84,7 +89,7 @@ class Game extends Component {
   reset() {
     this.props.dispatch({type: 'score:reset'})
     this.setState({beat: false})
-    this.loadLevel(0)
+    this.loadLevel(2)
   }
 
   render() { return (

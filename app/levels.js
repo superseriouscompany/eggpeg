@@ -37,7 +37,7 @@ export default [
         velocity: 1,
       },
       {
-        x: 20,
+        x: width - config.sizes.target,
         y: (height - config.sizes.target) / 2,
         xMax: width,
         velocity: 2,

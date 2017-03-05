@@ -1,4 +1,5 @@
 const initialState = {total: 0, level: 0}
+import config from '../config'
 
 export default function(state = initialState, action) {
   switch(action.type) {
@@ -18,6 +19,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         total: state.total + state.level,
+      }
+    case 'score:multihit':
+      return {
+        ...state,
+        level: state.level + action.hits * config.bonus.multihit,
       }
     case 'score:reset':
       return initialState

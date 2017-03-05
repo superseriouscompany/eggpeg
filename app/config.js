@@ -17,6 +17,9 @@ const config = {
     max: 100,
     penalty: 2,
   },
+  bonus: {
+    multihit: 100,
+  }
 }
 
 if( DeviceInfo.isEmulator() ) {
