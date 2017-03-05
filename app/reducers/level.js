@@ -1,12 +1,7 @@
 import config from '../config'
 
-export default function(state={level: 1}, action) {
+export default function(state={level: 0}, action) {
   switch(action.type) {
-    case 'bullets:hit':
-      return {
-        ...state,
-        score: (state.score || 0) + action.score,
-      }
     case 'level:win':
       return {
         ...state,
@@ -25,13 +20,9 @@ export default function(state={level: 1}, action) {
         win: false,
         done: true,
       }
-    case 'level:retry':
+    case 'level:clear':
       return {
-        ...state,
-        done: false,
-        win:  null,
-        winTime: null,
-        score: 0,
+        level: 0,
       }
     default:
       return state

@@ -95,9 +95,8 @@ function mapStateToProps(state) {
     targets:    state.targets,
     chamber:    state.chamber,
     hasBullets: state.chamber > 0,
-    level:     state.level,
-
-    head: state.targets[0],
+    level:      state.level,
+    score:      state.score,
   }
 }
 

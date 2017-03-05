@@ -26,7 +26,7 @@ export default class Result extends Component {
       :
         <View>
           <Text style={style.text}>game over!</Text>
-          <Text style={style.text}>{this.props.score}</Text>
+          <Text style={style.text}>{this.props.score}pts</Text>
         </View>
       }
     </TouchableOpacity>

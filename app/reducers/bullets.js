@@ -13,7 +13,7 @@ export default function bullet(state = [], action) {
           width: config.sizes.bullet,
         }
       )
-    case 'level:retry':
+    case 'level:clear':
       return []
     case 'bullets:hit':
       return state.map(hit(action.index))
