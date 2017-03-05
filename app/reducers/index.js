@@ -16,8 +16,10 @@ const reducers = combineReducers({
   score,
 })
 const middleware = [thunk]
-if( false && __DEV__ ) {
-  middleware.push(createLogger())
+if( __DEV__ ) {
+  middleware.push(createLogger({
+    predicate: (getState, action) => action.type != 'tick'
+  }))
 }
 
 const store = createStore(reducers,applyMiddleware(...middleware))
