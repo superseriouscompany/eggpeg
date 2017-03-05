@@ -6,6 +6,7 @@ import Text from './Text';
 import {
   Image,
   Linking,
+  StatusBar,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -20,17 +21,14 @@ export default class FollowUs extends Component {
 
   render() { return (
     <View style={{flex: 1}}>
+      <StatusBar hidden/>
+
       <View style={style.header}>
         <TouchableOpacity style={style.leftNav} onPress={this.props.back}>
           <Text>&times;</Text>
         </TouchableOpacity>
       </View>
       <View style={style.main}>
-        <View>
-          <Text style={{fontSize: 14, textAlign: 'center'}}>this is a piece of poop by</Text>
-          <Text style={{fontSize: 32, textAlign: 'center', marginBottom: 5}}>Super Serious Company</Text>
-        </View>
-
         <Image style={{marginBottom: 10}} source={require('../images/CartoonsWorking.png')} />
 
         <TouchableOpacity onPress={this.visitGram}>
@@ -78,7 +76,7 @@ const style = StyleSheet.create({
   footer: {
     paddingLeft: 20,
     paddingRight: 20,
-    paddingBottom: 20,
+    paddingBottom: 25,
     alignItems: 'center',
   }
 })

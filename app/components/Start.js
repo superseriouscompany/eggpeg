@@ -123,11 +123,6 @@ const style = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-  footer: {
-    padding: 20,
-    paddingBottom: 25,
-    alignItems: 'center',
-  },
   startButton: {
     borderWidth: 1,
     borderColor: base.colors.grey,
@@ -136,6 +131,11 @@ const style = StyleSheet.create({
     height: 75,
     paddingBottom: 6,
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  footer: {
+    padding: 20,
+    paddingBottom: 25,
     alignItems: 'center',
   },
 })
