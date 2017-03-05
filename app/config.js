@@ -19,13 +19,14 @@ const config = {
   },
   multiplier: {
     multihit: 2,
-  }
+  },
+  countdown: 20, // game over countdown timer
 }
 
 if( DeviceInfo.isEmulator() ) {
   config.winDelay     = 0;
   config.lossDelay    = 0;
-  config.bullet.delay = 3000;
+  config.bullet.delay = 0;
 }
 
 export default config

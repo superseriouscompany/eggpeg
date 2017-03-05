@@ -8,6 +8,7 @@ import Victory from './Victory'
 import Bullet from './Bullet'
 import Target from './Target'
 import GameHeader from './GameHeader'
+import GameOver from './GameOver'
 import base from '../styles/base'
 import {
   Dimensions,
@@ -22,6 +23,7 @@ export default class GameView extends Component {
     shoot:     PropTypes.func.isRequired,
     reset:     PropTypes.func.isRequired,
     nextLevel: PropTypes.func.isRequired,
+    continue:  PropTypes.func.isRequired,
   }
 
   render() {
@@ -35,7 +37,14 @@ export default class GameView extends Component {
               score={this.props.score.total}
               reset={this.props.reset} />
           </View>
-        : this.props.level.done ?
+        : this.props.level.done && !this.props.level.win ?
+          <View style={style.container}>
+            <GameOver
+              score={this.props.score.total}
+              reset={this.props.reset}
+              continue={this.props.continue} />
+          </View>
+        : this.props.level.done && this.props.level.win ?
           <View style={style.container}>
             <GameHeader tries={this.props.chamber} score={this.props.score.level} />
             <Result

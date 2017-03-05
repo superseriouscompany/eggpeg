@@ -17,6 +17,7 @@ class Game extends Component {
     this.reset     = this.reset.bind(this)
     this.nextLevel = this.nextLevel.bind(this)
     this.loadLevel = this.loadLevel.bind(this)
+    this.continue  = this.continue.bind(this)
   }
 
   componentDidMount() {
@@ -27,6 +28,10 @@ class Game extends Component {
   gameLoop() {
     this.iterate();
     requestAnimationFrame(this.gameLoop)
+  }
+
+  continue() {
+    this.loadLevel(this.state.level)
   }
 
   nextLevel() {
@@ -92,13 +97,14 @@ class Game extends Component {
   reset() {
     this.props.dispatch({type: 'score:reset'})
     this.setState({beat: false})
-    this.loadLevel(2)
+    this.loadLevel(0)
   }
 
   render() { return (
     <GameView
       shoot={this.shoot}
       reset={this.reset}
+      continue={this.continue}
       nextLevel={this.nextLevel}
       beat={this.state.beat} {...this.props} />
   )}
