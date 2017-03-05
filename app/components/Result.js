@@ -11,41 +11,38 @@ import {
 
 export default class Result extends Component {
   static propTypes = {
-    win:       PropTypes.bool.isRequired,
-    reset:     PropTypes.func.isRequired,
-    nextLevel: PropTypes.func.isRequired,
+    nextLevel:  PropTypes.func.isRequired,
+    score:      PropTypes.number.isRequired,
+    levelScore: PropTypes.number.isRequired,
   }
 
   render() { return (
-    <TouchableOpacity onPress={this.props.win ? this.props.nextLevel : this.props.reset} style={style.container}>
-      { this.props.win ?
-        <View>
-          <Text style={style.text}>cleared!</Text>
-          <Text style={style.text}>
-            {this.props.score - this.props.levelScore} +&nbsp;
-            {this.props.levelScore} =&nbsp;
-            {this.props.score}pts
-          </Text>
-        </View>
-      :
-        <View>
-          <Text style={style.text}>game over!</Text>
-          <Text style={style.text}>
-            {this.props.score}pts
-          </Text>
-        </View>
-      }
+    <TouchableOpacity onPress={this.props.nextLevel} style={style.container}>
+      <View style={style.scoreContainer}>
+        <Text style={style.score}>{this.props.score}</Text>
+      </View>
+      <Text style={style.footer}>tap anywhere to continue</Text>
     </TouchableOpacity>
   )}
 }
 
 const style = StyleSheet.create({
-  text: {
-    color: 'gainsboro',
-  },
   container: {
+    flex:            1,
+    backgroundColor: '#BA6BCA',
+  },
+  scoreContainer: {
     flex:           1,
     justifyContent: 'center',
     alignItems:     'center',
   },
+  score: {
+    color: '#8B5096',
+    fontSize: 64,
+  },
+  footer: {
+    textAlign: 'center',
+    marginBottom: 20,
+    color:        '#8B5096',
+  }
 })

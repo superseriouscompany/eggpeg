@@ -56,9 +56,7 @@ export default class GameOver extends Component {
           </TouchableOpacity>
           <Text style={style.explanation}>keep playing for 99¢</Text>
         </View>
-        <View style={style.footerContainer}>
-          <Text style={style.footer}>or tap anywhere to restart</Text>
-        </View>
+        <Text style={style.footer}>or tap anywhere to restart</Text>
       </View>
     </TouchableOpacity>
   )}
@@ -102,11 +100,9 @@ const style = StyleSheet.create({
   explanation: {
     color: 'white',
   },
-  footerContainer: {
-    marginBottom: 20,
-  },
   footer: {
-    color:    '#8B5097',
-    fontSize: 18,
+    color:        '#8B5097',
+    fontSize:     18,
+    marginBottom: 20,
   },
 })

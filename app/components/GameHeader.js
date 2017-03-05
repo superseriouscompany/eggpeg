@@ -41,6 +41,7 @@ const style = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
+    zIndex: 2,
   },
   egg: {
     margin: 3,
@@ -48,5 +49,6 @@ const style = StyleSheet.create({
   score: {
     margin: 3,
     color: 'white',
+    backgroundColor: 'transparent',
   }
 })
