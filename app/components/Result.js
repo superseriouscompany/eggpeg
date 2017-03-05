@@ -21,12 +21,18 @@ export default class Result extends Component {
       { this.props.win ?
         <View>
           <Text style={style.text}>cleared!</Text>
-          <Text style={style.text}>{this.props.score}pts</Text>
+          <Text style={style.text}>
+            {this.props.score - this.props.levelScore} +&nbsp;
+            {this.props.levelScore} =&nbsp;
+            {this.props.score}pts
+          </Text>
         </View>
       :
         <View>
           <Text style={style.text}>game over!</Text>
-          <Text style={style.text}>{this.props.score}pts</Text>
+          <Text style={style.text}>
+            {this.props.score}pts
+          </Text>
         </View>
       }
     </TouchableOpacity>
