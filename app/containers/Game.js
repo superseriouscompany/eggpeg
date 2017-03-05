@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import GameView from '../components/GameView'
 import config from '../config'
+import {loadLevel} from '../actions/levels'
 import levels from '../levels'
 
 class Game extends Component {
@@ -31,21 +32,16 @@ class Game extends Component {
     const state = { level: this.state.level + 1 }
     if( state.level == levels.length ) {
       return this.props.dispatch({type: 'game:beat'})
+    } else {
+      this.props.dispatch(loadLevel(state.level))
     }
-    this.props.dispatch({type: 'level:retry'})
-    levels[state.level].targets.forEach((target) => {
-      this.props.dispatch({
-        ...target,
-        type: 'targets:add',
-      })
-    })
     this.setState(state)
   }
 
   iterate() {
     if( this.props.level.done ) { return; }
     if( this.props.level.winTime ) {
-      if( +new Date <= this.props.level.winTime ) { return }
+      if( +new Date <= this.props.level.winTime ) { return; }
       return this.props.dispatch({type: 'level:finish'})
     }
     this.props.dispatch({type: 'tick'})

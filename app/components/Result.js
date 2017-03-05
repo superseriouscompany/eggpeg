@@ -19,14 +19,14 @@ export default class Result extends Component {
   render() { return (
     <TouchableOpacity onPress={this.props.win ? this.props.nextLevel : this.props.retry} style={style.container}>
       { this.props.win ?
-        <View style={style.text}>
-          <Text>cleared!</Text>
-          <Text>{this.props.score}pts</Text>
+        <View>
+          <Text style={style.text}>cleared!</Text>
+          <Text style={style.text}>{this.props.score}pts</Text>
         </View>
       :
-        <View style={style.text}>
-          <Text>game over!</Text>
-          <Text>{this.props.score}</Text>
+        <View>
+          <Text style={style.text}>game over!</Text>
+          <Text style={style.text}>{this.props.score}</Text>
         </View>
       }
     </TouchableOpacity>

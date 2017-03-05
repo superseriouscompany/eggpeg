@@ -1,6 +1,6 @@
 import config from '../config'
 
-export default function(state={}, action) {
+export default function(state={level: 1}, action) {
   switch(action.type) {
     case 'bullets:hit':
       return {
@@ -30,6 +30,7 @@ export default function(state={}, action) {
         ...state,
         done: false,
         win:  null,
+        winTime: null,
         score: 0,
       }
     default:

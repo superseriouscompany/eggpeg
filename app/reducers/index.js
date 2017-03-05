@@ -5,6 +5,7 @@ import bullets from './bullets'
 import chamber from './chamber'
 import level from './level'
 import targets from './targets'
+import thunk from 'redux-thunk';
 
 const reducers = combineReducers({
   bullets,
@@ -12,7 +13,7 @@ const reducers = combineReducers({
   level,
   targets,
 })
-const middleware = []
+const middleware = [thunk]
 if( false && __DEV__ ) {
   middleware.push(createLogger())
 }

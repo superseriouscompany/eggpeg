@@ -26,7 +26,6 @@ export default function bullet(state = [], action) {
 
 function hit(index) {
   return function(bullet, i) {
-    console.log("trying to hit", index)
     if( i != index ) { return bullet; }
     bullet.hit = true;
     return bullet;
