@@ -44,7 +44,7 @@ export default class Start extends Component {
             <PayButton payDialog={this.payDialog}/>
           </View>
           <View style={style.main}>
-            <EggDrop />
+            <EggDrop/>
             <TouchableOpacity onPress={this.props.startGame} style={style.startButton}>
               <Text style={{fontStyle: 'italic', fontSize: 32}}>play</Text>
             </TouchableOpacity>
@@ -110,7 +110,8 @@ const style = StyleSheet.create({
     width: 120,
     padding: 20,
     paddingTop: 18,
-    paddingRight: 0
+    paddingRight: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0)'
   },
   main: {
     flex: 1,

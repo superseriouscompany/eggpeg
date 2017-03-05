@@ -39,6 +39,7 @@ const style = StyleSheet.create({
     width: 120,
     padding: 20,
     paddingTop: 18,
-    paddingLeft: 0
+    paddingLeft: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0)'
   },
 })
