@@ -4,36 +4,22 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import GameView from '../components/GameView'
 import config from '../config'
-import {
-  Dimensions
-} from 'react-native'
+import levels from '../levels'
 
 class Game extends Component {
   constructor(props) {
     super(props)
-    this.gameLoop = this.gameLoop.bind(this)
-    this.iterate  = this.iterate.bind(this)
-    this.shoot    = this.shoot.bind(this)
-    this.retry    = this.retry.bind(this)
+    this.state     = { level: -1 }
+    this.gameLoop  = this.gameLoop.bind(this)
+    this.iterate   = this.iterate.bind(this)
+    this.shoot     = this.shoot.bind(this)
+    this.retry     = this.retry.bind(this)
+    this.nextLevel = this.nextLevel.bind(this)
   }
 
   componentDidMount() {
-    this.props.dispatch({
-      type: 'targets:add',
-      x: 0,
-      y: (Dimensions.get('window').height - config.target.width) / 2,
-      xMax: Dimensions.get('window').width,
-      velocity: 1,
-    })
-
-    this.props.dispatch({
-      type: 'targets:add',
-      x: 50,
-      y: (Dimensions.get('window').height - config.target.width) / 2,
-      xMax: Dimensions.get('window').width,
-      velocity: 1.2,
-    })
     this.gameLoop()
+    this.nextLevel(0)
   }
 
   gameLoop() {
@@ -41,16 +27,35 @@ class Game extends Component {
     requestAnimationFrame(this.gameLoop)
   }
 
+  nextLevel(level) {
+    const state = { level: this.state.level + 1 }
+    if( state.level == levels.length ) {
+      return this.props.dispatch({type: 'game:beat'})
+    }
+    this.props.dispatch({type: 'result:retry'})
+    levels[state.level].targets.forEach((target) => {
+      this.props.dispatch({
+        ...target,
+        type: 'targets:add',
+      })
+    })
+    this.setState(state)
+  }
+
   iterate() {
+    if( this.props.result.winTime ) {
+      if( +new Date - this.props.result.winTime < config.winDelay ) { return }
+      return this.props.dispatch({type: 'result:finish'})
+    }
     if( this.props.result.done ) { return; }
     this.props.dispatch({type: 'tick'})
 
-    this.props.bullets.filter((bullet) => {
-      return bullet.visible
-    }).forEach((bullet) => {
+    this.props.bullets.forEach((bullet, bi) => {
       this.props.targets.forEach((target, index) => {
-        if( !target.hit && isCollision(target, bullet) ) {
+        if( bullet.visible && !target.hit && isCollision(target, bullet) ) {
+          const score = Math.round(config.score.max - distance(target, bullet) * config.score.penalty);
           this.props.dispatch({type: 'targets:hit', index: index})
+          this.props.dispatch({type: 'bullets:hit', index: bi, score: score})
         }
       })
     })
@@ -72,7 +77,7 @@ class Game extends Component {
 
   shoot(x, y) {
     if( !this.props.hasBullets ) { return console.warn('No bullets'); }
-    this.props.dispatch({type: 'bullet:fire', x: x, y: y})
+    this.props.dispatch({type: 'bullets:fire', x: x, y: y})
   }
 
   retry() {
@@ -80,7 +85,7 @@ class Game extends Component {
   }
 
   render() { return (
-    <GameView shoot={this.shoot} retry={this.retry} {...this.props} />
+    <GameView shoot={this.shoot} retry={this.retry} nextLevel={this.nextLevel} {...this.props} />
   )}
 }
 
@@ -112,6 +117,21 @@ function isCollision(a, b) {
   console.log('checked collision', isXCollision, isYCollision, a, b);
 
   return isXCollision && isYCollision;
+}
+
+function distance(a, b) {
+  const aCenter = {
+    x: a.x + a.width / 2,
+    y: a.y + (a.height || a.width) / 2
+  };
+
+  const bCenter = {
+    x: b.x + b.width / 2,
+    y: b.y + (b.height || b.width) / 2
+  }
+
+  // https://en.wikipedia.org/wiki/Cartesian_coordinate_system#Distance_between_two_points
+  return Math.sqrt(Math.pow(aCenter.x - bCenter.x, 2) + Math.pow(aCenter.y - bCenter.y, 2))
 }
 
 export default connect(mapStateToProps)(Game);

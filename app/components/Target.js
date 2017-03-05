@@ -31,10 +31,10 @@ export default class Target extends Component {
 
 const style = StyleSheet.create({
   target: {
-    backgroundColor: 'slateblue',
+    backgroundColor: 'white',
     position:        'absolute',
   },
   hit: {
-    backgroundColor: 'gold',
+    backgroundColor: '#532D5A',
   },
 })

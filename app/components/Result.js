@@ -11,23 +11,32 @@ import {
 
 export default class Result extends Component {
   static propTypes = {
-    win:   PropTypes.bool.isRequired,
-    retry: PropTypes.func.isRequired,
+    win:       PropTypes.bool.isRequired,
+    retry:     PropTypes.func.isRequired,
+    nextLevel: PropTypes.func.isRequired,
   }
 
   render() { return (
-    <TouchableOpacity onPress={this.props.retry} style={style.container}>
+    <TouchableOpacity onPress={this.props.win ? this.props.nextLevel : this.props.retry} style={style.container}>
       { this.props.win ?
-        <Text>You won!</Text>
+        <View style={style.text}>
+          <Text>cleared!</Text>
+          <Text>{this.props.score}pts</Text>
+        </View>
       :
-        <Text>You lost.</Text>
+        <View style={style.text}>
+          <Text>game over!</Text>
+          <Text>{this.props.score}</Text>
+        </View>
       }
-      <Text>Tap anywhere to retry.</Text>
     </TouchableOpacity>
   )}
 }
 
 const style = StyleSheet.create({
+  text: {
+    color: 'gainsboro',
+  },
   container: {
     flex:           1,
     justifyContent: 'center',

@@ -5,6 +5,7 @@ export default function targets(state = [], action) {
     case 'targets:add':
       return state.concat({
         ...config.target,
+        width:    config.sizes.target,
         originX:  action.x,
         originY:  action.y,
         x:        action.x,
@@ -15,7 +16,7 @@ export default function targets(state = [], action) {
     case 'targets:hit':
       return state.map(hit(action.index))
     case 'result:retry':
-      return state.map(reset)
+      return []
     case 'tick':
       return state.map(tick)
     default:
@@ -39,6 +40,7 @@ function reset(target) {
 }
 
 function tick(target) {
+  if( target.hit ) { return target; }
   const {width, x, xMax} = target
   let   {velocity}       = target
 
