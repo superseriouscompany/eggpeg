@@ -27,15 +27,15 @@ export default class GameView extends Component {
       <View style={{flex: 1}}>
         <StatusBar hidden={true} />
 
-        { this.props.result.done ?
+        { this.props.level.done ?
           <View style={style.container}>
-            <GameHeader tries={this.props.chamber} score={this.props.result.score} />
-            <Result score={this.props.result.score} win={this.props.result.win} retry={this.props.retry} nextLevel={this.props.nextLevel} />
+            <GameHeader tries={this.props.chamber} score={this.props.level.score} />
+            <Result score={this.props.level.score} win={this.props.level.win} retry={this.props.retry} nextLevel={this.props.nextLevel} />
           </View>
         :
           <TouchableWithoutFeedback onPress={(e) => this.props.shoot(e.nativeEvent.pageX, e.nativeEvent.pageY)}>
             <View style={style.container}>
-              <GameHeader tries={this.props.chamber} score={this.props.result.score || 0}/>
+              <GameHeader tries={this.props.chamber} score={this.props.level.score || 0}/>
               { this.props.targets.map((target, key) => (
                 <Target key={key} target={target} />
               ))}

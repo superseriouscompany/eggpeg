@@ -15,7 +15,7 @@ export default function targets(state = [], action) {
       })
     case 'targets:hit':
       return state.map(hit(action.index))
-    case 'result:retry':
+    case 'level:retry':
       return []
     case 'tick':
       return state.map(tick)

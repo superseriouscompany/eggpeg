@@ -1,3 +1,5 @@
+import config from '../config'
+
 export default function(state={}, action) {
   switch(action.type) {
     case 'bullets:hit':
@@ -5,25 +7,25 @@ export default function(state={}, action) {
         ...state,
         score: (state.score || 0) + action.score,
       }
-    case 'result:win':
+    case 'level:win':
       return {
         ...state,
         win:     true,
-        winTime: +new Date,
+        winTime: +new Date + config.winDelay,
       }
-    case 'result:finish':
+    case 'level:finish':
       return {
         ...state,
         winTime: null,
         done: true,
       }
-    case 'result:loss':
+    case 'level:loss':
       return {
         ...state,
         win: false,
         done: true,
       }
-    case 'result:retry':
+    case 'level:retry':
       return {
         ...state,
         done: false,

@@ -32,7 +32,7 @@ class Game extends Component {
     if( state.level == levels.length ) {
       return this.props.dispatch({type: 'game:beat'})
     }
-    this.props.dispatch({type: 'result:retry'})
+    this.props.dispatch({type: 'level:retry'})
     levels[state.level].targets.forEach((target) => {
       this.props.dispatch({
         ...target,
@@ -43,11 +43,11 @@ class Game extends Component {
   }
 
   iterate() {
-    if( this.props.result.winTime ) {
-      if( +new Date - this.props.result.winTime < config.winDelay ) { return }
-      return this.props.dispatch({type: 'result:finish'})
+    if( this.props.level.done ) { return; }
+    if( this.props.level.winTime ) {
+      if( +new Date <= this.props.level.winTime ) { return }
+      return this.props.dispatch({type: 'level:finish'})
     }
-    if( this.props.result.done ) { return; }
     this.props.dispatch({type: 'tick'})
 
     this.props.bullets.forEach((bullet, bi) => {
@@ -63,14 +63,14 @@ class Game extends Component {
     const allHit = !this.props.targets.find((t) => { return !t.hit })
     // check if all hit
     if( this.props.targets.length && allHit ) {
-      this.props.dispatch({type: 'result:win'})
+      this.props.dispatch({type: 'level:win'})
     }
 
 
     if( !this.props.hasBullets ) {
       const allSpent = !this.props.bullets.find((b) => { return !b.spent })
       if( allSpent ) {
-        this.props.dispatch({type: 'result:loss'})
+        this.props.dispatch({type: 'level:loss'})
       }
     }
   }
@@ -81,7 +81,7 @@ class Game extends Component {
   }
 
   retry() {
-    this.props.dispatch({type: 'result:retry'})
+    this.props.dispatch({type: 'level:retry'})
   }
 
   render() { return (
@@ -95,7 +95,7 @@ function mapStateToProps(state) {
     targets:    state.targets,
     chamber:    state.chamber,
     hasBullets: state.chamber > 0,
-    result:     state.result,
+    level:     state.level,
 
     head: state.targets[0],
   }
