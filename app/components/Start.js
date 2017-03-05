@@ -44,7 +44,9 @@ export default class Start extends Component {
             <TouchableOpacity style={style.leftNav} onPress={this.props.showAbout}>
               <Text style={{fontStyle: 'italic'}}>who?</Text>
             </TouchableOpacity>
-            <PayButton payDialog={this.payDialog}/>
+            <TouchableOpacity style={style.rightNav} onPress={this.shareDialog}>
+              <Text style={{fontStyle: 'italic', textAlign: 'right'}}>link</Text>
+            </TouchableOpacity>
           </View>
           <View style={style.main}>
             <EggDrop />
@@ -53,11 +55,6 @@ export default class Start extends Component {
                 <Text style={{fontStyle: 'italic', fontSize: 32, color: base.colors.grey}}>play</Text>
               </TouchableOpacity>
             </View>
-          </View>
-          <View style={style.footer}>
-            <TouchableOpacity onPress={this.shareDialog}>
-              <Text style={{fontStyle: 'italic'}}>show your dad</Text>
-            </TouchableOpacity>
           </View>
         </View>
       }
@@ -114,8 +111,13 @@ const style = StyleSheet.create({
   leftNav: {
     width: 120,
     padding: 20,
-    paddingTop: 20,
     paddingRight: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0)'
+  },
+  rightNav: {
+    width: 120,
+    padding: 20,
+    paddingLeft: 0,
     backgroundColor: 'rgba(0, 0, 0, 0)'
   },
   main: {
@@ -131,11 +133,6 @@ const style = StyleSheet.create({
     height: 75,
     paddingBottom: 6,
     justifyContent: 'center',
-    alignItems: 'center',
-  },
-  footer: {
-    padding: 20,
-    paddingBottom: 25,
     alignItems: 'center',
   },
 })
