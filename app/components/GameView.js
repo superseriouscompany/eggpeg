@@ -4,6 +4,8 @@ import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
 import Result from './Result'
+import Bullet from './Bullet'
+import Target from './Target'
 import {
   Dimensions,
   StatusBar,
@@ -29,34 +31,11 @@ export default class GameView extends Component {
           <TouchableWithoutFeedback onPress={(e) => this.props.shoot(e.nativeEvent.pageX, e.nativeEvent.pageY)}>
             <View style={style.container}>
               <Text style={style.tries}>{this.props.chamber} {this.props.chamber == 1 ? 'try' : 'tries'} left</Text>
-              <View style={[style.head, {
-                marginLeft: this.props.head.x,
-                width: this.props.head.width,
-                height: this.props.head.width
-              }]} />
+              { this.props.targets.map((target, key) => (
+                <Target key={key} target={target} />
+              ))}
               { this.props.bullets.map((bullet, key) => (
-                <View key={key} style={[style.bulletContainer, {
-                  left:   bullet.x - bullet.width,
-                  top:    bullet.y - bullet.width,
-                  width:  bullet.width * 2,
-                  height: bullet.width * 2,
-                }]}>
-                  { bullet.visible ?
-                    <View style={[style.bullet, {
-                      width:  bullet.width,
-                      height: bullet.width}]} />
-                  : bullet.shadow > 0 ?
-                    <View style={[style.shadow, {
-                      width:  bullet.width * 2 * bullet.shadow,
-                      height: bullet.width * 2 * bullet.shadow}]} />
-                  : bullet.spent ?
-                    <View style={[style.casing, {
-                      width:  bullet.width,
-                      height: bullet.width,
-                    }]} />
-                  : null
-                  }
-                </View>
+                <Bullet key={key} bullet={bullet} />
               ))}
             </View>
           </TouchableWithoutFeedback>
@@ -68,32 +47,11 @@ export default class GameView extends Component {
 
 const style = StyleSheet.create({
   container: {
-    flex:           1,
-    justifyContent: 'center',
+    flex: 1,
   },
   tries: {
     position: 'absolute',
     top: 20,
     left: 20,
-  },
-  head: {
-    backgroundColor: 'slateblue',
-    position:        'absolute',
-  },
-  bullet: {
-    backgroundColor: 'orange',
-  },
-  casing: {
-    position: 'absolute',
-    borderColor: 'indianred',
-    borderWidth: 1,
-  },
-  bulletContainer: {
-    justifyContent: 'center',
-    alignItems:     'center',
-    position:       'absolute',
-  },
-  shadow: {
-    backgroundColor: 'turquoise',
   },
 })

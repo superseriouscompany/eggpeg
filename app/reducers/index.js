@@ -3,14 +3,14 @@ import createLogger from 'redux-logger';
 
 import bullets from './bullets'
 import chamber from './chamber'
-import head   from './head'
 import result from './result'
+import targets from './targets'
 
 const reducers = combineReducers({
   bullets,
   chamber,
-  head,
   result,
+  targets,
 })
 const middleware = []
 if( false && __DEV__ ) {

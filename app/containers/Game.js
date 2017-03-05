@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import GameView from '../components/GameView'
+import config from '../config'
 import {
   Dimensions
 } from 'react-native'
@@ -10,10 +11,6 @@ import {
 class Game extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      windowWidth:  Dimensions.get('window').width,
-      windowHeight: Dimensions.get('window').height,
-    }
     this.gameLoop = this.gameLoop.bind(this)
     this.iterate  = this.iterate.bind(this)
     this.shoot    = this.shoot.bind(this)
@@ -22,8 +19,19 @@ class Game extends Component {
 
   componentDidMount() {
     this.props.dispatch({
-      type: 'head:setY',
-      y: (this.state.windowHeight - this.props.head.width) / 2
+      type: 'targets:add',
+      x: 0,
+      y: (Dimensions.get('window').height - config.target.width) / 2,
+      xMax: Dimensions.get('window').width,
+      velocity: 1,
+    })
+
+    this.props.dispatch({
+      type: 'targets:add',
+      x: 50,
+      y: (Dimensions.get('window').height - config.target.width) / 2,
+      xMax: Dimensions.get('window').width,
+      velocity: 1.2,
     })
     this.gameLoop()
   }
@@ -35,23 +43,24 @@ class Game extends Component {
 
   iterate() {
     if( this.props.result.done ) { return; }
-    // update head position
-    const {width, x}    = this.props.head
-    const {windowWidth} = this.state
-    let {velocity}      = this.props.head
-    if( velocity > 0 && (x + width) >= windowWidth ) { velocity *= -1 }
-    if( velocity < 0 && x <= 0 ) { velocity *= -1 }
-    this.props.dispatch({type: 'head:move', velocity: velocity})
-
     this.props.dispatch({type: 'tick'})
 
-    this.props.bullets.forEach((bullet) => {
-      // check for a hit
-      if( !this.props.head.hit && bullet.visible && isCollision(this.props.head, bullet) ) {
-        this.props.dispatch({type: 'head:hit'})
-        this.props.dispatch({type: 'result:win'})
-      }
+    this.props.bullets.filter((bullet) => {
+      return bullet.visible
+    }).forEach((bullet) => {
+      this.props.targets.forEach((target, index) => {
+        if( !target.hit && isCollision(target, bullet) ) {
+          this.props.dispatch({type: 'targets:hit', index: index})
+        }
+      })
     })
+
+    const allHit = !this.props.targets.find((t) => { return !t.hit })
+    // check if all hit
+    if( this.props.targets.length && allHit ) {
+      this.props.dispatch({type: 'result:win'})
+    }
+
 
     if( !this.props.hasBullets ) {
       const allSpent = !this.props.bullets.find((b) => { return !b.spent })
@@ -77,12 +86,13 @@ class Game extends Component {
 
 function mapStateToProps(state) {
   return {
-    bullet:     state.bullets[0],
     bullets:    state.bullets,
-    head:       state.head,
+    targets:    state.targets,
     chamber:    state.chamber,
     hasBullets: state.chamber > 0,
     result:     state.result,
+
+    head: state.targets[0],
   }
 }
 

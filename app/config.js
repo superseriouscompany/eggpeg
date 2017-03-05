@@ -5,9 +5,7 @@ export default {
     linger: 100,
   },
   chamber: 3,
-  head: {
-    x:        0,
-    velocity: 1,
+  target: {
     width:    20,
   },
 }
