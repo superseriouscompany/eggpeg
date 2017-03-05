@@ -3,6 +3,7 @@
 import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
+import config from '../config';
 import {
   StyleSheet,
   View,
@@ -26,21 +27,26 @@ export default class Bullet extends Component {
     <View style={[style.bulletContainer, {
       left:   bullet.x - bullet.width,
       top:    bullet.y - bullet.width,
-      width:  bullet.width * 2,
-      height: bullet.width * 2,
+      width:  Math.max(config.sizes.shadow, config.sizes.bullet),
+      height: Math.max(config.sizes.shadow, config.sizes.bullet),
     }]}>
       { bullet.visible ?
         <View style={[style.bullet, {
           width:  bullet.width,
-          height: bullet.width}]} />
+          height: bullet.width,
+          borderRadius: bullet.width / 2,
+        }]} />
       : bullet.shadow > 0 ?
         <View style={[style.shadow, {
-          width:  bullet.width * 2 * bullet.shadow,
-          height: bullet.width * 2 * bullet.shadow}]} />
+          width:  config.sizes.shadow * bullet.shadow,
+          height: config.sizes.shadow * bullet.shadow,
+          borderRadius: (config.sizes.shadow * bullet.shadow) / 2,
+        }]} />
       : bullet.spent ?
         <View style={[style.casing, {
           width:  bullet.width,
           height: bullet.width,
+          borderRadius: bullet.width / 2,
         }]} />
       : null
       }
@@ -55,14 +61,16 @@ const style = StyleSheet.create({
     position:       'absolute',
   },
   shadow: {
-    backgroundColor: 'turquoise',
+    backgroundColor: 'white',
+    borderColor: 'black',
+    borderWidth: 1,
   },
   bullet: {
-    backgroundColor: 'orange',
+    backgroundColor: '#F5B140',
   },
   casing: {
     position: 'absolute',
-    borderColor: 'indianred',
+    borderColor: 'white',
     borderWidth: 1,
   },
 })

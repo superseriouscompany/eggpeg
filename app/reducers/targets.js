@@ -5,6 +5,7 @@ export default function targets(state = [], action) {
     case 'targets:add':
       return state.concat({
         ...config.target,
+        width:    config.sizes.target,
         originX:  action.x,
         originY:  action.y,
         x:        action.x,

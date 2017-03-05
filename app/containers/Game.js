@@ -21,7 +21,7 @@ class Game extends Component {
     this.props.dispatch({
       type: 'targets:add',
       x: 0,
-      y: (Dimensions.get('window').height - config.target.width) / 2,
+      y: (Dimensions.get('window').height - config.sizes.target) / 2,
       xMax: Dimensions.get('window').width,
       velocity: 1,
     })
@@ -29,7 +29,7 @@ class Game extends Component {
     this.props.dispatch({
       type: 'targets:add',
       x: 50,
-      y: (Dimensions.get('window').height - config.target.width) / 2,
+      y: (Dimensions.get('window').height - config.sizes.target) / 2,
       xMax: Dimensions.get('window').width,
       velocity: 1.2,
     })

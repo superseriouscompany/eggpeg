@@ -10,6 +10,7 @@ export default function bullet(state = [], action) {
           x: action.x,
           y: action.y,
           shadow: 1,
+          width: config.sizes.bullet,
         }
       )
     case 'result:retry':

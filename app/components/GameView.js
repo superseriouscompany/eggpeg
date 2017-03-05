@@ -48,6 +48,7 @@ export default class GameView extends Component {
 const style = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#8B5097',
   },
   tries: {
     position: 'absolute',
