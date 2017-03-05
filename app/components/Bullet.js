@@ -24,14 +24,14 @@ export default class Bullet extends Component {
   render() {
     const {bullet} = this.props;
   return (
-    <View style={[style.bulletContainer, {
+    <View style={[style.bulletContainer, bullet.hit ? style.hit : null, {
       left:   bullet.x - bullet.width,
       top:    bullet.y - bullet.width,
       width:  Math.max(config.sizes.shadow, config.sizes.bullet),
       height: Math.max(config.sizes.shadow, config.sizes.bullet),
     }]}>
       { bullet.visible || bullet.hit ?
-        <View style={[style.bullet, {
+        <View style={[style.bullet, bullet.hit ? style.hit : null, {
           width:  bullet.width,
           height: bullet.width,
           borderRadius: bullet.width / 2,
@@ -64,10 +64,12 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     borderColor: 'black',
     borderWidth: 1,
-    zIndex: 3,
   },
   bullet: {
     backgroundColor: '#F5B140',
+  },
+  hit: {
+    zIndex: -1,
   },
   casing: {
     position: 'absolute',
