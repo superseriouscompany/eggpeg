@@ -1190,7 +1190,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.superserious.sniper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.superserious.eggpeg;
 				PRODUCT_NAME = sniper;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1220,7 +1220,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.superserious.sniper;
+				PRODUCT_BUNDLE_IDENTIFIER = com.superserious.eggpeg;
 				PRODUCT_NAME = sniper;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
