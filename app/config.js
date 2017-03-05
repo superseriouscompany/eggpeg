@@ -6,6 +6,6 @@ export default {
   },
   chamber: 3,
   target: {
-    width:    20,
+    width: 20,
   },
 }

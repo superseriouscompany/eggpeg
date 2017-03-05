@@ -5,6 +5,7 @@ import Component from './Component';
 import Text from './Text';
 import PayButton from './PayButton';
 import PayDialog from './PayDialog';
+import EggDrop from './EggDrop';
 import {
   Platform,
   Share,
@@ -28,20 +29,21 @@ export default class Start extends Component {
   }
 
   render() { return (
-    <View style={[style.container, {flex: 1}]}>
+    <View style={[style.container]}>
       { this.state.paying ?
         <PayDialog back={() => this.setState({paying: false})} product={this.state.product}/>
       :
         <View style={{flex: 1}}>
           <View style={style.header}>
             <TouchableOpacity style={style.leftNav} onPress={this.props.showAbout}>
-              <Text style={{fontStyle: 'italic'}}>who dis?</Text>
+              <Text style={{fontStyle: 'italic'}}>who?</Text>
             </TouchableOpacity>
             <PayButton payDialog={this.payDialog}/>
           </View>
           <View style={style.main}>
-            <TouchableOpacity onPress={this.props.startGame}>
-              <Text style={{fontStyle: 'italic', fontSize: 32}}>start</Text>
+            <EggDrop />
+            <TouchableOpacity onPress={this.props.startGame} style={style.startButton}>
+              <Text style={{fontStyle: 'italic', fontSize: 32}}>play</Text>
             </TouchableOpacity>
           </View>
           <View style={style.footer}>
@@ -90,10 +92,16 @@ export default class Start extends Component {
 }
 
 const style = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F8F4E5',
+  },
   header: {
-    zIndex: 69,
+    zIndex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    position: 'absolute',
+    width: '100%',
   },
   leftNav: {
     width: 120,
@@ -103,8 +111,7 @@ const style = StyleSheet.create({
   },
   main: {
     flex: 1,
-    marginTop: -50,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
   footer: {
@@ -112,5 +119,11 @@ const style = StyleSheet.create({
     paddingRight: 20,
     paddingBottom: 20,
     alignItems: 'center',
+  },
+  startButton: {
+    borderWidth: 1,
+    borderColor: 'hotpink',
+    borderRadius: 10,
+    padding: 20,
   }
 })

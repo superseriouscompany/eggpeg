@@ -18,7 +18,7 @@ export default class PayButton extends Component {
 
   render() { return (
     <TouchableOpacity style={style.rightNav} onPress={this.pay}>
-      <Text style={{fontStyle: 'italic'}}>we po&#39;</Text>
+      <Text style={{fontStyle: 'italic'}}>$$$</Text>
     </TouchableOpacity>
   )}
 
