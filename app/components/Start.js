@@ -9,6 +9,7 @@ import EggDrop from './EggDrop';
 import {
   Platform,
   Share,
+  StatusBar,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -30,6 +31,8 @@ export default class Start extends Component {
 
   render() { return (
     <View style={[style.container]}>
+      <StatusBar hidden/>
+
       { this.state.paying ?
         <PayDialog back={() => this.setState({paying: false})} product={this.state.product}/>
       :
