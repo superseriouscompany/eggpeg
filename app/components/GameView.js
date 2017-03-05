@@ -17,8 +17,9 @@ import {
 
 export default class GameView extends Component {
   static propTypes = {
-    shoot: PropTypes.func.isRequired,
-    retry: PropTypes.func.isRequired,
+    shoot:     PropTypes.func.isRequired,
+    retry:     PropTypes.func.isRequired,
+    nextLevel: PropTypes.func.isRequired,
   }
 
   render() {
@@ -27,7 +28,10 @@ export default class GameView extends Component {
         <StatusBar hidden={true} />
 
         { this.props.result.done ?
-          <Result win={this.props.result.win} retry={this.props.retry} />
+          <View style={style.container}>
+            <GameHeader tries={this.props.chamber} score={this.props.result.score} />
+            <Result score={this.props.result.score} win={this.props.result.win} retry={this.props.retry} nextLevel={this.props.nextLevel} />
+          </View>
         :
           <TouchableWithoutFeedback onPress={(e) => this.props.shoot(e.nativeEvent.pageX, e.nativeEvent.pageY)}>
             <View style={style.container}>

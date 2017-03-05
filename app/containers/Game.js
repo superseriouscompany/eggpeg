@@ -4,34 +4,42 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import GameView from '../components/GameView'
 import config from '../config'
-import {
-  Dimensions
-} from 'react-native'
+import levels from '../levels'
 
 class Game extends Component {
   constructor(props) {
     super(props)
-    this.gameLoop = this.gameLoop.bind(this)
-    this.iterate  = this.iterate.bind(this)
-    this.shoot    = this.shoot.bind(this)
-    this.retry    = this.retry.bind(this)
+    this.state     = { level: -1 }
+    this.gameLoop  = this.gameLoop.bind(this)
+    this.iterate   = this.iterate.bind(this)
+    this.shoot     = this.shoot.bind(this)
+    this.retry     = this.retry.bind(this)
+    this.nextLevel = this.nextLevel.bind(this)
   }
 
   componentDidMount() {
-    this.props.dispatch({
-      type: 'targets:add',
-      x: 0,
-      y: (Dimensions.get('window').height - config.sizes.target) / 2,
-      xMax: Dimensions.get('window').width,
-      velocity: 1,
-    })
-
     this.gameLoop()
+    this.nextLevel(0)
   }
 
   gameLoop() {
     this.iterate();
     requestAnimationFrame(this.gameLoop)
+  }
+
+  nextLevel(level) {
+    const state = { level: this.state.level + 1 }
+    if( state.level == levels.length ) {
+      return this.props.dispatch({type: 'game:beat'})
+    }
+    this.props.dispatch({type: 'result:retry'})
+    levels[state.level].targets.forEach((target) => {
+      this.props.dispatch({
+        ...target,
+        type: 'targets:add',
+      })
+    })
+    this.setState(state)
   }
 
   iterate() {
@@ -73,7 +81,7 @@ class Game extends Component {
   }
 
   render() { return (
-    <GameView shoot={this.shoot} retry={this.retry} {...this.props} />
+    <GameView shoot={this.shoot} retry={this.retry} nextLevel={this.nextLevel} {...this.props} />
   )}
 }
 
