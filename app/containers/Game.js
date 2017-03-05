@@ -29,9 +29,7 @@ class Game extends Component {
   }
 
   nextLevel() {
-    const state = { level: this.state.level + 1 }
-    this.loadLevel(state.level)
-    this.setState(state)
+    this.loadLevel(this.state.level + 1)
   }
 
   loadLevel(level) {
@@ -83,7 +81,7 @@ class Game extends Component {
 
   reset() {
     this.props.dispatch({type: 'score:reset'})
-    this.nextLevel(1)
+    this.loadLevel(0)
   }
 
   render() { return (

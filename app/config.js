@@ -1,4 +1,4 @@
-export default {
+const config = {
   winDelay: 0,
   bullet: {
     delay:  0,
@@ -15,3 +15,5 @@ export default {
     penalty: 2,
   },
 }
+
+export default config
