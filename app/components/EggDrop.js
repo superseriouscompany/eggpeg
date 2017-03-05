@@ -3,6 +3,7 @@
 import React from 'react';
 import Component from './Component';
 import Text from './Text';
+import base from '../styles/base';
 import {
   Dimensions,
   Image,
@@ -16,12 +17,12 @@ export default class EggDrop extends Component {
   render() { return (
     <View>
       <View style={{flexDirection: 'row'}}>
-        <Bar color="#79B249" />
-        <Bar color="#F5B840" />
-        <Bar color="#EA8A39" />
-        <Bar color="#D1534A" />
-        <Bar color="#8B5097" />
-        <Bar color="#389ED9" />
+        <Bar color={base.colors.green} />
+        <Bar color={base.colors.yellow} />
+        <Bar color={base.colors.orange} />
+        <Bar color={base.colors.red} />
+        <Bar color={base.colors.purple} />
+        <Bar color={base.colors.blue} />
       </View>
       <Image source={require('../images/Oval.png')} style={style.egg}/>
     </View>

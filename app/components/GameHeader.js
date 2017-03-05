@@ -11,7 +11,7 @@ import {
 
 export default class GameHeader extends Component {
   render() { return (
-    <View style={{flexDirection: 'row'}}>
+    <View style={style.header}>
       <View style={{flexDirection: 'row', flex: 1}}>
         <Egg filled={this.props.tries >= 1} />
         <Egg filled={this.props.tries >= 2} />
@@ -32,11 +32,17 @@ class Egg extends Component {
 }
 
 const style = StyleSheet.create({
+  header: {
+    flexDirection: 'row',
+    padding: 11,
+    paddingTop: 9,
+    paddingBottom: 10,
+  },
   egg: {
     margin: 3,
   },
   score: {
     margin: 3,
-    color: 'gainsboro',
+    color: 'white',
   }
 })

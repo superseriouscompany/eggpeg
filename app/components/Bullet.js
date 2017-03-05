@@ -4,6 +4,7 @@ import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
 import config from '../config';
+import base from '../styles/base';
 import {
   StyleSheet,
   View,
@@ -73,11 +74,11 @@ const style = StyleSheet.create({
   },
   shadow: {
     backgroundColor: 'white',
-    borderColor: 'black',
+    borderColor: base.colors.purple,
     borderWidth: 1,
   },
   bullet: {
-    backgroundColor: '#F5B140',
+    backgroundColor: base.colors.yellow,
   },
   score: {
     position: 'absolute',

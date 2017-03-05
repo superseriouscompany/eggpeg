@@ -8,6 +8,7 @@ import Victory from './Victory'
 import Bullet from './Bullet'
 import Target from './Target'
 import GameHeader from './GameHeader'
+import base from '../styles/base'
 import {
   Dimensions,
   StatusBar,
@@ -65,7 +66,7 @@ export default class GameView extends Component {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#8B5097',
+    backgroundColor: base.colors.purple,
   },
   tries: {
     position: 'absolute',
