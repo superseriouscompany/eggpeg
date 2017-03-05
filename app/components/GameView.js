@@ -28,41 +28,33 @@ export default class GameView extends Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={style.container}>
         <StatusBar hidden/>
-
+        <GameHeader tries={this.props.chamber} score={this.props.score.level || 0} />
         { this.props.beat ?
-          <View style={style.container}>
-            <Victory
-              score={this.props.score.total}
-              reset={this.props.reset}
-              highScores={[
-                { score: this.props.score.total + 10, time: new Date },
-                { score: this.props.score.total, time: new Date },
-                { score: this.props.score.total - 50, time: new Date },
-              ]} />
-          </View>
+          <Victory
+            score={this.props.score.total}
+            reset={this.props.reset}
+            highScores={[
+              { score: this.props.score.total + 10, time: new Date },
+              { score: this.props.score.total, time: new Date },
+              { score: this.props.score.total - 50, time: new Date },
+            ]} />
         : this.props.level.done && !this.props.level.win ?
-          <View style={style.container}>
-            <GameOver
-              score={this.props.score.total}
-              reset={this.props.reset}
-              continue={this.props.continue} />
-          </View>
+          <GameOver
+            score={this.props.score.total}
+            reset={this.props.reset}
+            continue={this.props.continue} />
         : this.props.level.done && this.props.level.win ?
-          <View style={style.container}>
-            <GameHeader tries={this.props.chamber} score={this.props.score.level} />
-            <Result
-              score={this.props.score.total}
-              levelScore={this.props.score.level}
-              win={this.props.level.win}
-              reset={this.props.reset}
-              nextLevel={this.props.nextLevel} />
-          </View>
+          <Result
+            score={this.props.score.total}
+            levelScore={this.props.score.level}
+            win={this.props.level.win}
+            reset={this.props.reset}
+            nextLevel={this.props.nextLevel} />
         :
           <TouchableWithoutFeedback onPress={(e) => this.props.shoot(e.nativeEvent.pageX, e.nativeEvent.pageY)}>
-            <View style={style.container}>
-              <GameHeader tries={this.props.chamber} score={this.props.score.level || 0}/>
+            <View style={{flex: 1}}>
               { this.props.targets.map((target, key) => (
                 <Target key={key} target={target} />
               ))}

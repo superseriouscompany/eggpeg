@@ -37,6 +37,10 @@ const style = StyleSheet.create({
     padding: 11,
     paddingTop: 9,
     paddingBottom: 10,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
   },
   egg: {
     margin: 3,
