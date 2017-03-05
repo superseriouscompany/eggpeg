@@ -25,7 +25,7 @@ export default class GameView extends Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <StatusBar hidden={true} />
+        <StatusBar hidden/>
 
         { this.props.level.done ?
           <View style={style.container}>

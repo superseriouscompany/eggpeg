@@ -4,10 +4,13 @@ import React from 'react';
 import Component from './Component';
 import Text from './Text';
 import {
+  Dimensions,
   Image,
   StyleSheet,
   View,
 } from 'react-native';
+
+const windowHeight = Dimensions.get('window').height;
 
 export default class EggDrop extends Component {
   render() { return (
@@ -34,9 +37,10 @@ class Bar extends Component {
 const style = StyleSheet.create({
   bar: {
     width: 20,
-    height: 350,
+    height: windowHeight * 0.537,
   },
   egg: {
     marginTop: -100,
+    resizeMode: 'contain',
   }
 })

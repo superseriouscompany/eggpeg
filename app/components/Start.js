@@ -6,6 +6,7 @@ import Text from './Text';
 import PayButton from './PayButton';
 import PayDialog from './PayDialog';
 import EggDrop from './EggDrop';
+import base from '../styles/base';
 import {
   Platform,
   Share,
@@ -14,6 +15,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+
 
 export default class Start extends Component {
   static propTypes = {
@@ -29,7 +31,8 @@ export default class Start extends Component {
     this.dismissPayDialog = this.dismissPayDialog.bind(this)
   }
 
-  render() { return (
+  render() {
+    return (
     <View style={[style.container]}>
       <StatusBar hidden/>
 
@@ -44,10 +47,12 @@ export default class Start extends Component {
             <PayButton payDialog={this.payDialog}/>
           </View>
           <View style={style.main}>
-            <EggDrop/>
-            <TouchableOpacity onPress={this.props.startGame} style={style.startButton}>
-              <Text style={{fontStyle: 'italic', fontSize: 32}}>play</Text>
-            </TouchableOpacity>
+            <EggDrop />
+            <View style={{flex: 1, justifyContent: 'center'}}>
+              <TouchableOpacity onPress={this.props.startGame} style={style.startButton}>
+                <Text style={{fontStyle: 'italic', fontSize: 32, color: base.colors.grey}}>play</Text>
+              </TouchableOpacity>
+            </View>
           </View>
           <View style={style.footer}>
             <TouchableOpacity onPress={this.shareDialog}>
@@ -119,15 +124,17 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   footer: {
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingBottom: 20,
+    padding: 20,
     alignItems: 'center',
   },
   startButton: {
     borderWidth: 1,
-    borderColor: 'hotpink',
+    borderColor: base.colors.grey,
     borderRadius: 10,
-    padding: 20,
-  }
+    width: 172,
+    height: 60,
+    paddingBottom: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 })
