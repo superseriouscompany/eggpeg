@@ -102,7 +102,7 @@ export default class Start extends Component {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F4E5',
+    backgroundColor: base.colors.beige,
   },
   header: {
     zIndex: 1,

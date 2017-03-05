@@ -3,6 +3,7 @@
 import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
+import base from '../styles/base';
 import {
   StyleSheet,
   View,
@@ -31,8 +32,9 @@ export default class Target extends Component {
 
 const style = StyleSheet.create({
   target: {
-    backgroundColor: 'white',
-    position:        'absolute',
+    position: 'absolute',
+    backgroundColor: base.colors.beige,
+    borderRadius: 2,
   },
   hit: {
     backgroundColor: '#532D5A',

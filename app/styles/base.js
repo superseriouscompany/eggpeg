@@ -4,6 +4,7 @@ import {
 
 const colors = {
   grey: '#838386',
+  beige: '#F8F4E5',
 }
 const fontSizes = {
   big: 20,
