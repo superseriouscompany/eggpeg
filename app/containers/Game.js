@@ -10,17 +10,17 @@ import levels from '../levels'
 class Game extends Component {
   constructor(props) {
     super(props)
-    this.state     = { level: -1 }
     this.gameLoop  = this.gameLoop.bind(this)
     this.iterate   = this.iterate.bind(this)
     this.shoot     = this.shoot.bind(this)
-    this.retry     = this.retry.bind(this)
+    this.reset     = this.reset.bind(this)
     this.nextLevel = this.nextLevel.bind(this)
+    this.loadLevel = this.loadLevel.bind(this)
   }
 
   componentDidMount() {
     this.gameLoop()
-    this.nextLevel(0)
+    this.loadLevel(0)
   }
 
   gameLoop() {
@@ -28,14 +28,19 @@ class Game extends Component {
     requestAnimationFrame(this.gameLoop)
   }
 
-  nextLevel(level) {
+  nextLevel() {
     const state = { level: this.state.level + 1 }
-    if( state.level == levels.length ) {
-      return this.props.dispatch({type: 'game:beat'})
-    } else {
-      this.props.dispatch(loadLevel(state.level))
-    }
+    this.loadLevel(state.level)
     this.setState(state)
+  }
+
+  loadLevel(level) {
+    if( level >= levels.length ) {
+      return this.props.dispatch({type: 'game:beat'})
+    }
+
+    this.setState({level: level})
+    this.props.dispatch(loadLevel(level))
   }
 
   iterate() {
@@ -76,12 +81,13 @@ class Game extends Component {
     this.props.dispatch({type: 'bullets:fire', x: x, y: y})
   }
 
-  retry() {
-    this.props.dispatch({type: 'level:retry'})
+  reset() {
+    this.props.dispatch({type: 'score:reset'})
+    this.nextLevel(1)
   }
 
   render() { return (
-    <GameView shoot={this.shoot} retry={this.retry} nextLevel={this.nextLevel} {...this.props} />
+    <GameView shoot={this.shoot} reset={this.reset} nextLevel={this.nextLevel} {...this.props} />
   )}
 }
 

@@ -12,12 +12,12 @@ import {
 export default class Result extends Component {
   static propTypes = {
     win:       PropTypes.bool.isRequired,
-    retry:     PropTypes.func.isRequired,
+    reset:     PropTypes.func.isRequired,
     nextLevel: PropTypes.func.isRequired,
   }
 
   render() { return (
-    <TouchableOpacity onPress={this.props.win ? this.props.nextLevel : this.props.retry} style={style.container}>
+    <TouchableOpacity onPress={this.props.win ? this.props.nextLevel : this.props.reset} style={style.container}>
       { this.props.win ?
         <View>
           <Text style={style.text}>cleared!</Text>

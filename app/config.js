@@ -1,6 +1,7 @@
 export default {
+  winDelay: 0,
   bullet: {
-    delay:  3000,
+    delay:  0,
     linger: 100,
   },
   chamber: 3,
@@ -13,5 +14,4 @@ export default {
     max: 100,
     penalty: 2,
   },
-  winDelay: 1000,
 }
