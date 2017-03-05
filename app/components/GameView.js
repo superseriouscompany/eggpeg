@@ -4,6 +4,7 @@ import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
 import Result from './Result'
+import Victory from './Victory'
 import Bullet from './Bullet'
 import Target from './Target'
 import GameHeader from './GameHeader'
@@ -27,7 +28,13 @@ export default class GameView extends Component {
       <View style={{flex: 1}}>
         <StatusBar hidden/>
 
-        { this.props.level.done ?
+        { this.props.beat ?
+          <View style={style.container}>
+            <Victory
+              score={this.props.score.total}
+              reset={this.props.reset} />
+          </View>
+        : this.props.level.done ?
           <View style={style.container}>
             <GameHeader tries={this.props.chamber} score={this.props.score.level} />
             <Result

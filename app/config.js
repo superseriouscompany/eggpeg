@@ -19,7 +19,6 @@ const config = {
   },
 }
 
-
 if( DeviceInfo.isEmulator() ) {
   config.winDelay     = 0;
   config.lossDelay    = 0;

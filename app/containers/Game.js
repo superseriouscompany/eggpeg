@@ -10,6 +10,7 @@ import levels from '../levels'
 class Game extends Component {
   constructor(props) {
     super(props)
+    this.state     = {}
     this.gameLoop  = this.gameLoop.bind(this)
     this.iterate   = this.iterate.bind(this)
     this.shoot     = this.shoot.bind(this)
@@ -34,7 +35,7 @@ class Game extends Component {
 
   loadLevel(level) {
     if( level >= levels.length ) {
-      return this.props.dispatch({type: 'game:beat'})
+      return this.setState({beat: true})
     }
 
     this.setState({level: level})
@@ -82,11 +83,16 @@ class Game extends Component {
 
   reset() {
     this.props.dispatch({type: 'score:reset'})
+    this.setState({beat: false})
     this.loadLevel(0)
   }
 
   render() { return (
-    <GameView shoot={this.shoot} reset={this.reset} nextLevel={this.nextLevel} {...this.props} />
+    <GameView
+      shoot={this.shoot}
+      reset={this.reset}
+      nextLevel={this.nextLevel}
+      beat={this.state.beat} {...this.props} />
   )}
 }
 
