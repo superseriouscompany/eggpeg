@@ -154,27 +154,6 @@ export default [
       },
     ]
   },
-  // {
-  //   level: 'Star of David',
-  //   targets: [
-  //     {
-  //       points: [
-  //         { x: xcenter + 100, y: ycenter + 100 },
-  //         { x: xcenter + 100, y: ycenter },
-  //         { x: xcenter - 100, y: ycenter },
-  //       ],
-  //       velocity: 1,
-  //     },
-  //     {
-  //       points: [
-  //         { x: xcenter, y: ycenter },
-  //         { x: xcenter + 100, y: ycenter - 100},
-  //         { x: xcenter - 100, y: ycenter - 100},
-  //       ],
-  //       velocity: 1,
-  //     },
-  //   ]
-  // },
   {
     level: 'X Marks the Spot',
     targets: [
@@ -208,6 +187,39 @@ export default [
       },
     ]
   },
+  {
+    level: 'The Santi Special',
+    targets: [
+      {
+        points: [
+          { x: xcenter - 50, y: ycenter },
+          { x: xcenter - 50, y: ycenter - 50 },
+          { x: xcenter, y: ycenter - 50 },
+          { x: xcenter, y: ycenter }
+        ],
+        velocity: 1,
+      },
+      {
+        points: [
+          { x: xcenter - 50, y: ycenter },
+          { x: xcenter - 50, y: ycenter + 50 },
+          { x: xcenter, y: ycenter + 50 },
+          { x: xcenter, y: ycenter }
+        ],
+        velocity: 1,
+      },
+      {
+        points: [
+          { x: xcenter, y: ycenter },
+          { x: xcenter, y: ycenter - 25 },
+          { x: xcenter + 125, y: ycenter - 25 },
+          { x: xcenter + 125, y: ycenter + 25 },
+          { x: xcenter, y: ycenter + 25 },
+        ],
+        velocity: 1,
+      }
+    ]
+  }
 ]
 
 function steps(opts) {
