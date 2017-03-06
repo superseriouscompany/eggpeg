@@ -21,14 +21,21 @@ export default class Victory extends Component {
 
   render() { return (
     <TouchableOpacity onPress={this.props.reset} style={style.container}>
-      <Text>
+      <Text style={style.p}>
         You win! &nbsp;
-        <Text>{this.props.score}</Text>
       </Text>
 
-      {this.props.highScores.map((s, key) => (
-        <Text key={key} style={s.score == this.props.score ? style.newHighScore : null}>{s.score}</Text>
-      ))}
+      <Text style={style.p}>
+        Honestly, we didn't think anyone would get this far.
+      </Text>
+
+      <Text style={style.p}>
+        So we uh maybe didn't finish designing this screen.
+      </Text>
+
+      <Text style={style.p}>
+        ...we love you?
+      </Text>
     </TouchableOpacity>
   )}
 }
@@ -38,6 +45,10 @@ const style = StyleSheet.create({
     flex:           1,
     justifyContent: 'center',
     alignItems:     'center',
+  },
+  p: {
+    width: 200,
+    marginBottom: 20,
   },
   newHighScore: {
     color: 'goldenrod',
