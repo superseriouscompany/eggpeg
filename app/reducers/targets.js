@@ -49,7 +49,6 @@ function tick(target) {
   if( target.x == point.x && target.y == point.y ) {
     nextPoint(target)
     point = target.points[target.pointIndex]
-    console.log('reset point index to ', target.pointIndex)
   }
 
   // Figure out what direction we should step in
@@ -65,7 +64,7 @@ function tick(target) {
   target.y += target.velocity * diry * Math.min(1, dy/dx)
 
   // Correct path if we have overshot the target
-  if( Math.sqrt(Math.pow(target.x - point.x, 2) + Math.pow(target.y - point.y, 2)) < target.velocity ) {
+  if( Math.sqrt(Math.pow(target.x - point.x, 2) + Math.pow(target.y - point.y, 2)) <= target.velocity ) {
     target.x = point.x
     target.y = point.y
     nextPoint(target)

@@ -7,6 +7,8 @@ import config from '../config'
 import {loadLevel} from '../actions/levels'
 import levels from '../levels'
 
+let level = 0;
+
 class Game extends Component {
   constructor(props) {
     super(props)
@@ -97,7 +99,7 @@ class Game extends Component {
   reset() {
     this.props.dispatch({type: 'score:reset'})
     this.setState({beat: false})
-    this.loadLevel(0)
+    this.loadLevel(level)
   }
 
   render() { return (
