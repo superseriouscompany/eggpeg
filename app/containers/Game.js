@@ -7,6 +7,8 @@ import config from '../config'
 import {loadLevel} from '../actions/levels'
 import levels from '../levels'
 
+let level = 0
+
 class Game extends Component {
   constructor(props) {
     super(props)
@@ -121,37 +123,30 @@ function mapStateToProps(state) {
   }
 }
 
-function isCollision(a, b) {
-  const aLeft   = a.x;
-  const aRight  = a.x + a.width;
-  const bLeft   = b.x;
-  const bRight  = b.x + b.width;
-  const aTop    = a.y;
-  const aBottom = a.y + (a.height || a.width);
-  const bTop    = b.y;
-  const bBottom = b.y + (b.height || b.width);
+function isCollision(t, b) {
+  const aLeft   = t.x;
+  const aRight  = t.x + t.width;
+  const bLeft   = b.x - b.width/2;
+  const bRight  = b.x + b.width/2;
+  const aTop    = t.y;
+  const aBottom = t.y + (t.height || t.width);
+  const bTop    = b.y - b.width /2;
+  const bBottom = b.y + (b.height || b.width) / 2;
 
   const isXCollision = aLeft < bLeft && bLeft < aRight || aLeft < bRight && bRight < aRight;
   const isYCollision = aTop < bTop && bTop < aBottom || aTop < bBottom && bBottom < aBottom;
 
-  console.log('checked collision', isXCollision, isYCollision, a, b);
-
   return isXCollision && isYCollision;
 }
 
-function distance(a, b) {
-  const aCenter = {
-    x: a.x + a.width / 2,
-    y: a.y + (a.height || a.width) / 2
+function distance(t, b) {
+  const a = {
+    x: t.x + t.width / 2,
+    y: t.y + (t.height || t.width) / 2
   };
 
-  const bCenter = {
-    x: b.x + b.width / 2,
-    y: b.y + (b.height || b.width) / 2
-  }
-
   // https://en.wikipedia.org/wiki/Cartesian_coordinate_system#Distance_between_two_points
-  return Math.sqrt(Math.pow(aCenter.x - bCenter.x, 2) + Math.pow(aCenter.y - bCenter.y, 2))
+  return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2))
 }
 
 export default connect(mapStateToProps)(Game);

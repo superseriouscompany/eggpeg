@@ -24,12 +24,13 @@ export default class Bullet extends Component {
 
   render() {
     const {bullet} = this.props;
+    const containerWidth = Math.max(config.sizes.shadow, config.sizes.bullet)
   return (
     <View style={[style.bulletContainer, bullet.hit ? style.hit : null, {
-      left:   bullet.x - bullet.width,
-      top:    bullet.y - bullet.width,
-      width:  Math.max(config.sizes.shadow, config.sizes.bullet),
-      height: Math.max(config.sizes.shadow, config.sizes.bullet),
+      left:   bullet.x - containerWidth / 2,
+      top:    bullet.y - containerWidth / 2,
+      width:  containerWidth,
+      height: containerWidth,
     }]}>
       { bullet.hit ?
         <View style={style.score}>
@@ -82,7 +83,7 @@ const style = StyleSheet.create({
   },
   score: {
     position: 'absolute',
-    top: -30,
+    top: -40,
     zIndex: -1,
   },
   hit: {
