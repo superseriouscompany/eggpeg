@@ -4,8 +4,8 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:7amj.app.link</string>
-		<string>applinks:7amj-alternate.app.link</string>
+		<string>applinks:eggpeg.app.link</string>
+		<string>applinks:eggpeg-alternate.app.link</string>
 	</array>
 </dict>
 </plist>
