@@ -60,11 +60,12 @@ function tick(target) {
   const dy = Math.abs(point.y - target.y)
 
   // Move forward at velocity times ratio of slopes
-  target.x += target.velocity * dirx * Math.min(1, dx/dy)
-  target.y += target.velocity * diry * Math.min(1, dy/dx)
+  const velocity = point.velocity || target.velocity;
+  target.x += velocity * dirx * Math.min(1, dx/dy)
+  target.y += velocity * diry * Math.min(1, dy/dx)
 
   // Correct path if we have overshot the target
-  if( Math.sqrt(Math.pow(target.x - point.x, 2) + Math.pow(target.y - point.y, 2)) <= target.velocity ) {
+  if( Math.sqrt(Math.pow(target.x - point.x, 2) + Math.pow(target.y - point.y, 2)) <= velocity ) {
     target.x = point.x
     target.y = point.y
     nextPoint(target)

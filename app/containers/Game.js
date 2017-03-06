@@ -7,7 +7,7 @@ import config from '../config'
 import {loadLevel} from '../actions/levels'
 import levels from '../levels'
 
-let level = 0;
+let level = 6;
 
 class Game extends Component {
   constructor(props) {

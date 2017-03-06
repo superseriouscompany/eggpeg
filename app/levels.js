@@ -74,9 +74,50 @@ export default [
       },
     ]
   },
+  {
+    level: 'Slow Meeting',
+    targets: [
+      {
+        points: [
+          { x: xcenter - 100, y: ycenter - 50 },
+          { x: xcenter - 5,   y: ycenter - 50 },
+          { x: xcenter - 5,   y: ycenter + 50, velocity: 0.3 },
+          { x: xcenter - 100, y: ycenter + 50 },
+        ],
+        velocity: 1,
+      },
+      {
+        points: [
+          { x: xcenter + 100, y: ycenter - 50 },
+          { x: xcenter + 5,   y: ycenter - 50 },
+          { x: xcenter + 5,   y: ycenter + 50, velocity: 0.3 },
+          { x: xcenter + 100, y: ycenter + 50 },
+        ],
+        velocity: 1,
+      },
+    ]
+  },
   // TODO: stops
-  // TODO: slow mtg
   // TODO: fast mtg
+  {
+    level: 'Fast Meeting',
+    targets: [
+      {
+        points: [
+          { x: 0,       y: ycenter },
+          { x: xcenter, y: ycenter, velocity: 2 },
+        ],
+        velocity: 0.5,
+      },
+      {
+        points: [
+          { x: rightEdge, y: ycenter },
+          { x: xcenter,   y: ycenter, velocity: 2},
+        ],
+        velocity: 0.5,
+      },
+    ]
+  },
   {
     level: 'Two Speed',
     targets: [
