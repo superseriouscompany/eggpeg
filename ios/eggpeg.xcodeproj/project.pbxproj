@@ -36,6 +36,8 @@
 		2DCD954D1E0B4F2C00145EB5 /* sniperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* sniperTests.m */; };
 		3F4E11A01E6A38CC00FB18A3 /* Branch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F4E119F1E6A38CC00FB18A3 /* Branch.framework */; };
 		3FBEF9E11E6A53AF00782101 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FBEF9E01E6A53AF00782101 /* StoreKit.framework */; };
+		3FD77C0E1E6D0D0100E199DD /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FD77C0C1E6D0D0100E199DD /* Fabric.framework */; };
+		3FD77C0F1E6D0D0100E199DD /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FD77C0D1E6D0D0100E199DD /* Crashlytics.framework */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		69B7276ED34F43BC92BAC922 /* libreact-native-branch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 552C11F68F5E490D94AB7A05 /* libreact-native-branch.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -289,6 +291,8 @@
 		3F4E119F1E6A38CC00FB18A3 /* Branch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Branch.framework; path = Carthage/Build/iOS/Branch.framework; sourceTree = "<group>"; };
 		3F4E11A21E6A3BCD00FB18A3 /* sniper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = sniper.entitlements; path = sniper/sniper.entitlements; sourceTree = "<group>"; };
 		3FBEF9E01E6A53AF00782101 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		3FD77C0C1E6D0D0100E199DD /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		3FD77C0D1E6D0D0100E199DD /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		4909137A3E2E418A8444FD90 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		552C11F68F5E490D94AB7A05 /* libreact-native-branch.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libreact-native-branch.a"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -322,11 +326,13 @@
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
+				3FD77C0F1E6D0D0100E199DD /* Crashlytics.framework in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				3F4E11A01E6A38CC00FB18A3 /* Branch.framework in Frameworks */,
 				69B7276ED34F43BC92BAC922 /* libreact-native-branch.a in Frameworks */,
 				E7E695A656B948B5A11C2D64 /* libInAppUtils.a in Frameworks */,
+				3FD77C0E1E6D0D0100E199DD /* Fabric.framework in Frameworks */,
 				F8AEAB55904C44269D3B43A7 /* libRNDeviceInfo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,6 +488,8 @@
 		3F4E119E1E6A38CC00FB18A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3FD77C0C1E6D0D0100E199DD /* Fabric.framework */,
+				3FD77C0D1E6D0D0100E199DD /* Crashlytics.framework */,
 				3FBEF9E01E6A53AF00782101 /* StoreKit.framework */,
 				3F4E119F1E6A38CC00FB18A3 /* Branch.framework */,
 			);
@@ -598,6 +606,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				3F4E11A11E6A38ED00FB18A3 /* ShellScript */,
+				3FD77BEE1E6D0C9600E199DD /* ShellScript */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 			);
 			buildRules = (
@@ -1039,6 +1048,19 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
+		3FD77BEE1E6D0C9600E199DD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 6421088286a39d1b593400da0ac6819ff6dde0d0 879126e4df20c1addccd76129465972bb34c3beed5e4a6304a4bae12d6dc0195";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1176,6 +1198,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1206,6 +1229,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

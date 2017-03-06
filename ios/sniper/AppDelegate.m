@@ -15,6 +15,9 @@
 #import <Branch/Branch.h>
 #import <react-native-branch/RNBranch.h>
 
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -38,6 +41,9 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+
+  [Fabric with:@[[Branch class], [Crashlytics class]]];
+
   return YES;
 }
 
