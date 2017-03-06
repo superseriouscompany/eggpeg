@@ -5,13 +5,10 @@ export default function targets(state = [], action) {
     case 'targets:add':
       return state.concat({
         ...config.target,
-        width:    config.sizes.target,
-        originX:  action.x,
-        originY:  action.y,
-        x:        action.x,
-        y:        action.y,
-        xMax:     action.xMax,
-        velocity: action.velocity,
+        ...action.target,
+        x: action.target.points[0].x,
+        y: action.target.points[0].y,
+        width: config.sizes.target,
       })
     case 'targets:hit':
       return state.map(hit(action.index))
@@ -34,19 +31,50 @@ function hit(index) {
 
 function reset(target) {
   delete target.hit
-  target.x = target.originX
-  target.y = target.originY
+  target.x = target.points[0].x
+  target.y = target.points[0].y
+  target.pointIndex = 1
   return target
 }
 
 function tick(target) {
+  // Guards
   if( target.hit ) { return target; }
-  const {width, x, xMax} = target
-  let   {velocity}       = target
+  if( !target.points || !target.points.length || target.points.length == 1 ) { return target; }
+  if( !target.velocity ) { return target; }
 
-  if( velocity > 0 && (x + width) >= xMax ) { velocity *= -1 }
-  if( velocity < 0 && x <= 0 ) { velocity *= -1 }
-  target.velocity = velocity;
-  target.x = target.x + target.velocity;
-  return target
+  // Figure out what point we should be headed to
+  if( target.pointIndex === undefined ) { target.pointIndex = 1; }
+  let point = target.points[target.pointIndex]
+  if( target.x == point.x && target.y == point.y ) {
+    nextPoint(target)
+    point = target.points[target.pointIndex]
+    console.log('reset point index to ', target.pointIndex)
+  }
+
+  // Figure out what direction we should step in
+  const dirx = target.x == point.x ? 0 : target.x > point.x  ? -1 : 1
+  const diry = target.y == point.y ? 0 : target.y > point.y  ? -1 : 1
+
+  // Figure out the ratio of steps
+  const dx = Math.abs(point.x - target.x)
+  const dy = Math.abs(point.y - target.y)
+
+  // Move forward at velocity times ratio of slopes
+  target.x += target.velocity * dirx * Math.min(1, dx/dy)
+  target.y += target.velocity * diry * Math.min(1, dy/dx)
+
+  // Correct path if we have overshot the target
+  if( Math.sqrt(Math.pow(target.x - point.x, 2) + Math.pow(target.y - point.y, 2)) < target.velocity ) {
+    target.x = point.x
+    target.y = point.y
+    nextPoint(target)
+  }
+
+  return target;
+}
+
+function nextPoint(target) {
+  target.pointIndex++
+  if( target.pointIndex == target.points.length ) { target.pointIndex = 0 }
 }
