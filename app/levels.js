@@ -9,6 +9,20 @@ const ycenter = (height - config.sizes.target) / 2
 
 export default [
   {
+    level: 0,
+    targets: [
+      {
+        points: [
+          { x: 100, y: 100 },
+          { x: 110, y: 110 },
+          { x: 120, y: 110 },
+          { x: 120, y: 120 },
+        ],
+        velocity: 1,
+      },
+    ]
+  },
+  {
     level: 1,
     targets: [
       {

@@ -27,8 +27,8 @@ class Game extends Component {
 
   gameLoop() {
     this.iterate();
-    // requestAnimationFrame(this.gameLoop)
-    setTimeout(this.gameLoop, 1000)
+    requestAnimationFrame(this.gameLoop)
+    // setTimeout(this.gameLoop, 1000)
   }
 
   continue() {
