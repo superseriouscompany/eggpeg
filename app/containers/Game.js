@@ -61,7 +61,19 @@ class Game extends Component {
       let hits = []
       this.props.targets.forEach((target, index) => {
         if( bullet.visible && !target.hit && isCollision(target, bullet) ) {
-          const score = Math.round(config.score.max - distance(target, bullet) * config.score.penalty);
+          // To get magic number for max distance:
+          //
+          // Math.sqrt(
+          //   (
+          //     Math.pow(target.width, 2) + 2 * target.width * bullet.width + Math.pow(bullet.width, 2)
+          //   ) / 2
+          // )
+          const accuracy = distance(target, bullet) / 17;
+          const score =
+            accuracy < 0.3 ? 5 :
+            accuracy < 0.6 ? 2 :
+            1;
+
           this.props.dispatch({type: 'targets:hit', index: index})
           hits.push({score: score})
         }
