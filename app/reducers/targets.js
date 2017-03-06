@@ -47,8 +47,7 @@ function tick(target) {
   if( target.pointIndex === undefined ) { target.pointIndex = 1; }
   let point = target.points[target.pointIndex]
   if( target.x == point.x && target.y == point.y ) {
-    target.pointIndex++
-    if( target.pointIndex == target.points.length ) { target.pointIndex = 0 }
+    nextPoint(target)
     point = target.points[target.pointIndex]
     console.log('reset point index to ', target.pointIndex)
   }
@@ -65,5 +64,17 @@ function tick(target) {
   target.x += target.velocity * dirx * Math.min(1, dx/dy)
   target.y += target.velocity * diry * Math.min(1, dy/dx)
 
+  // Correct path if we have overshot the target
+  if( Math.sqrt(Math.pow(target.x - point.x, 2) + Math.pow(target.y - point.y, 2)) < target.velocity ) {
+    target.x = point.x
+    target.y = point.y
+    nextPoint(target)
+  }
+
   return target;
+}
+
+function nextPoint(target) {
+  target.pointIndex++
+  if( target.pointIndex == target.points.length ) { target.pointIndex = 0 }
 }
