@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import GameView from '../components/GameView'
 import config from '../config'
 import {loadLevel} from '../actions/levels'
+import {recordScore} from '../actions/scores'
 import levels from '../levels'
 
 let level = 0
@@ -112,6 +113,7 @@ class Game extends Component {
     this.props.dispatch({type: 'score:reset'})
     this.setState({beat: false})
     this.loadLevel(level)
+    recordScore(this.props.score.total)
   }
 
   render() { return (
