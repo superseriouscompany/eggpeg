@@ -9,7 +9,6 @@ import Bullet from './Bullet'
 import Target from './Target'
 import GameHeader from './GameHeader'
 import GameOver from './GameOver'
-import {loadProducts} from '../actions/purchases'
 import base from '../styles/base'
 import {
   Dimensions,
@@ -30,15 +29,6 @@ export default class GameView extends Component {
   constructor(props) {
     super(props)
     this.state = {}
-  }
-
-  componentDidMount() {
-    loadProducts((err, products) => {
-      if( err ) { alert(err) }
-      this.setState({
-        products: products,
-      })
-    })
   }
 
   render() {

@@ -3,6 +3,7 @@
 import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
+import {connect} from 'react-redux'
 import {purchase} from '../actions/purchases'
 import {
   ActivityIndicator,
@@ -11,7 +12,7 @@ import {
   View,
 } from 'react-native';
 
-export default class PayButton extends Component {
+class PayButton extends Component {
   static propTypes = {
     pause:    PropTypes.func.isRequired,
     resume:   PropTypes.func.isRequired,
@@ -22,6 +23,7 @@ export default class PayButton extends Component {
   constructor(props) {
     super(props)
     this.pay = this.pay.bind(this)
+    this.state = { purchasing: false }
   }
 
   render() { return (
@@ -59,6 +61,14 @@ export default class PayButton extends Component {
     })
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    products: state.purchase.products,
+  }
+}
+
+export default connect(mapStateToProps)(PayButton)
 
 const style = StyleSheet.create({
   explanation: {

@@ -6,6 +6,7 @@ import GameView from '../components/GameView'
 import config from '../config'
 import {loadLevel} from '../actions/levels'
 import levels from '../levels'
+import {loadProducts} from '../actions/purchases'
 
 let level = 0
 
@@ -25,6 +26,8 @@ class Game extends Component {
   componentDidMount() {
     this.gameLoop()
     this.reset()
+
+    this.props.dispatch(loadProducts())
   }
 
   gameLoop() {
