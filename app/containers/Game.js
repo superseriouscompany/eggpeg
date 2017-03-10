@@ -113,7 +113,9 @@ class Game extends Component {
     this.props.dispatch({type: 'score:reset'})
     this.setState({beat: false})
     this.loadLevel(level)
-    recordScore(this.props.score.total)
+    recordScore(this.props.score.total).catch((err) => {
+      console.error(err)
+    })
   }
 
   render() { return (
