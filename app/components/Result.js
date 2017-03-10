@@ -16,6 +16,12 @@ export default class Result extends Component {
     levelScore: PropTypes.number.isRequired,
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.props.nextLevel()
+    }, 1250)
+  }
+
   render() { return (
     <TouchableOpacity onPress={this.props.nextLevel} style={style.container}>
       <View style={style.scoreContainer}>
