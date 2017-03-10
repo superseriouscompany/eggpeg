@@ -8,12 +8,10 @@ export function loadProducts(cb) {
       'com.superserious.eggpeg.continue'
     ];
 
-    console.warn('loading products')
     InAppUtils.loadProducts(products, (err, products) => {
       if( err ) { return alert(err.message || JSON.stringify(err)) }
       if( !products.length ) { return alert('No products returned for in app purchases') }
 
-      console.warn('loaded products', products)
       dispatch({type: 'purchase:loadProducts', products: products})
     })
   }
