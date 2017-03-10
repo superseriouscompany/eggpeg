@@ -12,3 +12,15 @@ export function loadProducts(cb) {
     return cb(null, products);
   })
 }
+
+export function purchase(identifier, cb) {
+  InAppUtils.purchaseProduct(identifier, (err, response) => {
+    if( err ) { return cb(err); }
+    if(!response || !response.productIdentifier) {
+      return cb(new Error('Invalid response: ' + JSON.stringify(response)));
+    }
+
+    console.log('Purchase successful.', response.transactionIdentifier);
+    return cb(null, response.transactionIdentifier);
+  })
+}

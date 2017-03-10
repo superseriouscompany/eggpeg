@@ -3,14 +3,13 @@
 import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
+import {purchase} from '../actions/purchases'
 import {
   ActivityIndicator,
-  NativeModules,
   StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
-const { InAppUtils } = NativeModules;
 
 export default class PayButton extends Component {
   static propTypes = {
@@ -38,7 +37,10 @@ export default class PayButton extends Component {
           <Text style={style.continue}>continue?</Text>
         </TouchableOpacity>
       }
-      <Text style={style.explanation}>keep playing for {this.state.priceString}</Text>
+      { this.props.products && this.props.products.length > 0 ?
+        <Text style={style.explanation}>keep playing for {this.props.products[0].priceString}</Text>
+      : null
+      }
     </View>
   )}
 
@@ -51,23 +53,16 @@ export default class PayButton extends Component {
       return setTimeout(this.pay, 200);
     }
 
-    InAppUtils.purchaseProduct('com.superserious.eggpeg.continue', (error, response) => {
-      if( error ) {
-        alert(error.message || JSON.stringify(error));
+    purchase('com.superserious.eggpeg.continue', (err, ok) => {
+      if( err ) {
+        alert(err.message || JSON.stringify(err));
         this.setState({purchasing: false})
         this.props.resume()
         return
       }
 
-      if(response && response.productIdentifier) {
-        this.setState({purchasing: false})
-        this.props.continue()
-        console.log('Purchase Successful. Your Transaction ID is ' + response.transactionIdentifier);
-      } else {
-        alert('Invalid response', JSON.stringify(response))
-        this.setState({purchasing: false})
-        this.props.resume()
-      }
+      this.setState({purchasing: false})
+      this.props.continue()
     })
   }
 }
