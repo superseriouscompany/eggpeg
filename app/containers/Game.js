@@ -110,12 +110,17 @@ class Game extends Component {
   }
 
   reset() {
+    this.props.dispatch(recordScore(this.props.score.total)).then((isHigh) => {
+      if( isHigh ) {
+        alert('New high score!')        
+      }
+    }).catch((err) => {
+      console.error(err)
+    })
+
     this.props.dispatch({type: 'score:reset'})
     this.setState({beat: false})
     this.loadLevel(level)
-    recordScore(this.props.score.total).catch((err) => {
-      console.error(err)
-    })
   }
 
   render() { return (
