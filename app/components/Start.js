@@ -69,7 +69,7 @@ export default class Start extends Component {
     }
 
     Share.share({
-      message: Platform.OS == 'android' ? `Download Sniper ${this.props.shareLink}` : 'Download Sniper',
+      message: Platform.OS == 'android' ? `Download Egg Peg ${this.props.shareLink}` : 'Download Egg Peg',
       url: this.props.shareLink,
     }, {
       dialogTitle: 'Invite Friends',
