@@ -46,7 +46,7 @@ const style = StyleSheet.create({
     alignItems:     'center',
   },
   score: {
-    color: '#8B5096',
+    color: '#532D5A',
     fontSize: 64,
   },
 })
