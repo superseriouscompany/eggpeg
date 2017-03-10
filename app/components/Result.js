@@ -17,9 +17,13 @@ export default class Result extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
+    this.timeout = setTimeout(() => {
       this.props.nextLevel()
     }, 1250)
+  }
+
+  componentWillUnmount() {
+    this.timeout && clearTimeout(this.timeout)
   }
 
   render() { return (

@@ -35,20 +35,6 @@ export default [
     ]
   },
   {
-    level: 'Small loop',
-    targets: [
-      {
-        points: [
-          { x: xcenter - 5, y: ycenter - 5 },
-          { x: xcenter + 5, y: ycenter - 5 },
-          { x: xcenter + 5, y: ycenter + 5 },
-          { x: xcenter + -5, y: ycenter + 5 },
-        ],
-        velocity: .2,
-      }
-    ]
-  },
-  {
     level: 'Straight Line',
     targets: [
       {
