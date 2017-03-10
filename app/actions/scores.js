@@ -3,10 +3,30 @@ import {
 } from 'react-native'
 
 export function recordScore(score) {
+  let newHighScore = false;
+  if( !score ) { return Promise.resolve(false) }
   return AsyncStorage.getItem('@eggpeg:highscores').then((payload) => {
     const scores = payload && JSON.parse(payload) || []
-    scores.push(score)
-    console.warn(scores);
-    return AsyncStorage.setItem('@eggpeg:highscores', JSON.stringify(scores))
+    let place = -1;
+    if( !scores.length ) {
+      place = 0
+    } else {
+      for( var i = 0; i < 3; i++ ) {
+        if( i >= scores.length || scores[i] <= score ) {
+          place = i;
+          break;
+        }
+      }
+    }
+    if( place === -1 ) {
+      return false;
+    }
+
+    scores.splice(place, 0, score)
+    scores.length > 3 && scores.pop()
+
+    return AsyncStorage.setItem('@eggpeg:highscores', JSON.stringify(scores)).then(() => {
+      return true
+    })
   })
 }
