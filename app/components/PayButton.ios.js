@@ -17,6 +17,7 @@ export default class PayButton extends Component {
     pause:    PropTypes.func.isRequired,
     resume:   PropTypes.func.isRequired,
     continue: PropTypes.func.isRequired,
+    products: PropTypes.array.isRequired,
   }
 
   constructor(props) {
@@ -26,20 +27,6 @@ export default class PayButton extends Component {
       title: 'continue?',
       priceString: '99¢',
     }
-  }
-
-  componentDidMount() {
-    const products = [
-      'com.superserious.eggpeg.continue'
-    ];
-    InAppUtils.loadProducts(products, (err, products) => {
-      if( err ) { return console.error(err) }
-      if( !products.length ) { return console.error('No products returned for in app purchase') }
-      this.setState({
-        priceString: products[0].priceString,
-        loaded: true,
-      })
-    })
   }
 
   render() { return (

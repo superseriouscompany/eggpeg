@@ -9,6 +9,7 @@ import Bullet from './Bullet'
 import Target from './Target'
 import GameHeader from './GameHeader'
 import GameOver from './GameOver'
+import {loadProducts} from '../actions/purchases'
 import base from '../styles/base'
 import {
   Dimensions,
@@ -24,6 +25,20 @@ export default class GameView extends Component {
     reset:     PropTypes.func.isRequired,
     nextLevel: PropTypes.func.isRequired,
     continue:  PropTypes.func.isRequired,
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+
+  componentDidMount() {
+    loadProducts((err, products) => {
+      if( err ) { alert(err) }
+      this.setState({
+        products: products,
+      })
+    })
   }
 
   render() {
@@ -42,6 +57,7 @@ export default class GameView extends Component {
             ]} />
         : this.props.level.done && !this.props.level.win ?
           <GameOver
+            products={this.state.products}
             score={this.props.score.total}
             reset={this.props.reset}
             continue={this.props.continue} />

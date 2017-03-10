@@ -3,8 +3,6 @@
 import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
-import PayButton from './PayButton';
-import PayDialog from './PayDialog';
 import EggDrop from './EggDrop';
 import base from '../styles/base';
 import {
@@ -27,8 +25,6 @@ export default class Start extends Component {
     super(props)
     this.state            = {}
     this.shareDialog      = this.shareDialog.bind(this)
-    this.payDialog        = this.payDialog.bind(this)
-    this.dismissPayDialog = this.dismissPayDialog.bind(this)
   }
 
   render() {
@@ -36,28 +32,24 @@ export default class Start extends Component {
     <View style={[style.container]}>
       <StatusBar hidden/>
 
-      { this.state.paying ?
-        <PayDialog back={() => this.setState({paying: false})} product={this.state.product}/>
-      :
-        <View style={{flex: 1}}>
-          <View style={style.header}>
-            <TouchableOpacity style={style.leftNav} onPress={this.props.showAbout}>
-              <Text style={{fontStyle: 'italic'}}>who?</Text>
+      <View style={{flex: 1}}>
+        <View style={style.header}>
+          <TouchableOpacity style={style.leftNav} onPress={this.props.showAbout}>
+            <Text style={{fontStyle: 'italic'}}>who?</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={style.rightNav} onPress={this.shareDialog}>
+            <Text style={{fontStyle: 'italic', textAlign: 'right'}}>link</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={style.main}>
+          <EggDrop />
+          <View style={{flex: 1, justifyContent: 'center'}}>
+            <TouchableOpacity onPress={this.props.startGame} style={style.startButton}>
+              <Text style={{fontStyle: 'italic', fontSize: 32, color: base.colors.grey}}>play</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={style.rightNav} onPress={this.shareDialog}>
-              <Text style={{fontStyle: 'italic', textAlign: 'right'}}>link</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={style.main}>
-            <EggDrop />
-            <View style={{flex: 1, justifyContent: 'center'}}>
-              <TouchableOpacity onPress={this.props.startGame} style={style.startButton}>
-                <Text style={{fontStyle: 'italic', fontSize: 32, color: base.colors.grey}}>play</Text>
-              </TouchableOpacity>
-            </View>
           </View>
         </View>
-      }
+      </View>
     </View>
   )}
 
@@ -74,24 +66,6 @@ export default class Start extends Component {
     }, {
       dialogTitle: 'Invite Friends',
       tintColor: 'blue'
-    })
-  }
-
-  payDialog(id, title, description, priceString) {
-    this.setState({
-      paying: true,
-      product: {
-        id,
-        title,
-        description,
-        priceString,
-      }
-    })
-  }
-
-  dismissPayDialog() {
-    this.setState({
-      paying: false,
     })
   }
 }
