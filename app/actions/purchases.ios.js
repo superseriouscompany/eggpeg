@@ -2,7 +2,7 @@ import { NativeModules } from 'react-native'
 
 const { InAppUtils } = NativeModules;
 
-export function loadProducts(cb) {
+export function loadProducts() {
   return function(dispatch) {
     const products = [
       'com.superserious.eggpeg.continue'
