@@ -22,10 +22,6 @@ export default class PayButton extends Component {
   constructor(props) {
     super(props)
     this.pay = this.pay.bind(this)
-    this.state = {
-      title: 'continue?',
-      priceString: '99¢',
-    }
   }
 
   render() { return (
@@ -49,9 +45,6 @@ export default class PayButton extends Component {
       purchasing: true,
     })
     this.props.pause()
-    if( !this.state.loaded ) {
-      return setTimeout(this.pay, 200);
-    }
 
     purchase('com.superserious.eggpeg.continue', (err, ok) => {
       if( err ) {
