@@ -73,7 +73,7 @@ export default class GameOver extends Component {
             </View>
           :
             <View style={style.continueContainer}>
-              <View style={{height: 104, width: '100%'}}></View>
+              <View style={{height: 91, width: '100%'}}></View>
             </View>
           }
           <TouchableOpacity style={style.button}>
