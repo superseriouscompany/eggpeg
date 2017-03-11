@@ -34,10 +34,12 @@ const style = StyleSheet.create({
     width: 120,
     padding: 20,
     paddingRight: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0)'
   },
   rightNav: {
     width: 120,
     padding: 20,
     paddingLeft: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0)'
   },
 })
