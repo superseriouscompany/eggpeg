@@ -14,15 +14,15 @@ import {
   View,
 } from 'react-native';
 
-let playing = false;
+let scene = 'Start';
+// scene = 'Game'
 
 export default class Root extends Component {
   constructor(props) {
     super(props)
-    this.state = { playing: playing }
     this.startGame = this.startGame.bind(this)
-    this.showAbout = this.showAbout.bind(this)
     this.showStart = this.showStart.bind(this)
+    this.state = { scene: scene }
   }
 
   componentDidMount() {
@@ -50,32 +50,37 @@ export default class Root extends Component {
         shareLink: payload.url,
       })
     })
+
+    store.subscribe(() => {
+      const state = store.getState()
+      this.setState({
+        scene: state.scene,
+      })
+    })
   }
 
   render() { return (
     <View style={style.container}>
       <Provider store={store}>
-        { this.state.playing ?
-          <Game />
-        : this.state.aboutUs ?
+        { this.state.scene == 'Game' ?
+          <Game/>
+        : this.state.scene == 'AboutUs' ?
           <FollowUs back={this.showStart}/>
+        : this.state.scene == 'Start' ?
+          <Start startGame={this.startGame} shareLink={this.state.shareLink}/>
         :
-          <Start showAbout={this.showAbout} startGame={this.startGame} shareLink={this.state.shareLink}/>
+          <Text>404</Text>
         }
       </Provider>
     </View>
   )}
 
-  showAbout() {
-    this.setState({aboutUs: true})
-  }
-
   startGame() {
-    this.setState({playing: true})
+    this.setState({scene: 'Game'})
   }
 
   showStart() {
-    this.setState({aboutUs: false, playing: false,})
+    this.setState({scene: 'Start'})
   }
 }
 

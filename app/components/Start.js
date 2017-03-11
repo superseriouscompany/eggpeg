@@ -19,13 +19,11 @@ import {
 export default class Start extends Component {
   static propTypes = {
     startGame: PropTypes.func.isRequired,
-    showAbout: PropTypes.func.isRequired,
   }
 
   constructor(props) {
     super(props)
     this.state            = {}
-    this.shareDialog      = this.shareDialog.bind(this)
   }
 
   render() {
@@ -46,22 +44,6 @@ export default class Start extends Component {
       </View>
     </View>
   )}
-
-  shareDialog() {
-    this.shareTimeout && clearTimeout(this.shareTimeout);
-    if( !this.props.shareLink ) {
-      this.shareTimeout = setTimeout(this.shareDialog, 200);
-      return;
-    }
-
-    Share.share({
-      message: Platform.OS == 'android' ? `Download Egg Peg ${this.props.shareLink}` : 'Download Egg Peg',
-      url: this.props.shareLink,
-    }, {
-      dialogTitle: 'Invite Friends',
-      tintColor: 'blue'
-    })
-  }
 }
 
 const style = StyleSheet.create({

@@ -7,6 +7,7 @@ import level from './level'
 import targets from './targets'
 import score from './score'
 import purchase from './purchase'
+import scene from './scene'
 import thunk from 'redux-thunk';
 
 const reducers = combineReducers({
@@ -16,6 +17,7 @@ const reducers = combineReducers({
   targets,
   score,
   purchase,
+  scene,
 })
 const middleware = [thunk]
 if( __DEV__ ) {
