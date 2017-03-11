@@ -3,6 +3,7 @@
 import React from 'react';
 import Component from './Component';
 import Text from './Text';
+import {connect} from 'react-redux'
 import {
   Image,
   Linking,
@@ -12,11 +13,12 @@ import {
   View,
 } from 'react-native';
 
-export default class FollowUs extends Component {
+class FollowUs extends Component {
   constructor(props) {
     super(props)
     this.visitGram = this.visitGram.bind(this)
     this.visitSite = this.visitSite.bind(this)
+    this.back = this.back.bind(this)
   }
 
   render() { return (
@@ -24,7 +26,7 @@ export default class FollowUs extends Component {
       <StatusBar hidden/>
 
       <View style={style.header}>
-        <TouchableOpacity style={style.leftNav} onPress={this.props.back}>
+        <TouchableOpacity style={style.leftNav} onPress={this.back}>
           <Text style={{fontStyle: 'italic'}}>esc</Text>
         </TouchableOpacity>
       </View>
@@ -43,6 +45,10 @@ export default class FollowUs extends Component {
       </View>
     </View>
   )}
+
+  back() {
+    this.props.dispatch({type: 'scene:pop'})
+  }
 
   visitGram() {
     Linking.openURL('https://instagram.com/superseriouscompany')
@@ -80,3 +86,5 @@ const style = StyleSheet.create({
     alignItems: 'center',
   }
 })
+
+export default connect()(FollowUs)

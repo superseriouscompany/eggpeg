@@ -27,7 +27,9 @@ class Game extends Component {
 
   componentDidMount() {
     this.gameLoop()
-    this.reset()
+    if( !this.props.level || !this.props.level.done ) {
+      this.reset()
+    }
 
     this.loadIAPsWithRetry()
   }

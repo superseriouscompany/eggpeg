@@ -1,7 +1,15 @@
-export default function(state = 'Start', action) {
+export default function(state = {current: 'Start', previous: null}, action) {
   switch(action.type) {
     case 'scene:change':
-      return action.scene
+      return {
+        current: action.scene,
+        previous: state.current
+      }
+    case 'scene:pop':
+      return {
+        current: state.previous,
+        previous: null,
+      }
     default:
       return state
   }

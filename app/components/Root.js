@@ -54,7 +54,7 @@ export default class Root extends Component {
     store.subscribe(() => {
       const state = store.getState()
       this.setState({
-        scene: state.scene,
+        scene: state.scene.current,
       })
     })
   }
@@ -69,7 +69,7 @@ export default class Root extends Component {
         : this.state.scene == 'Start' ?
           <Start shareLink={this.state.shareLink}/>
         :
-          <Text>404</Text>
+          <View style={{backgroundColor: 'indianred', width: 100, height: 100}}/>
         }
       </Provider>
     </View>
