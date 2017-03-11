@@ -30,7 +30,9 @@ class PayButton extends Component {
   render() { return (
     <View>
       { this.state.purchasing ?
-        <ActivityIndicator />
+        <View style={style.activityContainer}>
+          <ActivityIndicator />
+        </View>
       :
         <TouchableOpacity style={this.props.style} onPress={this.pay}>
             <Text style={{fontStyle: 'italic', fontSize: 32, color: 'white'}}>
@@ -104,5 +106,10 @@ const style = StyleSheet.create({
     paddingBottom: 6,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  activityContainer: {
+    height: 90,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 })
