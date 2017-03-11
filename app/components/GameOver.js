@@ -62,7 +62,7 @@ export default class GameOver extends Component {
       <View style={{flex: 1, alignItems: 'center', marginTop: 55}}>
         <HighScores scores={this.props.highScores} score={this.props.score} isHigh={this.props.isHighScore} />
 
-        <View style={{flex: 1, justifyContent: 'center'}}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           { !this.state.expired && this.props.highScores.length >= 3 ?
             <View style={style.continueContainer}>
               <PayButton style={style.button}
@@ -71,7 +71,10 @@ export default class GameOver extends Component {
                pause={this.pause}
                resume={this.resume} />
             </View>
-          : null
+          :
+            <View style={style.continueContainer}>
+              <View style={{height: 104, width: '100%'}}></View>
+            </View>
           }
           <TouchableOpacity style={style.button}>
             <Text style={{fontStyle: 'italic', fontSize: 32, color: 'white'}}>game over</Text>
