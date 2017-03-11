@@ -6,6 +6,7 @@ import Text from './Text';
 import EggDrop from './EggDrop';
 import LinksHeader from './LinksHeader';
 import base from '../styles/base';
+import {connect} from 'react-redux';
 import {
   Platform,
   Share,
@@ -16,14 +17,11 @@ import {
 } from 'react-native';
 
 
-export default class Start extends Component {
-  static propTypes = {
-    startGame: PropTypes.func.isRequired,
-  }
-
+class Start extends Component {
   constructor(props) {
     super(props)
-    this.state            = {}
+    this.state = {}
+    this.startGame = this.startGame.bind(this)
   }
 
   render() {
@@ -36,7 +34,7 @@ export default class Start extends Component {
         <View style={style.main}>
           <EggDrop />
           <View style={{flex: 1, justifyContent: 'center'}}>
-            <TouchableOpacity onPress={this.props.startGame} style={style.startButton}>
+            <TouchableOpacity onPress={this.startGame} style={style.startButton}>
               <Text style={{fontStyle: 'italic', fontSize: 32, color: base.colors.grey}}>play</Text>
             </TouchableOpacity>
           </View>
@@ -44,6 +42,10 @@ export default class Start extends Component {
       </View>
     </View>
   )}
+
+  startGame() {
+    this.props.dispatch({type: 'scene:change', scene: 'Game'})
+  }
 }
 
 const style = StyleSheet.create({
@@ -67,3 +69,5 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
 })
+
+export default connect()(Start)

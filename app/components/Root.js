@@ -67,7 +67,7 @@ export default class Root extends Component {
         : this.state.scene == 'AboutUs' ?
           <FollowUs back={this.showStart}/>
         : this.state.scene == 'Start' ?
-          <Start startGame={this.startGame} shareLink={this.state.shareLink}/>
+          <Start shareLink={this.state.shareLink}/>
         :
           <Text>404</Text>
         }
