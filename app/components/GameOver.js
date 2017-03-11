@@ -5,10 +5,10 @@ import Component from './Component';
 import Text from './Text';
 import PayButton from './PayButton'
 import HighScores from './HighScores'
+import LinksHeader from './LinksHeader'
 import config from '../config'
 import {
   StyleSheet,
-  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -56,22 +56,21 @@ export default class GameOver extends Component {
   }
 
   render() { return (
-    <TouchableOpacity onPress={this.props.reset} style={{flex: 1}}>
-      <View style={style.container}>
-        <HighScores scores={this.props.highScores} score={this.props.score} isHigh={this.props.isHighScore} />
+    <View style={style.container}>
+      <LinksHeader textStyle={{color: 'white'}} />
+      <HighScores scores={this.props.highScores} score={this.props.score} isHigh={this.props.isHighScore} />
 
-        <View style={style.buttonsContainer}>
-          { !this.state.expired ?
-            <View style={style.continueContainer}>
-              <Text style={style.countdown}>{this.state.timer}</Text>
-              <PayButton style={style.button} continue={this.props.continue} pause={this.pause} resume={this.resume}/>
-            </View>
-          : null
-          }
-          <Text style={style.button}>game over</Text>
-        </View>
+      <View style={style.buttonsContainer}>
+        { !this.state.expired ?
+          <View style={style.continueContainer}>
+            <Text style={style.countdown}>{this.state.timer}</Text>
+            <PayButton style={style.button} continue={this.props.continue} pause={this.pause} resume={this.resume}/>
+          </View>
+        : null
+        }
+        <Text style={style.button}>game over</Text>
       </View>
-    </TouchableOpacity>
+    </View>
   )}
 }
 
