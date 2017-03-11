@@ -8,8 +8,6 @@ import {loadLevel} from '../actions/levels'
 import levels from '../levels'
 import {loadProducts} from '../actions/purchases'
 
-let level = 0
-
 class Game extends Component {
   constructor(props) {
     super(props)
@@ -86,7 +84,7 @@ class Game extends Component {
             accuracy < 0.6 ? 2 :
             1;
 
-          this.props.dispatch({type: 'targets:hit', index: index})
+          this.props.dispatch({type: 'targets:hit', index: index, score: score})
           hits.push({score: score})
         }
       })

@@ -11,7 +11,7 @@ export default function targets(state = [], action) {
         width: config.sizes.target,
       })
     case 'targets:hit':
-      return state.map(hit(action.index))
+      return state.map(hit(action.index, action.score))
     case 'level:clear':
       return []
     case 'tick':
@@ -21,10 +21,11 @@ export default function targets(state = [], action) {
   }
 }
 
-function hit(index) {
+function hit(index, score) {
   return function(target, i) {
     if( i != index ) { return target; }
-    target.hit = true;
+    target.hit   = true;
+    target.score = score;
     return target;
   }
 }

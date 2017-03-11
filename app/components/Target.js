@@ -22,20 +22,37 @@ export default class Target extends Component {
   render() {
     const {target} = this.props;
   return (
-    <Image source={require('../images/Target.png')} style={[style.target, target.hit ? style.hit : null, {
-      left: target.x,
-      top: target.y,
-      width: target.width,
-      height: target.width}]} />
+    <View style={[style.targetContainer, {
+      left:   target.x,
+      top:    target.y,
+      width:  target.width,
+      height: target.width,
+    }]}>
+      <Image source={require('../images/Target.png')} style={[style.target, target.hit ? style.hit : null, {
+        width: target.width,
+        height: target.width}]} />
+      { target.hit ?
+        <Text style={[style.score, {
+          top: -target.width - 5,
+        }]}>{target.score}</Text>
+      : null }
+    </View>
   )}
 }
 
 const style = StyleSheet.create({
-  target: {
-    position: 'absolute',
+  targetContainer: {
+    position:       'absolute',
+    alignItems:     'center',
+    justifyContent: 'center',
   },
   hit: {
     backgroundColor: '#532D5A',
     zIndex: -1,
+  },
+  score: {
+    color: 'hotpink',
+    position: 'absolute',
+    textAlign: 'center',
   },
 })
