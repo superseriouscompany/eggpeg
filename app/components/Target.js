@@ -85,7 +85,6 @@ const style = StyleSheet.create({
   dead: {
     position: 'absolute',
     backgroundColor: '#532D5A',
-    zIndex: -1,
   },
   hitContainer: {
     zIndex: -1,

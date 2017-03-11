@@ -1,4 +1,9 @@
 import config from '../config'
+import {
+  Platform
+} from 'react-native'
+
+const isAndroid = Platform.OS == 'android';
 
 export default function targets(state = [], action) {
   switch(action.type) {
@@ -61,7 +66,8 @@ function tick(target) {
   const dy = Math.abs(point.y - target.y)
 
   // Move forward at velocity times ratio of slopes
-  const velocity = point.velocity || target.velocity;
+  let velocity = point.velocity || target.velocity;
+  if( isAndroid ) velocity *= 2;
   target.x += velocity * dirx * Math.min(1, dx/dy)
   target.y += velocity * diry * Math.min(1, dy/dx)
 

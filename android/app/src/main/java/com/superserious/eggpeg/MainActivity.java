@@ -1,4 +1,4 @@
-package com.sniper;
+package com.superserious.eggpeg;
 
 import com.facebook.react.ReactActivity;
 import io.branch.rnbranch.*;

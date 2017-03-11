@@ -1,4 +1,4 @@
-package com.sniper;
+package com.superserious.eggpeg;
 
 import android.app.Application;
 
@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 
 // import Branch and RNBranch
-import io.branch.rnbranch.*;
 import io.branch.referral.Branch;
 
 public class MainApplication extends Application implements ReactApplication {
