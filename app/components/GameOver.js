@@ -74,7 +74,7 @@ export default class GameOver extends Component {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: '#5C3463',
+    backgroundColor: '#532D5A',
     flex:            1,
     alignItems:      'center',
   },
@@ -84,7 +84,7 @@ const style = StyleSheet.create({
   },
   score: {
     fontSize: 64,
-    color:    '#8B5096',
+    color:    '#BA6BC9',
   },
   continueContainer: {
     alignItems:     'center',

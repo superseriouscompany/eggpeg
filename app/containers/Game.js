@@ -7,6 +7,7 @@ import config from '../config'
 import {loadLevel} from '../actions/levels'
 import {recordScore} from '../actions/scores'
 import levels from '../levels'
+import {loadProducts} from '../actions/purchases'
 
 let level = 0
 
@@ -14,18 +15,29 @@ class Game extends Component {
   constructor(props) {
     super(props)
     this.state     = {}
-    this.gameLoop  = this.gameLoop.bind(this)
-    this.iterate   = this.iterate.bind(this)
-    this.shoot     = this.shoot.bind(this)
-    this.reset     = this.reset.bind(this)
-    this.nextLevel = this.nextLevel.bind(this)
-    this.loadLevel = this.loadLevel.bind(this)
-    this.continue  = this.continue.bind(this)
+    this.gameLoop          = this.gameLoop.bind(this)
+    this.iterate           = this.iterate.bind(this)
+    this.shoot             = this.shoot.bind(this)
+    this.reset             = this.reset.bind(this)
+    this.nextLevel         = this.nextLevel.bind(this)
+    this.loadLevel         = this.loadLevel.bind(this)
+    this.continue          = this.continue.bind(this)
+    this.loadIAPsWithRetry = this.loadIAPsWithRetry.bind(this)
   }
 
   componentDidMount() {
     this.gameLoop()
     this.reset()
+
+    this.loadIAPsWithRetry()
+  }
+
+  loadIAPsWithRetry() {
+    this.props.dispatch(loadProducts((err, ok) => {
+      if( err ) {
+        setTimeout(this.loadIAPsWithRetry, 30000);
+      }
+    }))
   }
 
   gameLoop() {
