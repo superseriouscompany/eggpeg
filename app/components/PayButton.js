@@ -14,10 +14,11 @@ import {
 
 class PayButton extends Component {
   static propTypes = {
-    pause:    PropTypes.func.isRequired,
-    resume:   PropTypes.func.isRequired,
-    continue: PropTypes.func.isRequired,
-    products: PropTypes.array.isRequired,
+    pause:     PropTypes.func.isRequired,
+    resume:    PropTypes.func.isRequired,
+    continue:  PropTypes.func.isRequired,
+    products:  PropTypes.array.isRequired,
+    countdown: PropTypes.number.isRequired,
   }
 
   constructor(props) {
@@ -32,7 +33,19 @@ class PayButton extends Component {
         <ActivityIndicator />
       :
         <TouchableOpacity onPress={this.pay}>
-          <Text style={this.props.style}>buy a life</Text>
+          <View style={this.props.buttonStyle}>
+            <Text style={this.props.style}>
+              buy a life
+            </Text>
+            <Text style={style.countdown}>
+              {this.props.countdown}
+            </Text>
+            { this.props.products && this.props.products.length ?
+              <Text style={style.priceString}>
+                {this.props.products[0].priceString}
+              </Text>
+            : null }
+          </View>
         </TouchableOpacity>
       }
     </View>
@@ -69,5 +82,19 @@ export default connect(mapStateToProps)(PayButton)
 const style = StyleSheet.create({
   explanation: {
     color: 'white',
+  },
+  countdown: {
+    color: 'white',
+    position: 'absolute',
+    top: 20,
+    right: 6,
+    fontSize: 12,
+  },
+  priceString: {
+    color: 'white',
+    position: 'absolute',
+    bottom: 15,
+    right: 6,
+    fontSize: 12,
   },
 })

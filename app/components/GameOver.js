@@ -63,8 +63,11 @@ export default class GameOver extends Component {
       <View style={style.buttonsContainer}>
         { !this.state.expired ?
           <View style={style.continueContainer}>
-            <Text style={style.countdown}>{this.state.timer}</Text>
-            <PayButton style={style.button} continue={this.props.continue} pause={this.pause} resume={this.resume}/>
+            <PayButton style={style.button}
+             countdown={this.state.timer}
+             continue={this.props.continue}
+             pause={this.pause}
+             resume={this.resume} />
           </View>
         : null
         }
