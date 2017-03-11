@@ -4,6 +4,7 @@ import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
 import PayButton from './PayButton'
+import HighScores from './HighScores'
 import config from '../config'
 import {
   StyleSheet,
@@ -57,22 +58,18 @@ export default class GameOver extends Component {
   render() { return (
     <TouchableOpacity onPress={this.props.reset} style={{flex: 1}}>
       <View style={style.container}>
-        <View style={style.scoreContainer}>
-          <Text style={style.score}>{this.props.score}</Text>
+        <HighScores scores={this.props.highScores} score={this.props.score} isHigh={this.props.isHighScore} />
+
+        <View style={style.buttonsContainer}>
+          { !this.state.expired ?
+            <View style={style.continueContainer}>
+              <Text style={style.countdown}>{this.state.timer}</Text>
+              <PayButton style={style.button} continue={this.props.continue} pause={this.pause} resume={this.resume}/>
+            </View>
+          : null
+          }
+          <Text style={style.button}>game over</Text>
         </View>
-        {(this.props.highScores || []).map((score, key) => (
-          <Text key={key}>{key + 1}. {score}</Text>
-        ))}
-        { this.props.isHighScore ?
-          <Text>New High Score!</Text>
-        : null }
-        { !this.state.expired ?
-          <View style={style.continueContainer}>
-            <Text style={style.countdown}>{this.state.timer}</Text>
-            <PayButton continue={this.props.continue} pause={this.pause} resume={this.resume}/>
-          </View>
-        : null
-        }
       </View>
     </TouchableOpacity>
   )}
@@ -84,20 +81,27 @@ const style = StyleSheet.create({
     flex:            1,
     alignItems:      'center',
   },
-  scoreContainer: {
-    flex:           1,
-    justifyContent: 'center',
-  },
-  score: {
-    fontSize: 64,
-    color:    '#BA6BC9',
-  },
-  continueContainer: {
+  buttonsContainer: {
     alignItems:     'center',
     justifyContent: 'center',
     marginBottom:   41,
   },
   countdown: {
     color: 'white',
+  },
+  button: {
+    fontSize:      32,
+    color:         'white',
+    paddingTop:    14,
+    paddingBottom: 20,
+    paddingLeft:   31,
+    paddingRight:  31,
+    borderColor:   'white',
+    borderWidth:   1,
+    borderRadius:  5,
+    marginTop:     16,
+    marginBottom:  10,
+    width:         220,
+    textAlign: 'center',
   },
 })

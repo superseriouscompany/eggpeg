@@ -23,6 +23,7 @@ export function recordScore(score) {
         }
       }
       if( place === -1 ) {
+        dispatch({type: 'score:setHighScores', isHigh: false, scores})
         return false;
       }
 

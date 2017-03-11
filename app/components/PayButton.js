@@ -32,12 +32,8 @@ class PayButton extends Component {
         <ActivityIndicator />
       :
         <TouchableOpacity onPress={this.pay}>
-          <Text style={style.continue}>continue?</Text>
+          <Text style={this.props.style}>continue?</Text>
         </TouchableOpacity>
-      }
-      { this.props.products && this.props.products.length > 0 ?
-        <Text style={style.explanation}>keep playing for {this.props.products[0].priceString}</Text>
-      : null
       }
     </View>
   )}
@@ -73,18 +69,5 @@ export default connect(mapStateToProps)(PayButton)
 const style = StyleSheet.create({
   explanation: {
     color: 'white',
-  },
-  continue: {
-    fontSize:      32,
-    color:         'white',
-    paddingTop:    14,
-    paddingBottom: 20,
-    paddingLeft:   31,
-    paddingRight:  31,
-    borderColor:   'white',
-    borderWidth:   1,
-    borderRadius:  5,
-    marginTop:     16,
-    marginBottom:  10,
   },
 })
