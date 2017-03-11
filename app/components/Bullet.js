@@ -32,11 +32,6 @@ export default class Bullet extends Component {
       width:  containerWidth,
       height: containerWidth,
     }]}>
-      { bullet.hit ?
-        <View style={style.score}>
-          <Text>{bullet.score}</Text>
-        </View>
-      : null }
       { bullet.hit || bullet.visible ?
         <View style={[style.bullet, bullet.hit ? style.hit : null, {
           width:  bullet.width,
@@ -80,11 +75,6 @@ const style = StyleSheet.create({
   },
   bullet: {
     backgroundColor: base.colors.yellow,
-  },
-  score: {
-    position: 'absolute',
-    top: -40,
-    zIndex: -1,
   },
   hit: {
     zIndex: -1,
