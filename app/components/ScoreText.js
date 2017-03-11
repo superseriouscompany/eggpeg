@@ -17,27 +17,40 @@ class ScoreText extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      enterAnim: new Animated.Value(-32),
       leaveAnim: new Animated.Value(0),
     }
   }
 
   componentWillReceiveProps(props) {
     if( props.text && !this.props.text ) {
-      Animated.timing(
-        this.state.leaveAnim,
-        { toValue: 1, duration: 2000, }
-      ).start()
+      Animated.sequence([
+        Animated.spring(
+          this.state.enterAnim,
+          { toValue: 0, friction: 4, }
+        ),
+        Animated.timing(
+          this.state.leaveAnim,
+          { toValue: 1, duration: 1000, }
+        )
+      ]).start()
     }
   }
 
   render() { return (
     <Animated.View style={[style.container, {
-      bottom: this.state.leaveAnim.interpolate({
-        inputRange: [0, .1, 0.5, 1],
-        outputRange: [-32, 0, 0, height],
+      bottom: this.state.enterAnim,
+      opacity: this.state.leaveAnim.interpolate({
+        inputRange:  [0, 1],
+        outputRange: [1, 0],
       }),
     }]}>
-      <Text style={style.text}>{this.props.text}</Text>
+      <Animated.Text style={[style.text, {
+        fontSize: this.state.leaveAnim.interpolate({
+          inputRange:  [0, 1],
+          outputRange: [32, 100],
+        })
+      }]}>{this.props.text}</Animated.Text>
     </Animated.View>
   )}
 }
@@ -53,7 +66,6 @@ const style = StyleSheet.create({
 
   text: {
     color: '#532D5A',
-    fontSize: 32,
   },
 })
 

@@ -1,7 +1,7 @@
 const DeviceInfo = require('react-native-device-info')
 
 const config = {
-  winDelay:  1000,
+  winDelay:  3000,
   lossDelay: 200,
   bullet: {
     delay:  3000,
@@ -24,7 +24,7 @@ const config = {
 }
 
 if( DeviceInfo.isEmulator() ) {
-  config.winDelay     = 2000;
+  config.winDelay     = 3000;
   config.lossDelay    = 0;
   config.bullet.delay = 0;
 }
