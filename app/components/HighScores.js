@@ -42,7 +42,11 @@ export default class HighScores extends Component {
         <View style={style.scoreboard}>
           {(this.props.scores || []).map((score, key) => (
             <Text key={key} style={style.highScore}>
-              {key + 1}&nbsp;&nbsp;{score}
+              { this.props.scores.length > 1 ?
+                <Text style={style.highScore}>{key + 1}&nbsp;&nbsp;{score}</Text>
+              :
+                <Text style={style.highScore}>{score}</Text>
+              }
               { this.props.isHigh && !gaveHighScore && score === this.props.score ? (gaveHighScore = true) && '!' : ' ' }
             </Text>
           ))}
@@ -60,6 +64,8 @@ function Bar(props) {
     <View style={[style.bar, {backgroundColor: props.color}]} />
   )
 }
+
+const barHeight = 25;
 
 const style = StyleSheet.create({
   container: {
@@ -88,7 +94,7 @@ const style = StyleSheet.create({
     backgroundColor: 'hotpink',
   },
   bar: {
-    height: 25,
+    height: barHeight,
     width: '100%'
   },
   barContainer: {
@@ -96,6 +102,8 @@ const style = StyleSheet.create({
   },
   scoresContainer: {
     alignItems: 'center',
+    justifyContent: 'center',
+    height: barHeight * 6
   },
   scoreboard: {
     alignItems: 'center',

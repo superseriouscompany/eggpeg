@@ -61,7 +61,7 @@ export default class GameOver extends Component {
       <HighScores scores={this.props.highScores} score={this.props.score} isHigh={this.props.isHighScore} />
 
       <View style={style.buttonsContainer}>
-        { !this.state.expired ?
+        { !this.state.expired && this.props.highScores.length >= 3 ?
           <View style={style.continueContainer}>
             <PayButton style={style.button}
              countdown={this.state.timer}
