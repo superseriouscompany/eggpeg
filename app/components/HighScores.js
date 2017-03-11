@@ -16,7 +16,9 @@ export default class HighScores extends Component {
     scores: PropTypes.arrayOf(PropTypes.number).isRequired,
   }
 
-  render() { return (
+  render() {
+    let gaveHighScore = false;
+  return (
     <View style={style.container}>
       { this.props.isHigh ?
         <Text style={style.highScore}>new high score!</Text>
@@ -24,7 +26,7 @@ export default class HighScores extends Component {
       {(this.props.scores || []).map((score, key) => (
         <Text key={key} style={style.highScore}>
           {key + 1}&nbsp;&nbsp;{score}
-          { this.props.isHigh && score === this.props.score ? '!' : null }
+          { this.props.isHigh && !gaveHighScore && score === this.props.score ? (gaveHighScore = true) && '!' : ' ' }
         </Text>
       ))}
       { !this.props.isHigh ?
