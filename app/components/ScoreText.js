@@ -17,7 +17,7 @@ class ScoreText extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      enterAnim: new Animated.Value(-32),
+      enterAnim: new Animated.Value(-100),
       leaveAnim: new Animated.Value(0),
     }
   }
@@ -27,11 +27,11 @@ class ScoreText extends Component {
       Animated.sequence([
         Animated.spring(
           this.state.enterAnim,
-          { toValue: 0, friction: 4, }
+          { toValue: 24, friction: 4, }
         ),
         Animated.timing(
           this.state.leaveAnim,
-          { toValue: 1, duration: 1000, }
+          { toValue: 1, duration: 500, }
         )
       ]).start()
     }
@@ -41,14 +41,14 @@ class ScoreText extends Component {
     <Animated.View style={[style.container, {
       bottom: this.state.enterAnim,
       opacity: this.state.leaveAnim.interpolate({
-        inputRange:  [0, 1],
-        outputRange: [1, 0],
+        inputRange:  [0, 0.25, .5, 1],
+        outputRange: [1, 0.5, 0.05, 0],
       }),
     }]}>
       <Animated.Text style={[style.text, {
         fontSize: this.state.leaveAnim.interpolate({
           inputRange:  [0, 1],
-          outputRange: [32, 100],
+          outputRange: [32, 64],
         })
       }]}>{this.props.text}</Animated.Text>
     </Animated.View>
@@ -59,8 +59,8 @@ const style = StyleSheet.create({
   container: {
     position: 'absolute',
     zIndex: -2,
-    left: 0,
-    right: 0,
+    left: -200,
+    right: -200,
     alignItems: 'center',
   },
 
