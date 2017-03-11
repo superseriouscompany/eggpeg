@@ -73,7 +73,7 @@ class PayButton extends Component {
 
 function mapStateToProps(state) {
   return {
-    products: state.purchase.products,
+    products: state.purchase.products || [],
   }
 }
 
