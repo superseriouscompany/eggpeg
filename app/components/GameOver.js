@@ -4,6 +4,8 @@ import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
 import PayButton from './PayButton'
+import HighScores from './HighScores'
+import LinksHeader from './LinksHeader'
 import config from '../config'
 import {
   StyleSheet,
@@ -55,20 +57,31 @@ export default class GameOver extends Component {
   }
 
   render() { return (
-    <TouchableOpacity onPress={this.props.reset} style={{flex: 1}}>
-      <View style={style.container}>
-        <View style={style.scoreContainer}>
-          <Text style={style.score}>{this.props.score}</Text>
+    <View style={style.container}>
+      <LinksHeader textStyle={{color: 'white'}} />
+      <View style={{flex: 1, alignItems: 'center', marginTop: 55}}>
+        <HighScores scores={this.props.highScores} score={this.props.score} isHigh={this.props.isHighScore} />
+
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          { !this.state.expired && this.props.highScores.length >= 3 ?
+            <View style={style.continueContainer}>
+              <PayButton style={style.button}
+               countdown={this.state.timer}
+               continue={this.props.continue}
+               pause={this.pause}
+               resume={this.resume} />
+            </View>
+          :
+            <View style={style.continueContainer}>
+              <View style={{height: 104, width: '100%'}}></View>
+            </View>
+          }
+          <TouchableOpacity style={style.button}>
+            <Text style={{fontStyle: 'italic', fontSize: 32, color: 'white'}}>game over</Text>
+          </TouchableOpacity>
         </View>
-        { !this.state.expired ?
-          <View style={style.continueContainer}>
-            <Text style={style.countdown}>{this.state.timer}</Text>
-            <PayButton continue={this.props.continue} pause={this.pause} resume={this.resume}/>
-          </View>
-        : null
-        }
       </View>
-    </TouchableOpacity>
+    </View>
   )}
 }
 
@@ -78,20 +91,19 @@ const style = StyleSheet.create({
     flex:            1,
     alignItems:      'center',
   },
-  scoreContainer: {
-    flex:           1,
-    justifyContent: 'center',
-  },
-  score: {
-    fontSize: 64,
-    color:    '#BA6BC9',
-  },
-  continueContainer: {
-    alignItems:     'center',
-    justifyContent: 'center',
-    marginBottom:   41,
-  },
   countdown: {
     color: 'white',
+  },
+  button: {
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 5,
+    width: 200,
+    height: 75,
+    paddingBottom: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 8,
+    marginBottom: 8,
   },
 })

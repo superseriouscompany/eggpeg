@@ -1,4 +1,4 @@
-const initialState = {total: 0, level: 0}
+const initialState = {total: 0, level: 0, highScores: []}
 import config from '../config'
 
 export default function(state = initialState, action) {
@@ -18,6 +18,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         total: state.total + state.level,
+      }
+    case 'score:setHighScores':
+      return {
+        ...state,
+        highScores: action.scores,
+        isHigh:     action.isHigh,
       }
     case 'score:reset':
       return initialState
