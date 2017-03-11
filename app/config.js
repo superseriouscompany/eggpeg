@@ -1,7 +1,7 @@
 const DeviceInfo = require('react-native-device-info')
 
 const config = {
-  winDelay:  1000,
+  winDelay:  3000,
   lossDelay: 200,
   bullet: {
     delay:  3000,

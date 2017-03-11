@@ -9,6 +9,7 @@ import Bullet from './Bullet'
 import Target from './Target'
 import GameHeader from './GameHeader'
 import GameOver from './GameOver'
+import ScoreText from './ScoreText'
 import base from '../styles/base'
 import {
   Dimensions,
@@ -70,6 +71,7 @@ export default class GameView extends Component {
                 { this.props.bullets.map((bullet, key) => (
                   <Bullet key={key} bullet={bullet} />
                 ))}
+                <ScoreText />
               </View>
             </TouchableWithoutFeedback>
           </View>

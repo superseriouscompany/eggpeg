@@ -96,7 +96,7 @@ class Game extends Component {
         if( hits.length > 1 ) {
           score *= config.multiplier.multihit * (hits.length - 1)
         }
-        this.props.dispatch({type: 'bullets:hit', index: bi, score: score})
+        this.props.dispatch({type: 'bullets:hit', index: bi, score: score, count: hits.length})
       }
     })
 
