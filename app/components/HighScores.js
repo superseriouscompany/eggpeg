@@ -23,7 +23,7 @@ export default class HighScores extends Component {
     <View style={style.container}>
       <View style={style.explanationContainer}>
         { this.props.isHigh ?
-          <Text style={style.explanation}>new high score!</Text>
+          <Text style={[style.explanation, this.props.explanationStyle]}>new high score!</Text>
         : null }
       </View>
 

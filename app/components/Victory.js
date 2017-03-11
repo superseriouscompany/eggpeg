@@ -3,7 +3,10 @@
 import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
+import LinksHeader from './LinksHeader'
+import HighScores from './HighScores'
 import {
+  Image,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -13,44 +16,51 @@ export default class Victory extends Component {
   static propTypes = {
     score: PropTypes.number.isRequired,
     reset: PropTypes.func.isRequired,
-    highScores: PropTypes.arrayOf(PropTypes.shape({
-	    score:      PropTypes.score,
-      time:       PropTypes.date,
-	  })),
+    isHighScore: PropTypes.bool.isRequired,
+    highScores:  PropTypes.arrayOf(PropTypes.number).isRequired,
   }
 
   render() { return (
-    <TouchableOpacity onPress={this.props.reset} style={style.container}>
-      <Text style={style.p}>
-        You win! &nbsp;
-      </Text>
+    <View style={style.container}>
+      <LinksHeader/>
+      <HighScores
+        explanationStyle={style.explanation}
+        scores={this.props.highScores}
+        score={this.props.score}
+        isHigh={this.props.isHighScore} />
 
-      <Text style={style.p}>
-        Honestly, we didn't think anyone would get this far.
-      </Text>
-
-      <Text style={style.p}>
-        So we uh maybe didn't finish designing this screen.
-      </Text>
-
-      <Text style={style.p}>
-        ...we love you?
-      </Text>
-    </TouchableOpacity>
+      <Image source={require('../images/Splat.png')} />
+      <TouchableOpacity onPress={this.props.reset} style={style.button}>
+        <Text style={style.buttonText}>again</Text>
+      </TouchableOpacity>
+    </View>
   )}
 }
 
 const style = StyleSheet.create({
   container: {
-    flex:           1,
-    justifyContent: 'center',
-    alignItems:     'center',
+    flex: 1,
+    backgroundColor: '#F8F4E5',
+    alignItems: 'center',
   },
-  p: {
+
+  explanation: {
+    color: '#838386'
+  },
+
+  button: {
+    borderColor: '#838386',
+    borderWidth: 1,
+    borderRadius: 5,
     width: 200,
-    marginBottom: 20,
+    paddingTop: 12,
+    paddingBottom: 22,
+    alignItems: 'center',
+    marginBottom: 50,
+    marginTop: 25,
   },
-  newHighScore: {
-    color: 'goldenrod',
-  }
+
+  buttonText: {
+    fontSize: 32,
+  },
 })

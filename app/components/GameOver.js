@@ -14,9 +14,11 @@ import {
 
 export default class GameOver extends Component {
   static propTypes = {
-    score:    PropTypes.number.isRequired,
-    reset:    PropTypes.func.isRequired,
-    continue: PropTypes.func.isRequired,
+    score:       PropTypes.number.isRequired,
+    reset:       PropTypes.func.isRequired,
+    continue:    PropTypes.func.isRequired,
+    isHighScore: PropTypes.bool.isRequired,
+    highScores:  PropTypes.arrayOf(PropTypes.number).isRequired,
   }
 
   constructor(props) {
