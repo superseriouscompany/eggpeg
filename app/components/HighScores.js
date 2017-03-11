@@ -76,6 +76,8 @@ const style = StyleSheet.create({
   explanation: {
     color: 'white',
     fontSize: 32,
+    fontStyle: 'italic',
+    marginBottom: 15,
   },
   highScore: {
     color: 'white',

@@ -32,9 +32,8 @@ class PayButton extends Component {
       { this.state.purchasing ?
         <ActivityIndicator />
       :
-        <TouchableOpacity onPress={this.pay}>
-          <View style={this.props.buttonStyle}>
-            <Text style={this.props.style}>
+        <TouchableOpacity style={this.props.style} onPress={this.pay}>
+            <Text style={{fontStyle: 'italic', fontSize: 32, color: 'white'}}>
               buy a life
             </Text>
             <Text style={style.countdown}>
@@ -45,7 +44,6 @@ class PayButton extends Component {
                 {this.props.products[0].priceString}
               </Text>
             : null }
-          </View>
         </TouchableOpacity>
       }
     </View>
@@ -86,15 +84,25 @@ const style = StyleSheet.create({
   countdown: {
     color: 'white',
     position: 'absolute',
-    top: 20,
-    right: 6,
+    top: 5,
+    right: 7,
     fontSize: 12,
   },
   priceString: {
     color: 'white',
     position: 'absolute',
-    bottom: 15,
-    right: 6,
+    bottom: 5,
+    right: 7,
     fontSize: 12,
+  },
+  button: {
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 5,
+    width: 200,
+    height: 75,
+    paddingBottom: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })
