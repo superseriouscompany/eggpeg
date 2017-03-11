@@ -3,6 +3,7 @@
 import React, { PropTypes } from 'react';
 import Component from './Component';
 import Text from './Text';
+import base from '../styles/base'
 import {
   Image,
   StyleSheet,
@@ -20,20 +21,44 @@ export default class HighScores extends Component {
     let gaveHighScore = false;
   return (
     <View style={style.container}>
-      { this.props.isHigh ?
-        <Text style={style.highScore}>new high score!</Text>
-      : null }
-      {(this.props.scores || []).map((score, key) => (
-        <Text key={key} style={style.highScore}>
-          {key + 1}&nbsp;&nbsp;{score}
-          { this.props.isHigh && !gaveHighScore && score === this.props.score ? (gaveHighScore = true) && '!' : ' ' }
-        </Text>
-      ))}
+      <View style={style.explanationContainer}>
+        { this.props.isHigh ?
+          <Text style={style.explanation}>new high score!</Text>
+        : null }
+      </View>
+
+      <View style={style.scoresContainer}>
+        { this.props.isHigh ?
+          <View style={style.barContainer}>
+            <Bar color={base.colors.green} />
+            <Bar color={base.colors.yellow} />
+            <Bar color={base.colors.orange} />
+            <Bar color={base.colors.red} />
+            <Bar color={base.colors.purple} />
+            <Bar color={base.colors.blue} />
+          </View>
+        : null }
+
+        <View style={style.scoreboard}>
+          {(this.props.scores || []).map((score, key) => (
+            <Text key={key} style={style.highScore}>
+              {key + 1}&nbsp;&nbsp;{score}
+              { this.props.isHigh && !gaveHighScore && score === this.props.score ? (gaveHighScore = true) && '!' : ' ' }
+            </Text>
+          ))}
+        </View>
+      </View>
       { !this.props.isHigh ?
         <Text style={style.lowScore}>{this.props.score}</Text>
       : null }
     </View>
   )}
+}
+
+function Bar(props) {
+  return (
+    <View style={[style.bar, {backgroundColor: props.color}]} />
+  )
 }
 
 const style = StyleSheet.create({
@@ -42,9 +67,14 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  explanation: {
+    color: 'white',
+    fontSize: 32,
+  },
   highScore: {
     color: 'white',
     fontSize: 32,
+    backgroundColor: 'transparent'
   },
   lowScore: {
     fontSize: 32,
@@ -56,5 +86,18 @@ const style = StyleSheet.create({
     left: 0,
     top: 0,
     backgroundColor: 'hotpink',
+  },
+  bar: {
+    height: 25,
+    width: '100%'
+  },
+  barContainer: {
+    position: 'absolute',
+  },
+  scoresContainer: {
+    alignItems: 'center',
+  },
+  scoreboard: {
+    alignItems: 'center',
   }
 })
