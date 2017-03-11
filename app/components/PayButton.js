@@ -14,10 +14,11 @@ import {
 
 class PayButton extends Component {
   static propTypes = {
-    pause:    PropTypes.func.isRequired,
-    resume:   PropTypes.func.isRequired,
-    continue: PropTypes.func.isRequired,
-    products: PropTypes.array.isRequired,
+    pause:     PropTypes.func.isRequired,
+    resume:    PropTypes.func.isRequired,
+    continue:  PropTypes.func.isRequired,
+    products:  PropTypes.array.isRequired,
+    countdown: PropTypes.number.isRequired,
   }
 
   constructor(props) {
@@ -29,15 +30,23 @@ class PayButton extends Component {
   render() { return (
     <View>
       { this.state.purchasing ?
-        <ActivityIndicator />
+        <View style={style.activityContainer}>
+          <ActivityIndicator />
+        </View>
       :
-        <TouchableOpacity onPress={this.pay}>
-          <Text style={style.continue}>continue?</Text>
+        <TouchableOpacity style={this.props.style} onPress={this.pay}>
+            <Text style={{fontStyle: 'italic', fontSize: 32, color: 'white'}}>
+              buy a life
+            </Text>
+            <Text style={style.countdown}>
+              {this.props.countdown}
+            </Text>
+            { this.props.products && this.props.products.length ?
+              <Text style={style.priceString}>
+                {this.props.products[0].priceString}
+              </Text>
+            : null }
         </TouchableOpacity>
-      }
-      { this.props.products && this.props.products.length > 0 ?
-        <Text style={style.explanation}>keep playing for {this.props.products[0].priceString}</Text>
-      : null
       }
     </View>
   )}
@@ -64,7 +73,7 @@ class PayButton extends Component {
 
 function mapStateToProps(state) {
   return {
-    products: state.purchase.products,
+    products: state.purchase.products || [],
   }
 }
 
@@ -74,17 +83,33 @@ const style = StyleSheet.create({
   explanation: {
     color: 'white',
   },
-  continue: {
-    fontSize:      32,
-    color:         'white',
-    paddingTop:    14,
-    paddingBottom: 20,
-    paddingLeft:   31,
-    paddingRight:  31,
-    borderColor:   'white',
-    borderWidth:   1,
-    borderRadius:  5,
-    marginTop:     16,
-    marginBottom:  10,
+  countdown: {
+    color: 'white',
+    position: 'absolute',
+    top: 5,
+    right: 7,
+    fontSize: 12,
+  },
+  priceString: {
+    color: 'white',
+    position: 'absolute',
+    bottom: 5,
+    right: 7,
+    fontSize: 12,
+  },
+  button: {
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 5,
+    width: 200,
+    height: 75,
+    paddingBottom: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  activityContainer: {
+    height: 90,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 })

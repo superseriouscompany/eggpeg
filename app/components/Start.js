@@ -4,6 +4,7 @@ import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
 import EggDrop from './EggDrop';
+import LinksHeader from './LinksHeader';
 import base from '../styles/base';
 import {
   Platform,
@@ -33,14 +34,7 @@ export default class Start extends Component {
       <StatusBar hidden/>
 
       <View style={{flex: 1}}>
-        <View style={style.header}>
-          <TouchableOpacity style={style.leftNav} onPress={this.props.showAbout}>
-            <Text style={{fontStyle: 'italic'}}>who?</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={style.rightNav} onPress={this.shareDialog}>
-            <Text style={{fontStyle: 'italic', textAlign: 'right'}}>link</Text>
-          </TouchableOpacity>
-        </View>
+        <LinksHeader />
         <View style={style.main}>
           <EggDrop />
           <View style={{flex: 1, justifyContent: 'center'}}>
@@ -74,25 +68,6 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: base.colors.beige,
-  },
-  header: {
-    zIndex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    position: 'absolute',
-    width: '100%',
-  },
-  leftNav: {
-    width: 120,
-    padding: 20,
-    paddingRight: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0)'
-  },
-  rightNav: {
-    width: 120,
-    padding: 20,
-    paddingLeft: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0)'
   },
   main: {
     flex: 1,
