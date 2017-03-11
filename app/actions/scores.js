@@ -29,13 +29,8 @@ export function recordScore(score) {
       scores.splice(place, 0, score)
       scores.length > 3 && scores.pop()
 
+      dispatch({type: 'score:setHighScores', isHigh: true, scores})
       return AsyncStorage.setItem('@eggpeg:highscores', JSON.stringify(scores))
-    }).then((isHigh) => {
-      if( !isHigh ) {
-        return false
-      }
-      dispatch({type: 'scores:setHighScores', scores})
-      return isHigh
     })
   }
 }
