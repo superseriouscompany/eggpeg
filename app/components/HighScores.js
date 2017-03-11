@@ -23,10 +23,8 @@ export default class HighScores extends Component {
       : null }
       {(this.props.scores || []).map((score, key) => (
         <Text key={key} style={style.highScore}>
-          {this.props.isHigh && score === this.props.score ?
-            <Image source={require('../images/Star.png')} style={style.star}/>
-          : null }
-          {key + 1}.&nbsp;{score}
+          {key + 1}&nbsp;&nbsp;{score}
+          { this.props.isHigh && score === this.props.score ? '!' : null }
         </Text>
       ))}
       { !this.props.isHigh ?
@@ -49,6 +47,7 @@ const style = StyleSheet.create({
   lowScore: {
     fontSize: 32,
     color: '#BA6BC9',
+    marginTop: 15,
   },
   star: {
     position: 'absolute',
