@@ -45,9 +45,17 @@ export default class Target extends Component {
       width:  target.width,
       height: target.width,
     }]}>
-      <Image source={require('../images/Target.png')} style={[style.target, target.hit ? style.hitTarget : null, {
-        width: target.width,
-        height: target.width}]} />
+      { target.hit ?
+        <View style={[style.dead,{
+          width:  target.width,
+          height: target.width,
+          borderRadius: target.width/2,
+        }]} />
+      :
+        <Image source={require('../images/Target.png')} style={[style.target, {
+          width: target.width,
+          height: target.width}]} />
+      }
       { target.hit ?
         <Animated.Text style={[style.score, {
           top: this.state.ghostAnim.interpolate({
@@ -74,16 +82,19 @@ const style = StyleSheet.create({
     position: 'absolute',
     zIndex: 1,
   },
-  hitContainer: {
+  dead: {
+    position: 'absolute',
+    backgroundColor: '#532D5A',
     zIndex: -1,
   },
-  hitTarget: {
-    backgroundColor: '#532D5A',
+  hitContainer: {
+    zIndex: -1,
   },
   score: {
     color: 'white',
     position: 'absolute',
     textAlign: 'center',
     zIndex: -1,
+    backgroundColor: 'transparent',
   },
 })
