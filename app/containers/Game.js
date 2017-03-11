@@ -9,7 +9,7 @@ import {recordScore} from '../actions/scores'
 import levels from '../levels'
 import {loadProducts} from '../actions/purchases'
 
-let level = 9;
+let level = 0;
 
 class Game extends Component {
   constructor(props) {
