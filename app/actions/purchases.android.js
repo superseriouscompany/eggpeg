@@ -17,17 +17,20 @@ export function loadProducts() {
 }
 
 export function purchase(identifier, cb) {
-  return function(dispatch) {
-    return InAppBilling.open().then(() => {
-      return InAppBilling.purchase(identifier);
-    }).then((details) => {
-      purchaseToken = details.purchaseToken;
-      return InAppBilling.consumePurchase(identifier);
-    }).then(() => {
-      cb(null, true)
-      InAppBilling.close()
-    }).catch((err) => {
-      cb(err);
-    })
-  }
+  return InAppBilling.open().then(() => {
+    alert('purchasing')
+    return InAppBilling.purchase(identifier);
+  }).then((details) => {
+    alert('consuming')
+    purchaseToken = details.purchaseToken;
+    return InAppBilling.consumePurchase(identifier);
+  }).then(() => {
+    alert('done')
+    cb(null, true)
+    InAppBilling.close()
+  }).catch((err) => {
+    alert('caught shit')
+    console.error(err)
+    cb(err);
+  })
 }

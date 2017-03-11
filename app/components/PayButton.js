@@ -43,11 +43,13 @@ class PayButton extends Component {
   )}
 
   pay() {
+    alert('about to pause')
     this.setState({
       purchasing: true,
     })
     this.props.pause()
 
+    alert('about to purchase')
     purchase('com.superserious.eggpeg.continue', (err, ok) => {
       if( err ) {
         alert(err.message || JSON.stringify(err));
