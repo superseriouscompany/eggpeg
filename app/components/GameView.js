@@ -63,7 +63,7 @@ export default class GameView extends Component {
             <TouchableWithoutFeedback onPress={(e) => this.props.shoot(e.nativeEvent.pageX, e.nativeEvent.pageY)}>
               <View style={{flex: 1}}>
                 { this.props.targets.map((target, key) => (
-                  <Target key={key} target={target} />
+                  <Target key={key} target={target} hit={target.hit}/>
                 ))}
                 { this.props.bullets.map((bullet, key) => (
                   <Bullet key={key} bullet={bullet} />
