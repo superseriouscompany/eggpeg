@@ -23,16 +23,19 @@ export default class Victory extends Component {
   render() { return (
     <View style={style.container}>
       <LinksHeader/>
-      <HighScores
-        explanationStyle={style.explanation}
-        scores={this.props.highScores}
-        score={this.props.score}
-        isHigh={this.props.isHighScore} />
+      <View style={{flex: 1, alignItems: 'center', marginTop: 25}}>
+        <HighScores
+          explanationText={'you beat it all!'}
+          explanationStyle={style.explanation}
+          scores={this.props.highScores}
+          score={this.props.score}
+          isHigh={this.props.isHighScore} />
 
-      <Image source={require('../images/Splat.png')} />
-      <TouchableOpacity onPress={this.props.reset} style={style.button}>
-        <Text style={style.buttonText}>again</Text>
-      </TouchableOpacity>
+        <Image source={require('../images/Splat.png')} />
+        <TouchableOpacity onPress={this.props.reset} style={style.button}>
+          <Text style={style.buttonText}>again</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )}
 }
@@ -45,7 +48,10 @@ const style = StyleSheet.create({
   },
 
   explanation: {
-    color: '#838386'
+    color: '#838386',
+    fontSize: 32,
+    fontStyle: 'italic',
+    marginBottom: 15,
   },
 
   button: {

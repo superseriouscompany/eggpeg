@@ -60,7 +60,7 @@ export default class GameOver extends Component {
   render() { return (
     <View style={style.container}>
       <LinksHeader textStyle={{color: 'white'}} />
-      <HighScores scores={this.props.highScores} score={this.props.score} isHigh={this.props.isHighScore} />
+      <HighScores explanationText={'new high score!'} scores={this.props.highScores} score={this.props.score} isHigh={this.props.isHighScore} />
 
       <View style={style.buttonsContainer}>
         { !this.state.expired && this.props.highScores.length >= 3 ?
