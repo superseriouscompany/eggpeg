@@ -108,6 +108,6 @@ const style = StyleSheet.create({
     height: barHeight * 6
   },
   scoreboard: {
-    alignItems: 'center',
+    alignItems: 'flex-start',
   }
 })
