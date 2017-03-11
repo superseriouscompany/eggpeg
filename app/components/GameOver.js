@@ -60,6 +60,12 @@ export default class GameOver extends Component {
         <View style={style.scoreContainer}>
           <Text style={style.score}>{this.props.score}</Text>
         </View>
+        {(this.props.highScores || []).map((score, key) => (
+          <Text key={key}>{key + 1}. {score}</Text>
+        ))}
+        { this.props.isHighScore ?
+          <Text>New High Score!</Text>
+        : null }
         { !this.state.expired ?
           <View style={style.continueContainer}>
             <Text style={style.countdown}>{this.state.timer}</Text>
