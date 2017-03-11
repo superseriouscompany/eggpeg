@@ -21,11 +21,13 @@ class ScoreText extends Component {
     }
   }
 
-  componentDidMount() {
-    Animated.timing(
-      this.state.leaveAnim,
-      { toValue: 1, duration: 2000, }
-    ).start()
+  componentWillReceiveProps(props) {
+    if( props.text && !this.props.text ) {
+      Animated.timing(
+        this.state.leaveAnim,
+        { toValue: 1, duration: 2000, }
+      ).start()
+    }
   }
 
   render() { return (
@@ -34,7 +36,7 @@ class ScoreText extends Component {
         inputRange: [0, .1, 0.5, 1],
         outputRange: [-32, 0, 0, height],
       }),
-    }, {bottom: 20}]}>
+    }]}>
       <Text style={style.text}>{this.props.text}</Text>
     </Animated.View>
   )}

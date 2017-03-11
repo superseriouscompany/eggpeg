@@ -24,7 +24,7 @@ const config = {
 }
 
 if( DeviceInfo.isEmulator() ) {
-  config.winDelay     = 1000;
+  config.winDelay     = 2000;
   config.lossDelay    = 0;
   config.bullet.delay = 0;
 }
