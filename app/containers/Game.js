@@ -8,6 +8,8 @@ import {loadLevel} from '../actions/levels'
 import levels from '../levels'
 import {loadProducts} from '../actions/purchases'
 
+let level = 0;
+
 class Game extends Component {
   constructor(props) {
     super(props)
