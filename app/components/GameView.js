@@ -39,7 +39,7 @@ export default class GameView extends Component {
         { true ?
           <GameOver
             score={2}
-            highScores={[85, 2]}
+            highScores={[85, 49, 2]}
             isHighScore={true}
             reset={this.props.reset}
             continue={this.props.continue} />
