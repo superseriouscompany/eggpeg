@@ -47,7 +47,6 @@ export default class GameView extends Component {
             ]} />
         : this.props.level.done && !this.props.level.win ?
           <GameOver
-            products={this.state.products}
             score={this.props.score.total}
             reset={this.props.reset}
             continue={this.props.continue} />

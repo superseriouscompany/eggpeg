@@ -14,20 +14,29 @@ class Game extends Component {
   constructor(props) {
     super(props)
     this.state     = {}
-    this.gameLoop  = this.gameLoop.bind(this)
-    this.iterate   = this.iterate.bind(this)
-    this.shoot     = this.shoot.bind(this)
-    this.reset     = this.reset.bind(this)
-    this.nextLevel = this.nextLevel.bind(this)
-    this.loadLevel = this.loadLevel.bind(this)
-    this.continue  = this.continue.bind(this)
+    this.gameLoop          = this.gameLoop.bind(this)
+    this.iterate           = this.iterate.bind(this)
+    this.shoot             = this.shoot.bind(this)
+    this.reset             = this.reset.bind(this)
+    this.nextLevel         = this.nextLevel.bind(this)
+    this.loadLevel         = this.loadLevel.bind(this)
+    this.continue          = this.continue.bind(this)
+    this.loadIAPsWithRetry = this.loadIAPsWithRetry.bind(this)
   }
 
   componentDidMount() {
     this.gameLoop()
     this.reset()
 
-    this.props.dispatch(loadProducts())
+    this.loadIAPsWithRetry()
+  }
+
+  loadIAPsWithRetry() {
+    this.props.dispatch(loadProducts((err, ok) => {
+      if( err ) {
+        setTimeout(this.loadIAPsWithRetry, 30000);
+      }
+    }))
   }
 
   gameLoop() {

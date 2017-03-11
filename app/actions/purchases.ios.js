@@ -2,15 +2,15 @@ import { NativeModules } from 'react-native'
 
 const { InAppUtils } = NativeModules;
 
-export function loadProducts() {
+export function loadProducts(cb) {
   return function(dispatch) {
     const products = [
       'com.superserious.eggpeg.continue'
     ];
 
-    InAppUtils.loadProducts(products, (err, products) => {
-      if( err ) { return alert(err.message || JSON.stringify(err)) }
-      if( !products.length ) { return alert('No products returned for in app purchases') }
+    InAppUtils.loadProducts(products, function(err, products) {
+      if( err ) { return cb(err); }
+      if( !products.length ) { return cb(new Error('No products returned for in app purchases')) }
 
       dispatch({type: 'purchase:loadProducts', products: products})
     })
