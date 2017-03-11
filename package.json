@@ -6,7 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "build_apk": "(cd android && ./gradlew assembleRelease && open ./app/build/outputs/apk)",
-    "run_apk": "react-native run-android --configuration=release"
+    "run_apk": "react-native run-android --variant=release"
   },
   "dependencies": {
     "react": "~15.4.1",
