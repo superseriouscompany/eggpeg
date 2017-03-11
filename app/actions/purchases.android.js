@@ -1,5 +1,11 @@
 export function loadProducts() {
-  return alert('Not implemented on android')
+  return function(dispatch) {
+    const products = [{
+      priceString: '$0.99'
+    }]
+
+    dispatch({type: 'purchase:loadProducts', products: products})
+  }
 }
 
 export function purchase(identifier) {

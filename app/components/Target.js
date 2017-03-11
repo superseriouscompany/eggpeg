@@ -48,7 +48,6 @@ const style = StyleSheet.create({
   },
   hit: {
     backgroundColor: '#532D5A',
-    zIndex: -1,
   },
   score: {
     color: 'hotpink',

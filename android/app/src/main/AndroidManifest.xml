@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sniper"
+    package="com.superserious.eggpeg"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -30,7 +30,7 @@
               <action android:name="android.intent.action.VIEW" />
               <category android:name="android.intent.category.DEFAULT" />
               <category android:name="android.intent.category.BROWSABLE" />
-              <data android:scheme="https" android:host="7amj.app.link" />
+              <data android:scheme="https" android:host="eggpeg.app.link" />
           </intent-filter>
 
           <intent-filter>
