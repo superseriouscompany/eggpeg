@@ -32,7 +32,7 @@ class PayButton extends Component {
         <ActivityIndicator />
       :
         <TouchableOpacity onPress={this.pay}>
-          <Text style={this.props.style}>continue?</Text>
+          <Text style={this.props.style}>buy a life</Text>
         </TouchableOpacity>
       }
     </View>

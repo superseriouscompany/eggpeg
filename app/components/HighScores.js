@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react';
 import Component from './Component';
 import Text from './Text';
 import {
+  Image,
   StyleSheet,
   View,
 } from 'react-native';
@@ -23,10 +24,9 @@ export default class HighScores extends Component {
       {(this.props.scores || []).map((score, key) => (
         <Text key={key} style={style.highScore}>
           {this.props.isHigh && score === this.props.score ?
-            <Text> 8===> </Text>
+            <Image source={require('../images/Star.png')} style={style.star}/>
           : null }
-          {key + 1}.
-          {score}
+          {key + 1}.&nbsp;{score}
         </Text>
       ))}
       { !this.props.isHigh ?
@@ -40,6 +40,7 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   highScore: {
     color: 'white',
@@ -49,4 +50,10 @@ const style = StyleSheet.create({
     fontSize: 32,
     color: '#BA6BC9',
   },
+  star: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    backgroundColor: 'hotpink',
+  }
 })
