@@ -9,6 +9,7 @@ import Bullet from './Bullet'
 import Target from './Target'
 import GameHeader from './GameHeader'
 import GameOver from './GameOver'
+import ScoreText from './ScoreText'
 import base from '../styles/base'
 import {
   Dimensions,
@@ -36,27 +37,17 @@ export default class GameView extends Component {
       <View style={style.container}>
         <StatusBar hidden/>
 
-        { true ?
-          <Victory
-            score={62}
-            highScores={[85, 62, 59]}
-            isHighScore={true}
-            reset={this.props.reset}
-            />
-        : this.props.beat ?
+        { this.props.beat ?
           <Victory
             score={this.props.score.total}
             reset={this.props.reset}
-            highScores={[
-              { score: this.props.score.total + 10, time: new Date },
-              { score: this.props.score.total, time: new Date },
-              { score: this.props.score.total - 50, time: new Date },
-            ]} />
+            highScores={this.props.score.highScores}
+            isHighScore={this.props.score.isHigh} />
         : this.props.level.done && !this.props.level.win ?
           <GameOver
             score={this.props.score.total}
             highScores={this.props.score.highScores}
-            isHighScore={this.props.score.isHigh}
+            isHighScore={this.props.score.isHigh || false}
             reset={this.props.reset}
             continue={this.props.continue} />
         : this.props.level.done && this.props.level.win ?
@@ -72,11 +63,12 @@ export default class GameView extends Component {
             <TouchableWithoutFeedback onPress={(e) => this.props.shoot(e.nativeEvent.pageX, e.nativeEvent.pageY)}>
               <View style={{flex: 1}}>
                 { this.props.targets.map((target, key) => (
-                  <Target key={key} target={target} />
+                  <Target key={key} target={target} hit={target.hit}/>
                 ))}
                 { this.props.bullets.map((bullet, key) => (
                   <Bullet key={key} bullet={bullet} />
                 ))}
+                <ScoreText />
               </View>
             </TouchableWithoutFeedback>
           </View>

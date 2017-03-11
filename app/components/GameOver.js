@@ -9,6 +9,7 @@ import LinksHeader from './LinksHeader'
 import config from '../config'
 import {
   StyleSheet,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -60,20 +61,27 @@ export default class GameOver extends Component {
   render() { return (
     <View style={style.container}>
       <LinksHeader textStyle={{color: 'white'}} />
-      <HighScores explanationText={'new high score!'} scores={this.props.highScores} score={this.props.score} isHigh={this.props.isHighScore} />
+      <View style={style.mainContainer}>
+        <HighScores explanationText={'new high score!'} scores={this.props.highScores} score={this.props.score} isHigh={this.props.isHighScore} />
 
-      <View style={style.buttonsContainer}>
-        { !this.state.expired && this.props.highScores.length >= 3 ?
-          <View style={style.continueContainer}>
-            <PayButton style={style.button}
-             countdown={this.state.timer}
-             continue={this.props.continue}
-             pause={this.pause}
-             resume={this.resume} />
-          </View>
-        : null
-        }
-        <Text style={style.button}>game over</Text>
+        <View style={style.buttonsContainer}>
+          { !this.state.expired && this.props.highScores.length >= 3 ?
+            <View style={style.continueContainer}>
+              <PayButton style={style.button}
+               countdown={this.state.timer}
+               continue={this.props.continue}
+               pause={this.pause}
+               resume={this.resume} />
+            </View>
+          :
+            <View style={style.continueContainer}>
+              <View style={{height: 104, width: '100%'}}></View>
+            </View>
+          }
+          <TouchableOpacity style={style.button} onPress={this.props.reset}>
+            <Text style={{fontStyle: 'italic', fontSize: 32, color: 'white'}}>game over</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )}
@@ -85,27 +93,29 @@ const style = StyleSheet.create({
     flex:            1,
     alignItems:      'center',
   },
+  mainContainer: {
+    flex: 1,
+    alignItems: 'center',
+    marginTop: 55,
+  },
   buttonsContainer: {
-    alignItems:     'center',
+    flex: 1,
     justifyContent: 'center',
-    marginBottom:   41,
+    alignItems: 'center'
   },
   countdown: {
     color: 'white',
   },
   button: {
-    fontSize:      32,
-    color:         'white',
-    paddingTop:    14,
-    paddingBottom: 20,
-    paddingLeft:   31,
-    paddingRight:  31,
-    borderColor:   'white',
-    borderWidth:   1,
-    borderRadius:  5,
-    marginTop:     16,
-    marginBottom:  10,
-    width:         220,
-    textAlign: 'center',
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 5,
+    width: 200,
+    height: 75,
+    paddingBottom: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 8,
+    marginBottom: 8,
   },
 })
