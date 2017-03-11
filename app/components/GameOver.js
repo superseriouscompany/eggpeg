@@ -59,22 +59,24 @@ export default class GameOver extends Component {
   render() { return (
     <View style={style.container}>
       <LinksHeader textStyle={{color: 'white'}} />
-      <HighScores scores={this.props.highScores} score={this.props.score} isHigh={this.props.isHighScore} />
+      <View style={{flex: 1, alignItems: 'center', marginTop: 55}}>
+        <HighScores scores={this.props.highScores} score={this.props.score} isHigh={this.props.isHighScore} />
 
-      <View style={{flex: 1, justifyContent: 'center'}}>
-        { !this.state.expired && this.props.highScores.length >= 3 ?
-          <View style={style.continueContainer}>
-            <PayButton style={style.button}
-             countdown={this.state.timer}
-             continue={this.props.continue}
-             pause={this.pause}
-             resume={this.resume} />
-          </View>
-        : null
-        }
-        <TouchableOpacity style={style.button}>
-          <Text style={{fontStyle: 'italic', fontSize: 32, color: 'white'}}>game over</Text>
-        </TouchableOpacity>
+        <View style={{flex: 1, justifyContent: 'center'}}>
+          { !this.state.expired && this.props.highScores.length >= 3 ?
+            <View style={style.continueContainer}>
+              <PayButton style={style.button}
+               countdown={this.state.timer}
+               continue={this.props.continue}
+               pause={this.pause}
+               resume={this.resume} />
+            </View>
+          : null
+          }
+          <TouchableOpacity style={style.button}>
+            <Text style={{fontStyle: 'italic', fontSize: 32, color: 'white'}}>game over</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   )}
@@ -98,8 +100,7 @@ const style = StyleSheet.create({
     paddingBottom: 6,
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: 32,
-    color: 'white',
-    marginTop: 16,
+    marginTop: 8,
+    marginBottom: 8,
   },
 })
