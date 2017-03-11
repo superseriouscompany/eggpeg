@@ -53,7 +53,7 @@ export default class HighScores extends Component {
         </View>
       </View>
       { !this.props.isHigh ?
-        <Text style={style.lowScore}>{this.props.score}</Text>
+        <Text style={style.lowScore}>{this.props.score}!</Text>
       : null }
     </View>
   )}
@@ -86,8 +86,8 @@ const style = StyleSheet.create({
   },
   lowScore: {
     fontSize: 32,
-    color: '#BA6BC9',
-    marginTop: 15,
+    color: 'white',
+    marginTop: 40,
   },
   star: {
     position: 'absolute',
