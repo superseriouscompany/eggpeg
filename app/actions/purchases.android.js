@@ -10,6 +10,7 @@ export function loadProducts() {
         description: p.description,
         priceString: p.priceText,
       }]})
+      return InAppBilling.close()
     }).catch((err) => {
       alert(err.message || JSON.stringify(err))
     });
@@ -18,18 +19,14 @@ export function loadProducts() {
 
 export function purchase(identifier, cb) {
   return InAppBilling.open().then(() => {
-    alert('purchasing')
     return InAppBilling.purchase(identifier);
   }).then((details) => {
-    alert('consuming')
     purchaseToken = details.purchaseToken;
     return InAppBilling.consumePurchase(identifier);
   }).then(() => {
-    alert('done')
     cb(null, true)
-    InAppBilling.close()
+    return InAppBilling.close()
   }).catch((err) => {
-    alert('caught shit')
     console.error(err)
     cb(err);
   })
