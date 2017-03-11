@@ -26,6 +26,11 @@ export default class GameView extends Component {
     continue:  PropTypes.func.isRequired,
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+
   render() {
     return (
       <View style={style.container}>
