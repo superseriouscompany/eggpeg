@@ -103,24 +103,21 @@ class Game extends Component {
     const allHit = !this.props.targets.find((t) => { return !t.hit })
     // check if all hit
     if( this.props.targets.length && allHit ) {
-      this.props.dispatch(recordScore(this.props.score.total)).then(() => {
-        this.props.dispatch({type: 'level:win'})
-      }).catch((err) => {
-        this.props.dispatch({type: 'level:win'})
+      this.props.dispatch(recordScore(this.props.score.total)).catch((err) => {
         console.error(err)
       })
+      this.props.dispatch({type: 'level:win'})
     }
 
 
     if( !this.props.hasBullets ) {
       const allSpent = !this.props.bullets.find((b) => { return !b.spent })
       if( allSpent ) {
-        this.props.dispatch(recordScore(this.props.score.total)).then(() => {
-          this.props.dispatch({type: 'level:loss'})
-        }).catch((err) => {
+        this.props.dispatch(recordScore(this.props.score.total)).catch((err) => {
           this.props.dispatch({type: 'level:loss'})
           console.error(err)
         })
+        this.props.dispatch({type: 'level:loss'})
       }
     }
   }
