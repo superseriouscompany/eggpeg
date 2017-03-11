@@ -31,7 +31,7 @@ export default class Target extends Component {
     if( props.hit && !this.props.hit ) {
       Animated.timing(
         this.state.ghostAnim,
-        { toValue: 1, duration: 1000 },
+        { toValue: 1, duration: 1750 },
       ).start()
     }
   }
@@ -52,11 +52,11 @@ export default class Target extends Component {
         <Animated.Text style={[style.score, {
           top: this.state.ghostAnim.interpolate({
             inputRange: [0, 1],
-            outputRange: [-target.width, -target.width - 30]
+            outputRange: [0, -target.width - 30],
           }),
           opacity: this.state.ghostAnim.interpolate({
-            inputRange: [0, 1],
-            outputRange: [1, 0],
+            inputRange: [0, 0.5, 1],
+            outputRange: [1, 1, 0],
           }),
         }]}>{target.score}</Animated.Text>
       : null }
@@ -81,7 +81,7 @@ const style = StyleSheet.create({
     backgroundColor: '#532D5A',
   },
   score: {
-    color: 'hotpink',
+    color: 'white',
     position: 'absolute',
     textAlign: 'center',
     zIndex: -1,
