@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Component from './Component';
+import { connect } from 'react-redux'
 import Text from './Text';
 import {
   Animated,
@@ -12,7 +13,7 @@ import {
 
 const {height} = Dimensions.get('window')
 
-export default class ScoreText extends Component {
+class ScoreText extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -33,8 +34,8 @@ export default class ScoreText extends Component {
         inputRange: [0, .1, 0.5, 1],
         outputRange: [-32, 0, 0, height],
       }),
-    }]}>
-      <Text style={style.text}>hello</Text>
+    }, {bottom: 20}]}>
+      <Text style={style.text}>{this.props.text}</Text>
     </Animated.View>
   )}
 }
@@ -53,3 +54,11 @@ const style = StyleSheet.create({
     fontSize: 32,
   },
 })
+
+function mapStateToProps(state) {
+  return {
+    text: state.score.encouragement,
+  }
+}
+
+export default connect(mapStateToProps)(ScoreText)
