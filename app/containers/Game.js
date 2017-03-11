@@ -9,7 +9,7 @@ import {recordScore} from '../actions/scores'
 import levels from '../levels'
 import {loadProducts} from '../actions/purchases'
 
-let level = 0;
+let level = 9;
 
 class Game extends Component {
   constructor(props) {
@@ -103,20 +103,24 @@ class Game extends Component {
     const allHit = !this.props.targets.find((t) => { return !t.hit })
     // check if all hit
     if( this.props.targets.length && allHit ) {
-      this.props.dispatch(recordScore(this.props.score.total)).catch((err) => {
+      this.props.dispatch(recordScore(this.props.score.total)).then(() => {
+        this.props.dispatch({type: 'level:win'})
+      }).catch((err) => {
+        this.props.dispatch({type: 'level:win'})
         console.error(err)
       })
-      this.props.dispatch({type: 'level:win'})
     }
 
 
     if( !this.props.hasBullets ) {
       const allSpent = !this.props.bullets.find((b) => { return !b.spent })
       if( allSpent ) {
-        this.props.dispatch(recordScore(this.props.score.total)).catch((err) => {
+        this.props.dispatch(recordScore(this.props.score.total)).then(() => {
+          this.props.dispatch({type: 'level:loss'})
+        }).catch((err) => {
+          this.props.dispatch({type: 'level:loss'})
           console.error(err)
         })
-        this.props.dispatch({type: 'level:loss'})
       }
     }
   }
@@ -150,7 +154,7 @@ function mapStateToProps(state) {
     chamber:    state.chamber,
     hasBullets: state.chamber > 0,
     level:      state.level,
-    score:      state.score,    
+    score:      state.score,
   }
 }
 

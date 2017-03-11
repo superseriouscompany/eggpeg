@@ -7,6 +7,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         level:         state.level + action.score,
+        total:         state.total + action.score,
         encouragement: encouragement(action.score, action.count),
       }
     case 'level:clear':
@@ -14,12 +15,6 @@ export default function(state = initialState, action) {
         ...state,
         level: 0,
         encouragement: null,
-      }
-    case 'level:loss':
-    case 'level:win':
-      return {
-        ...state,
-        total: state.total + state.level,
       }
     case 'score:setHighScores':
       return {

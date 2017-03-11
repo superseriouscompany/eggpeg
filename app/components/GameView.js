@@ -41,16 +41,13 @@ export default class GameView extends Component {
           <Victory
             score={this.props.score.total}
             reset={this.props.reset}
-            highScores={[
-              { score: this.props.score.total + 10, time: new Date },
-              { score: this.props.score.total, time: new Date },
-              { score: this.props.score.total - 50, time: new Date },
-            ]} />
+            highScores={this.props.score.highScores}
+            isHighScore={true} />
         : this.props.level.done && !this.props.level.win ?
           <GameOver
             score={this.props.score.total}
             highScores={this.props.score.highScores}
-            isHighScore={this.props.score.isHigh}
+            isHighScore={this.props.score.isHigh || false}
             reset={this.props.reset}
             continue={this.props.continue} />
         : this.props.level.done && this.props.level.win ?
