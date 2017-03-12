@@ -5,6 +5,7 @@ import Component from './Component';
 import FollowUs from './FollowUs';
 import Start from './Start';
 import Game from '../containers/Game';
+import Settings from './Settings'
 import {Provider} from 'react-redux'
 import branch from 'react-native-branch';
 import store from '../reducers'
@@ -14,15 +15,10 @@ import {
   View,
 } from 'react-native';
 
-let scene = 'Start';
-// scene = 'Game'
-
 export default class Root extends Component {
   constructor(props) {
     super(props)
-    this.startGame = this.startGame.bind(this)
-    this.showStart = this.showStart.bind(this)
-    this.state = { scene: scene }
+    this.state = { scene: 'Start' }
   }
 
   componentDidMount() {
@@ -64,23 +60,17 @@ export default class Root extends Component {
         { this.state.scene == 'Game' ?
           <Game/>
         : this.state.scene == 'AboutUs' ?
-          <FollowUs back={this.showStart}/>
+          <FollowUs />
         : this.state.scene == 'Start' ?
           <Start shareLink={this.state.shareLink}/>
+        : this.state.scene == 'Settings' ?
+          <Settings />
         :
           <View style={{backgroundColor: 'indianred', width: 100, height: 100}}/>
         }
       </Provider>
     </View>
   )}
-
-  startGame() {
-    this.setState({scene: 'Game'})
-  }
-
-  showStart() {
-    this.setState({scene: 'Start'})
-  }
 }
 
 const style = StyleSheet.create({
