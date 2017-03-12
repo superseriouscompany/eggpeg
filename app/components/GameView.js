@@ -10,6 +10,7 @@ import Target from './Target'
 import GameHeader from './GameHeader'
 import GameOver from './GameOver'
 import ScoreText from './ScoreText'
+import SettingsLink from './SettingsLink'
 import base from '../styles/base'
 import {
   Dimensions,
@@ -77,6 +78,7 @@ export default class GameView extends Component {
                 }
               </View>
             </TouchableWithoutFeedback>
+            <SettingsLink />
           </View>
         }
       </View>

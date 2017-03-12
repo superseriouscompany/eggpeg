@@ -6,14 +6,16 @@ import Text from './Text';
 import PayButton from './PayButton'
 import HighScores from './HighScores'
 import LinksHeader from './LinksHeader'
+import SettingsLink from './SettingsLink'
 import config from '../config'
+import {connect} from 'react-redux'
 import {
   StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
 
-export default class GameOver extends Component {
+class GameOver extends Component {
   static propTypes = {
     score:       PropTypes.number.isRequired,
     reset:       PropTypes.func.isRequired,
@@ -27,6 +29,7 @@ export default class GameOver extends Component {
     this.countdown = this.countdown.bind(this)
     this.pause = this.pause.bind(this)
     this.resume = this.resume.bind(this)
+    this.showSettings = this.showSettings.bind(this)
     this.state = { timer: config.countdown }
   }
 
@@ -58,6 +61,10 @@ export default class GameOver extends Component {
     })
   }
 
+  showSettings() {
+    this.props.dispatch({type: 'scene:change', scene: 'Settings'})
+  }
+
   render() { return (
     <View style={style.container}>
       <LinksHeader textStyle={{color: 'white'}} />
@@ -83,6 +90,7 @@ export default class GameOver extends Component {
           </TouchableOpacity>
         </View>
       </View>
+      <SettingsLink />
     </View>
   )}
 }
@@ -119,3 +127,5 @@ const style = StyleSheet.create({
     marginBottom: 8,
   },
 })
+
+export default connect()(GameOver)

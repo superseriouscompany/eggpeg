@@ -13,10 +13,6 @@ const config = {
     shadow: 90,
     bullet: 7,
   },
-  score: {
-    max: 100,
-    penalty: 2,
-  },
   multiplier: {
     multihit: 2,
   },
@@ -31,3 +27,7 @@ if( DeviceInfo.isEmulator() ) {
 }
 
 export default config
+
+export function changeConfig(cfg) {
+  Object.assign(config, cfg)
+}
