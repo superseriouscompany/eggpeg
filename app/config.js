@@ -10,7 +10,7 @@ const config = {
   chamber: 3,
   sizes: {
     target: 20,
-    shadow: 26,
+    shadow: 90,
     bullet: 7,
   },
   score: {
@@ -21,6 +21,7 @@ const config = {
     multihit: 2,
   },
   countdown: 20, // game over countdown timer
+  startingLevel: 0,
 }
 
 if( DeviceInfo.isEmulator() ) {

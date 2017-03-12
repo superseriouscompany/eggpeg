@@ -40,7 +40,7 @@ class FollowUs extends Component {
 
       <View style={style.footer}>
         <TouchableOpacity onPress={this.visitSite}>
-          <Text style={{fontStyle: 'italic'}}>el websito</Text>
+          <Text style={{fontStyle: 'italic'}}>superseriouscompany.com</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -68,7 +68,13 @@ export default class GameView extends Component {
                 { this.props.bullets.map((bullet, key) => (
                   <Bullet key={key} bullet={bullet} />
                 ))}
-                <ScoreText />
+                { this.props.currentLevel === 0 ?
+                  <View style={style.hintContainer}>
+                    <Text style={style.hint}>Tap the target to drop an egg on it.</Text>
+                  </View>
+                :
+                  <ScoreText override={this.props.level.level === 0 ? 'Drop an Egg on the Target' : null}/>
+                }
               </View>
             </TouchableWithoutFeedback>
           </View>
@@ -82,6 +88,16 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: base.colors.purple,
+  },
+  hintContainer: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    flex: 1,
+  },
+  hint: {
+    color: '#532D5A',
+    fontSize: 16,
+    marginBottom: 20,
   },
   tries: {
     position: 'absolute',

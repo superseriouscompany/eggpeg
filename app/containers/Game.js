@@ -9,7 +9,7 @@ import {recordScore} from '../actions/scores'
 import levels from '../levels'
 import {loadProducts} from '../actions/purchases'
 
-let level = 0;
+let level = config.startingLevel;
 
 class Game extends Component {
   constructor(props) {
@@ -28,6 +28,7 @@ class Game extends Component {
   componentDidMount() {
     this.gameLoop()
     if( !this.props.level.done && !this.props.beat ) {
+      level = config.startingLevel;
       this.reset()
     }
 
@@ -133,6 +134,7 @@ class Game extends Component {
     this.props.dispatch({type: 'score:reset'})
     this.props.dispatch({type: 'victory:reset'})
     this.loadLevel(level)
+    level = 1
   }
 
   render() { return (
@@ -141,6 +143,7 @@ class Game extends Component {
       reset={this.reset}
       continue={this.continue}
       nextLevel={this.nextLevel}
+      currentLevel={this.state.level}
       {...this.props} />
   )}
 }
