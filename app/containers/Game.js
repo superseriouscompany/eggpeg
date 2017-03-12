@@ -57,6 +57,9 @@ class Game extends Component {
 
   loadLevel(level) {
     if( level >= levels.length ) {
+      this.props.dispatch(recordScore(this.props.score.total)).catch((err) => {
+        console.error(err)
+      })
       return this.props.dispatch({type: 'victory:yes'})
     }
 
@@ -105,9 +108,6 @@ class Game extends Component {
     const allHit = !this.props.targets.find((t) => { return !t.hit })
     // check if all hit
     if( this.props.targets.length && allHit ) {
-      this.props.dispatch(recordScore(this.props.score.total)).catch((err) => {
-        console.error(err)
-      })
       this.props.dispatch({type: 'level:win'})
     }
 
@@ -116,7 +116,6 @@ class Game extends Component {
       const allSpent = !this.props.bullets.find((b) => { return !b.spent })
       if( allSpent ) {
         this.props.dispatch(recordScore(this.props.score.total)).catch((err) => {
-          this.props.dispatch({type: 'level:loss'})
           console.error(err)
         })
         this.props.dispatch({type: 'level:loss'})
