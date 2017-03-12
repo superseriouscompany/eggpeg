@@ -9,6 +9,7 @@ import score from './score'
 import purchase from './purchase'
 import scene from './scene'
 import shareLink from './shareLink'
+import victory from './victory'
 import thunk from 'redux-thunk';
 
 const reducers = combineReducers({
@@ -20,6 +21,7 @@ const reducers = combineReducers({
   purchase,
   scene,
   shareLink,
+  victory,
 })
 const middleware = [thunk]
 if( __DEV__ ) {

@@ -27,7 +27,7 @@ class Game extends Component {
 
   componentDidMount() {
     this.gameLoop()
-    if( !this.props.level || !this.props.level.done ) {
+    if( !this.props.level.done && !this.props.beat ) {
       this.reset()
     }
 
@@ -57,7 +57,7 @@ class Game extends Component {
 
   loadLevel(level) {
     if( level >= levels.length ) {
-      return this.setState({beat: true})
+      return this.props.dispatch({type: 'victory:yes'})
     }
 
     this.setState({level: level})
@@ -132,7 +132,7 @@ class Game extends Component {
 
   reset() {
     this.props.dispatch({type: 'score:reset'})
-    this.setState({beat: false})
+    this.props.dispatch({type: 'victory:reset'})
     this.loadLevel(level)
   }
 
@@ -142,7 +142,7 @@ class Game extends Component {
       reset={this.reset}
       continue={this.continue}
       nextLevel={this.nextLevel}
-      beat={this.state.beat} {...this.props} />
+      {...this.props} />
   )}
 }
 
@@ -154,6 +154,7 @@ function mapStateToProps(state) {
     hasBullets: state.chamber > 0,
     level:      state.level,
     score:      state.score,
+    beat:       state.victory,
   }
 }
 
