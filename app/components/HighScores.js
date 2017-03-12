@@ -2,6 +2,7 @@
 
 import React, { PropTypes } from 'react';
 import Component from './Component';
+import RainbowBar from './RainbowBar';
 import Text from './Text';
 import base from '../styles/base'
 import {
@@ -29,14 +30,7 @@ export default class HighScores extends Component {
 
       <View style={style.scoresContainer}>
         { this.props.isHigh ?
-          <View style={style.barContainer}>
-            <Bar color={base.colors.green} />
-            <Bar color={base.colors.yellow} />
-            <Bar color={base.colors.orange} />
-            <Bar color={base.colors.red} />
-            <Bar color={base.colors.purple} />
-            <Bar color={base.colors.blue} />
-          </View>
+          <RainbowBar />
         : null }
 
         <View style={style.scoreboard}>
@@ -57,12 +51,6 @@ export default class HighScores extends Component {
       : null }
     </View>
   )}
-}
-
-function Bar(props) {
-  return (
-    <View style={[style.bar, {backgroundColor: props.color}]} />
-  )
 }
 
 const barHeight = 25;
@@ -94,13 +82,6 @@ const style = StyleSheet.create({
     left: 0,
     top: 0,
     backgroundColor: 'hotpink',
-  },
-  bar: {
-    height: barHeight,
-    width: '100%'
-  },
-  barContainer: {
-    position: 'absolute',
   },
   scoresContainer: {
     alignItems: 'center',
