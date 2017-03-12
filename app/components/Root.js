@@ -26,6 +26,7 @@ export default class Root extends Component {
   }
 
   componentDidMount() {
+    // TODO: put all of this in another component
     let branchUniversalObject = branch.createBranchUniversalObject(
       `default`,
       {
@@ -41,14 +42,12 @@ export default class Root extends Component {
     }
 
     let controlParams = {
-      '$ios_deepview': 'floats_deepview_vk8d',
+      '$ios_deepview': 'egg_peg_deepview_ckbe',
     }
     controlParams = {};
 
     branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((payload) => {
-      this.setState({
-        shareLink: payload.url,
-      })
+      store.dispatch({type: 'shareLink:set', shareLink: payload.url})
     })
 
     store.subscribe(() => {

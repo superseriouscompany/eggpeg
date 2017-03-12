@@ -5,6 +5,8 @@ import Component from './Component';
 import Text from './Text';
 import {connect} from 'react-redux'
 import {
+  Platform,
+  Share,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -13,7 +15,7 @@ import {
 class LinksHeader extends Component {
   constructor(props) {
     super(props)
-    this.shareDialog      = this.shareDialog.bind(this)
+    this.shareDialog = this.shareDialog.bind(this)
   }
 
   render() { return (
@@ -66,4 +68,10 @@ const style = StyleSheet.create({
   },
 })
 
-export default connect()(LinksHeader)
+function mapStateToProps(state) {
+  return {
+    shareLink: state.shareLink,
+  }
+}
+
+export default connect(mapStateToProps)(LinksHeader)

@@ -8,8 +8,6 @@ import LinksHeader from './LinksHeader';
 import base from '../styles/base';
 import {connect} from 'react-redux';
 import {
-  Platform,
-  Share,
   StatusBar,
   StyleSheet,
   TouchableOpacity,
