@@ -122,6 +122,35 @@ export default [
     ]
   },
   {
+    level: 'Jagged Edge',
+    targets: [
+      {
+        points: backtrack([
+          { x: xcenter - 150, y: ycenter - 100 },
+          { x: xcenter - 100, y: ycenter + 100 },
+          { x: xcenter - 50, y: ycenter - 100 },
+          { x: xcenter, y: ycenter + 100 },
+          { x: xcenter + 50, y: ycenter - 100 },
+          { x: xcenter + 100, y: ycenter + 100 },
+          { x: xcenter + 150, y: ycenter - 100 },
+        ]),
+        velocity: 1,
+      }
+    ]
+  },
+  {
+    level: 'Fast Guy',
+    targets: [
+      {
+        points: [
+          { x: 0, y: ycenter },
+          { x: rightEdge, y: ycenter },
+        ],
+        velocity: 2,
+      }
+    ],
+  },
+  {
     level: 'Fast Meeting',
     targets: [
       {
@@ -137,6 +166,35 @@ export default [
           { x: xcenter,   y: ycenter, velocity: 2},
         ],
         velocity: 0.5,
+      },
+    ]
+  },
+  {
+    level: 'Argyle',
+    targets: [
+      {
+        points: backtrack([
+          { x: xcenter - 150, y: ycenter - 100 },
+          { x: xcenter - 100, y: ycenter + 100 },
+          { x: xcenter - 50, y: ycenter - 100 },
+          { x: xcenter, y: ycenter + 100 },
+          { x: xcenter + 50, y: ycenter - 100 },
+          { x: xcenter + 100, y: ycenter + 100 },
+          { x: xcenter + 150, y: ycenter - 100 },
+        ]),
+        velocity: 1,
+      },
+      {
+        points: backtrack([
+          { x: xcenter - 150, y: ycenter + 100 },
+          { x: xcenter - 100, y: ycenter - 100 },
+          { x: xcenter - 50, y: ycenter + 100 },
+          { x: xcenter, y: ycenter - 100 },
+          { x: xcenter + 50, y: ycenter + 100 },
+          { x: xcenter + 100, y: ycenter - 100 },
+          { x: xcenter + 150, y: ycenter + 100 },
+        ]),
+        velocity: 1,
       },
     ]
   },
@@ -207,6 +265,18 @@ export default [
         ],
         velocity: 1,
       },
+    ]
+  },
+  {
+    level: 'Superfast',
+    targets: [
+      {
+        points: [
+          { x: 0, y: bottomEdge },
+          { x: rightEdge, y: top},
+        ],
+        velocity: 3,
+      }
     ]
   },
   {
@@ -291,4 +361,10 @@ function steps(opts) {
   stepsBack.shift()
   points = points.concat(stepsBack);
   return points;
+}
+
+function backtrack(points) {
+  const stepsBack = points.slice(1).reverse();
+  stepsBack.shift()
+  return points.concat(stepsBack)
 }
