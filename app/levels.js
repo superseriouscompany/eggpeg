@@ -35,7 +35,20 @@ export default [
     ]
   },
   {
-    level: 'Stairs',
+    level: 'Slow triangle',
+    targets: [
+      {
+        points: [
+          { x: xcenter - 50, y: ycenter + 25 * Math.sqrt(3)},
+          { x: xcenter, y: ycenter - 25 * Math.sqrt(3) },
+          { x: xcenter + 50, y: ycenter + 25 * Math.sqrt(3)},
+        ],
+        velocity: .3,
+      }
+    ]
+  },
+  {
+    level: 'Slow Stairs',
     targets: [
       {
         points: steps({x: xcenter - 100, y: ycenter - 100, distance: 20, steps: 10}),
@@ -194,6 +207,27 @@ export default [
           { x: xcenter + 100, y: ycenter - 100 },
           { x: xcenter + 150, y: ycenter + 100 },
         ]),
+        velocity: 1,
+      },
+    ]
+  },
+  {
+    level: 'Star of David',
+    targets: [
+      {
+        points: [
+          { x: xcenter - 50, y: ycenter - 10 + 25 * Math.sqrt(3)},
+          { x: xcenter, y: ycenter - 10 - 25 * Math.sqrt(3) },
+          { x: xcenter + 50, y: ycenter - 10 + 25 * Math.sqrt(3)},
+        ],
+        velocity: 1,
+      },
+      {
+        points: [
+          { x: xcenter + 50, y: ycenter + 10 - 25 * Math.sqrt(3)},
+          { x: xcenter - 50, y: ycenter + 10 - 25 * Math.sqrt(3)},
+          { x: xcenter, y: ycenter + 10 + 25 * Math.sqrt(3) },
+        ],
         velocity: 1,
       },
     ]
