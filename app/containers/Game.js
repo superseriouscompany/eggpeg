@@ -23,6 +23,7 @@ class Game extends Component {
     this.loadLevel         = this.loadLevel.bind(this)
     this.continue          = this.continue.bind(this)
     this.loadIAPsWithRetry = this.loadIAPsWithRetry.bind(this)
+
   }
 
   componentDidMount() {

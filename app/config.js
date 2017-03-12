@@ -31,3 +31,7 @@ if( DeviceInfo.isEmulator() ) {
 }
 
 export default config
+
+export function changeConfig(cfg) {
+  Object.assign(config, cfg)
+}
