@@ -35,26 +35,21 @@ export default [
     ]
   },
   {
+    level: 'Stairs',
+    targets: [
+      {
+        points: steps({x: xcenter - 100, y: ycenter - 100, distance: 20, steps: 10}),
+        velocity: .5,
+      }
+    ]
+  },
+  {
     level: 'Straight Line',
     targets: [
       {
         points: [
           { x: 0, y: ycenter },
           { x: rightEdge, y: ycenter },
-        ],
-        velocity: 1,
-      },
-    ]
-  },
-  {
-    level: 'Whole Phone',
-    targets: [
-      {
-        points: [
-          { x: 0, y: top },
-          { x: rightEdge, y: top },
-          { x: rightEdge, y: bottomEdge },
-          { x: 0, y: bottomEdge },
         ],
         velocity: 1,
       },
@@ -83,8 +78,49 @@ export default [
       },
     ]
   },
-  // TODO: stops
-  // TODO: fast mtg
+  {
+    level: 'Linked',
+    targets: [
+      {
+        points: [
+          { x: 0, y: ycenter },
+          { x: rightEdge, y:ycenter },
+        ],
+        velocity: 1,
+      },
+      {
+        points: [
+          { x: 15, y: ycenter },
+          { x: rightEdge, y:ycenter },
+          { x: 0, y: ycenter },
+        ],
+        velocity: 1,
+      },
+    ]
+  },
+  {
+    level: 'Whole Phone',
+    targets: [
+      {
+        points: [
+          { x: 0, y: top },
+          { x: rightEdge, y: top },
+          { x: rightEdge, y: bottomEdge },
+          { x: 0, y: bottomEdge },
+        ],
+        velocity: 1,
+      },
+    ]
+  },
+  {
+    level: 'Concentric Box',
+    targets: [
+      {
+        points: concentric({x: xcenter, y: ycenter, step: 20, max: 200}),
+        velocity: 1,
+      }
+    ]
+  },
   {
     level: 'Fast Meeting',
     targets: [
@@ -207,6 +243,30 @@ export default [
     ]
   }
 ]
+
+function concentric(opts) {
+  const {x, y, step, max} = opts
+  let points = []
+  for( var i = step; i < max; i+= step ) {
+    points = points.concat([
+      { x: x - i, y: y - i },
+      { x: x + i, y: y - i },
+      { x: x + i, y: y + i },
+      { x: x - (i+step), y: y + i },
+    ])
+  }
+
+  for( var i = 0; i < 20; i++ ) {
+    points = points.concat([
+      { x: x - max, y: y - max },
+      { x: x + max, y: y - max },
+      { x: x + max, y: y + max },
+      { x: x - max, u: y + max },
+    ])
+  }
+
+  return points
+}
 
 function steps(opts) {
   let points = [{x: opts.x, y: opts.y}]
