@@ -6,6 +6,7 @@ import Text from './Text';
 import PayButton from './PayButton'
 import HighScores from './HighScores'
 import LinksHeader from './LinksHeader'
+import SettingsLink from './SettingsLink'
 import config from '../config'
 import {connect} from 'react-redux'
 import {
@@ -89,13 +90,7 @@ class GameOver extends Component {
           </TouchableOpacity>
         </View>
       </View>
-      { __DEV__ ?
-        <View style={{position: 'absolute', right: 10, bottom: 10}}>
-          <TouchableOpacity onPress={this.showSettings}>
-            <Text style={{color: 'white'}}>settings</Text>
-          </TouchableOpacity>
-        </View>
-      : null}
+      <SettingsLink />
     </View>
   )}
 }

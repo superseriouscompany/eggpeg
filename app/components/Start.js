@@ -5,6 +5,7 @@ import Component from './Component';
 import Text from './Text';
 import EggDrop from './EggDrop';
 import LinksHeader from './LinksHeader';
+import SettingsLink from './SettingsLink'
 import base from '../styles/base';
 import {connect} from 'react-redux';
 import {
@@ -37,6 +38,7 @@ class Start extends Component {
             </TouchableOpacity>
           </View>
         </View>
+        <SettingsLink textColor={base.colors.grey}/>
       </View>
     </View>
   )}

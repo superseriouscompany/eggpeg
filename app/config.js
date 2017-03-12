@@ -13,10 +13,6 @@ const config = {
     shadow: 90,
     bullet: 7,
   },
-  score: {
-    max: 100,
-    penalty: 2,
-  },
   multiplier: {
     multihit: 2,
   },
