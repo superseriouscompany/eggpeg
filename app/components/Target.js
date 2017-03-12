@@ -40,8 +40,8 @@ export default class Target extends Component {
     const {target} = this.props;
   return (
     <View style={[style.targetContainer, target.hit ? style.hitContainer : null, {
-      left:   target.x,
-      top:    target.y,
+      left:   target.x - target.width / 2,
+      top:    target.y - target.width / 2,
       width:  target.width,
       height: target.width,
     }]}>

@@ -78,7 +78,7 @@ class Settings extends Component {
           />
 
         <Text style={style.label}>
-          Egg shadow size: {this.state.sizes.shadow}
+          Egg start size: {this.state.sizes.shadow}
         </Text>
         <Slider
           value={this.state.sizes.shadow}
@@ -91,7 +91,7 @@ class Settings extends Component {
           />
 
         <Text style={style.label}>
-          Egg size: {this.state.sizes.bullet}
+          Yolk size: {this.state.sizes.bullet}
         </Text>
         <Slider
           value={this.state.sizes.bullet}
