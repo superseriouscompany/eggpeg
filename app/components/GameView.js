@@ -37,18 +37,7 @@ export default class GameView extends Component {
       <View style={style.container}>
         <StatusBar hidden/>
 
-        { true ?
-
-          <GameOver
-            score={69}
-            highScores={[69, 55, 11]}
-            isHighScore={true}
-            reset={this.props.reset}
-            continue={this.props.continue} />
-
-            :
-
-          this.props.beat ?
+        { this.props.beat ?
           <Victory
             score={this.props.score.total}
             reset={this.props.reset}
