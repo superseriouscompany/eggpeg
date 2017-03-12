@@ -22,7 +22,7 @@ export default class Victory extends Component {
 
   render() { return (
     <View style={style.container}>
-      <LinksHeader/>
+      <LinksHeader />
       <View style={{flex: 1, alignItems: 'center', marginTop: 25}}>
         <HighScores
           explanationText={'you beat it all!'}

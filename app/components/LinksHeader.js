@@ -3,16 +3,24 @@
 import React from 'react';
 import Component from './Component';
 import Text from './Text';
+import {connect} from 'react-redux'
 import {
+  Platform,
+  Share,
   StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
 
-export default class LinksHeader extends Component {
+class LinksHeader extends Component {
+  constructor(props) {
+    super(props)
+    this.shareDialog = this.shareDialog.bind(this)
+  }
+
   render() { return (
     <View style={style.header}>
-      <TouchableOpacity style={style.leftNav} onPress={this.props.showAbout}>
+      <TouchableOpacity style={style.leftNav} onPress={() => this.props.dispatch({type: 'scene:change', scene: 'AboutUs'})}>
         <Text style={[this.props.textStyle,{fontStyle: 'italic'}]}>who?</Text>
       </TouchableOpacity>
       <TouchableOpacity style={style.rightNav} onPress={this.shareDialog}>
@@ -20,6 +28,22 @@ export default class LinksHeader extends Component {
       </TouchableOpacity>
     </View>
   )}
+
+  shareDialog() {
+    this.shareTimeout && clearTimeout(this.shareTimeout);
+    if( !this.props.shareLink ) {
+      this.shareTimeout = setTimeout(this.shareDialog, 200);
+      return;
+    }
+
+    Share.share({
+      message: Platform.OS == 'android' ? `Download Egg Peg ${this.props.shareLink}` : 'Download Egg Peg',
+      url: this.props.shareLink,
+    }, {
+      dialogTitle: 'Invite Friends',
+      tintColor: 'blue'
+    })
+  }
 }
 
 const style = StyleSheet.create({
@@ -43,3 +67,11 @@ const style = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0)'
   },
 })
+
+function mapStateToProps(state) {
+  return {
+    shareLink: state.shareLink,
+  }
+}
+
+export default connect(mapStateToProps)(LinksHeader)

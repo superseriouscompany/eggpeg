@@ -14,18 +14,19 @@ import {
   View,
 } from 'react-native';
 
-let playing = false;
+let scene = 'Start';
+// scene = 'Game'
 
 export default class Root extends Component {
   constructor(props) {
     super(props)
-    this.state = { playing: playing }
     this.startGame = this.startGame.bind(this)
-    this.showAbout = this.showAbout.bind(this)
     this.showStart = this.showStart.bind(this)
+    this.state = { scene: scene }
   }
 
   componentDidMount() {
+    // TODO: put all of this in another component
     let branchUniversalObject = branch.createBranchUniversalObject(
       `default`,
       {
@@ -41,13 +42,18 @@ export default class Root extends Component {
     }
 
     let controlParams = {
-      '$ios_deepview': 'floats_deepview_vk8d',
+      '$ios_deepview': 'egg_peg_deepview_ckbe',
     }
     controlParams = {};
 
     branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((payload) => {
+      store.dispatch({type: 'shareLink:set', shareLink: payload.url})
+    })
+
+    store.subscribe(() => {
+      const state = store.getState()
       this.setState({
-        shareLink: payload.url,
+        scene: state.scene.current,
       })
     })
   }
@@ -55,27 +61,25 @@ export default class Root extends Component {
   render() { return (
     <View style={style.container}>
       <Provider store={store}>
-        { this.state.playing ?
-          <Game />
-        : this.state.aboutUs ?
+        { this.state.scene == 'Game' ?
+          <Game/>
+        : this.state.scene == 'AboutUs' ?
           <FollowUs back={this.showStart}/>
+        : this.state.scene == 'Start' ?
+          <Start shareLink={this.state.shareLink}/>
         :
-          <Start showAbout={this.showAbout} startGame={this.startGame} shareLink={this.state.shareLink}/>
+          <View style={{backgroundColor: 'indianred', width: 100, height: 100}}/>
         }
       </Provider>
     </View>
   )}
 
-  showAbout() {
-    this.setState({aboutUs: true})
-  }
-
   startGame() {
-    this.setState({playing: true})
+    this.setState({scene: 'Game'})
   }
 
   showStart() {
-    this.setState({aboutUs: false, playing: false,})
+    this.setState({scene: 'Start'})
   }
 }
 
