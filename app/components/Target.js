@@ -37,7 +37,6 @@ export default class Target extends Component {
 
   render() {
     const {target} = this.props;
-    console.warn(JSON.stringify(target))
   return (
     <View style={[style.targetContainer, target.hit ? style.hitContainer : null, {
       left:   target.x - target.width / 2,
