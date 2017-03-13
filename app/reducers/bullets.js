@@ -42,12 +42,12 @@ function tick(bullet) {
   const isActive       = bulletFiredAgo >= bullet.delay && !isExpired;
 
   if( !isExpired && !isActive ) {
-    const distance = g * Math.pow(bulletFiredAgo / 1000, 2);
+    const distance = (g * Math.pow(bulletFiredAgo / 1000, 2)) + 1;
+    // console.warn('ms', bulletFiredAgo, 'distance', distance, 'multiplier', bullet.distanceMultiplier);
     const shadow  = (bullet.delay - bulletFiredAgo) / bullet.delay;
     bullet.shadow = shadow;
-    bullet.distanceMultiplier = Math.min(1, 1 / distance);
-    console.warn('ms', bulletFiredAgo, 'distance', distance, 'multiplier', bullet.distanceMultiplier);
-    // console.warn(1/)
+    bullet.distanceMultiplier = shadow;
+    bullet.distanceMultiplier = 1 / parseFloat(distance.toFixed(2));
   } else if( isExpired ) {
     bullet.spent   = true;
     bullet.visible = false;
