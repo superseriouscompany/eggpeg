@@ -20,8 +20,8 @@ export default class Halp extends Component {
   }
 
   update() {
-    const angularDiameter  = calcAngularDiameter(this.state.distance)
-    const apparentDiameter = calcApparentDiameter(angularDiameter)
+    const angularDiameter  = calcAngularDiameter(this.state.distance, this.state.diameter)
+    const apparentDiameter = calcApparentDiameter(this.state.distance, angularDiameter)
     this.setState({
       angularDiameter,
       apparentDiameter,
@@ -65,10 +65,12 @@ export default class Halp extends Component {
 }
 
 
-function calcAngularDiameter(distance) {
-  return 20
+function calcAngularDiameter(distance, diameter) {
+  return (2 * Math.atan(
+    diameter / (2 * distance)
+  )).toPrecision(3)
 }
 
-function calcApparentDiameter(angularDiameter) {
+function calcApparentDiameter(distance, angularDiameter) {
   return Math.round(Math.random() * 400)
 }
