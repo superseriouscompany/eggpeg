@@ -8,6 +8,7 @@ const config = {
     linger: 100,
   },
   chamber: 3,
+  poop: 200,
   sizes: {
     target: 20,
     shadow: 90,
@@ -23,7 +24,7 @@ const config = {
 if( DeviceInfo.isEmulator() ) {
   config.winDelay     = 0;
   config.lossDelay    = 0;
-  config.bullet.delay = 0;
+  config.bullet.delay = 3000;
 }
 
 export default config

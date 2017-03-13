@@ -58,7 +58,7 @@ export default class Root extends Component {
   render() { return (
     <View style={style.container}>
       <Provider store={store}>
-        { true ?
+        { true && false ?
           <Halp />
         : this.state.scene == 'Game' ?
           <Game/>

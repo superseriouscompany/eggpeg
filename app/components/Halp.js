@@ -13,15 +13,16 @@ export default class Halp extends Component {
     super(props)
     this.update = this.update.bind(this)
     this.state = {
-      distance: 0,
-      diameter: 100,
-      apparentDiameter: 100,
+      distance:         0,
+      diameter:         250,
+      apparentDiameter: 250,
+      angularDiameter:  3.14,
     }
   }
 
   update() {
     const angularDiameter  = calcAngularDiameter(this.state.distance, this.state.diameter)
-    const apparentDiameter = calcApparentDiameter(this.state.distance, angularDiameter)
+    const apparentDiameter = calcApparentDiameter(this.state.distance, angularDiameter, this.state.diameter)
     this.setState({
       angularDiameter,
       apparentDiameter,
@@ -48,15 +49,27 @@ export default class Halp extends Component {
           onValueChange={(value) => this.setState({distance: value})}
           onSlidingComplete={this.update}
         />
+        <Slider
+          value={this.state.diameter}
+          minimumValue={10}
+          maximumValue={200}
+          step={10}
+          minimumTrackTintColor="hotpink"
+          onValueChange={(value) => this.setState({diameter: value})}
+          onSlidingComplete={this.update}
+        />
         <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
           <Text>
-            distance: {this.state.distance}
+            dist: {this.state.distance}
           </Text>
           <Text>
-            angular diameter: { this.state.angularDiameter}
+            d: {this.state.diameter}
           </Text>
           <Text>
-            diameter: { this.state.apparentDiameter}
+            ad: { this.state.angularDiameter.toPrecision(3)}
+          </Text>
+          <Text>
+            vd: { this.state.apparentDiameter.toPrecision(3)}
           </Text>
         </View>
       </View>
@@ -66,11 +79,11 @@ export default class Halp extends Component {
 
 
 function calcAngularDiameter(distance, diameter) {
-  return (2 * Math.atan(
+  return 2 * Math.atan(
     diameter / (2 * distance)
-  )).toPrecision(3)
+  )
 }
 
-function calcApparentDiameter(distance, angularDiameter) {
-  return Math.round(Math.random() * 400)
+function calcApparentDiameter(distance, angularDiameter, diameter) {
+  return distance === 0 ? diameter : diameter / distance;
 }
