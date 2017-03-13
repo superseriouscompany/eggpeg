@@ -21,7 +21,6 @@ class Game extends Component {
     this.loadLevel         = this.loadLevel.bind(this)
     this.continue          = this.continue.bind(this)
     this.loadIAPsWithRetry = this.loadIAPsWithRetry.bind(this)
-
   }
 
   componentDidMount() {
@@ -63,7 +62,6 @@ class Game extends Component {
     }
 
     this.setState({level: level})
-    console.warn('loading level', level)
     this.props.dispatch(loadLevel(level))
   }
 
