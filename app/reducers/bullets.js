@@ -33,7 +33,7 @@ function hit(index, score) {
   }
 }
 
-const g = .5 * 9.80665;
+const g = .5 * config.gravity;
 
 function tick(bullet) {
   if( !bullet.time ) { return bullet; }
@@ -45,7 +45,11 @@ function tick(bullet) {
     // http://keisan.casio.com/exec/system/1224835316
     const distance = (g * Math.pow(bulletFiredAgo / 1000, 2)) + 1;
     // http://math.stackexchange.com/questions/859760/calculating-size-of-an-object-based-on-distance
-    bullet.shadow = 1 / parseFloat(distance.toFixed(2));
+    if( config.gravity ) {
+      bullet.shadow = 1 / parseFloat(distance.toFixed(2));
+    } else {
+      bullet.shadow  = (bullet.delay - bulletFiredAgo) / bullet.delay;
+    }
   } else if( isExpired ) {
     bullet.spent   = true;
     bullet.visible = false;

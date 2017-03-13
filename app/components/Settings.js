@@ -52,6 +52,19 @@ class Settings extends Component {
           />
 
         <Text style={style.label}>
+          Gravity (m/s^2): {this.state.gravity}
+        </Text>
+        <Slider
+          value={this.state.gravity}
+          minimumValue={0}
+          maximumValue={9.8}
+          step={0.1}
+          minimumTrackTintColor="hotpink"
+          onValueChange={(value) => this.setState({gravity: value})}
+          onSlidingComplete={this.update}
+          />
+
+        <Text style={style.label}>
           Egg drop time (ms): {this.state.bullet.delay}
         </Text>
         <Slider

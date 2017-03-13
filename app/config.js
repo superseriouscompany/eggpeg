@@ -10,12 +10,13 @@ const config = {
   chamber: 3,
   sizes: {
     target: 20,
-    shadow: 200,
+    shadow: 100,
     bullet: 7,
   },
   multiplier: {
     multihit: 2,
   },
+  gravity: 4.5,//9.80665,
   countdown: 20, // game over countdown timer
   startingLevel: __DEV__ ? 'Stationary' : 'Stationary',
 }
@@ -23,7 +24,7 @@ const config = {
 if( DeviceInfo.isEmulator() ) {
   config.winDelay     = 0;
   config.lossDelay    = 0;
-  config.bullet.delay = 0;
+  config.bullet.delay = 3000;
 }
 
 export default config
