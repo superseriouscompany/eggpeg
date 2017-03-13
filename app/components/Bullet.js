@@ -25,8 +25,7 @@ export default class Bullet extends Component {
   render() {
     const {bullet} = this.props;
     const containerWidth = Math.max(config.sizes.shadow, config.sizes.bullet)
-    let shadowWidth = Math.round(config.poop * bullet.distanceMultiplier);
-    if( isNaN(shadowWidth) ) { shadowWidth = config.poop; }
+    let shadowWidth = Math.round(config.sizes.shadow * bullet.shadow);
   return (
     <View style={[style.bulletContainer, bullet.hit ? style.hit : null, {
       left:   bullet.x - containerWidth / 2,

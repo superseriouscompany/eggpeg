@@ -8,10 +8,9 @@ const config = {
     linger: 100,
   },
   chamber: 3,
-  poop: 200,
   sizes: {
     target: 20,
-    shadow: 90,
+    shadow: 200,
     bullet: 7,
   },
   multiplier: {
