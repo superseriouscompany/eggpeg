@@ -5,6 +5,7 @@ import Component from './Component';
 import FollowUs from './FollowUs';
 import Start from './Start';
 import Game from '../containers/Game';
+import Halp from './Halp'
 import Settings from './Settings'
 import {Provider} from 'react-redux'
 import branch from 'react-native-branch';
@@ -57,7 +58,9 @@ export default class Root extends Component {
   render() { return (
     <View style={style.container}>
       <Provider store={store}>
-        { this.state.scene == 'Game' ?
+        { true ?
+          <Halp />
+        : this.state.scene == 'Game' ?
           <Game/>
         : this.state.scene == 'AboutUs' ?
           <FollowUs />

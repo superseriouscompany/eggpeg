@@ -17,7 +17,7 @@ const config = {
     multihit: 2,
   },
   countdown: 20, // game over countdown timer
-  startingLevel: __DEV__ ? 'Stationary' : 'Stationary',
+  startingLevel: __DEV__ ? 'solo' : 'Stationary',
 }
 
 if( DeviceInfo.isEmulator() ) {
