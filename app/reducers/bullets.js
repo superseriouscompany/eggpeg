@@ -42,7 +42,9 @@ function tick(bullet) {
   const isActive       = bulletFiredAgo >= bullet.delay && !isExpired;
 
   if( !isExpired && !isActive ) {
+    // http://keisan.casio.com/exec/system/1224835316
     const distance = (g * Math.pow(bulletFiredAgo / 1000, 2)) + 1;
+    // http://math.stackexchange.com/questions/859760/calculating-size-of-an-object-based-on-distance
     bullet.shadow = 1 / parseFloat(distance.toFixed(2));
   } else if( isExpired ) {
     bullet.spent   = true;

@@ -66,7 +66,6 @@ export default [
   },
   {
     name: 'Solo',
-    height: 45,
     targets: [
       {
         points: [
