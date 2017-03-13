@@ -43,7 +43,7 @@ class Settings extends Component {
         </Text>
         <Slider
           value={this.state.sizes.target}
-          minimumValue={10}
+          minimumValue={20}
           maximumValue={200}
           step={10}
           minimumTrackTintColor="hotpink"
