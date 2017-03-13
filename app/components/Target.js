@@ -43,8 +43,6 @@ export default class Target extends Component {
       top:    target.y - target.width / 2,
       width:  target.width,
       height: target.width,
-      borderWidth: 1,
-      borderColor: 'hotpink'
     }]}>
       { target.hit ?
         <View style={[style.dead,{

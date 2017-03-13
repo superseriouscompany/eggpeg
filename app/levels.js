@@ -165,7 +165,7 @@ export default [
         velocity: 1,
       }
     ],
-    color: colors.red,
+    color: colors.purple,
   },
   {
     name: 'Jagged Edge',
@@ -183,7 +183,7 @@ export default [
         velocity: 1,
       }
     ],
-    color: colors.red,
+    color: colors.purple,
   },
   {
     name: 'Fast Guy',
@@ -268,7 +268,7 @@ export default [
         velocity: 1,
       },
     ],
-    color: colors.blue,
+    color: colors.purple,
   },
   {
     name: 'Two Speed',
@@ -289,7 +289,7 @@ export default [
         velocity: 2,
       }
     ],
-    color: colors.blue,
+    color: colors.purple,
   },
   {
     name: 'Stairs',
@@ -306,7 +306,7 @@ export default [
         velocity: 1,
       },
     ],
-    color: colors.blue,
+    color: colors.purple,
   },
   {
     name: 'X Marks the Spot',
@@ -340,7 +340,7 @@ export default [
         velocity: 1,
       },
     ],
-    color: 'black',
+    color: colors.purple,
   },
   {
     name: 'Superfast',
@@ -353,7 +353,7 @@ export default [
         velocity: 3,
       }
     ],
-    color: 'black',
+    color: colors.purple,
   },
   {
     name: 'The Santi Special',
@@ -387,7 +387,7 @@ export default [
         velocity: 1,
       }
     ],
-    color: 'black',
+    color: colors.purple,
   }
 ]
 
