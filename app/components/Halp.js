@@ -4,6 +4,7 @@ import React from 'react';
 import Component from './Component';
 import Text from './Text';
 import {
+  TouchableOpacity,
   Slider,
   View,
 } from 'react-native';
@@ -30,23 +31,6 @@ export default class Halp extends Component {
     });
   }
 
-  drop() {
-    this.start = +new Date
-    this.setState({dropping: true})
-  }
-
-  tick() {
-    if( !this.state.dropping ) return false
-    const time = +new Date - this.start
-    const g = .5 * 9.80665;
-    const distance = g * Math.pow(time, 2)
-    this.setState({
-      time: time,
-      // distance: distance + 9
-    })
-    requestAnimationFrame(this.tick)
-  }
-
   render() { return (
     <View style={{flex: 1, padding: 20}}>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -58,9 +42,6 @@ export default class Halp extends Component {
         }} />
       </View>
       <View>
-        <TouchableOpacity onPress={this.drop}>
-          <Text>Drop</Text>
-        </TouchableOpacity>
         <Slider
           value={this.state.distance}
           minimumValue={0}
