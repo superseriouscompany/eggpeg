@@ -5,6 +5,7 @@ import Component from './Component';
 import FollowUs from './FollowUs';
 import Start from './Start';
 import Game from '../containers/Game';
+import Halp from './Halp'
 import Settings from './Settings'
 import {Provider} from 'react-redux'
 import branch from 'react-native-branch';

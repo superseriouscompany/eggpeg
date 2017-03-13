@@ -38,7 +38,7 @@ export default [
         velocity: .1,
       }
     ],
-    color: colors.green,
+    color: colors.purple,
   },
   {
     name: 'Slow triangle',
@@ -52,7 +52,7 @@ export default [
         velocity: .3,
       }
     ],
-    color: colors.green,
+    color: colors.purple,
   },
   {
     name: 'Slow Stairs',
@@ -62,7 +62,7 @@ export default [
         velocity: .5,
       }
     ],
-    color: colors.green
+    color: colors.purple
   },
   {
     name: 'Solo',
@@ -75,7 +75,7 @@ export default [
         velocity: 1,
       }
     ],
-    color: colors.yellow,
+    color: colors.purple,
   },
   {
     name: 'Slow Meeting',
@@ -99,7 +99,7 @@ export default [
         velocity: 1,
       },
     ],
-    color: colors.yellow,
+    color: colors.purple,
   },
   {
     name: 'Linked',
@@ -120,7 +120,7 @@ export default [
         velocity: 1,
       },
     ],
-    color: colors.orange,
+    color: colors.purple,
   },
   {
     name: 'Crossing',
@@ -140,7 +140,7 @@ export default [
         velocity: 1,
       }
     ],
-    color: colors.orange,
+    color: colors.purple,
   },
   {
     name: 'Whole Phone',
@@ -155,7 +155,7 @@ export default [
         velocity: 1,
       },
     ],
-    color: colors.orange,
+    color: colors.purple,
   },
   {
     name: 'Concentric Box',

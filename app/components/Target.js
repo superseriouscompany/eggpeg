@@ -43,6 +43,8 @@ export default class Target extends Component {
       top:    target.y - target.width / 2,
       width:  target.width,
       height: target.width,
+      borderWidth: 1,
+      borderColor: 'hotpink'
     }]}>
       { target.hit ?
         <View style={[style.dead,{
@@ -73,9 +75,10 @@ function Bullseye(props) {
   const {width, height} = props;
   const rings = [
     { width: width, height: height },
-    { width: width - width / 4, height: height - height / 4 },
-    { width: width - width / 2, height: height - height / 2 },
-    { width: width - 3 * width / 4, height: height - 3 * height / 4 },
+    { width: width - width / 5, height: height - height / 5 },
+    { width: width - 2 * width / 5, height: height - 2 * height / 5 },
+    { width: width - 3 * width / 5, height: height - 3 * height / 5 },
+    { width: width - 4 * width / 5, height: height - 4 * height / 5 },
   ]
 
   return (
@@ -89,16 +92,22 @@ function Bullseye(props) {
         height: rings[1].height,
         borderRadius: rings[1].width/2,
       }]}>
-        <View style={[style.inner, style.ring, {
+        <View style={[style.middle, style.ring, {
           width: rings[2].width,
           height: rings[2].height,
           borderRadius: rings[2].width/2,
         }]}>
-          <View style={[style.bullseye, style.ring, {
+          <View style={[style.inner, style.ring, {
             width: rings[3].width,
             height: rings[3].height,
             borderRadius: rings[3].width/2,
-          }]} />
+          }]}>
+            <View style={[style.bullseye, style.ring, {
+              width: rings[4].width,
+              height: rings[4].height,
+              borderRadius: rings[4].width/2,
+            }]} />
+          </View>
         </View>
       </View>
     </View>
@@ -121,16 +130,19 @@ const style = StyleSheet.create({
   },
   rim: {
     position:        'absolute',
-    backgroundColor: 'white',
+    backgroundColor: base.colors.red,
   },
   outer: {
-    backgroundColor: 'cornflowerblue',
+    backgroundColor: 'white'
+  },
+  middle: {
+    backgroundColor: base.colors.red,
   },
   inner: {
-    backgroundColor: 'indianred',
+    backgroundColor: 'white'
   },
   bullseye: {
-    backgroundColor: 'gold'
+    backgroundColor: base.colors.red
   },
   dead: {
     position: 'absolute',
