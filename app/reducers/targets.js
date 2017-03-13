@@ -9,11 +9,10 @@ export default function targets(state = [], action) {
   switch(action.type) {
     case 'targets:add':
       return state.concat({
-        ...config.target,
+        width: config.sizes.target,
         ...action.target,
         x: action.target.points[0].x,
         y: action.target.points[0].y,
-        width: config.sizes.target,
       })
     case 'targets:hit':
       return state.map(hit(action.index, action.score))

@@ -9,8 +9,6 @@ import {recordScore} from '../actions/scores'
 import levels from '../levels'
 import {loadProducts} from '../actions/purchases'
 
-let level = config.startingLevel;
-
 class Game extends Component {
   constructor(props) {
     super(props)
@@ -29,8 +27,8 @@ class Game extends Component {
   componentDidMount() {
     this.gameLoop()
     if( !this.props.level.done && !this.props.beat ) {
-      level = config.startingLevel;
-      this.reset()
+      const levelIndex = levelByName(config.startingLevel);
+      this.reset(levelIndex)
     }
 
     this.loadIAPsWithRetry()
@@ -129,7 +127,7 @@ class Game extends Component {
     this.props.dispatch({type: 'bullets:fire', x: x, y: y})
   }
 
-  reset() {
+  reset(level) {
     this.props.dispatch({type: 'score:reset'})
     this.props.dispatch({type: 'victory:reset'})
     this.loadLevel(level)
@@ -178,6 +176,15 @@ function isCollision(t, b) {
 function distance(t, b) {
   // https://en.wikipedia.org/wiki/Cartesian_coordinate_system#Distance_between_two_points
   return Math.sqrt(Math.pow(t.x - b.x, 2) + Math.pow(t.y - b.y, 2))
+}
+
+function levelByName(name) {
+  let level;
+  for( var i = 0; i < levels.length; i++ ) {
+    if( levels[i].name.toLowerCase() !== name.toLowerCase() ) { continue; }
+    return i;
+  }
+  throw `Level not found: ${name}`
 }
 
 export default connect(mapStateToProps)(Game);

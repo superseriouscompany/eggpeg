@@ -6,24 +6,29 @@ const {width, height} = Dimensions.get('window')
 
 const xcenter    = (width - config.sizes.target)  / 2;
 const ycenter    = (height - config.sizes.target) / 2;
-const bottomEdge = height - config.sizes.target
-const rightEdge  = width - config.sizes.target;
+const bottomEdge = height - config.sizes.target / 2;
+const rightEdge  = width - config.sizes.target / 2;
+const leftEdge   = config.sizes.target / 2;
 const top        = 50
+
+const {colors}   = require('./styles/base')
 
 export default [
   {
-    level: 'Stationary',
+    name: 'Stationary',
     targets: [
       {
+        width: 200,
         points: [
           { x: xcenter, y: ycenter },
         ],
         velocity: 0,
       },
-    ]
+    ],
+    color: 'white'
   },
   {
-    level: 'Slow line',
+    name: 'Slow line',
     targets: [
       {
         points: [
@@ -32,10 +37,11 @@ export default [
         ],
         velocity: .1,
       }
-    ]
+    ],
+    color: colors.green,
   },
   {
-    level: 'Slow triangle',
+    name: 'Slow triangle',
     targets: [
       {
         points: [
@@ -45,31 +51,34 @@ export default [
         ],
         velocity: .3,
       }
-    ]
+    ],
+    color: colors.green,
   },
   {
-    level: 'Slow Stairs',
+    name: 'Slow Stairs',
     targets: [
       {
         points: steps({x: xcenter - 100, y: ycenter - 100, distance: 20, steps: 10}),
         velocity: .5,
       }
-    ]
+    ],
+    color: colors.green
   },
   {
-    level: 'Straight Line',
+    name: 'Solo',
     targets: [
       {
         points: [
-          { x: 0, y: ycenter },
-          { x: rightEdge, y: ycenter },
+          { x: leftEdge, y: ycenter },
+          { x: rightEdge, y: ycenter }
         ],
         velocity: 1,
-      },
-    ]
+      }
+    ],
+    color: colors.yellow,
   },
   {
-    level: 'Slow Meeting',
+    name: 'Slow Meeting',
     targets: [
       {
         points: [
@@ -89,10 +98,11 @@ export default [
         ],
         velocity: 1,
       },
-    ]
+    ],
+    color: colors.yellow,
   },
   {
-    level: 'Linked',
+    name: 'Linked',
     targets: [
       {
         points: [
@@ -109,10 +119,31 @@ export default [
         ],
         velocity: 1,
       },
-    ]
+    ],
+    color: colors.orange,
   },
   {
-    level: 'Whole Phone',
+    name: 'Crossing',
+    targets: [
+      {
+        points: [
+          { x: leftEdge, y: ycenter },
+          { x: rightEdge, y: ycenter },
+        ],
+        velocity: 1,
+      },
+      {
+        points: [
+          { x: xcenter, y: ycenter - rightEdge / 2},
+          { x: xcenter, y: ycenter + rightEdge / 2},
+        ],
+        velocity: 1,
+      }
+    ],
+    color: colors.orange,
+  },
+  {
+    name: 'Whole Phone',
     targets: [
       {
         points: [
@@ -123,19 +154,21 @@ export default [
         ],
         velocity: 1,
       },
-    ]
+    ],
+    color: colors.orange,
   },
   {
-    level: 'Concentric Box',
+    name: 'Concentric Box',
     targets: [
       {
         points: concentric({x: xcenter, y: ycenter, step: 20, max: 200}),
         velocity: 1,
       }
-    ]
+    ],
+    color: colors.red,
   },
   {
-    level: 'Jagged Edge',
+    name: 'Jagged Edge',
     targets: [
       {
         points: backtrack([
@@ -149,10 +182,11 @@ export default [
         ]),
         velocity: 1,
       }
-    ]
+    ],
+    color: colors.red,
   },
   {
-    level: 'Fast Guy',
+    name: 'Fast Guy',
     targets: [
       {
         points: [
@@ -162,9 +196,10 @@ export default [
         velocity: 2,
       }
     ],
+    color: colors.purple,
   },
   {
-    level: 'Fast Meeting',
+    name: 'Fast Meeting',
     targets: [
       {
         points: [
@@ -180,10 +215,11 @@ export default [
         ],
         velocity: 0.5,
       },
-    ]
+    ],
+    color: colors.purple,
   },
   {
-    level: 'Argyle',
+    name: 'Argyle',
     targets: [
       {
         points: backtrack([
@@ -209,10 +245,11 @@ export default [
         ]),
         velocity: 1,
       },
-    ]
+    ],
+    color: colors.purple,
   },
   {
-    level: 'Star of David',
+    name: 'Star of David',
     targets: [
       {
         points: [
@@ -230,10 +267,11 @@ export default [
         ],
         velocity: 1,
       },
-    ]
+    ],
+    color: colors.blue,
   },
   {
-    level: 'Two Speed',
+    name: 'Two Speed',
     targets: [
       {
         points: [
@@ -250,10 +288,11 @@ export default [
         ],
         velocity: 2,
       }
-    ]
+    ],
+    color: colors.blue,
   },
   {
-    level: 'Stairs',
+    name: 'Stairs',
     targets: [
       {
         points: steps({x: xcenter - 100, y: ycenter - 100, distance: 20, steps: 10}),
@@ -266,10 +305,11 @@ export default [
         ],
         velocity: 1,
       },
-    ]
+    ],
+    color: colors.blue,
   },
   {
-    level: 'X Marks the Spot',
+    name: 'X Marks the Spot',
     targets: [
       {
         points: [
@@ -299,10 +339,11 @@ export default [
         ],
         velocity: 1,
       },
-    ]
+    ],
+    color: 'black',
   },
   {
-    level: 'Superfast',
+    name: 'Superfast',
     targets: [
       {
         points: [
@@ -311,10 +352,11 @@ export default [
         ],
         velocity: 3,
       }
-    ]
+    ],
+    color: 'black',
   },
   {
-    level: 'The Santi Special',
+    name: 'The Santi Special',
     targets: [
       {
         points: [
@@ -344,7 +386,8 @@ export default [
         ],
         velocity: 1,
       }
-    ]
+    ],
+    color: 'black',
   }
 ]
 
