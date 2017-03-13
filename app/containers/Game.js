@@ -12,7 +12,7 @@ import {loadProducts} from '../actions/purchases'
 class Game extends Component {
   constructor(props) {
     super(props)
-    this.state     = {}
+    this.state             = { startLevel: levelByName(config.startingLevel) }
     this.gameLoop          = this.gameLoop.bind(this)
     this.iterate           = this.iterate.bind(this)
     this.shoot             = this.shoot.bind(this)
@@ -27,8 +27,7 @@ class Game extends Component {
   componentDidMount() {
     this.gameLoop()
     if( !this.props.level.done && !this.props.beat ) {
-      const levelIndex = levelByName(config.startingLevel);
-      this.reset(levelIndex)
+      this.reset()
     }
 
     this.loadIAPsWithRetry()
@@ -64,7 +63,19 @@ class Game extends Component {
     }
 
     this.setState({level: level})
+    console.warn('loading level', level)
     this.props.dispatch(loadLevel(level))
+  }
+
+  reset() {
+    this.props.dispatch({type: 'score:reset'})
+    this.props.dispatch({type: 'victory:reset'})
+    this.loadLevel(this.state.startLevel)
+    if( this.state.startLevel === 0 ) {
+      this.setState({
+        startLevel: 1
+      })
+    }
   }
 
   iterate() {
@@ -125,13 +136,6 @@ class Game extends Component {
     if( this.props.level.done || this.props.level.finishTime ) { return; }
     if( !this.props.hasBullets ) { return console.warn('No bullets'); }
     this.props.dispatch({type: 'bullets:fire', x: x, y: y})
-  }
-
-  reset(level) {
-    this.props.dispatch({type: 'score:reset'})
-    this.props.dispatch({type: 'victory:reset'})
-    this.loadLevel(level)
-    level = 1
   }
 
   render() { return (
