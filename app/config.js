@@ -4,19 +4,19 @@ const config = {
   winDelay:  1000,
   lossDelay: 200,
   bullet: {
-    delay:  3000,
+    delay:  2800,
     linger: 100,
   },
   chamber: 3,
   sizes: {
-    target: 20,
-    shadow: 100,
+    target: 40,
+    shadow: 75,
     bullet: 7,
   },
   multiplier: {
     multihit: 2,
   },
-  gravity: 4.5,//9.80665,
+  gravity: 0,//9.80665,
   countdown: 20, // game over countdown timer
   startingLevel: __DEV__ ? 'Stationary' : 'Stationary',
 }
