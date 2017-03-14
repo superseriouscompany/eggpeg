@@ -4,12 +4,8 @@ import { Dimensions } from 'react-native'
 
 const {width, height} = Dimensions.get('window')
 
-const xcenter    = (width - config.sizes.target)  / 2;
-const ycenter    = (height - config.sizes.target) / 2;
-const bottomEdge = height - config.sizes.target / 2;
-const rightEdge  = width - config.sizes.target / 2;
-const leftEdge   = config.sizes.target / 2;
-const top        = 50
+const xcenter    = width / 2;
+const ycenter    = height / 2;
 
 const {colors}   = require('./styles/base')
 
@@ -211,8 +207,8 @@ const levels = [
     targets: [
       {
         points: [
-          { x: leftEdge, y: ycenter },
-          { x: rightEdge, y: ycenter }
+          { x: 0, y: ycenter },
+          { x: width, y: ycenter }
         ],
         velocity: 1,
       }
@@ -244,14 +240,14 @@ const levels = [
       {
         points: [
           { x: 0, y: ycenter },
-          { x: rightEdge, y:ycenter },
+          { x: width, y:ycenter },
         ],
         velocity: 1,
       },
       {
         points: [
           { x: 40, y: ycenter },
-          { x: rightEdge, y:ycenter },
+          { x: width, y:ycenter },
           { x: 0, y: ycenter },
         ],
         velocity: 1,
@@ -284,10 +280,10 @@ const levels = [
     targets: [
       {
         points: [
-          { x: 0, y: top },
-          { x: rightEdge, y: top },
-          { x: rightEdge, y: bottomEdge },
-          { x: 0, y: bottomEdge },
+          { x: 0, y: 0 },
+          { x: width, y: 0 },
+          { x: width, y: height },
+          { x: 0, y: height },
         ],
         velocity: 1,
       },
@@ -328,7 +324,7 @@ const levels = [
       {
         points: [
           { x: 0, y: ycenter },
-          { x: rightEdge, y: ycenter },
+          { x: width, y: ycenter },
         ],
         velocity: 2,
       }
@@ -347,7 +343,7 @@ const levels = [
       },
       {
         points: [
-          { x: rightEdge, y: ycenter },
+          { x: width, y: ycenter },
           { x: xcenter,   y: ycenter, velocity: 2},
         ],
         velocity: 0.5,
@@ -413,14 +409,14 @@ const levels = [
       {
         points: [
           { x: 0, y: ycenter },
-          { x: rightEdge, y: ycenter}
+          { x: width, y: ycenter}
         ],
         velocity: 1,
       },
       {
         points: [
           { x: 20, y: ycenter },
-          { x: rightEdge, y: ycenter },
+          { x: width, y: ycenter },
           { x: 0, y: ycenter },
         ],
         velocity: 2,
@@ -467,8 +463,8 @@ const levels = [
     targets: [
       {
         points: [
-          { x: 0, y: bottomEdge },
-          { x: rightEdge, y: top},
+          { x: 0, y: height },
+          { x: width, y: 0},
         ],
         velocity: 3,
       }
