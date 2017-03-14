@@ -13,9 +13,6 @@ const config = {
     shadow: 75,
     bullet: 7,
   },
-  multiplier: {
-    multihit: 2,
-  },
   gravity: 0,//9.80665,
   countdown: 20, // game over countdown timer
   startingLevel: __DEV__ ? 'Stationary' : 'Stationary',

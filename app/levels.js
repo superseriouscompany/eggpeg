@@ -13,7 +13,7 @@ const top        = 50
 
 const {colors}   = require('./styles/base')
 
-export default [
+const levels = [
   {
     name: 'Stationary',
     targets: [
@@ -25,31 +25,122 @@ export default [
         velocity: 0,
       },
     ],
-    color: 'white'
+    color: colors.purple,
+    hint: 'Tap the target to drop an egg on it.',
   },
   {
-    name: 'Slow line',
+    name: 'Big line',
+    targets: [
+      {
+        width: 200,
+        points: [
+          { x: xcenter, y: ycenter - 200 },
+          { x: xcenter, y: ycenter + 200 },
+        ],
+        velocity: 1,
+      }
+    ],
+    color: colors.purple,
+    hint: 'Anticipate the movement.',
+  },
+  {
+    name: 'Big line diagonal',
+    targets: [
+      {
+        width: 200,
+        points: [
+          { x: 0, y: 0 },
+          { x: width, y: height },
+        ],
+        velocity: 1,
+      }
+    ],
+    color: colors.purple,
+    hint: 'Targets move in many directions.',
+  },
+  {
+    name: 'Big square',
+    targets: [
+      {
+        width: 200,
+        points: [
+          { x: xcenter, y: 0 },
+          { x: width, y: 0 },
+          { x: width, y: height },
+          { x: 0, y: height },
+          { x: 0, y: 0 },
+        ],
+        velocity: 1,
+      }
+    ],
+    color: colors.purple,
+    hint: 'Watch for patterns.'
+  },
+  {
+    name: 'Big double',
+    targets: [
+      {
+        width: 200,
+        points: [
+          { x: 0, y: ycenter },
+          { x: width, y: ycenter },
+        ],
+        velocity: 1,
+      },
+      {
+        width: 200,
+        points: [
+          { x: width, y: ycenter },
+          { x: 0, y: ycenter },
+        ],
+        velocity: 1,
+      },
+    ],
+    color: colors.purple,
+    hint: 'Hitting two targets doubles the score',
+  },
+  {
+    name: 'vibrator',
     targets: [
       {
         points: [
-          { x: xcenter, y: ycenter - 50 },
-          { x: xcenter, y: ycenter + 50 },
+          { x: xcenter - 10, y: ycenter },
+          { x: xcenter + 10, y: ycenter },
         ],
-        velocity: .1,
-      }
+        velocity: .5,
+    }
     ],
     color: colors.purple,
   },
   {
-    name: 'Slow triangle',
+    name: 'two headed vibrator',
     targets: [
       {
         points: [
-          { x: xcenter - 50, y: ycenter + 25 * Math.sqrt(3)},
-          { x: xcenter, y: ycenter - 25 * Math.sqrt(3) },
-          { x: xcenter + 50, y: ycenter + 25 * Math.sqrt(3)},
+          { x: xcenter - 50, y: ycenter - 10 - 100},
+          { x: xcenter - 50, y: ycenter + 10 - 100},
         ],
-        velocity: .3,
+        velocity: .5,
+      },
+      {
+        points: [
+          { x: xcenter + 50, y: ycenter - 10 + 100},
+          { x: xcenter + 50, y: ycenter + 10 + 100},
+        ],
+        velocity: .5,
+      },
+    ],
+    color: colors.purple,
+  },
+  {
+    name: 'Solo slow',
+    targets: [
+      {
+        points: [
+          { x: 0, y: ycenter },
+          { x: width, y: ycenter }
+        ],
+        velocity: .5,
       }
     ],
     color: colors.purple,
@@ -63,19 +154,6 @@ export default [
       }
     ],
     color: colors.purple
-  },
-  {
-    name: 'Solo',
-    targets: [
-      {
-        points: [
-          { x: leftEdge, y: ycenter },
-          { x: rightEdge, y: ycenter }
-        ],
-        velocity: 1,
-      }
-    ],
-    color: colors.purple,
   },
   {
     name: 'Slow Meeting',
@@ -102,7 +180,66 @@ export default [
     color: colors.purple,
   },
   {
-    name: 'Linked',
+    name: 'three headed vibrator',
+    targets: [
+      {
+        points: [
+          { x: xcenter - 50, y: ycenter - 10 - 100},
+          { x: xcenter - 50, y: ycenter + 10 - 100},
+        ],
+        velocity: .5,
+      },
+      {
+        points: [
+          { x: xcenter - 10, y: ycenter },
+          { x: xcenter + 10, y: ycenter },
+        ],
+        velocity: .5,
+      },
+      {
+        points: [
+          { x: xcenter + 50, y: ycenter - 10 + 100},
+          { x: xcenter + 50, y: ycenter + 10 + 100},
+        ],
+        velocity: .5,
+      },
+    ],
+    color: colors.purple,
+  },
+  {
+    name: 'Solo',
+    targets: [
+      {
+        points: [
+          { x: leftEdge, y: ycenter },
+          { x: rightEdge, y: ycenter }
+        ],
+        velocity: 1,
+      }
+    ],
+    color: colors.purple,
+  },
+  {
+    name: 'hyperactive brother',
+    targets: [
+      {
+        points: [
+          { x: 0, y: ycenter },
+          { x: width, y: ycenter },
+        ],
+        velocity: 1,
+      },
+      {
+        points: [
+          { x: xcenter, y: ycenter },
+        ],
+        velocity: 0,
+      },
+    ],
+    color: colors.purple,
+  },
+  {
+    name: 'linked',
     targets: [
       {
         points: [
@@ -113,7 +250,7 @@ export default [
       },
       {
         points: [
-          { x: 15, y: ycenter },
+          { x: 40, y: ycenter },
           { x: rightEdge, y:ycenter },
           { x: 0, y: ycenter },
         ],
@@ -127,15 +264,15 @@ export default [
     targets: [
       {
         points: [
-          { x: leftEdge, y: ycenter },
-          { x: rightEdge, y: ycenter },
+          { x: 0, y: ycenter },
+          { x: width, y: ycenter },
         ],
         velocity: 1,
       },
       {
         points: [
-          { x: xcenter, y: ycenter - rightEdge / 2},
-          { x: xcenter, y: ycenter + rightEdge / 2},
+          { x: xcenter, y: ycenter - (width - 40) / 2},
+          { x: xcenter, y: ycenter + (width - 40) / 2},
         ],
         velocity: 1,
       }
@@ -292,50 +429,33 @@ export default [
     color: colors.purple,
   },
   {
-    name: 'Stairs',
-    targets: [
-      {
-        points: steps({x: xcenter - 100, y: ycenter - 100, distance: 20, steps: 10}),
-        velocity: 1,
-      },
-      {
-        points: [
-          {x: xcenter - 190, y: ycenter + 190},
-          {x: xcenter + 190, y: ycenter - 190},
-        ],
-        velocity: 1,
-      },
-    ],
-    color: colors.purple,
-  },
-  {
     name: 'X Marks the Spot',
     targets: [
       {
         points: [
-          { x: 0, y: top },
-          { x: rightEdge, y: bottomEdge }
+          { x: xcenter - 100, y: ycenter - 100 },
+          { x: xcenter + 100, y: ycenter + 100 }
         ],
         velocity: 1,
       },
       {
         points: [
-          { x: rightEdge, y: top },
-          { x: 0, y: bottomEdge }
+          { x: xcenter + 100, y: ycenter - 100 },
+          { x: xcenter - 100, y: ycenter + 100 }
         ],
         velocity: 1,
       },
       {
         points: [
-          { x: 0, y: bottomEdge },
-          { x: rightEdge, y: top }
+          { x: xcenter - 100, y: ycenter + 100 },
+          { x: xcenter + 100, y: ycenter - 100 }
         ],
         velocity: 1,
       },
       {
         points: [
-          { x: rightEdge, y: bottomEdge },
-          { x: 0, y: top }
+          { x: xcenter + 100, y: ycenter + 100 },
+          { x: xcenter - 100, y: ycenter - 100 }
         ],
         velocity: 1,
       },
@@ -390,6 +510,23 @@ export default [
     color: colors.purple,
   }
 ]
+
+export default levels.map((l) => {
+  return {
+    ...l,
+    targets: l.targets.map((t) => {
+      const radius = (t.width || config.sizes.target)/2
+      t.points = t.points.map((p) => {
+        p.x = Math.max(radius, p.x);
+        p.x = Math.min(width - radius, p.x);
+        p.y = Math.max(50 + radius, p.y);
+        p.y = Math.min(height - radius, p.y)
+        return p
+      })
+      return t
+    })
+  }
+})
 
 function concentric(opts) {
   const {x, y, step, max} = opts

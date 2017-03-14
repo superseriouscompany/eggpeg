@@ -38,7 +38,7 @@ export default class Result extends Component {
 const style = StyleSheet.create({
   container: {
     flex:            1,
-    backgroundColor: 'white',
+    backgroundColor: '#BA6BCA',
   },
   scoreContainer: {
     flex:           1,

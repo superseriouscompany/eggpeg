@@ -71,7 +71,7 @@ class Game extends Component {
     this.loadLevel(this.state.startLevel)
     if( this.state.startLevel === 0 ) {
       this.setState({
-        startLevel: 1
+        startLevel: 5
       })
     }
   }
@@ -106,7 +106,7 @@ class Game extends Component {
       if( hits.length ) {
         let score = hits.reduce((a, v) => { return a + v.score}, 0)
         if( hits.length > 1 ) {
-          score *= config.multiplier.multihit * (hits.length - 1)
+          score *= hits.length
         }
         this.props.dispatch({type: 'bullets:hit', index: bi, score: score, count: hits.length})
       }

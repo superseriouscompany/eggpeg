@@ -12,7 +12,7 @@ import {
 
 class SettingsLink extends Component {
   render() {
-    return (__DEV__ ?
+    return ( __DEV__ ?
       <View style={style.container}>
         <TouchableOpacity onPress={() => this.props.dispatch({type: 'scene:change', scene: 'Settings'})}>
           <Text style={{color: this.props.textColor || 'white'}}>settings</Text>
