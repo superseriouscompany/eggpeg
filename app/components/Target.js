@@ -4,6 +4,7 @@ import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
 import base from '../styles/base';
+import config from '../config'
 import {
   Animated,
   StyleSheet,
@@ -38,13 +39,13 @@ export default class Target extends Component {
   render() {
     const {target} = this.props;
   return (
-    <View style={[style.targetContainer, target.hit ? style.hitContainer : null, {
+    <View style={[style.targetContainer, target.hit && !config.debugBullseye ? style.hitContainer : null, {
       left:   target.x - target.width / 2,
       top:    target.y - target.width / 2,
       width:  target.width,
       height: target.width,
     }]}>
-      { target.hit ?
+      { target.hit && !config.debugBullseye ?
         <View style={[style.dead,{
           width:  target.width,
           height: target.width,

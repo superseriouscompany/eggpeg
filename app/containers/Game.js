@@ -50,6 +50,7 @@ class Game extends Component {
   }
 
   nextLevel() {
+    if( config.debugBullseye ) { return this.loadLevel(this.state.level)}
     this.loadLevel(this.state.level + 1)
   }
 
@@ -87,7 +88,7 @@ class Game extends Component {
     this.props.bullets.forEach((bullet, bi) => {
       let hits = []
       this.props.targets.forEach((target, index) => {
-        if( bullet.visible && !target.hit && isCollision(target, bullet) ) {
+        if( bullet.visible && (!target.hit || config.debugBullseye) && isCollision(target, bullet) ) {
           const magicNumber = Math.sqrt(
             (
               Math.pow(target.width, 2) + 2 * target.width * bullet.width + Math.pow(bullet.width, 2)
