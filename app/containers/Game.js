@@ -10,8 +10,6 @@ import levels from '../levels'
 import {loadProducts} from '../actions/purchases'
 import {AsyncStorage} from 'react-native'
 
-let wasReset = false;
-
 class Game extends Component {
   constructor(props) {
     super(props)
@@ -172,20 +170,14 @@ function mapStateToProps(state) {
   }
 }
 
+// http://stackoverflow.com/questions/8367512/algorithm-to-detect-if-a-circles-intersect-with-any-other-circle-in-the-same-pla
 function isCollision(t, b) {
-  const aLeft   = t.x - t.width/2;
-  const aRight  = t.x + t.width/2;
-  const bLeft   = b.x - b.width/2;
-  const bRight  = b.x + b.width/2;
-  const aTop    = t.y - t.width/2;
-  const aBottom = t.y + (t.height || t.width)/2;
-  const bTop    = b.y - b.width/2;
-  const bBottom = b.y + (b.height || b.width)/2;
+  const r0 = t.width/2;
+  const r1 = b.width/2;
 
-  const isXCollision = aLeft < bLeft && bLeft < aRight || aLeft < bRight && bRight < aRight;
-  const isYCollision = aTop < bTop && bTop < aBottom || aTop < bBottom && bBottom < aBottom;
+  const maxDistance = Math.pow(t.x - b.x, 2) + Math.pow(t.y - b.y, 2);
 
-  return isXCollision && isYCollision;
+  return Math.pow(r0-r1, 2) <= maxDistance && maxDistance <= Math.pow(r0+r1, 2);
 }
 
 function distance(t, b) {
