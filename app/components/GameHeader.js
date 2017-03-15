@@ -3,6 +3,8 @@
 import React from 'react';
 import Component from './Component';
 import Text from './Text';
+import AnimateNumber from 'react-native-animate-number'
+
 import {
   Animated,
   Image,
@@ -14,16 +16,36 @@ export default class GameHeader extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      scoreAnim: new Animated.Value(0)
+      scoreAnim: new Animated.Value(0),
+      score: props.score,
     }
+    this.displayScore = this.displayScore.bind(this)
+    this.state.scoreAnim.addListener(this.displayScore);
+  }
+
+  componentWillUnmount() {
+    this.state.scoreAnim.removeListener(this.displayScore);
+  }
+
+  displayScore(animation) {
+    this.setState({
+      score: Math.round(this.props.score - this.state.delta + this.state.delta * animation.value)
+    })
   }
 
   componentWillReceiveProps(props) {
     if( props.score != this.props.score ) {
+      this.setState({
+        delta: props.score - (this.props.score || 0),
+      })
       Animated.timing(
         this.state.scoreAnim,
-        {toValue: 1, duration: 1000}
-      ).start();
+        {toValue: 1, duration: 500}
+      ).start(() => {
+        this.setState({
+          score: props.score,
+        })
+      });
     }
   }
 
@@ -39,7 +61,9 @@ export default class GameHeader extends Component {
           inputRange:  [0, .5, 1],
           outputRange: [18, 26, 18],
         })
-      }]}>{this.props.score}</Animated.Text>
+      }]}>
+        {this.state.score}
+      </Animated.Text>
     </View>
   )}
 }
