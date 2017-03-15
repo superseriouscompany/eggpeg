@@ -28,11 +28,17 @@ export default class Bullet extends Component {
     this.state = {
       multAnim: new Animated.Value(0),
       incAnim: new Animated.Value(0),
+      score: 0,
     }
+    this.displayScore = this.displayScore.bind(this)
+    this.state.incAnim.addListener(this.displayScore)
+  }
+
+  componentWillUnmount() {
+    this.state.incAnim.removeListener(this.displayScore)
   }
 
   componentWillReceiveProps(props) {
-    console.log('checking', props.bullet.hit, this.props.bullet.hit)
     if( props.hit && !this.props.hit ) {
       Animated.stagger(500, [
         Animated.timing(
@@ -45,6 +51,12 @@ export default class Bullet extends Component {
         )
       ]).start()
     }
+  }
+
+  displayScore(animation) {
+    this.setState({
+      score: Math.min(this.props.bullet.score, Math.round(this.props.bullet.score * animation.value * 2))
+    })
   }
 
   render() {
@@ -80,7 +92,7 @@ export default class Bullet extends Component {
             inputRange:  [0, 0.1, 0.5, 1],
             outputRange: [0, 1, 1, 0],
           }),
-        }]}>{bullet.score}</Animated.Text>
+        }]}>{this.state.score}</Animated.Text>
       : null }
 
       { bullet.hit || bullet.visible ?
