@@ -10,6 +10,7 @@ import Settings from './Settings'
 import {Provider} from 'react-redux'
 import branch from 'react-native-branch';
 import store from '../reducers'
+import {changeMode} from '../actions/difficulty'
 import {
   AsyncStorage,
   StyleSheet,
@@ -77,6 +78,7 @@ export default class Root extends Component {
     </View>
   )}
 
+  // TODO: noooooooo, move this responsibility out or persist entire store
   hydrate() {
     AsyncStorage.getItem('@eggpeg:difficultyUnlocked').then((yes) => {
       if( yes ) {
@@ -89,6 +91,12 @@ export default class Root extends Component {
         this.setState({
           skipDemo: true,
         })
+      }
+    })
+
+    AsyncStorage.getItem('@eggpeg:difficulty').then((difficulty) => {
+      if( difficulty ) {
+        store.dispatch(changeMode(difficulty))
       }
     })
   }
