@@ -70,27 +70,27 @@ class GameOver extends Component {
     <View style={style.container}>
       <LinksHeader textStyle={{color: 'white'}} />
       <View style={style.mainContainer}>
-        <HighScores explanationText={'new high score!'} scores={this.props.highScores} score={this.props.score} isHigh={this.props.isHighScore} />
+        <HighScores explanationText={'high score!'} scores={this.props.highScores} score={this.props.score} isHigh={this.props.isHighScore} />
+      </View>
 
-        <View style={style.buttonsContainer}>
-          { !this.state.expired && this.props.highScores.length >= 3 ?
-            <View style={style.continueContainer}>
-              <PayButton style={style.button}
-               countdown={this.state.timer}
-               continue={this.props.continue}
-               pause={this.pause}
-               resume={this.resume} />
-            </View>
-          :
-            <View style={style.continueContainer}>
-              <View style={{height: 91, width: '100%'}}></View>
-            </View>
-          }
-          <TouchableOpacity style={style.button} onPress={this.props.reset}>
-            <Text style={{fontStyle: 'italic', fontSize: 32, color: 'white'}}>game over</Text>
-          </TouchableOpacity>
-          <DifficultySwitch dark={true}/>
-        </View>
+      <View style={style.buttonsContainer}>
+        { !this.state.expired && this.props.highScores.length >= 3 ?
+          <View style={style.continueContainer}>
+            <PayButton style={style.button}
+             countdown={this.state.timer}
+             continue={this.props.continue}
+             pause={this.pause}
+             resume={this.resume} />
+          </View>
+        :
+          <View style={style.continueContainer}>
+            <View style={{height: 91, width: '100%'}}></View>
+          </View>
+        }
+        <TouchableOpacity style={style.button} onPress={this.props.reset}>
+          <Text style={{fontStyle: 'italic', fontSize: 32, color: 'white'}}>game over</Text>
+        </TouchableOpacity>
+        <DifficultySwitch dark={true} style={{marginTop: 20}}/>
       </View>
       <SettingsLink />
     </View>
@@ -104,14 +104,15 @@ const style = StyleSheet.create({
     alignItems:      'center',
   },
   mainContainer: {
-    flex: 1,
+    flex: .4,
     alignItems: 'center',
-    marginTop: 55,
+    justifyContent: 'center',
+    marginTop: 60,
   },
   buttonsContainer: {
-    flex: 1,
+    flex: .6,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   countdown: {
     color: 'white',

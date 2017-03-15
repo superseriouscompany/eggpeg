@@ -75,13 +75,7 @@ const style = StyleSheet.create({
   lowScore: {
     fontSize: 32,
     color: 'white',
-    marginTop: 40,
-  },
-  star: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    backgroundColor: 'hotpink',
+    marginTop: 10,
   },
   scoresContainer: {
     alignItems: 'center',
