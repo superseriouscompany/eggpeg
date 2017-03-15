@@ -82,6 +82,7 @@ export default class Bullet extends Component {
             inputRange:  [0, 0.1, 0.5, 1],
             outputRange: [0, 1, 1, 0],
           }),
+          fontSize: Math.round(18 + config.sizes.target / 10),
         }]}>x{bullet.count}</Animated.Text>
       : null }
       { bullet.hit ?
@@ -94,6 +95,7 @@ export default class Bullet extends Component {
             inputRange:  [0, 0.1, 0.5, 1],
             outputRange: [0, 1, 1, 0],
           }),
+          fontSize: Math.round(18 + config.sizes.target / 10)
         }]}>{this.state.score}</Animated.Text>
       : null }
 
