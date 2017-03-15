@@ -97,7 +97,7 @@ function Aura(props) {
     <Animated.View style={[...props.style, style.aura, {
       borderRadius: width,
       borderColor: base.colors.reward,
-      borderWidth: Math.round(width / 10),
+      borderWidth: Math.round(width / 40),
     }]} />
   )
 }
