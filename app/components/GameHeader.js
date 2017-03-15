@@ -3,6 +3,7 @@
 import React from 'react';
 import Component from './Component';
 import Text from './Text';
+import RainbowBar from './RainbowBar'
 import {
   Animated,
   Image,
@@ -13,6 +14,11 @@ import {
 export default class GameHeader extends Component {
   render() { return (
     <View style={style.header}>
+      { this.props.newHighScore ?
+        <RainbowBar barHeight={10}/>
+      :
+        null
+      }
       <View style={{flexDirection: 'row', flex: 1}}>
         <Egg filled={this.props.tries >= 1} />
         <Egg filled={this.props.tries >= 2} />
