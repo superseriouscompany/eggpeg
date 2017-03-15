@@ -20,7 +20,7 @@ const config = {
   },
   gravity: 0,//9.80665,
   countdown: 20, // game over countdown timer
-  startingLevel: __DEV__ ? 'Stationary' : 'Stationary',
+  startingLevel: __DEV__ ? 'the santi special' : 'Stationary',
   debugBullseye: false,
 }
 
