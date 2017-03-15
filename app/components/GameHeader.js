@@ -17,7 +17,10 @@ export default class GameHeader extends Component {
         <Egg filled={this.props.tries >= 2} />
         <Egg filled={this.props.tries >= 3} />
       </View>
-      <Text style={style.score}>{this.props.score}</Text>
+      <Text style={style.score}>
+        {JSON.stringify(this.props.highScores)}
+        {this.props.score}
+      </Text>
     </View>
   )}
 }

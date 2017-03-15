@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import GameView from '../components/GameView'
 import config from '../config'
 import {loadLevel} from '../actions/levels'
-import {recordScore} from '../actions/scores'
+import {loadScores, recordScore} from '../actions/scores'
 import levels from '../levels'
 import {loadProducts} from '../actions/purchases'
 
@@ -75,6 +75,7 @@ class Game extends Component {
         startLevel: 5
       })
     }
+    this.props.dispatch(loadScores())
   }
 
   iterate() {

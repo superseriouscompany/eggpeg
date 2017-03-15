@@ -60,7 +60,10 @@ export default class GameView extends Component {
             nextLevel={this.props.nextLevel} />
         :
           <View style={{flex: 1, backgroundColor: this.props.level.color || 'hotpink'}}>
-            <GameHeader tries={this.props.chamber} score={this.props.score.total || 0} />
+            <GameHeader
+              tries={this.props.chamber}
+              score={this.props.score.total || 0}
+              highScores={this.props.score.highScores} />
             <TouchableWithoutFeedback onPress={(e) => this.props.shoot(e.nativeEvent.pageX, e.nativeEvent.pageY)}>
               <View style={{flex: 1}}>
                 { this.props.targets.map((target, key) => (
