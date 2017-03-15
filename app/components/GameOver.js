@@ -7,6 +7,7 @@ import PayButton from './PayButton'
 import HighScores from './HighScores'
 import LinksHeader from './LinksHeader'
 import SettingsLink from './SettingsLink'
+import DifficultySwitch from './DifficultySwitch'
 import config from '../config'
 import {connect} from 'react-redux'
 import {
@@ -88,6 +89,7 @@ class GameOver extends Component {
           <TouchableOpacity style={style.button} onPress={this.props.reset}>
             <Text style={{fontStyle: 'italic', fontSize: 32, color: 'white'}}>game over</Text>
           </TouchableOpacity>
+          <DifficultySwitch dark={true}/>
         </View>
       </View>
       <SettingsLink />

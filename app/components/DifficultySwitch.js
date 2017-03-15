@@ -6,6 +6,7 @@ import Text from './Text';
 import {connect} from 'react-redux'
 import {changeMode} from '../actions/difficulty'
 import {
+  StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -16,22 +17,35 @@ class DifficultySwitch extends Component {
     this.toggle = this.toggle.bind(this)
   }
 
-  render() { return (
-    <TouchableOpacity onPress={this.toggle}>
-      <Text>{this.props.difficulty}</Text>
-    </TouchableOpacity>
-  )}
+  render() {
+    if( !this.props.unlocked ) { return null; }
+    return (
+      <TouchableOpacity onPress={this.toggle}>
+        <Text style={this.props.dark ? style.dark : style.light}>{this.props.mode}</Text>
+      </TouchableOpacity>
+    )
+  }
 
   toggle() {
-    const mode = this.props.difficulty === 'easy' ? 'hard' : 'easy';
+    const mode = this.props.mode === 'easy' ? 'hard' : 'easy';
     this.props.dispatch(changeMode(mode))
   }
 }
 
 function mapStateToProps(state) {
   return {
-    difficulty: state.difficulty,
+    unlocked: state.difficulty.unlocked,
+    mode:     state.difficulty.mode,
   }
 }
+
+const style = StyleSheet.create({
+  dark: {
+    color: 'cornflowerblue',
+  },
+  light: {
+    color: 'hotpink',
+  },
+})
 
 export default connect(mapStateToProps)(DifficultySwitch)

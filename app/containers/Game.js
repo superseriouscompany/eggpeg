@@ -61,6 +61,7 @@ class Game extends Component {
       this.props.dispatch(recordScore(this.props.score.total)).catch((err) => {
         console.error(err)
       })
+      this.props.dispatch({type: 'difficulty:unlock'})
       return this.props.dispatch({type: 'victory:yes'})
     }
 
