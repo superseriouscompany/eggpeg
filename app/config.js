@@ -16,11 +16,11 @@ const config = {
   gravity: 0,//9.80665,
   countdown: 20, // game over countdown timer
   startingLevel: __DEV__ ? 'Stationary' : 'Stationary',
-  debugBullseye: false,
+  debugBullseye: true,
 }
 
 if( DeviceInfo.isEmulator() ) {
-  config.winDelay     = 0;
+  config.winDelay     = 2000;
   config.lossDelay    = 0;
   config.bullet.delay = 0;
 }
