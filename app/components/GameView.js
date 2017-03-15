@@ -53,11 +53,13 @@ export default class GameView extends Component {
       scoreIndex: --index,
     })
 
+    // TODO: do this via a callback
+    const animationCompletion = config.timings.rainbowDelay + config.timings.rainbow + config.timings.rainbowLeaveDelay + config.timings.rainbowLeave + 500;
     setTimeout(() => {
       this.setState({
         newHighScore: false,
       })
-    }, config.timings.scoreHighlight)
+    }, animationCompletion)
   }
 
   render() {

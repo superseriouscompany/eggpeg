@@ -18,6 +18,10 @@ const config = {
     multiplierDelay:   1000,
     multiplierBetween: 500,
     scoreHighlight:    1000,
+    rainbowDelay:      150,
+    rainbow:           1000,
+    rainbowLeaveDelay: 1000,
+    rainbowLeave:      150,
   },
   gravity: 0,//9.80665,
   countdown: 20, // game over countdown timer

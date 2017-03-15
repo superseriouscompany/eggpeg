@@ -3,6 +3,7 @@
 import React, { PropTypes } from 'react';
 import Component from './Component';
 import base from '../styles/base'
+import config from '../config'
 import {
   Animated,
   Dimensions,
@@ -21,23 +22,32 @@ export default class RainbowBar extends Component {
      };
    }
 
+   // TODO: make a more coherent API for this component
    componentDidMount() {
      Animated.timing(
        this.state.offsetX,
-       {toValue: screenWidth / 2, duration: 1000, delay: 150}
-     ).start();
+       {toValue: this.props.finalOffset || (screenWidth / 2), duration: config.timings.rainbow, delay: config.timings.rainbowDelay}
+     ).start(() => {
+       if( !this.props.leave ) { return; }
+       Animated.timing(
+         this.state.offsetX,
+         { toValue: screenWidth, duration: config.timings.rainbowLeaveDelay, delay: config.timings.rainbowLeaveDelay}
+       ).start()
+     });
    }
 
    render() {
      return (
        <Animated.View
-       style={[this.props.style, style.barContainer, {transform: [{translateX: this.state.offsetX}]}]}>
-         <Bar style={{width: screenWidth * 2, height: this.props.barHeight}} color={base.colors.green} />
+       style={[this.props.style, style.barContainer, {
+         transform: [{translateX: this.state.offsetX}]
+       }]}>
+         <Bar style={{width: screenWidth * 2, height: this.props.barHeight}}    color={base.colors.green} />
          <Bar style={{width: screenWidth * 1.8, height: this.props.barHeight }} color={base.colors.yellow} />
-         <Bar style={{width: screenWidth * 1.6, height: this.props.barHeight}} color={base.colors.orange} />
-         <Bar style={{width: screenWidth * 1.4, height: this.props.barHeight}} color={base.colors.red} />
-         <Bar style={{width: screenWidth * 1.2, height: this.props.barHeight}} color={base.colors.purple} />
-         <Bar style={{width: screenWidth * 1, height: this.props.barHeight}} color={base.colors.blue} />
+         <Bar style={{width: screenWidth * 1.6, height: this.props.barHeight}}  color={base.colors.orange} />
+         <Bar style={{width: screenWidth * 1.4, height: this.props.barHeight}}  color={base.colors.red} />
+         <Bar style={{width: screenWidth * 1.2, height: this.props.barHeight}}  color={base.colors.purple} />
+         <Bar style={{width: screenWidth * 1, height: this.props.barHeight}}    color={base.colors.blue} />
        </Animated.View>
      );
    }

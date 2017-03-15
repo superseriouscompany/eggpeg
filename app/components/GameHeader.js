@@ -6,16 +6,19 @@ import Text from './Text';
 import RainbowBar from './RainbowBar'
 import {
   Animated,
+  Dimensions,
   Image,
   StyleSheet,
   View,
 } from 'react-native';
 
+const screenWidth = Dimensions.get('window').width;
+
 export default class GameHeader extends Component {
   render() { return (
     <View style={style.header}>
       { this.props.newHighScore ?
-        <RainbowBar barHeight={10}/>
+        <RainbowBar barHeight={10} finalOffset={screenWidth - 50} leave={true}/>
       :
         null
       }
@@ -26,7 +29,6 @@ export default class GameHeader extends Component {
       </View>
       <Text style={style.score}>
         {this.props.score}
-        { this.props.newHighScore ? '!' : ''}
       </Text>
     </View>
   )}
