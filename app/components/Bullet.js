@@ -6,6 +6,7 @@ import Text from './Text';
 import config from '../config';
 import base from '../styles/base';
 import {
+  Animated,
   StyleSheet,
   View,
 } from 'react-native';
@@ -22,6 +23,23 @@ export default class Bullet extends Component {
     }).isRequired,
   }
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      ghostAnim: new Animated.Value(0)
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    console.log('checking', props.bullet.hit, this.props.bullet.hit)
+    if( props.hit && !this.props.hit ) {
+      Animated.timing(
+        this.state.ghostAnim,
+        { toValue: 1, duration: 1750, delay: 1750, },
+      ).start()
+    }
+  }
+
   render() {
     const {bullet} = this.props;
     const containerWidth = Math.max(config.sizes.shadow, config.sizes.bullet)
@@ -34,9 +52,16 @@ export default class Bullet extends Component {
       height: containerWidth,
     }]}>
       { bullet.hit ?
-        <View style={[style.ghost]}>
-          <Text style={style.ghostText}>x2</Text>
-        </View>
+        <Animated.Text style={[style.ghost, {
+          top: this.state.ghostAnim.interpolate({
+            inputRange:  [0, 1],
+            outputRange: [0, -config.sizes.bullet - 30],
+          }),
+          opacity: this.state.ghostAnim.interpolate({
+            inputRange:  [0, 0.1, 0.5, 1],
+            outputRange: [0, 1, 1, 0],
+          }),
+        }]}>x2</Animated.Text>
       : null }
 
       { bullet.hit || bullet.visible ?
@@ -79,9 +104,6 @@ const style = StyleSheet.create({
   },
   ghost: {
     position: 'absolute',
-    top: -20,
-  },
-  ghostText: {
     color: 'white',
   },
   hit: {
