@@ -40,16 +40,18 @@ export default class Bullet extends Component {
 
   componentWillReceiveProps(props) {
     if( props.hit && !this.props.hit ) {
-      Animated.stagger(500, [
+      const startDelay   = 1000;
+      const betweenDelay = 500;
+      Animated.stagger(betweenDelay, [
         Animated.timing(
           this.state.multAnim,
-          { toValue: 1, duration: 1750, },
+          { toValue: 1, duration: 1750, delay: startDelay, },
         ),
         Animated.timing(
           this.state.incAnim,
-          { toValue: 1, duration: 1750, }
+          { toValue: 1, duration: 1750, delay: startDelay,  }
         )
-      ]).start()
+      ], { delay: 1000 }).start()
     }
   }
 
@@ -127,15 +129,16 @@ const style = StyleSheet.create({
   },
   shadow: {
     backgroundColor: 'white',
-    borderColor: base.colors.purple,
-    borderWidth: 1,
+    borderColor:     base.colors.purple,
+    borderWidth:     1,
   },
   bullet: {
     backgroundColor: base.colors.yellow,
   },
   ghost: {
-    position: 'absolute',
-    color: 'white',
+    position:        'absolute',
+    color:           'white',
+    backgroundColor: 'transparent',
   },
   hit: {
     zIndex: -1,
