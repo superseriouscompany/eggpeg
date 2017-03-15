@@ -91,7 +91,7 @@ class Game extends Component {
     this.props.bullets.forEach((bullet, bi) => {
       let hits = []
       this.props.targets.forEach((target, index) => {
-        if( bullet.visible && (!target.hit || config.debugBullseye) && isCollision(target, bullet) ) {
+        if( bullet.visible && !target.hit && isCollision(target, bullet) ) {
           const magicNumber = Math.sqrt(
             (
               Math.pow(target.width, 2) + 2 * target.width * bullet.width + Math.pow(bullet.width, 2)
@@ -102,9 +102,13 @@ class Game extends Component {
             accuracy < 0.3 ? 5 :
             accuracy < 0.6 ? 2 :
             1;
+          const ring =
+            accuracy < 0.3 ? 'bullseye' :
+            accuracy < 0.6 ? 'inner' :
+            'outer';
 
           score *= config.scoreBonus
-          this.props.dispatch({type: 'targets:hit', index: index, score: score})
+          this.props.dispatch({type: 'targets:hit', index, score, ring})
           hits.push({score: score})
         }
       })

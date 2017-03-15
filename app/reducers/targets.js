@@ -15,7 +15,7 @@ export default function targets(state = [], action) {
         y: action.target.points[0].y,
       })
     case 'targets:hit':
-      return state.map(hit(action.index, action.score))
+      return state.map(hit(action.index, action.score, action.ring))
     case 'level:clear':
       return []
     case 'tick':
@@ -25,11 +25,12 @@ export default function targets(state = [], action) {
   }
 }
 
-function hit(index, score) {
+function hit(index, score, ring) {
   return function(target, i) {
     if( i != index ) { return target; }
-    target.hit   = true;
-    target.score = score;
+    target.hit      = true;
+    target.score    = score;
+    target.ring = ring;
     return target;
   }
 }
