@@ -67,8 +67,8 @@ export default class Target extends Component {
           ...style.reward,
           backgroundColor: base.colors.reward,
           opacity: this.state.ghostAnim.interpolate({
-            inputRange:  [0, .3, .6, .9, 1],
-            outputRange: [0, 1, 0, 1, 0],
+            inputRange:  [0, .05, 1],
+            outputRange: [0, .5, 0],
           }),
         }}/>
       :
@@ -113,17 +113,17 @@ function Bullseye(props) {
   ]
 
   return (
-    <Animated.View style={[hit ? ring == 'outer' ? props.rewardStyle : style.dead : style.rim, style.ring, {
+    <Animated.View style={[hit ? ring == 'outer' ? null : style.dead : style.rim, style.ring, {
       width: rings[0].width,
       height: rings[0].height,
       borderRadius: rings[0].width/2
     }]}>
-      <Animated.View style={[hit ? ring == 'inner' ? props.rewardStyle : style.dead : style.outer, style.ring, {
+      <Animated.View style={[hit ? ring == 'inner' ? null : style.dead : style.outer, style.ring, {
         width: rings[1].width,
         height: rings[1].height,
         borderRadius: rings[1].width/2,
       }]}>
-        <Animated.View style={[hit ? ring == 'inner' ? props.rewardStyle : style.dead : style.middle, style.ring, {
+        <Animated.View style={[hit ? ring == 'inner' ? null : style.dead : style.middle, style.ring, {
           width: rings[2].width,
           height: rings[2].height,
           borderRadius: rings[2].width/2,
