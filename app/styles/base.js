@@ -11,6 +11,7 @@ const colors = {
   red: '#D1534A',
   purple: '#8B5097',
   blue: '#389ED9',
+  reward: 'hotpink',
 }
 const fontSizes = {
   big: 20,

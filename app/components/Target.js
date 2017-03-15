@@ -63,7 +63,14 @@ export default class Target extends Component {
       : null }
 
       { target.hit ?
-        <Bullseye hit={target.hit} ring={target.ring} width={target.width} height={target.width} />
+        <Bullseye hit={target.hit} ring={target.ring} width={target.width} height={target.width} rewardStyle={{
+          ...style.reward,
+          backgroundColor: base.colors.reward,
+          opacity: this.state.ghostAnim.interpolate({
+            inputRange:  [0, .3, .6, .9, 1],
+            outputRange: [0, 1, 0, 1, 0],
+          }),
+        }}/>
       :
         <Bullseye width={target.width} height={target.width}/>
       }
@@ -89,7 +96,7 @@ function Aura(props) {
   return (
     <Animated.View style={[...props.style, style.aura, {
       borderRadius: width,
-      borderColor: 'cornflowerblue',
+      borderColor: base.colors.reward,
       borderWidth: Math.round(width / 10),
     }]} />
   )
@@ -106,35 +113,35 @@ function Bullseye(props) {
   ]
 
   return (
-    <View style={[hit ? ring == 'outer' ? style.reward : style.dead : style.rim, style.ring, {
+    <Animated.View style={[hit ? ring == 'outer' ? props.rewardStyle : style.dead : style.rim, style.ring, {
       width: rings[0].width,
       height: rings[0].height,
       borderRadius: rings[0].width/2
     }]}>
-      <View style={[hit ? ring == 'inner' ? style.reward : style.dead : style.outer, style.ring, {
+      <Animated.View style={[hit ? ring == 'inner' ? props.rewardStyle : style.dead : style.outer, style.ring, {
         width: rings[1].width,
         height: rings[1].height,
         borderRadius: rings[1].width/2,
       }]}>
-        <View style={[hit ? ring == 'inner' ? style.reward : style.dead : style.middle, style.ring, {
+        <Animated.View style={[hit ? ring == 'inner' ? props.rewardStyle : style.dead : style.middle, style.ring, {
           width: rings[2].width,
           height: rings[2].height,
           borderRadius: rings[2].width/2,
         }]}>
-          <View style={[hit ? ring == 'bullseye' ? style.reward : style.dead : style.inner, style.ring, {
+          <Animated.View style={[hit ? ring == 'bullseye' ? props.rewardStyle : style.dead : style.inner, style.ring, {
             width: rings[3].width,
             height: rings[3].height,
             borderRadius: rings[3].width/2,
           }]}>
-            <View style={[hit ? ring == 'bullseye' ? style.reward : style.dead : style.bullseye, style.ring, {
+            <Animated.View style={[hit ? ring == 'bullseye' ? props.rewardStyle : style.dead : style.bullseye, style.ring, {
               width: rings[4].width,
               height: rings[4].height,
               borderRadius: rings[4].width/2,
             }]} />
-          </View>
-        </View>
-      </View>
-    </View>
+          </Animated.View>
+        </Animated.View>
+      </Animated.View>
+    </Animated.View>
   )
 }
 
@@ -170,9 +177,6 @@ const style = StyleSheet.create({
   },
   bullseye: {
     backgroundColor: base.colors.red
-  },
-  reward: {
-    backgroundColor: 'hotpink'
   },
   dead: {
     position: 'absolute',
