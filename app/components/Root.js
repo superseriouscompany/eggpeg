@@ -56,7 +56,7 @@ export default class Root extends Component {
     })
 
     // TODO: move this responsibility somewhere else
-    this.init()
+    this.hydrate()
   }
 
   render() { return (
@@ -77,7 +77,7 @@ export default class Root extends Component {
     </View>
   )}
 
-  init() {
+  hydrate() {
     AsyncStorage.getItem('@eggpeg:difficultyUnlocked').then((yes) => {
       if( yes ) {
         store.dispatch({type: 'difficulty:unlock'})
