@@ -41,6 +41,7 @@ export default class GameHeader extends Component {
         this.state.scoreAnim,
         {toValue: 1, duration: 500}
       ).start(() => {
+        this.state.scoreAnim.setValue(0)
         this.setState({
           score: props.score,
         })
