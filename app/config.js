@@ -13,6 +13,11 @@ const config = {
     shadow: 75,
     bullet: 7,
   },
+  timings: {
+    // TODO: move all timings here
+    multiplierDelay:   1000,
+    multiplierBetween: 500,
+  },
   gravity: 0,//9.80665,
   countdown: 20, // game over countdown timer
   startingLevel: __DEV__ ? 'linked' : 'Stationary',

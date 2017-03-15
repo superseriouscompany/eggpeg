@@ -40,8 +40,8 @@ export default class Bullet extends Component {
 
   componentWillReceiveProps(props) {
     if( props.hit && !this.props.hit ) {
-      const startDelay   = 1000;
-      const betweenDelay = 500;
+      const startDelay   = config.timings.multiplierDelay;
+      const betweenDelay = config.timings.multiplierBetween;
       Animated.stagger(betweenDelay, [
         Animated.timing(
           this.state.multAnim,
