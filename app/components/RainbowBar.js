@@ -18,23 +18,31 @@ export default class RainbowBar extends Component {
   constructor(props) {
      super(props);
      this.state = {
-       offsetX: new Animated.Value(-screenWidth * 2),
+       pan: new Animated.ValueXY({x: -screenWidth * 2, y: 0}),
      };
    }
 
    // TODO: make a more coherent API for this component
    componentDidMount() {
      Animated.timing(
-       this.state.offsetX,
-       {toValue: this.props.finalOffset || (screenWidth / 2), duration: config.timings.rainbow, delay: config.timings.rainbowDelay}
+       this.state.pan.x,
+       {toValue: this.props.finalOffset + 5 || (screenWidth / 2), duration: config.timings.rainbow, delay: config.timings.rainbowDelay}
      ).start(() => {
        if( !this.props.leave ) { return; }
-       Animated.timing(
-         this.state.offsetX,
-         { toValue: screenWidth, duration: config.timings.rainbowLeaveDelay, delay: config.timings.rainbowLeaveDelay}
-       ).start(() => {
-         this.props.complete && this.props.complete()
-       })
+       Animated.spring(this.state.pan, {
+         toValue: {x: this.props.finalOffset - 5 || (screenWidth / 2), y: 0},
+         duration: 10000,
+         delay: 100,
+         tension: 2,
+         friction: 3
+       }).start(() => {
+         Animated.timing(
+           this.state.pan.x,
+           {toValue: screenWidth, duration: 100, delay: 100}
+         ).start(() => {
+           this.props.complete && this.props.complete()
+         });
+       });
      });
    }
 
@@ -42,7 +50,7 @@ export default class RainbowBar extends Component {
      return (
        <Animated.View
        style={[this.props.style, style.barContainer, {
-         transform: [{translateX: this.state.offsetX}]
+         transform: [{translateX: this.state.pan.x}]
        }]}>
          <Bar style={{width: screenWidth * 2, height: this.props.barHeight}}    color={base.colors.green} />
          <Bar style={{width: screenWidth * 1.8, height: this.props.barHeight }} color={base.colors.yellow} />

@@ -55,7 +55,7 @@ export default class GameHeader extends Component {
   render() { return (
     <View style={style.header}>
       { this.props.newHighScore ?
-        <RainbowBar barHeight={10} finalOffset={screenWidth - 50} leave={true} complete={this.props.completeRainbowAnimation}/>
+        <RainbowBar barHeight={7.5} finalOffset={screenWidth - 50} leave={true} complete={this.props.completeRainbowAnimation}/>
       :
         null
       }
