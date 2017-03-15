@@ -39,7 +39,7 @@ export default class GameHeader extends Component {
       })
       Animated.timing(
         this.state.scoreAnim,
-        {toValue: 1, duration: 500}
+        {toValue: 1, duration: 525}
       ).start(() => {
         this.state.scoreAnim.setValue(0)
         this.setState({
@@ -59,7 +59,7 @@ export default class GameHeader extends Component {
       <Animated.Text style={[style.score, {
         fontSize: this.state.scoreAnim.interpolate({
           inputRange:  [0, .5, 1],
-          outputRange: [18, 26, 18],
+          outputRange: [18, 21, 18],
         })
       }]}>
         {this.state.score}
