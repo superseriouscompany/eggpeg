@@ -20,7 +20,7 @@ class DifficultySwitch extends Component {
   render() {
     if( !this.props.unlocked ) { return null; }
     return (
-      <TouchableOpacity onPress={this.toggle}>
+      <TouchableOpacity onPress={this.toggle} style={this.props.style}>
         <Text style={this.props.dark ? style.dark : style.light}>{this.props.mode}</Text>
       </TouchableOpacity>
     )

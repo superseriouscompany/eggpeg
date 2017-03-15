@@ -4,6 +4,7 @@ import React, {PropTypes} from 'react';
 import Component from './Component';
 import Text from './Text';
 import EggDrop from './EggDrop';
+import DifficultySwitch from './DifficultySwitch'
 import LinksHeader from './LinksHeader';
 import SettingsLink from './SettingsLink'
 import base from '../styles/base';
@@ -32,10 +33,11 @@ class Start extends Component {
         <LinksHeader />
         <View style={style.main}>
           <EggDrop />
-          <View style={{flex: 1, justifyContent: 'center'}}>
+          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <TouchableOpacity onPress={this.startGame} style={style.startButton}>
               <Text style={{fontStyle: 'italic', fontSize: 32, color: base.colors.grey}}>play</Text>
             </TouchableOpacity>
+            <DifficultySwitch style={{marginTop: 20}}/>
           </View>
         </View>
         <SettingsLink textColor={base.colors.grey}/>
