@@ -32,6 +32,7 @@ export default class GameView extends Component {
   constructor(props) {
     super(props)
     this.state = { newHighScore: false }
+    this.completeRainbowAnimation = this.completeRainbowAnimation.bind(this)
   }
 
   componentWillReceiveProps(props) {
@@ -52,14 +53,12 @@ export default class GameView extends Component {
       topScore: index === 0,
       scoreIndex: --index,
     })
+  }
 
-    // TODO: do this via a callback
-    const animationCompletion = config.timings.rainbowDelay + config.timings.rainbow + config.timings.rainbowLeaveDelay + config.timings.rainbowLeave + 500;
-    setTimeout(() => {
-      this.setState({
-        newHighScore: false,
-      })
-    }, animationCompletion)
+  completeRainbowAnimation() {
+    this.setState({
+      newHighScore: false
+    })
   }
 
   render() {
@@ -92,7 +91,8 @@ export default class GameView extends Component {
             <GameHeader
               tries={this.props.chamber}
               score={this.props.score.total || 0}
-              newHighScore={this.state.newHighScore} />
+              newHighScore={this.state.newHighScore}
+              completeRainbowAnimation={this.completeRainbowAnimation} />
             <TouchableWithoutFeedback onPress={(e) => this.props.shoot(e.nativeEvent.pageX, e.nativeEvent.pageY)}>
               <View style={{flex: 1}}>
                 { this.props.targets.map((target, key) => (

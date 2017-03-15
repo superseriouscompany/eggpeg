@@ -32,7 +32,9 @@ export default class RainbowBar extends Component {
        Animated.timing(
          this.state.offsetX,
          { toValue: screenWidth, duration: config.timings.rainbowLeaveDelay, delay: config.timings.rainbowLeaveDelay}
-       ).start()
+       ).start(() => {
+         this.props.complete && this.props.complete()
+       })
      });
    }
 
