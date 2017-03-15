@@ -145,6 +145,7 @@ class Game extends Component {
       continue={this.continue}
       nextLevel={this.nextLevel}
       currentLevel={this.state.level}
+      currentScore={this.props.score.total}
       {...this.props} />
   )}
 }

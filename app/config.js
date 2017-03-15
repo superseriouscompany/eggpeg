@@ -17,6 +17,7 @@ const config = {
     // TODO: move all timings here
     multiplierDelay:   1000,
     multiplierBetween: 500,
+    scoreHighlight:    1000,
   },
   gravity: 0,//9.80665,
   countdown: 20, // game over countdown timer

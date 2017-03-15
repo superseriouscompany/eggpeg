@@ -4,6 +4,7 @@ import React from 'react';
 import Component from './Component';
 import Text from './Text';
 import {
+  Animated,
   Image,
   StyleSheet,
   View,
@@ -18,8 +19,8 @@ export default class GameHeader extends Component {
         <Egg filled={this.props.tries >= 3} />
       </View>
       <Text style={style.score}>
-        {JSON.stringify(this.props.highScores)}
         {this.props.score}
+        { this.props.newHighScore ? '!' : ''}
       </Text>
     </View>
   )}
