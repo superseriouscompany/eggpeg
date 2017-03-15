@@ -39,7 +39,7 @@ export default class Bullet extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if( props.hit && !this.props.hit ) {
+    if( props.hit && !this.props.hit && props.bullet.count > 1 ) {
       const startDelay   = config.timings.multiplierDelay;
       const betweenDelay = config.timings.multiplierBetween;
       Animated.stagger(betweenDelay, [
@@ -72,7 +72,7 @@ export default class Bullet extends Component {
       width:  containerWidth,
       height: containerWidth,
     }]}>
-      { bullet.hit ?
+      { bullet.hit && bullet.count > 1 ?
         <Animated.Text style={[style.ghost, {
           top: this.state.multAnim.interpolate({
             inputRange:  [0, 1],
@@ -82,7 +82,7 @@ export default class Bullet extends Component {
             inputRange:  [0, 0.1, 0.5, 1],
             outputRange: [0, 1, 1, 0],
           }),
-        }]}>x2</Animated.Text>
+        }]}>x{bullet.count}</Animated.Text>
       : null }
       { bullet.hit ?
         <Animated.Text style={[style.ghost, {
