@@ -26,17 +26,24 @@ export default class Bullet extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      ghostAnim: new Animated.Value(0)
+      multAnim: new Animated.Value(0),
+      incAnim: new Animated.Value(0),
     }
   }
 
   componentWillReceiveProps(props) {
     console.log('checking', props.bullet.hit, this.props.bullet.hit)
     if( props.hit && !this.props.hit ) {
-      Animated.timing(
-        this.state.ghostAnim,
-        { toValue: 1, duration: 1750, delay: 1750, },
-      ).start()
+      Animated.stagger(500, [
+        Animated.timing(
+          this.state.multAnim,
+          { toValue: 1, duration: 1750, },
+        ),
+        Animated.timing(
+          this.state.incAnim,
+          { toValue: 1, duration: 1750, }
+        )
+      ]).start()
     }
   }
 
@@ -53,15 +60,27 @@ export default class Bullet extends Component {
     }]}>
       { bullet.hit ?
         <Animated.Text style={[style.ghost, {
-          top: this.state.ghostAnim.interpolate({
+          top: this.state.multAnim.interpolate({
             inputRange:  [0, 1],
             outputRange: [0, -config.sizes.bullet - 30],
           }),
-          opacity: this.state.ghostAnim.interpolate({
+          opacity: this.state.multAnim.interpolate({
             inputRange:  [0, 0.1, 0.5, 1],
             outputRange: [0, 1, 1, 0],
           }),
         }]}>x2</Animated.Text>
+      : null }
+      { bullet.hit ?
+        <Animated.Text style={[style.ghost, {
+          top: this.state.incAnim.interpolate({
+            inputRange:  [0, 1],
+            outputRange: [0, -config.sizes.bullet - 30],
+          }),
+          opacity: this.state.incAnim.interpolate({
+            inputRange:  [0, 0.1, 0.5, 1],
+            outputRange: [0, 1, 1, 0],
+          }),
+        }]}>{bullet.score}</Animated.Text>
       : null }
 
       { bullet.hit || bullet.visible ?
