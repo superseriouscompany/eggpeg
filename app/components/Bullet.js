@@ -33,14 +33,14 @@ export default class Bullet extends Component {
       width:  containerWidth,
       height: containerWidth,
     }]}>
+      { bullet.hit ?
+        <View style={[style.ghost]}>
+          <Text style={style.ghostText}>x2</Text>
+        </View>
+      : null }
+
       { bullet.hit || bullet.visible ?
         <View style={[style.bullet, bullet.hit ? style.hit : null, {
-          width:  bullet.width,
-          height: bullet.width,
-          borderRadius: bullet.width / 2,
-        }]} />
-      : bullet.visible ?
-        <View style={[style.bullet, {
           width:  bullet.width,
           height: bullet.width,
           borderRadius: bullet.width / 2,
@@ -76,6 +76,13 @@ const style = StyleSheet.create({
   },
   bullet: {
     backgroundColor: base.colors.yellow,
+  },
+  ghost: {
+    position: 'absolute',
+    top: -20,
+  },
+  ghostText: {
+    color: 'white',
   },
   hit: {
     zIndex: -1,
