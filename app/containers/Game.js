@@ -59,6 +59,7 @@ class Game extends Component {
       this.props.dispatch(recordScore(this.props.score.total)).catch((err) => {
         console.error(err)
       })
+      this.props.dispatch({type: 'difficulty:unlock'})
       return this.props.dispatch({type: 'victory:yes'})
     }
 
@@ -70,11 +71,6 @@ class Game extends Component {
     this.props.dispatch({type: 'score:reset'})
     this.props.dispatch({type: 'victory:reset'})
     this.loadLevel(this.state.startLevel)
-    if( this.state.startLevel === 0 ) {
-      this.setState({
-        startLevel: 5
-      })
-    }
   }
 
   iterate() {
@@ -104,6 +100,7 @@ class Game extends Component {
             accuracy < 0.6 ? 'inner' :
             'outer';
 
+          score *= config.scoreBonus
           this.props.dispatch({type: 'targets:hit', index, score, ring})
           hits.push({score: score})
         }

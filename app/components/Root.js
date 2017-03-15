@@ -11,6 +11,7 @@ import {Provider} from 'react-redux'
 import branch from 'react-native-branch';
 import store from '../reducers'
 import {
+  AsyncStorage,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -53,6 +54,9 @@ export default class Root extends Component {
         scene: state.scene.current,
       })
     })
+
+    // TODO: move this responsibility somewhere else
+    this.hydrate()
   }
 
   render() { return (
@@ -72,6 +76,14 @@ export default class Root extends Component {
       </Provider>
     </View>
   )}
+
+  hydrate() {
+    AsyncStorage.getItem('@eggpeg:difficultyUnlocked').then((yes) => {
+      if( yes ) {
+        store.dispatch({type: 'difficulty:unlock'})
+      }
+    })
+  }
 }
 
 const style = StyleSheet.create({
