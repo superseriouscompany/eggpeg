@@ -63,7 +63,7 @@ export default class Root extends Component {
     <View style={style.container}>
       <Provider store={store}>
         { this.state.scene == 'Game' ?
-          <Game/>
+          <Game skipDemo={this.state.skipDemo}/>
         : this.state.scene == 'AboutUs' ?
           <FollowUs />
         : this.state.scene == 'Start' ?
@@ -81,6 +81,14 @@ export default class Root extends Component {
     AsyncStorage.getItem('@eggpeg:difficultyUnlocked').then((yes) => {
       if( yes ) {
         store.dispatch({type: 'difficulty:unlock'})
+      }
+    })
+
+    AsyncStorage.getItem('@eggpeg:passedDemo').then((yes) => {
+      if( yes ) {
+        this.setState({
+          skipDemo: true,
+        })
       }
     })
   }

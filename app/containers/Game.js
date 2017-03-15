@@ -8,6 +8,7 @@ import {loadLevel} from '../actions/levels'
 import {recordScore} from '../actions/scores'
 import levels from '../levels'
 import {loadProducts} from '../actions/purchases'
+import {AsyncStorage} from 'react-native'
 
 let wasReset = false;
 
@@ -28,6 +29,7 @@ class Game extends Component {
   componentDidMount() {
     this.gameLoop()
     if( !this.props.level.done && !this.props.beat ) {
+      // TODO: move this responsibility somewhere else
       this.reset()
     }
 
@@ -64,6 +66,9 @@ class Game extends Component {
       this.props.dispatch({type: 'difficulty:unlock'})
       return this.props.dispatch({type: 'victory:yes'})
     }
+    if( level >= 5 ) {
+      AsyncStorage.setItem('@eggpeg:passedDemo', 'yes')
+    }
 
     this.setState({level: level})
     this.props.dispatch(loadLevel(level))
@@ -72,12 +77,11 @@ class Game extends Component {
   reset() {
     this.props.dispatch({type: 'score:reset'})
     this.props.dispatch({type: 'victory:reset'})
-    if( !wasReset ) {
-      wasReset = true;
-      this.loadLevel(this.state.startLevel)
-    } else {
-      this.loadLevel(5)
+    let level = this.state.startLevel;
+    if( level === 0 && this.props.skipDemo ) {
+      level = 5;
     }
+    this.loadLevel(level)
   }
 
   iterate() {
