@@ -76,7 +76,7 @@ export default class Bullet extends Component {
         <Animated.Text style={[style.ghost, {
           top: this.state.multAnim.interpolate({
             inputRange:  [0, 1],
-            outputRange: [0, -config.sizes.bullet - 30],
+            outputRange: [5, -config.sizes.bullet - 30],
           }),
           opacity: this.state.multAnim.interpolate({
             inputRange:  [0, 0.1, 0.5, 1],
@@ -88,7 +88,7 @@ export default class Bullet extends Component {
         <Animated.Text style={[style.ghost, {
           top: this.state.incAnim.interpolate({
             inputRange:  [0, 1],
-            outputRange: [0, -config.sizes.bullet - 30],
+            outputRange: [5, -config.sizes.bullet - 30],
           }),
           opacity: this.state.incAnim.interpolate({
             inputRange:  [0, 0.1, 0.5, 1],

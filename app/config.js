@@ -17,7 +17,6 @@ const config = {
     // TODO: move all timings here
     multiplierDelay:   1000,
     multiplierBetween: 500,
-    scoreHighlight:    1000,
     rainbowDelay:      150,
     rainbow:           1000,
     rainbowLeaveDelay: 1000,
