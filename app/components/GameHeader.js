@@ -3,7 +3,6 @@
 import React from 'react';
 import Component from './Component';
 import Text from './Text';
-import AnimateNumber from 'react-native-animate-number'
 
 import {
   Animated,
