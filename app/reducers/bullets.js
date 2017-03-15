@@ -16,7 +16,7 @@ export default function bullet(state = [], action) {
     case 'level:clear':
       return []
     case 'bullets:hit':
-      return state.map(hit(action.index, action.score))
+      return state.map(hit(action.index, action.score, action.count))
     case 'tick':
       return state.map(tick)
     default:
@@ -24,11 +24,12 @@ export default function bullet(state = [], action) {
   }
 }
 
-function hit(index, score) {
+function hit(index, score, count) {
   return function(bullet, i) {
     if( i != index ) { return bullet; }
     bullet.hit = true;
     bullet.score = score;
+    bullet.count = count;
     return bullet;
   }
 }

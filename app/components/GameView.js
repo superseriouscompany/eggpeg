@@ -67,7 +67,7 @@ export default class GameView extends Component {
                   <Target key={key} target={target} hit={target.hit}/>
                 ))}
                 { this.props.bullets.map((bullet, key) => (
-                  <Bullet key={key} bullet={bullet} />
+                  <Bullet key={key} bullet={bullet} hit={bullet.hit}/>
                 ))}
                 { this.props.level.hint ?
                   <View style={style.hintContainer}>
