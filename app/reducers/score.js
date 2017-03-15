@@ -39,7 +39,7 @@ function encouragement(score, number) {
       return 'quadruple!'
   }
 
-  switch(score) {
+  switch(score / config.scoreBonus) {
     case 1:
       return 'hit!'
     case 2:

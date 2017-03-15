@@ -102,6 +102,7 @@ class Game extends Component {
             accuracy < 0.6 ? 2 :
             1;
 
+          score *= config.scoreBonus
           this.props.dispatch({type: 'targets:hit', index: index, score: score})
           hits.push({score: score})
         }

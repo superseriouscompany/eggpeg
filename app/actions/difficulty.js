@@ -7,7 +7,8 @@ export function changeMode(mode) {
         sizes: {
           ...config.sizes,
           target: 40,
-        }
+        },
+        scoreBonus: 1,
       })
       dispatch({type: 'difficulty:set', mode: mode})
     } else if( mode === 'hard' ) {
@@ -15,7 +16,8 @@ export function changeMode(mode) {
         sizes: {
           ...config.sizes,
           target: 20,
-        }
+        },
+        scoreBonus: 2,
       })
       dispatch({type: 'difficulty:set', mode: mode})
     } else {
