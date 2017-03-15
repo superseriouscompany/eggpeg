@@ -46,7 +46,20 @@ export default class Target extends Component {
       height: target.width,
     }]}>
       { target.hit && target.ring === 'bullseye' ?
-        <Aura width={target.width} height={target.width} />
+        <Aura width={target.width} style={[{
+          width: this.state.ghostAnim.interpolate({
+            inputRange:  [0, 1],
+            outputRange: [target.width, target.width * 2],
+          }),
+          height: this.state.ghostAnim.interpolate({
+            inputRange:  [0, 1],
+            outputRange: [target.width, target.width * 2],
+          }),
+          opacity: this.state.ghostAnim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [1, 0],
+          })
+        }]}/>
       : null }
 
       { target.hit ?
@@ -74,9 +87,7 @@ function Aura(props) {
   const {width, height} = props;
 
   return (
-    <View style={[style.aura, {
-      width: width*2,
-      height: height*2,
+    <Animated.View style={[...props.style, style.aura, {
       borderRadius: width,
       borderColor: 'cornflowerblue',
       borderWidth: Math.round(width / 10),
