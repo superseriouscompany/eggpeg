@@ -4,12 +4,29 @@ import React from 'react';
 import Component from './Component';
 import Text from './Text';
 import {
+  Animated,
   Image,
   StyleSheet,
   View,
 } from 'react-native';
 
 export default class GameHeader extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      scoreAnim: new Animated.Value(0)
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    if( props.score != this.props.score ) {
+      Animated.timing(
+        this.state.scoreAnim,
+        {toValue: 1, duration: 1000}
+      ).start();
+    }
+  }
+
   render() { return (
     <View style={style.header}>
       <View style={{flexDirection: 'row', flex: 1}}>
@@ -17,7 +34,12 @@ export default class GameHeader extends Component {
         <Egg filled={this.props.tries >= 2} />
         <Egg filled={this.props.tries >= 3} />
       </View>
-      <Text style={style.score}>{this.props.score}</Text>
+      <Animated.Text style={[style.score, {
+        fontSize: this.state.scoreAnim.interpolate({
+          inputRange:  [0, .5, 1],
+          outputRange: [18, 26, 18],
+        })
+      }]}>{this.props.score}</Animated.Text>
     </View>
   )}
 }
