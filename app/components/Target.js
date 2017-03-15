@@ -45,6 +45,10 @@ export default class Target extends Component {
       width:  target.width,
       height: target.width,
     }]}>
+      { target.hit && target.ring === 'bullseye' ?
+        <Aura width={target.width} height={target.width} />
+      : null }
+
       { target.hit ?
         <Bullseye hit={target.hit} ring={target.ring} width={target.width} height={target.width} />
       :
@@ -64,6 +68,20 @@ export default class Target extends Component {
       : null }
     </View>
   )}
+}
+
+function Aura(props) {
+  const {width, height} = props;
+
+  return (
+    <View style={[style.aura, {
+      width: width*2,
+      height: height*2,
+      borderRadius: width,
+      borderColor: 'cornflowerblue',
+      borderWidth: Math.round(width / 10),
+    }]} />
+  )
 }
 
 function Bullseye(props) {
@@ -122,6 +140,9 @@ const style = StyleSheet.create({
   ring: {
     alignItems:     'center',
     justifyContent: 'center',
+  },
+  aura: {
+    position: 'absolute',
   },
   rim: {
     position:        'absolute',
