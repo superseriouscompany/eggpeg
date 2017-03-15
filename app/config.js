@@ -1,7 +1,7 @@
 const DeviceInfo = require('react-native-device-info')
 
 const config = {
-  winDelay:  1750,
+  winDelay:  1000,
   lossDelay: 200,
   bullet: {
     delay:  2800,
@@ -16,11 +16,11 @@ const config = {
   gravity: 0,//9.80665,
   countdown: 20, // game over countdown timer
   startingLevel: __DEV__ ? 'Stationary' : 'Stationary',
-  debugBullseye: true,
+  debugBullseye: false,
 }
 
 if( DeviceInfo.isEmulator() ) {
-  config.winDelay     = 2000;
+  config.winDelay     = 0;
   config.lossDelay    = 0;
   config.bullet.delay = 0;
 }
