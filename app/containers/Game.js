@@ -9,8 +9,6 @@ import {recordScore} from '../actions/scores'
 import levels from '../levels'
 import {loadProducts} from '../actions/purchases'
 
-let wasReset = false;
-
 class Game extends Component {
   constructor(props) {
     super(props)
@@ -72,12 +70,7 @@ class Game extends Component {
   reset() {
     this.props.dispatch({type: 'score:reset'})
     this.props.dispatch({type: 'victory:reset'})
-    if( !wasReset ) {
-      wasReset = true;
-      this.loadLevel(this.state.startLevel)
-    } else {
-      this.loadLevel(5)
-    }
+    this.loadLevel(this.state.startLevel)
   }
 
   iterate() {
