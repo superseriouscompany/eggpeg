@@ -17,20 +17,20 @@ const config = {
   timings: {
     // TODO: move all timings here
     multiplierDelay:      1000,
-    multiplierBetween:     500,
-    rainbowDelay:          150,
-    rainbow:               500,
+    multiplierBetween:    500,
+    rainbowDelay:         150,
+    rainbow:              500,
     rainbowLeaveDuration: 150,
     rainbowLeaveDelay:    650,
   },
   gravity: 0,//9.80665,
   countdown: 20, // game over countdown timer
-  startingLevel: __DEV__ ? 'linked' : 'Stationary',
+  startingLevel: __DEV__ ? 'Stationary' : 'Stationary',
   debugBullseye: false,
 }
 
 if( DeviceInfo.isEmulator() ) {
-  config.winDelay     = 5000;
+  config.winDelay     = 0;
   config.lossDelay    = 0;
   config.bullet.delay = 0;
 }
