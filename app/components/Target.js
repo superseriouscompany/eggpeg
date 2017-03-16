@@ -84,6 +84,7 @@ export default class Target extends Component {
             inputRange: [0, 0.5, 1],
             outputRange: [1, 1, 0],
           }),
+          fontSize: Math.round(18 + target.width / 10),
         }]}>{target.score}</Animated.Text>
       : null }
     </View>
