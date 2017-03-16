@@ -19,8 +19,8 @@ const config = {
     multiplierBetween:     500,
     rainbowDelay:          150,
     rainbow:               500,
-    rainbowLeaveDuration: 2000,
-    rainbowLeaveDelay:    2000,
+    rainbowLeaveDuration: 150,
+    rainbowLeaveDelay:    650,
   },
   gravity: 0,//9.80665,
   countdown: 20, // game over countdown timer

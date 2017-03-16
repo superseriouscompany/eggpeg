@@ -30,17 +30,15 @@ export default class RainbowBar extends Component {
        delay: config.timings.rainbowDelay
      }).start(() => {
        if( !this.props.leave ) { return; }
-       Animated.stagger(1000, [
+       Animated.stagger(config.timings.rainbowLeaveDelay, [
          Animated.spring(this.state.offsetX, {
            toValue: this.props.finalOffset || (screenWidth / 2),
            tension: 2,
            friction: 3,
-           restSpeedThreshold: 4000,
          }),
          Animated.timing(this.state.offsetX, {
            toValue: screenWidth,
-           duration: 150,
-           delay: 150
+           duration: config.timings.rainbowLeaveDuration,
          })
        ]).start(() => {
          this.props.complete && this.props.complete()
