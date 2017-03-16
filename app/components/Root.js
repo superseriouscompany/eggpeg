@@ -64,7 +64,7 @@ export default class Root extends Component {
     <View style={style.container}>
       <Provider store={store}>
         { this.state.scene == 'Game' ?
-          <Game skipDemo={this.state.skipDemo}/>
+          <Game skipDemo={this.state.skipDemo} setSkipDemo={(yes) => { this.setState({skipDemo: yes})}}/>
         : this.state.scene == 'AboutUs' ?
           <FollowUs />
         : this.state.scene == 'Start' ?
