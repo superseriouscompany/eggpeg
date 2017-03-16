@@ -246,7 +246,7 @@ const levels = [
       },
       {
         points: [
-          { x: 40, y: ycenter },
+          { x: config.sizes.target, y: ycenter },
           { x: width, y:ycenter },
           { x: 0, y: ycenter },
         ],
@@ -267,8 +267,8 @@ const levels = [
       },
       {
         points: [
-          { x: xcenter, y: ycenter - (width - 40) / 2},
-          { x: xcenter, y: ycenter + (width - 40) / 2},
+          { x: xcenter, y: ycenter - (width - config.sizes.target) / 2},
+          { x: xcenter, y: ycenter + (width - config.sizes.target) / 2},
         ],
         velocity: 1,
       }
