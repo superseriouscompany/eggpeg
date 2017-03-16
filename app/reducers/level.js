@@ -7,7 +7,7 @@ export default function(state={level: 0}, action) {
       return {
         ...state,
         win:     true,
-        finishTime: +new Date + config.winDelay,
+        finishTime: +new Date + config.winDelay + action.delay,
       }
     case 'level:loss':
       return {

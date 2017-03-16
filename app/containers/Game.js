@@ -91,6 +91,9 @@ class Game extends Component {
     }
     this.props.dispatch({type: 'tick'})
 
+    // TODO: this is a janky way of checking for multi hits. There should be an abstraction that
+    // handles sequencing the animations
+    let hadMultihit = false;
     this.props.bullets.forEach((bullet, bi) => {
       let hits = []
       this.props.targets.forEach((target, index) => {
@@ -118,6 +121,7 @@ class Game extends Component {
       if( hits.length ) {
         let score = hits.reduce((a, v) => { return a + v.score}, 0)
         if( hits.length > 1 ) {
+          hadMultihit = true
           score *= hits.length
         }
         this.props.dispatch({type: 'bullets:hit', index: bi, score: score, count: hits.length})
@@ -127,7 +131,10 @@ class Game extends Component {
     const allHit = !this.props.targets.find((t) => { return !t.hit })
     // check if all hit
     if( this.props.targets.length && allHit ) {
-      this.props.dispatch({type: 'level:win'})
+      // TODO: this magic number should be generated from config
+      const delay = hadMultihit ? 2250 : 0;
+
+      return this.props.dispatch({type: 'level:win', delay: delay});
     }
 
 
