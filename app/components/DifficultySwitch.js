@@ -49,8 +49,10 @@ const clitWidth = 30;
 const styles = {
   hard: {
     box: {
-      paddingRight: clitWidth + 1,
-      paddingLeft: 4,
+      paddingRight: clitWidth + 3,
+      paddingLeft: 3,
+      paddingTop: 2,
+      paddingBottom: 2,
       justifyContent: 'center',
     },
     clit: {
@@ -59,8 +61,9 @@ const styles = {
   },
   easy: {
     box: {
-      paddingLeft: clitWidth + 1,
-      paddingRight: 4,
+      paddingLeft: clitWidth + 4,
+      paddingBottom: 3,
+      paddingRight: 2,
       justifyContent: 'flex-end',
     },
     clit: {
@@ -86,7 +89,7 @@ const styles = {
       backgroundColor: base.colors.beige,
     },
     text: {
-      color: 'white',
+      color: base.colors.beige,
     },
   },
 }
@@ -109,6 +112,7 @@ const style = StyleSheet.create({
   text: {
     paddingLeft: 6,
     paddingRight: 6,
+    fontStyle: 'italic',
   }
 })
 

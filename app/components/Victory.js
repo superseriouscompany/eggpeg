@@ -24,7 +24,7 @@ export default class Victory extends Component {
   render() { return (
     <View style={style.container}>
       <LinksHeader />
-      <View style={{flex: 1, alignItems: 'center', marginTop: 25}}>
+      <View style={{flex: 1, alignItems: 'center', marginTop: 60}}>
         <HighScores
           explanationText={'you beat it all!'}
           explanationStyle={style.explanation}
@@ -69,8 +69,8 @@ const style = StyleSheet.create({
     marginBottom: 20,
   },
   bottom: {
-    marginTop: 25,
-    marginBottom: 50,
+    marginTop: 20,
+    marginBottom: 35,
     alignItems: 'center'
   },
   buttonText: {
