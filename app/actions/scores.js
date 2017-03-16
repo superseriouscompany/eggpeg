@@ -7,8 +7,7 @@ export function loadScores() {
     Promise.resolve().then(() => {
       return AsyncStorage.getItem('@eggpeg:highscores')
     }).then((payload) => {
-      // const scores = payload && JSON.parse(payload) || []
-      const scores = [10, 5, 0]
+      const scores = payload && JSON.parse(payload) || []
       dispatch({type: 'score:setHighScores', isHigh: false, scores})
     })
   }
