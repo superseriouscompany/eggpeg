@@ -26,19 +26,17 @@ export default class RainbowBar extends Component {
    componentDidMount() {
      Animated.timing(
        this.state.pan.x,
-       {toValue: this.props.finalOffset + 5 || (screenWidth / 2), duration: config.timings.rainbow, delay: config.timings.rainbowDelay}
+       {toValue: this.props.finalOffset + 10 || (screenWidth / 2), duration: config.timings.rainbow, delay: config.timings.rainbowDelay}
      ).start(() => {
        if( !this.props.leave ) { return; }
        Animated.spring(this.state.pan, {
-         toValue: {x: this.props.finalOffset - 5 || (screenWidth / 2), y: 0},
-         duration: 10000,
-         delay: 100,
+         toValue: {x: this.props.finalOffset || (screenWidth / 2), y: 0},
          tension: 2,
-         friction: 3
+         friction: 3,
        }).start(() => {
          Animated.timing(
            this.state.pan.x,
-           {toValue: screenWidth, duration: 100, delay: 100}
+           {toValue: screenWidth, duration: 150, delay: 150}
          ).start(() => {
            this.props.complete && this.props.complete()
          });

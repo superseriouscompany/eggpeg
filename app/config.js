@@ -18,7 +18,7 @@ const config = {
     multiplierDelay:      1000,
     multiplierBetween:     500,
     rainbowDelay:          150,
-    rainbow:              1000,
+    rainbow:               500,
     rainbowLeaveDuration: 2000,
     rainbowLeaveDelay:    2000,
   },
@@ -29,7 +29,7 @@ const config = {
 }
 
 if( DeviceInfo.isEmulator() ) {
-  config.winDelay     = 3000;
+  config.winDelay     = 5000;
   config.lossDelay    = 0;
   config.bullet.delay = 0;
 }
