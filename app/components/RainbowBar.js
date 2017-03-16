@@ -52,12 +52,12 @@ export default class RainbowBar extends Component {
        style={[this.props.style, style.barContainer, {
          transform: [{translateX: this.state.offsetX}]
        }]}>
-         <Bar style={{width: screenWidth * 2, height: this.props.barHeight}}    color={base.colors.green} />
-         <Bar style={{width: screenWidth * 1.8, height: this.props.barHeight }} color={base.colors.yellow} />
-         <Bar style={{width: screenWidth * 1.6, height: this.props.barHeight}}  color={base.colors.orange} />
-         <Bar style={{width: screenWidth * 1.4, height: this.props.barHeight}}  color={base.colors.red} />
-         <Bar style={{width: screenWidth * 1.2, height: this.props.barHeight}}  color={base.colors.purple} />
-         <Bar style={{width: screenWidth * 1, height: this.props.barHeight}}    color={base.colors.blue} />
+         <Bar style={{width: screenWidth * 2, height: this.props.barHeight || barHeight }}    color={base.colors.green} />
+         <Bar style={{width: screenWidth * 1.8, height: this.props.barHeight || barHeight }} color={base.colors.yellow} />
+         <Bar style={{width: screenWidth * 1.6, height: this.props.barHeight || barHeight}}  color={base.colors.orange} />
+         <Bar style={{width: screenWidth * 1.4, height: this.props.barHeight || barHeight}}  color={base.colors.red} />
+         <Bar style={{width: screenWidth * 1.2, height: this.props.barHeight || barHeight}}  color={base.colors.purple} />
+         <Bar style={{width: screenWidth * 1, height: this.props.barHeight || barHeight}}    color={base.colors.blue} />
        </Animated.View>
      );
    }
