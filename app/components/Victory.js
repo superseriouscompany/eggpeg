@@ -5,6 +5,7 @@ import Component from './Component';
 import Text from './Text';
 import LinksHeader from './LinksHeader'
 import HighScores from './HighScores'
+import DifficultySwitch from './DifficultySwitch'
 import {
   Image,
   StyleSheet,
@@ -23,7 +24,7 @@ export default class Victory extends Component {
   render() { return (
     <View style={style.container}>
       <LinksHeader />
-      <View style={{flex: 1, alignItems: 'center', marginTop: 25}}>
+      <View style={{flex: 1, alignItems: 'center', marginTop: 60}}>
         <HighScores
           explanationText={'you beat it all!'}
           explanationStyle={style.explanation}
@@ -32,9 +33,12 @@ export default class Victory extends Component {
           isHigh={this.props.isHighScore} />
 
         <Image source={require('../images/Splat.png')} />
-        <TouchableOpacity onPress={this.props.reset} style={style.button}>
-          <Text style={style.buttonText}>again</Text>
-        </TouchableOpacity>
+        <View style={style.bottom}>
+          <TouchableOpacity onPress={this.props.reset} style={style.button}>
+            <Text style={style.buttonText}>again</Text>
+          </TouchableOpacity>
+          <DifficultySwitch />
+        </View>
       </View>
     </View>
   )}
@@ -62,10 +66,13 @@ const style = StyleSheet.create({
     paddingTop: 12,
     paddingBottom: 22,
     alignItems: 'center',
-    marginBottom: 50,
-    marginTop: 25,
+    marginBottom: 20,
   },
-
+  bottom: {
+    marginTop: 20,
+    marginBottom: 35,
+    alignItems: 'center'
+  },
   buttonText: {
     fontSize: 32,
   },

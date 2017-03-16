@@ -8,6 +8,7 @@ import {loadLevel} from '../actions/levels'
 import {loadScores, recordScore} from '../actions/scores'
 import levels from '../levels'
 import {loadProducts} from '../actions/purchases'
+import {AsyncStorage} from 'react-native'
 
 class Game extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class Game extends Component {
   componentDidMount() {
     this.gameLoop()
     if( !this.props.level.done && !this.props.beat ) {
+      // TODO: move this responsibility somewhere else
       this.reset()
     }
 
@@ -59,7 +61,11 @@ class Game extends Component {
       this.props.dispatch(recordScore(this.props.score.total)).catch((err) => {
         console.error(err)
       })
+      this.props.dispatch({type: 'difficulty:unlock'})
       return this.props.dispatch({type: 'victory:yes'})
+    }
+    if( level >= 5 ) {
+      AsyncStorage.setItem('@eggpeg:passedDemo', 'yes')
     }
 
     this.setState({level: level})
@@ -69,12 +75,11 @@ class Game extends Component {
   reset() {
     this.props.dispatch({type: 'score:reset'})
     this.props.dispatch({type: 'victory:reset'})
-    this.loadLevel(this.state.startLevel)
-    if( this.state.startLevel === 0 ) {
-      this.setState({
-        startLevel: 5
-      })
+    let level = this.state.startLevel;
+    if( level === 0 && this.props.skipDemo ) {
+      level = 5;
     }
+    this.loadLevel(level)
     this.props.dispatch(loadScores())
   }
 
@@ -89,7 +94,7 @@ class Game extends Component {
     this.props.bullets.forEach((bullet, bi) => {
       let hits = []
       this.props.targets.forEach((target, index) => {
-        if( bullet.visible && (!target.hit || config.debugBullseye) && isCollision(target, bullet) ) {
+        if( bullet.visible && !target.hit && isCollision(target, bullet) ) {
           const magicNumber = Math.sqrt(
             (
               Math.pow(target.width, 2) + 2 * target.width * bullet.width + Math.pow(bullet.width, 2)
@@ -100,8 +105,13 @@ class Game extends Component {
             accuracy < 0.3 ? 5 :
             accuracy < 0.6 ? 2 :
             1;
+          const ring =
+            accuracy < 0.3 ? 'bullseye' :
+            accuracy < 0.6 ? 'inner' :
+            'outer';
 
-          this.props.dispatch({type: 'targets:hit', index: index, score: score})
+          score *= config.scoreBonus
+          this.props.dispatch({type: 'targets:hit', index, score, ring})
           hits.push({score: score})
         }
       })
@@ -162,20 +172,14 @@ function mapStateToProps(state) {
   }
 }
 
+// http://stackoverflow.com/questions/8367512/algorithm-to-detect-if-a-circles-intersect-with-any-other-circle-in-the-same-pla
 function isCollision(t, b) {
-  const aLeft   = t.x - t.width/2;
-  const aRight  = t.x + t.width/2;
-  const bLeft   = b.x - b.width/2;
-  const bRight  = b.x + b.width/2;
-  const aTop    = t.y - t.width/2;
-  const aBottom = t.y + (t.height || t.width)/2;
-  const bTop    = b.y - b.width/2;
-  const bBottom = b.y + (b.height || b.width)/2;
+  const r0 = t.width/2;
+  const r1 = b.width/2;
 
-  const isXCollision = aLeft < bLeft && bLeft < aRight || aLeft < bRight && bRight < aRight;
-  const isYCollision = aTop < bTop && bTop < aBottom || aTop < bBottom && bBottom < aBottom;
+  const maxDistance = Math.pow(t.x - b.x, 2) + Math.pow(t.y - b.y, 2);
 
-  return isXCollision && isYCollision;
+  return Math.pow(r0-r1, 2) <= maxDistance && maxDistance <= Math.pow(r0+r1, 2);
 }
 
 function distance(t, b) {

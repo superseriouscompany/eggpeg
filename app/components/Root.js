@@ -10,7 +10,9 @@ import Settings from './Settings'
 import {Provider} from 'react-redux'
 import branch from 'react-native-branch';
 import store from '../reducers'
+import {changeMode} from '../actions/difficulty'
 import {
+  AsyncStorage,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -53,13 +55,16 @@ export default class Root extends Component {
         scene: state.scene.current,
       })
     })
+
+    // TODO: move this responsibility somewhere else
+    this.hydrate()
   }
 
   render() { return (
     <View style={style.container}>
       <Provider store={store}>
         { this.state.scene == 'Game' ?
-          <Game/>
+          <Game skipDemo={this.state.skipDemo}/>
         : this.state.scene == 'AboutUs' ?
           <FollowUs />
         : this.state.scene == 'Start' ?
@@ -72,6 +77,29 @@ export default class Root extends Component {
       </Provider>
     </View>
   )}
+
+  // TODO: noooooooo, move this responsibility out or persist entire store
+  hydrate() {
+    AsyncStorage.getItem('@eggpeg:difficultyUnlocked').then((yes) => {
+      if( yes ) {
+        store.dispatch({type: 'difficulty:unlock'})
+      }
+    })
+
+    AsyncStorage.getItem('@eggpeg:passedDemo').then((yes) => {
+      if( yes ) {
+        this.setState({
+          skipDemo: true,
+        })
+      }
+    })
+
+    AsyncStorage.getItem('@eggpeg:difficulty').then((difficulty) => {
+      if( difficulty ) {
+        store.dispatch(changeMode(difficulty))
+      }
+    })
+  }
 }
 
 const style = StyleSheet.create({

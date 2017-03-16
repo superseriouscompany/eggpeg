@@ -39,18 +39,38 @@ export default class Target extends Component {
   render() {
     const {target} = this.props;
   return (
-    <View style={[style.targetContainer, target.hit && !config.debugBullseye ? style.hitContainer : null, {
+    <View style={[style.targetContainer, target.hit ? style.hitContainer : null, {
       left:   target.x - target.width / 2,
       top:    target.y - target.width / 2,
       width:  target.width,
       height: target.width,
     }]}>
-      { target.hit && !config.debugBullseye ?
-        <View style={[style.dead,{
-          width:  target.width,
-          height: target.width,
-          borderRadius: target.width/2,
-        }]} />
+      { target.hit && target.ring === 'bullseye' ?
+        <Aura width={target.width} style={[{
+          width: this.state.ghostAnim.interpolate({
+            inputRange:  [0, 1],
+            outputRange: [target.width, target.width * 2],
+          }),
+          height: this.state.ghostAnim.interpolate({
+            inputRange:  [0, 1],
+            outputRange: [target.width, target.width * 2],
+          }),
+          opacity: this.state.ghostAnim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [1, 0],
+          })
+        }]}/>
+      : null }
+
+      { target.hit ?
+        <Bullseye hit={target.hit} ring={target.ring} width={target.width} height={target.width} rewardStyle={{
+          ...style.reward,
+          backgroundColor: base.colors.reward,
+          opacity: this.state.ghostAnim.interpolate({
+            inputRange:  [0, .05, 1],
+            outputRange: [0, .5, 0],
+          }),
+        }}/>
       :
         <Bullseye width={target.width} height={target.width}/>
       }
@@ -64,14 +84,27 @@ export default class Target extends Component {
             inputRange: [0, 0.5, 1],
             outputRange: [1, 1, 0],
           }),
+          fontSize: Math.round(18 + target.width / 10),
         }]}>{target.score}</Animated.Text>
       : null }
     </View>
   )}
 }
 
-function Bullseye(props) {
+function Aura(props) {
   const {width, height} = props;
+
+  return (
+    <Animated.View style={[...props.style, style.aura, {
+      borderRadius: width,
+      borderColor: base.colors.reward,
+      borderWidth: Math.round(width / 40),
+    }]} />
+  )
+}
+
+function Bullseye(props) {
+  const {width, height, hit, ring} = props;
   const rings = [
     { width: width, height: height },
     { width: width - width / 5, height: height - height / 5 },
@@ -81,35 +114,35 @@ function Bullseye(props) {
   ]
 
   return (
-    <View style={[style.rim, style.ring, {
+    <Animated.View style={[hit ? ring == 'outer' ? null : style.dead : style.rim, style.ring, {
       width: rings[0].width,
       height: rings[0].height,
       borderRadius: rings[0].width/2
     }]}>
-      <View style={[style.outer, style.ring, {
+      <Animated.View style={[hit ? ring == 'inner' ? null : style.dead : style.outer, style.ring, {
         width: rings[1].width,
         height: rings[1].height,
         borderRadius: rings[1].width/2,
       }]}>
-        <View style={[style.middle, style.ring, {
+        <Animated.View style={[hit ? ring == 'inner' ? null : style.dead : style.middle, style.ring, {
           width: rings[2].width,
           height: rings[2].height,
           borderRadius: rings[2].width/2,
         }]}>
-          <View style={[style.inner, style.ring, {
+          <Animated.View style={[hit ? ring == 'bullseye' ? props.rewardStyle : style.dead : style.inner, style.ring, {
             width: rings[3].width,
             height: rings[3].height,
             borderRadius: rings[3].width/2,
           }]}>
-            <View style={[style.bullseye, style.ring, {
+            <Animated.View style={[hit ? ring == 'bullseye' ? props.rewardStyle : style.dead : style.bullseye, style.ring, {
               width: rings[4].width,
               height: rings[4].height,
               borderRadius: rings[4].width/2,
             }]} />
-          </View>
-        </View>
-      </View>
-    </View>
+          </Animated.View>
+        </Animated.View>
+      </Animated.View>
+    </Animated.View>
   )
 }
 
@@ -126,6 +159,9 @@ const style = StyleSheet.create({
   ring: {
     alignItems:     'center',
     justifyContent: 'center',
+  },
+  aura: {
+    position: 'absolute',
   },
   rim: {
     position:        'absolute',

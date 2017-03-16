@@ -87,7 +87,7 @@ export default class GameView extends Component {
             reset={this.props.reset}
             nextLevel={this.props.nextLevel} />
         :
-          <View style={{flex: 1, backgroundColor: this.props.level.color || 'hotpink'}}>
+          <View style={{flex: 1, backgroundColor: this.props.level.color}}>
             <GameHeader
               tries={this.props.chamber}
               score={this.props.score.total || 0}
