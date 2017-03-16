@@ -177,7 +177,7 @@ function isCollision(t, b) {
 
   const maxDistance = Math.pow(t.x - b.x, 2) + Math.pow(t.y - b.y, 2);
 
-  return Math.pow(r0-r1, 2) <= maxDistance && maxDistance <= Math.pow(r0+r1, 2);
+  return distance(t,b) <= r0 + r1;
 }
 
 function distance(t, b) {

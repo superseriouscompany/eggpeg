@@ -114,17 +114,17 @@ function Bullseye(props) {
   ]
 
   return (
-    <Animated.View style={[hit ? ring == 'outer' ? null : style.dead : style.rim, style.ring, {
+    <Animated.View style={[hit ? ring == 'outer' ? style.dead : style.dead : style.rim, style.ring, {
       width: rings[0].width,
       height: rings[0].height,
       borderRadius: rings[0].width/2
     }]}>
-      <Animated.View style={[hit ? ring == 'inner' ? null : style.dead : style.outer, style.ring, {
+      <Animated.View style={[hit ? ring == 'inner' ? style.dead : style.dead : style.outer, style.ring, {
         width: rings[1].width,
         height: rings[1].height,
         borderRadius: rings[1].width/2,
       }]}>
-        <Animated.View style={[hit ? ring == 'inner' ? null : style.dead : style.middle, style.ring, {
+        <Animated.View style={[hit ? ring == 'inner' ? style.dead : style.dead : style.middle, style.ring, {
           width: rings[2].width,
           height: rings[2].height,
           borderRadius: rings[2].width/2,
