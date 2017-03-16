@@ -23,7 +23,10 @@ export default function(state = initialState, action) {
         isHigh:     action.isHigh,
       }
     case 'score:reset':
-      return initialState
+      return {
+        ...initialState,
+        highScores: state.highScores,
+      }
     default:
       return state
   }

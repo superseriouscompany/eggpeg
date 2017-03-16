@@ -3,13 +3,16 @@
 import React from 'react';
 import Component from './Component';
 import Text from './Text';
-
+import RainbowBar from './RainbowBar'
 import {
   Animated,
+  Dimensions,
   Image,
   StyleSheet,
   View,
 } from 'react-native';
+
+const screenWidth = Dimensions.get('window').width;
 
 export default class GameHeader extends Component {
   constructor(props) {
@@ -51,6 +54,11 @@ export default class GameHeader extends Component {
 
   render() { return (
     <View style={style.header}>
+      { this.props.newHighScore ?
+        <RainbowBar barHeight={7.5} finalOffset={screenWidth - 50} leave={true} complete={this.props.completeRainbowAnimation}/>
+      :
+        null
+      }
       <View style={{flexDirection: 'row', flex: 1}}>
         <Egg filled={this.props.tries >= 1} />
         <Egg filled={this.props.tries >= 2} />

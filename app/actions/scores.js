@@ -2,6 +2,18 @@ import {
   AsyncStorage
 } from 'react-native'
 
+export function loadScores() {
+  return function(dispatch) {
+    Promise.resolve().then(() => {
+      return AsyncStorage.getItem('@eggpeg:highscores')
+    }).then((payload) => {
+      // const scores = payload && JSON.parse(payload) || []
+      const scores = [10, 5, 0]
+      dispatch({type: 'score:setHighScores', isHigh: false, scores})
+    })
+  }
+}
+
 export function recordScore(score) {
   return function(dispatch) {
     let newHighScore = false;

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import GameView from '../components/GameView'
 import config from '../config'
 import {loadLevel} from '../actions/levels'
-import {recordScore} from '../actions/scores'
+import {loadScores, recordScore} from '../actions/scores'
 import levels from '../levels'
 import {loadProducts} from '../actions/purchases'
 import {AsyncStorage} from 'react-native'
@@ -80,6 +80,7 @@ class Game extends Component {
       level = 5;
     }
     this.loadLevel(level)
+    this.props.dispatch(loadScores())
   }
 
   iterate() {
@@ -154,6 +155,7 @@ class Game extends Component {
       continue={this.continue}
       nextLevel={this.nextLevel}
       currentLevel={this.state.level}
+      currentScore={this.props.score.total}
       {...this.props} />
   )}
 }

@@ -12,6 +12,7 @@ import GameOver from './GameOver'
 import ScoreText from './ScoreText'
 import SettingsLink from './SettingsLink'
 import base from '../styles/base'
+import config from '../config'
 import {
   Dimensions,
   StatusBar,
@@ -30,7 +31,34 @@ export default class GameView extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = { newHighScore: false }
+    this.completeRainbowAnimation = this.completeRainbowAnimation.bind(this)
+  }
+
+  componentWillReceiveProps(props) {
+    // TODO: clean this up and move it somewhere it belongs
+    const {highScores} = this.props.score
+    if( !highScores.length || props.currentScore === this.props.currentScore ) { return; }
+    if( this.state.scoreIndex && this.state.scoreIndex < 0 ) { return; }
+    let index;
+    for(var i = 0; i < (this.state.scoreIndex + 1 || highScores.length); i++ ) {
+      if( props.currentScore > highScores[i] ){
+        index = i;
+        break;
+      }
+    }
+    if( index === undefined ) { return; }
+    this.setState({
+      newHighScore: true,
+      topScore: index === 0,
+      scoreIndex: --index,
+    })
+  }
+
+  completeRainbowAnimation() {
+    this.setState({
+      newHighScore: false
+    })
   }
 
   render() {
@@ -60,7 +88,11 @@ export default class GameView extends Component {
             nextLevel={this.props.nextLevel} />
         :
           <View style={{flex: 1, backgroundColor: this.props.level.color}}>
-            <GameHeader tries={this.props.chamber} score={this.props.score.total || 0} />
+            <GameHeader
+              tries={this.props.chamber}
+              score={this.props.score.total || 0}
+              newHighScore={this.state.newHighScore}
+              completeRainbowAnimation={this.completeRainbowAnimation} />
             <TouchableWithoutFeedback onPress={(e) => this.props.shoot(e.nativeEvent.pageX, e.nativeEvent.pageY)}>
               <View style={{flex: 1}}>
                 { this.props.targets.map((target, key) => (
