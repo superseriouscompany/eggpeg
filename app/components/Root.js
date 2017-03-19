@@ -5,9 +5,9 @@ import Component from './Component';
 import FollowUs from './FollowUs';
 import Start from './Start';
 import Game from '../containers/Game';
-import Halp from './Halp'
 import Settings from './Settings'
 import DeeplinkProvider from '../containers/DeeplinkProvider'
+import IAPProvider from '../containers/IAPProvider'
 import {Provider} from 'react-redux'
 import store from '../reducers'
 import {changeMode} from '../actions/difficulty'
@@ -42,17 +42,19 @@ export default class Root extends Component {
     <View style={style.container}>
       <Provider store={store}>
         <DeeplinkProvider>
-          { this.state.scene == 'Game' ?
-            <Game skipDemo={this.state.skipDemo} setSkipDemo={(yes) => { this.setState({skipDemo: yes})}}/>
-          : this.state.scene == 'AboutUs' ?
-            <FollowUs />
-          : this.state.scene == 'Start' ?
-            <Start shareLink={this.state.shareLink}/>
-          : this.state.scene == 'Settings' ?
-            <Settings />
-          :
-            <View style={{backgroundColor: 'indianred', width: 100, height: 100}}/>
-          }
+          <IAPProvider>
+            { this.state.scene == 'Game' ?
+              <Game skipDemo={this.state.skipDemo} setSkipDemo={(yes) => { this.setState({skipDemo: yes})}}/>
+            : this.state.scene == 'AboutUs' ?
+              <FollowUs />
+            : this.state.scene == 'Start' ?
+              <Start shareLink={this.state.shareLink}/>
+            : this.state.scene == 'Settings' ?
+              <Settings />
+            :
+              <View style={{backgroundColor: 'indianred', width: 100, height: 100}}/>
+            }
+          </IAPProvider>
         </DeeplinkProvider>
       </Provider>
     </View>

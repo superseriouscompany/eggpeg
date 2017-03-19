@@ -7,7 +7,6 @@ import config from '../config'
 import {loadLevel} from '../actions/levels'
 import {loadScores, recordScore} from '../actions/scores'
 import levels from '../levels'
-import {loadProducts} from '../actions/purchases'
 import {AsyncStorage} from 'react-native'
 
 class Game extends Component {
@@ -19,7 +18,6 @@ class Game extends Component {
     this.nextLevel         = this.nextLevel.bind(this)
     this.loadLevel         = this.loadLevel.bind(this)
     this.continue          = this.continue.bind(this)
-    this.loadIAPsWithRetry = this.loadIAPsWithRetry.bind(this)
   }
 
   componentDidMount() {
@@ -27,16 +25,6 @@ class Game extends Component {
       // TODO: move this responsibility somewhere else
       this.reset()
     }
-
-    this.loadIAPsWithRetry()
-  }
-
-  loadIAPsWithRetry() {
-    this.props.dispatch(loadProducts((err, ok) => {
-      if( err ) {
-        setTimeout(this.loadIAPsWithRetry, 30000);
-      }
-    }))
   }
 
   continue() {

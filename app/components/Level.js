@@ -15,6 +15,8 @@ import {
   View,
 } from 'react-native';
 
+let running = true;
+
 class Level extends Component {
   static propTypes={
     shoot: PropTypes.func.isRequired,
@@ -22,29 +24,30 @@ class Level extends Component {
 
   constructor(props) {
     super(props)
-    this.state    = {running: true};
     this.gameLoop = this.gameLoop.bind(this)
     this.iterate  = this.iterate.bind(this)
   }
 
   componentDidMount() {
+    running = true;
     this.gameLoop()
   }
 
   componentWillUnmount() {
-    this.setState({
-      running: false
-    })
+    // setState doesn't work here for some reason
+    running = false;
   }
 
   gameLoop() {
     this.iterate();
-    this.state.running && requestAnimationFrame(this.gameLoop)
+    if( !running ) { return; }
+    requestAnimationFrame(this.gameLoop)
   }
 
   iterate() {
     if( this.props.level.done ) { return; }
     if( this.props.level.finishTime ) {
+      console.log('level', this.props.level)
       if( +new Date <= this.props.level.finishTime ) { return; }
       return this.props.dispatch({type: 'level:finish'})
     }
