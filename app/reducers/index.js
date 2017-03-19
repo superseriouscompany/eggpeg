@@ -1,5 +1,7 @@
-import {createStore, combineReducers, applyMiddleware} from 'redux';
+import {compose, createStore, combineReducers, applyMiddleware} from 'redux';
+import {persistStore, autoRehydrate} from 'redux-persist'
 import createLogger from 'redux-logger';
+import {AsyncStorage} from 'react-native'
 
 import bullets from './bullets'
 import chamber from './chamber'
@@ -32,6 +34,11 @@ if( __DEV__ ) {
   }))
 }
 
-const store = createStore(reducers,applyMiddleware(...middleware))
+const store = createStore(reducers, undefined, compose(
+  applyMiddleware(...middleware),
+  autoRehydrate()
+))
+
+persistStore(store, {storage: AsyncStorage})
 
 export default store

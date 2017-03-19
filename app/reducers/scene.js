@@ -7,7 +7,7 @@ export default function(state = {current: 'Start', previous: null}, action) {
       }
     case 'scene:pop':
       return {
-        current: state.previous,
+        current: state.previous || 'Start',
         previous: null,
       }
     default:

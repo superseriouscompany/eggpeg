@@ -134,6 +134,7 @@ class Game extends Component {
     // check if all hit
     if( this.props.targets.length && allHit ) {
       // TODO: this magic number should be generated from config
+      // TODO: ideally, this would happen directly from a callback
       const delay = hadMultihit ? 2250 : 0;
 
       return this.props.dispatch({type: 'level:win', delay: delay});
