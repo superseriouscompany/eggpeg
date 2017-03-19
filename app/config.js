@@ -15,13 +15,15 @@ const config = {
     bullet: 7,
   },
   timings: {
-    // TODO: move all timings here
-    multiplierDelay:      1000,
-    multiplierBetween:    500,
-    rainbowDelay:         150,
-    rainbow:              500,
-    rainbowLeaveDuration: 150,
-    rainbowLeaveDelay:    650,
+    multiplierDelay:       1000,
+    multiplierBetween:     500,
+    rainbowDelay:          150,
+    rainbow:               500,
+    rainbowLeaveDuration:  150,
+    rainbowLeaveDelay:     650,
+    scoreIncrement:        525,
+    scoreExplanationLeave: 500,
+    targetGhost:           1750,
   },
   gravity: 0,//9.80665,
   countdown: 20, // game over countdown timer
