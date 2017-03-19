@@ -33,12 +33,9 @@ export default class Root extends Component {
         })
       }
     })
-
-    // TODO: move this responsibility somewhere else
-    this.hydrate()
   }
 
-  render() { return (
+  render() { return ( // TODO: add MigrateProvider
     <View style={style.container}>
       <Provider store={store}>
         <DeeplinkProvider>
@@ -59,21 +56,6 @@ export default class Root extends Component {
       </Provider>
     </View>
   )}
-
-  // TODO: noooooooo, move this responsibility out or persist entire store
-  hydrate() {
-    AsyncStorage.getItem('@eggpeg:difficultyUnlocked').then((yes) => {
-      if( yes ) {
-        store.dispatch({type: 'difficulty:unlock'})
-      }
-    })
-
-    AsyncStorage.getItem('@eggpeg:difficulty').then((difficulty) => {
-      if( difficulty ) {
-        store.dispatch(changeMode(difficulty))
-      }
-    })
-  }
 }
 
 const style = StyleSheet.create({

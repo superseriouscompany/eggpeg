@@ -8,6 +8,7 @@ import {loadLevel} from '../actions/levels'
 import {loadScores, recordScore} from '../actions/scores'
 import levels from '../levels'
 import {AsyncStorage} from 'react-native'
+import {changeMode} from '../actions/difficulty'
 
 class Game extends Component {
   constructor(props) {
@@ -20,8 +21,16 @@ class Game extends Component {
   }
 
   componentDidMount() {
+    if( this.props.difficulty.mode ) {
+      // TODO: we're using this thing twice unexpectedly.
+      // this should only set the config and not dispatch an action
+
+      // TODO: read from AsyncStorage once for legacy clients
+      this.props.dispatch(changeMode(this.props.difficulty.mode))
+    }
+
     if( !this.props.level.done && !this.props.beat ) {
-      // TODO: move this responsibility somewhere else
+      // TODO: move the responsibility of loading the first level to Start
       this.reset()
     }
   }
@@ -81,6 +90,7 @@ function mapStateToProps(state) {
     score:        state.score,
     beat:         state.victory,
     skipTutorial: state.tutorial.complete,
+    difficulty:   state.difficulty,
   }
 }
 

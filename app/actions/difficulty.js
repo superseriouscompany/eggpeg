@@ -12,7 +12,6 @@ export function changeMode(mode) {
         },
         scoreBonus: 1,
       })
-      AsyncStorage.setItem('@eggpeg:difficulty', 'easy')
       dispatch({type: 'difficulty:set', mode: mode})
     } else {
       changeConfig({
@@ -22,7 +21,6 @@ export function changeMode(mode) {
         },
         scoreBonus: 2,
       })
-      AsyncStorage.setItem('@eggpeg:difficulty', 'hard')
       dispatch({type: 'difficulty:set', mode: mode})
     }
   }
