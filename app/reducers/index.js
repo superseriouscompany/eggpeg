@@ -13,6 +13,7 @@ import scene from './scene'
 import shareLink from './shareLink'
 import victory from './victory'
 import difficulty from './difficulty'
+import tutorial from './tutorial'
 import thunk from 'redux-thunk';
 
 const reducers = combineReducers({
@@ -26,6 +27,7 @@ const reducers = combineReducers({
   shareLink,
   victory,
   difficulty,
+  tutorial,
 })
 const middleware = [thunk]
 if( __DEV__ ) {

@@ -44,7 +44,7 @@ export default class Root extends Component {
         <DeeplinkProvider>
           <IAPProvider>
             { this.state.scene == 'Game' ?
-              <Game skipDemo={this.state.skipDemo} setSkipDemo={(yes) => { this.setState({skipDemo: yes})}}/>
+              <Game />
             : this.state.scene == 'AboutUs' ?
               <FollowUs />
             : this.state.scene == 'Start' ?
@@ -65,14 +65,6 @@ export default class Root extends Component {
     AsyncStorage.getItem('@eggpeg:difficultyUnlocked').then((yes) => {
       if( yes ) {
         store.dispatch({type: 'difficulty:unlock'})
-      }
-    })
-
-    AsyncStorage.getItem('@eggpeg:passedDemo').then((yes) => {
-      if( yes ) {
-        this.setState({
-          skipDemo: true,
-        })
       }
     })
 

@@ -46,9 +46,7 @@ class Game extends Component {
       return this.props.dispatch({type: 'victory:yes'})
     }
     if( level >= 5 ) {
-      AsyncStorage.setItem('@eggpeg:passedDemo', 'yes')
-      // TODO: this is a terrible name and all of this should move to redux
-      this.props.setSkipDemo && this.props.setSkipDemo(true)
+      this.props.dispatch({type: 'tutorial:complete'})
     }
 
     this.setState({level: level})
@@ -59,7 +57,7 @@ class Game extends Component {
     this.props.dispatch({type: 'score:reset'})
     this.props.dispatch({type: 'victory:reset'})
     let level = this.state.startLevel;
-    if( level < 5 && this.props.skipDemo ) {
+    if( level < 5 && this.props.skipTutorial ) {
       level = 5;
     }
     this.loadLevel(level)
@@ -78,10 +76,11 @@ class Game extends Component {
 
 function mapStateToProps(state) {
   return {
-    chamber:    state.chamber,
-    level:      state.level,
-    score:      state.score,
-    beat:       state.victory,
+    chamber:      state.chamber,
+    level:        state.level,
+    score:        state.score,
+    beat:         state.victory,
+    skipTutorial: state.tutorial.complete,
   }
 }
 
