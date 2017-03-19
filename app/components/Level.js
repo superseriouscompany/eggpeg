@@ -26,6 +26,7 @@ class Level extends Component {
     super(props)
     this.gameLoop = this.gameLoop.bind(this)
     this.iterate  = this.iterate.bind(this)
+    this.shoot    = this.shoot.bind(this)
   }
 
   componentDidMount() {
@@ -42,6 +43,12 @@ class Level extends Component {
     this.iterate();
     if( !running ) { return; }
     requestAnimationFrame(this.gameLoop)
+  }
+
+  shoot(e) {
+    if( this.props.level.done || this.props.level.finishTime ) { return; }
+    const {pageX, pageY} = e.nativeEvent;
+    this.props.dispatch({type: 'bullets:fire', x: pageX, y: pageY})
   }
 
   iterate() {
@@ -115,7 +122,7 @@ class Level extends Component {
   }
 
   render() { return (
-    <TouchableWithoutFeedback onPress={(e) => this.props.shoot(e.nativeEvent.pageX, e.nativeEvent.pageY)}>
+    <TouchableWithoutFeedback onPress={this.shoot}>
       <View style={{flex: 1}}>
         { this.props.targets.map((target, key) => (
           <Target key={key} target={target} hit={target.hit}/>

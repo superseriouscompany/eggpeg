@@ -13,7 +13,6 @@ class Game extends Component {
   constructor(props) {
     super(props)
     this.state             = { startLevel: levelByName(config.startingLevel) }
-    this.shoot             = this.shoot.bind(this)
     this.reset             = this.reset.bind(this)
     this.nextLevel         = this.nextLevel.bind(this)
     this.loadLevel         = this.loadLevel.bind(this)
@@ -67,15 +66,8 @@ class Game extends Component {
     this.props.dispatch(loadScores())
   }
 
-  shoot(x, y) {
-    if( this.props.level.done || this.props.level.finishTime ) { return; }
-    if( !this.props.hasBullets ) { return console.warn('No bullets'); }
-    this.props.dispatch({type: 'bullets:fire', x: x, y: y})
-  }
-
   render() { return (
     <GameView
-      shoot={this.shoot}
       reset={this.reset}
       continue={this.continue}
       nextLevel={this.nextLevel}
@@ -86,10 +78,7 @@ class Game extends Component {
 
 function mapStateToProps(state) {
   return {
-    bullets:    state.bullets,
-    targets:    state.targets,
     chamber:    state.chamber,
-    hasBullets: state.chamber > 0,
     level:      state.level,
     score:      state.score,
     beat:       state.victory,

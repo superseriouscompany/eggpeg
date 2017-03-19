@@ -91,10 +91,7 @@ export default class GameView extends Component {
               score={this.props.score.total || 0}
               newHighScore={this.state.newHighScore}
               completeRainbowAnimation={this.completeRainbowAnimation} />
-            <Level
-              shoot={this.props.shoot}
-              targets={this.props.targets}
-              bullets={this.props.bullets} />
+            <Level />
             { this.props.level.name !== 'Stationary' ?
               <SettingsLink />
             : null }
