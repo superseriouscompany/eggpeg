@@ -5,11 +5,9 @@ import Component from './Component';
 import Text from './Text';
 import Result from './Result'
 import Victory from './Victory'
-import Bullet from './Bullet'
-import Target from './Target'
 import GameHeader from './GameHeader'
 import GameOver from './GameOver'
-import ScoreText from './ScoreText'
+import Level from './Level'
 import SettingsLink from './SettingsLink'
 import base from '../styles/base'
 import config from '../config'
@@ -93,23 +91,11 @@ export default class GameView extends Component {
               score={this.props.score.total || 0}
               newHighScore={this.state.newHighScore}
               completeRainbowAnimation={this.completeRainbowAnimation} />
-            <TouchableWithoutFeedback onPress={(e) => this.props.shoot(e.nativeEvent.pageX, e.nativeEvent.pageY)}>
-              <View style={{flex: 1}}>
-                { this.props.targets.map((target, key) => (
-                  <Target key={key} target={target} hit={target.hit}/>
-                ))}
-                { this.props.bullets.map((bullet, key) => (
-                  <Bullet key={key} bullet={bullet} hit={bullet.hit}/>
-                ))}
-                { this.props.level.hint ?
-                  <View style={style.hintContainer}>
-                    <Text style={style.hint}>{this.props.level.hint}</Text>
-                  </View>
-                :
-                  <ScoreText />
-                }
-              </View>
-            </TouchableWithoutFeedback>
+            <Level
+              shoot={this.props.shoot}
+              targets={this.props.targets}
+              bullets={this.props.bullets}
+              hint={this.props.level.hint} />
             { this.props.level.name !== 'Stationary' ?
               <SettingsLink />
             : null }
@@ -124,17 +110,6 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: base.colors.purple,
-  },
-  hintContainer: {
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    flex: 1,
-    zIndex: -1,
-  },
-  hint: {
-    color: '#532D5A',
-    fontSize: 16,
-    marginBottom: 20,
   },
   tries: {
     position: 'absolute',

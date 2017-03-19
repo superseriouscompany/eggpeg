@@ -48,12 +48,14 @@ class Game extends Component {
   }
 
   continue() {
-    this.loadLevel(this.state.level)
+    // TODO: make sure this doesn't happen on upgrade
+    this.loadLevel(this.props.level.index)
   }
 
   nextLevel() {
-    if( config.debugBullseye ) { return this.loadLevel(this.state.level)}
-    this.loadLevel(this.state.level + 1)
+    // TODO: make sure this doesn't happen on upgrade
+    if( !this.props.level.index ) { console.warn('No level index found'); this.loadLevel(0); }
+    this.loadLevel(this.props.level.index + 1)
   }
 
   loadLevel(level) {
@@ -164,7 +166,6 @@ class Game extends Component {
       reset={this.reset}
       continue={this.continue}
       nextLevel={this.nextLevel}
-      currentLevel={this.state.level}
       currentScore={this.props.score.total}
       {...this.props} />
   )}
