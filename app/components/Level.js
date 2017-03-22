@@ -9,6 +9,7 @@ import Text               from './Text';
 import {recordScore}      from '../actions/scores'
 import {connect}          from 'react-redux'
 import config             from '../config'
+import sounds             from '../sounds'
 import {
   StyleSheet,
   TouchableWithoutFeedback,
@@ -49,6 +50,11 @@ class Level extends Component {
     if( this.props.level.done || this.props.level.finishTime ) { return; }
     const {pageX, pageY} = e.nativeEvent;
     this.props.dispatch({type: 'bullets:fire', x: pageX, y: pageY})
+    sounds.play((success) => {
+      console.log('finished')
+    }, (err) => {
+      console.error(err)
+    })
   }
 
   iterate() {
