@@ -18,10 +18,10 @@ export default function(state = initialState, action) {
         previous: null,
       }
     case REHYDRATE:
-      console.warn('rehydrating')
+      // Reset to home screen if we were on game over
       const incoming = action.payload.scene;
-      if( !incoming ) { return {...initialState} }
       const {level}  = action.payload;
+      if( !incoming ) { return {...initialState} }
       if( incoming.current == 'Game' && level.done && !level.win ) {
         return {...initialState}
       }

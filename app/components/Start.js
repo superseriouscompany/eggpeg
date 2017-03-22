@@ -9,6 +9,7 @@ import LinksHeader        from './LinksHeader';
 import SettingsLink       from './SettingsLink'
 import base               from '../styles/base';
 import {connect}          from 'react-redux';
+import {loadLevel}        from '../actions/levels';
 import {
   StatusBar,
   StyleSheet,
@@ -46,6 +47,14 @@ class Start extends Component {
   )}
 
   startGame() {
+    this.props.dispatch({type: 'score:reset'})
+    this.props.dispatch({type: 'victory:reset'})
+    // FIXME: this stuff
+    // let level = 0;
+    // if( level < 5 && this.props.skipTutorial ) {
+    //   level = 5;
+    // }
+    this.props.dispatch(loadLevel(5))
     this.props.dispatch({type: 'scene:change', scene: 'Game'})
   }
 }

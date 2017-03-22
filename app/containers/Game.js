@@ -24,8 +24,6 @@ class Game extends Component {
     if( this.props.difficulty.mode ) {
       // TODO: we're using this thing twice unexpectedly.
       // this should only set the config and not dispatch an action
-
-      // TODO: read from AsyncStorage once for legacy clients
       this.props.dispatch(changeMode(this.props.difficulty.mode))
     }
 
@@ -58,7 +56,6 @@ class Game extends Component {
       this.props.dispatch({type: 'tutorial:complete'})
     }
 
-    this.setState({level: level})
     this.props.dispatch(loadLevel(level))
   }
 
