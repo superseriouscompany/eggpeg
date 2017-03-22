@@ -1,17 +1,18 @@
 'use strict';
 
-import React            from 'react';
-import {Provider}       from 'react-redux'
-import Component        from './Component';
-import FollowUs         from './FollowUs';
-import Start            from './Start';
-import Settings         from './Settings'
-import DeeplinkProvider from '../containers/DeeplinkProvider'
-import Game             from '../containers/Game';
-import IAPProvider      from '../containers/IAPProvider'
-import MigrateProvider  from '../containers/MigrateProvider'
-import store            from '../reducers'
-import {changeMode}     from '../actions/difficulty'
+import React              from 'react';
+import {Provider}         from 'react-redux'
+import Component          from './Component';
+import FollowUs           from './FollowUs';
+import Start              from './Start';
+import Settings           from './Settings'
+import DeeplinkProvider   from '../containers/DeeplinkProvider'
+import DifficultyProvider from '../containers/DifficultyProvider'
+import Game               from '../containers/Game';
+import IAPProvider        from '../containers/IAPProvider'
+import MigrateProvider    from '../containers/MigrateProvider'
+import store              from '../reducers'
+import {changeMode}       from '../actions/difficulty'
 import {
   AsyncStorage,
   StyleSheet,
@@ -42,17 +43,19 @@ export default class Root extends Component {
         <DeeplinkProvider>
           <IAPProvider>
             <MigrateProvider>
-              { this.state.scene == 'Game' ?
-                <Game />
-              : this.state.scene == 'AboutUs' ?
-                <FollowUs />
-              : this.state.scene == 'Start' ?
-                <Start shareLink={this.state.shareLink}/>
-              : this.state.scene == 'Settings' ?
-                <Settings />
-              :
-                <View style={{backgroundColor: 'indianred', width: 100, height: 100}}/>
-              }
+              <DifficultyProvider>
+                { this.state.scene == 'Game' ?
+                  <Game />
+                : this.state.scene == 'AboutUs' ?
+                  <FollowUs />
+                : this.state.scene == 'Start' ?
+                  <Start shareLink={this.state.shareLink}/>
+                : this.state.scene == 'Settings' ?
+                  <Settings />
+                :
+                  <View style={{backgroundColor: 'indianred', width: 100, height: 100}}/>
+                }
+              </DifficultyProvider>
             </MigrateProvider>
           </IAPProvider>
         </DeeplinkProvider>

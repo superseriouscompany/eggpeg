@@ -1,19 +1,18 @@
 'use strict';
 
-import React, {Component}        from 'react';
-import { connect }               from 'react-redux';
-import GameView                  from '../components/GameView'
-import config                    from '../config'
-import {loadLevel}               from '../actions/levels'
-import {loadScores, recordScore} from '../actions/scores'
-import levels                    from '../levels'
-import {AsyncStorage}            from 'react-native'
-import {changeMode}              from '../actions/difficulty'
+import React, {Component}          from 'react';
+import { connect }                 from 'react-redux';
+import GameView                    from '../components/GameView'
+import config                      from '../config'
+import {loadLevel, loadFirstLevel} from '../actions/levels'
+import {loadScores, recordScore}   from '../actions/scores'
+import levels                      from '../levels'
+import {AsyncStorage}              from 'react-native'
+import {changeMode}                from '../actions/difficulty'
 
 class Game extends Component {
   constructor(props) {
     super(props)
-    this.state             = { startLevel: levelByName(config.startingLevel) }
     this.reset             = this.reset.bind(this)
     this.nextLevel         = this.nextLevel.bind(this)
     this.loadLevel         = this.loadLevel.bind(this)
@@ -21,16 +20,7 @@ class Game extends Component {
   }
 
   componentDidMount() {
-    if( this.props.difficulty.mode ) {
-      // TODO: we're using this thing twice unexpectedly.
-      // this should only set the config and not dispatch an action
-      this.props.dispatch(changeMode(this.props.difficulty.mode))
-    }
-
-    if( !this.props.level.done && !this.props.beat ) {
-      // TODO: move the responsibility of loading the first level to Start
-      this.reset()
-    }
+    this.props.dispatch(loadScores())
   }
 
   continue() {
@@ -60,14 +50,8 @@ class Game extends Component {
   }
 
   reset() {
-    this.props.dispatch({type: 'score:reset'})
-    this.props.dispatch({type: 'victory:reset'})
-    let level = this.state.startLevel;
-    if( level < 5 && this.props.skipTutorial ) {
-      level = 5;
-    }
-    this.loadLevel(level)
-    this.props.dispatch(loadScores())
+    this.props.dispatch({type: 'game:reset'})
+    this.props.dispatch(loadFirstLevel(this.props.showTutorial))
   }
 
   render() { return (
@@ -86,18 +70,9 @@ function mapStateToProps(state) {
     level:        state.level,
     score:        state.score,
     beat:         state.victory,
-    skipTutorial: state.tutorial.complete,
+    showTutorial: !state.tutorial.complete,
     difficulty:   state.difficulty,
   }
-}
-
-function levelByName(name) {
-  let level;
-  for( var i = 0; i < levels.length; i++ ) {
-    if( levels[i].name.toLowerCase() !== name.toLowerCase() ) { continue; }
-    return i;
-  }
-  throw `Level not found: ${name}`
 }
 
 export default connect(mapStateToProps)(Game);
