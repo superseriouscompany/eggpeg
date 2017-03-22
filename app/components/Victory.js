@@ -1,11 +1,11 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
-import Component from './Component';
-import Text from './Text';
-import LinksHeader from './LinksHeader'
-import HighScores from './HighScores'
-import DifficultySwitch from './DifficultySwitch'
+import Component          from './Component';
+import Text               from './Text';
+import LinksHeader        from './LinksHeader'
+import HighScores         from './HighScores'
+import DifficultySwitch   from './DifficultySwitch'
 import {
   Image,
   StyleSheet,

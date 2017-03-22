@@ -1,9 +1,10 @@
 'use strict';
 
-import React from 'react';
-import Component from './Component';
-import Text from './Text';
+import React      from 'react';
+import Component  from './Component';
+import Text       from './Text';
 import RainbowBar from './RainbowBar'
+import config     from '../config'
 import {
   Animated,
   Dimensions,
@@ -42,7 +43,7 @@ export default class GameHeader extends Component {
       })
       Animated.timing(
         this.state.scoreAnim,
-        {toValue: 1, duration: 525}
+        {toValue: 1, duration: config.timings.scoreIncrement}
       ).start(() => {
         this.state.scoreAnim.setValue(0)
         this.setState({

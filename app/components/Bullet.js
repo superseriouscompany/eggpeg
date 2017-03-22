@@ -1,10 +1,10 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
-import Component from './Component';
-import Text from './Text';
-import config from '../config';
-import base from '../styles/base';
+import Component          from './Component';
+import Text               from './Text';
+import config             from '../config';
+import base               from '../styles/base';
 import {
   Animated,
   StyleSheet,

@@ -1,5 +1,5 @@
 import config, {changeConfig} from '../config'
-import {AsyncStorage} from 'react-native'
+import {AsyncStorage}         from 'react-native'
 
 export function changeMode(mode) {
   return function(dispatch) {
@@ -12,7 +12,6 @@ export function changeMode(mode) {
         },
         scoreBonus: 1,
       })
-      AsyncStorage.setItem('@eggpeg:difficulty', 'easy')
       dispatch({type: 'difficulty:set', mode: mode})
     } else {
       changeConfig({
@@ -22,7 +21,6 @@ export function changeMode(mode) {
         },
         scoreBonus: 2,
       })
-      AsyncStorage.setItem('@eggpeg:difficulty', 'hard')
       dispatch({type: 'difficulty:set', mode: mode})
     }
   }

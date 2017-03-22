@@ -1,10 +1,10 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
-import Component from './Component';
-import Text from './Text';
-import base from '../styles/base';
-import config from '../config'
+import Component          from './Component';
+import Text               from './Text';
+import base               from '../styles/base';
+import config             from '../config'
 import {
   Animated,
   StyleSheet,
@@ -31,7 +31,7 @@ export default class Target extends Component {
     if( props.hit && !this.props.hit ) {
       Animated.timing(
         this.state.ghostAnim,
-        { toValue: 1, duration: 1750 },
+        { toValue: 1, duration: config.timings.targetGhost },
       ).start()
     }
   }

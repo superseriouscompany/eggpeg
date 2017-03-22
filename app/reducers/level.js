@@ -25,7 +25,10 @@ export default function(state={level: 0}, action) {
       if( !levels[action.index]) {
         throw `No level found at index ${action.index}`
       }
-      return levels[action.index]
+      return {
+        ...levels[action.index],
+        index: action.index,
+      }
     default:
       return state
   }

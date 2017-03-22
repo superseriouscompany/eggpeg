@@ -1,4 +1,11 @@
-export default function(state = {current: 'Start', previous: null}, action) {
+import {REHYDRATE} from 'redux-persist/constants'
+
+const initialState = {
+  current: 'Start',
+  previous: null,
+}
+
+export default function(state = initialState, action) {
   switch(action.type) {
     case 'scene:change':
       return {
@@ -7,9 +14,18 @@ export default function(state = {current: 'Start', previous: null}, action) {
       }
     case 'scene:pop':
       return {
-        current: state.previous,
+        current: state.previous || 'Start',
         previous: null,
       }
+    case REHYDRATE:
+      // Reset to home screen if we were on game over
+      const incoming = action.payload.scene;
+      const {level}  = action.payload;
+      if( !incoming ) { return {...initialState} }
+      if( incoming.current == 'Game' && level.done && !level.win ) {
+        return {...initialState}
+      }
+      return {...initialState, ...incoming}
     default:
       return state
   }

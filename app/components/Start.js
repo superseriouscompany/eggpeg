@@ -1,14 +1,15 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
-import Component from './Component';
-import Text from './Text';
-import EggDrop from './EggDrop';
-import DifficultySwitch from './DifficultySwitch'
-import LinksHeader from './LinksHeader';
-import SettingsLink from './SettingsLink'
-import base from '../styles/base';
-import {connect} from 'react-redux';
+import Component          from './Component';
+import Text               from './Text';
+import EggDrop            from './EggDrop';
+import DifficultySwitch   from './DifficultySwitch'
+import LinksHeader        from './LinksHeader';
+import SettingsLink       from './SettingsLink'
+import base               from '../styles/base';
+import {connect}          from 'react-redux';
+import {loadFirstLevel}   from '../actions/levels';
 import {
   StatusBar,
   StyleSheet,
@@ -46,6 +47,8 @@ class Start extends Component {
   )}
 
   startGame() {
+    this.props.dispatch({type: 'game:reset'})
+    this.props.dispatch(loadFirstLevel(this.props.showTutorial))
     this.props.dispatch({type: 'scene:change', scene: 'Game'})
   }
 }
@@ -72,4 +75,11 @@ const style = StyleSheet.create({
   },
 })
 
-export default connect()(Start)
+function mapStateToProps(state) {
+  return {
+    showTutorial: !state.tutorial.complete,
+  }
+}
+
+
+export default connect(mapStateToProps)(Start)

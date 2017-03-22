@@ -1,8 +1,8 @@
 'use strict';
 
-import React from 'react';
+import React     from 'react';
 import Component from './Component';
-import Text from './Text';
+import Text      from './Text';
 import {connect} from 'react-redux'
 import {
   StyleSheet,

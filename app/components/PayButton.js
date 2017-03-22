@@ -1,10 +1,10 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
-import Component from './Component';
-import Text from './Text';
-import {connect} from 'react-redux'
-import {purchase} from '../actions/purchases'
+import Component          from './Component';
+import Text               from './Text';
+import {connect}          from 'react-redux'
+import {purchase}         from '../actions/purchases'
 import {
   ActivityIndicator,
   StyleSheet,

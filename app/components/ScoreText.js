@@ -1,9 +1,10 @@
 'use strict';
 
-import React from 'react';
-import Component from './Component';
+import React       from 'react';
+import Component   from './Component';
 import { connect } from 'react-redux'
-import Text from './Text';
+import Text        from './Text';
+import config      from '../config'
 import {
   Animated,
   Dimensions,
@@ -31,7 +32,7 @@ class ScoreText extends Component {
         ),
         Animated.timing(
           this.state.leaveAnim,
-          { toValue: 1, duration: 500, }
+          { toValue: 1, duration: config.timings.scoreExplanationLeave, }
         )
       ]).start()
     }

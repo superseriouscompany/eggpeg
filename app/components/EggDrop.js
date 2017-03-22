@@ -1,9 +1,9 @@
 'use strict';
 
-import React from 'react';
+import React     from 'react';
 import Component from './Component';
-import Text from './Text';
-import base from '../styles/base';
+import Text      from './Text';
+import base      from '../styles/base';
 import {
   Dimensions,
   Image,
