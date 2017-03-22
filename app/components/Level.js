@@ -18,8 +18,8 @@ import {
 let running = true;
 
 class Level extends Component {
-  static propTypes={
-    shoot: PropTypes.func.isRequired,
+  static propTypes = {
+    level: PropTypes.object.isRequired,
   }
 
   constructor(props) {

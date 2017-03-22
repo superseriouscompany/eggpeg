@@ -21,7 +21,6 @@ import {
 
 export default class GameView extends Component {
   static propTypes = {
-    shoot:     PropTypes.func.isRequired,
     reset:     PropTypes.func.isRequired,
     nextLevel: PropTypes.func.isRequired,
     continue:  PropTypes.func.isRequired,
