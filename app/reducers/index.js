@@ -2,19 +2,6 @@ import {persistStore, autoRehydrate} from 'redux-persist'
 import createLogger                  from 'redux-logger';
 import {AsyncStorage}                from 'react-native'
 import thunk                         from 'redux-thunk';
-
-import bullets    from './bullets'
-import chamber    from './chamber'
-import level      from './level'
-import targets    from './targets'
-import score      from './score'
-import purchase   from './purchase'
-import scene      from './scene'
-import shareLink  from './shareLink'
-import victory    from './victory'
-import difficulty from './difficulty'
-import tutorial   from './tutorial'
-
 import {
   compose,
   createStore,
@@ -22,6 +9,18 @@ import {
   applyMiddleware
 } from 'redux';
 
+// Register reducers from this directory. http://redux.js.org/docs/api/combineReducers.html
+import bullets    from './bullets'
+import chamber    from './chamber'
+import difficulty from './difficulty'
+import level      from './level'
+import purchase   from './purchase'
+import scene      from './scene'
+import score      from './score'
+import shareLink  from './shareLink'
+import targets    from './targets'
+import tutorial   from './tutorial'
+import victory    from './victory'
 const reducers = combineReducers({
   bullets,
   chamber,
@@ -35,6 +34,8 @@ const reducers = combineReducers({
   difficulty,
   tutorial,
 })
+
+// Add middleware http://redux.js.org/docs/advanced/Middleware.html
 const middleware = [thunk]
 if( __DEV__ ) {
   middleware.push(createLogger({
@@ -42,6 +43,7 @@ if( __DEV__ ) {
   }))
 }
 
+// Apply reducers and middleware from above with redux persistence
 const store = createStore(reducers, undefined, compose(
   applyMiddleware(...middleware),
   autoRehydrate()
