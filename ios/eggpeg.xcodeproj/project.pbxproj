@@ -278,18 +278,18 @@
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* eggpeg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eggpeg.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = sniper/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = sniper/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = sniper/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = sniper/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = sniper/main.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		217D07764F234D35BDC42CED /* RNBranch.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNBranch.xcodeproj; path = "../node_modules/react-native-branch/ios/RNBranch.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* eggpeg-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "eggpeg-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* eggpeg-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "eggpeg-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F4E119F1E6A38CC00FB18A3 /* Branch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Branch.framework; path = Carthage/Build/iOS/Branch.framework; sourceTree = "<group>"; };
-		3F4E11A21E6A3BCD00FB18A3 /* sniper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = sniper.entitlements; path = sniper/sniper.entitlements; sourceTree = "<group>"; };
+		3F4E11A21E6A3BCD00FB18A3 /* eggpeg.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = eggpeg.entitlements; sourceTree = "<group>"; };
 		3FBEF9E01E6A53AF00782101 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		3FD77C0C1E6D0D0100E199DD /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		3FD77C0D1E6D0D0100E199DD /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
@@ -410,8 +410,7 @@
 				00E356F21AD99517003FC87E /* eggpegTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			name = eggpegTests;
-			path = sniperTests;
+			path = eggpegTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -443,7 +442,7 @@
 		13B07FAE1A68108700A75B9A /* eggpeg */ = {
 			isa = PBXGroup;
 			children = (
-				3F4E11A21E6A3BCD00FB18A3 /* sniper.entitlements */,
+				3F4E11A21E6A3BCD00FB18A3 /* eggpeg.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -452,7 +451,7 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = eggpeg;
+			path = eggpeg;
 			sourceTree = "<group>";
 		};
 		146834001AC3E56700842450 /* Products */ = {
@@ -1121,7 +1120,6 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = sniper;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1141,7 +1139,7 @@
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 				);
-				INFOPLIST_FILE = sniperTests/Info.plist;
+				INFOPLIST_FILE = eggpegTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1170,7 +1168,7 @@
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 				);
-				INFOPLIST_FILE = sniperTests/Info.plist;
+				INFOPLIST_FILE = eggpegTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1192,7 +1190,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = sniper/sniper.entitlements;
+				CODE_SIGN_ENTITLEMENTS = eggpeg/eggpeg.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = SL8THA84AW;
@@ -1207,7 +1205,7 @@
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 				);
-				INFOPLIST_FILE = sniper/Info.plist;
+				INFOPLIST_FILE = eggpeg/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1224,7 +1222,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = sniper/sniper.entitlements;
+				CODE_SIGN_ENTITLEMENTS = eggpeg/eggpeg.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SL8THA84AW;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1238,7 +1236,7 @@
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 				);
-				INFOPLIST_FILE = sniper/Info.plist;
+				INFOPLIST_FILE = eggpeg/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1269,7 +1267,7 @@
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 				);
-				INFOPLIST_FILE = "sniper-tvOS/Info.plist";
+				INFOPLIST_FILE = "eggpeg-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1281,7 +1279,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.sniper-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.superserious.eggpeg-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -1307,7 +1305,7 @@
 					"$(SRCROOT)/../node_modules/react-native-in-app-utils/InAppUtils",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 				);
-				INFOPLIST_FILE = "sniper-tvOS/Info.plist";
+				INFOPLIST_FILE = "eggpeg-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1319,7 +1317,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.sniper-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.superserious.eggpeg-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -1338,7 +1336,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "sniper-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "eggpeg-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1346,7 +1344,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.sniper-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.superserious.eggpeg-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/eggpeg-tvOS.app/eggpeg-tvOS";
@@ -1365,7 +1363,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "sniper-tvOSTests/Info.plist";
+				INFOPLIST_FILE = "eggpeg-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1373,7 +1371,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.sniper-tvOSTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.superserious.eggpeg-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/eggpeg-tvOS.app/eggpeg-tvOS";
