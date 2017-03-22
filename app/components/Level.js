@@ -1,14 +1,14 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
-import Component from './Component';
-import ScoreText from './ScoreText';
-import Target from './Target';
-import Bullet from './Bullet';
-import Text from './Text';
-import {recordScore} from '../actions/scores'
-import {connect} from 'react-redux'
-import config from '../config'
+import Component          from './Component';
+import ScoreText          from './ScoreText';
+import Target             from './Target';
+import Bullet             from './Bullet';
+import Text               from './Text';
+import {recordScore}      from '../actions/scores'
+import {connect}          from 'react-redux'
+import config             from '../config'
 import {
   StyleSheet,
   TouchableWithoutFeedback,

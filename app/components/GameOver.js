@@ -1,15 +1,15 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
-import Component from './Component';
-import Text from './Text';
-import PayButton from './PayButton'
-import HighScores from './HighScores'
-import LinksHeader from './LinksHeader'
-import SettingsLink from './SettingsLink'
-import DifficultySwitch from './DifficultySwitch'
-import config from '../config'
-import {connect} from 'react-redux'
+import Component          from './Component';
+import Text               from './Text';
+import PayButton          from './PayButton'
+import HighScores         from './HighScores'
+import LinksHeader        from './LinksHeader'
+import SettingsLink       from './SettingsLink'
+import DifficultySwitch   from './DifficultySwitch'
+import config             from '../config'
+import {connect}          from 'react-redux'
 import {
   StyleSheet,
   TouchableOpacity,

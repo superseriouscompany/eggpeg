@@ -1,10 +1,10 @@
 'use strict';
 
-import React from 'react';
-import Component from './Component';
-import Text from './Text';
+import React      from 'react';
+import Component  from './Component';
+import Text       from './Text';
 import RainbowBar from './RainbowBar'
-import config from '../config'
+import config     from '../config'
 import {
   Animated,
   Dimensions,

@@ -1,10 +1,10 @@
 'use strict';
 
 import React, { PropTypes } from 'react';
-import Component from './Component';
-import RainbowBar from './RainbowBar';
-import Text from './Text';
-import base from '../styles/base'
+import Component            from './Component';
+import RainbowBar           from './RainbowBar';
+import Text                 from './Text';
+import base                 from '../styles/base'
 import {
   Image,
   StyleSheet,

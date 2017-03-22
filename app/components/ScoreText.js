@@ -1,10 +1,10 @@
 'use strict';
 
-import React from 'react';
-import Component from './Component';
+import React       from 'react';
+import Component   from './Component';
 import { connect } from 'react-redux'
-import Text from './Text';
-import config from '../config'
+import Text        from './Text';
+import config      from '../config'
 import {
   Animated,
   Dimensions,

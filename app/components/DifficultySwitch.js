@@ -1,11 +1,11 @@
 'use strict';
 
-import React from 'react';
-import Component from './Component';
-import Text from './Text';
-import {connect} from 'react-redux'
+import React        from 'react';
+import Component    from './Component';
+import Text         from './Text';
+import {connect}    from 'react-redux'
 import {changeMode} from '../actions/difficulty'
-import base from '../styles/base'
+import base         from '../styles/base'
 import {
   StyleSheet,
   TouchableOpacity,

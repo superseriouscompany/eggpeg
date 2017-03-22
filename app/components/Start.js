@@ -1,14 +1,14 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
-import Component from './Component';
-import Text from './Text';
-import EggDrop from './EggDrop';
-import DifficultySwitch from './DifficultySwitch'
-import LinksHeader from './LinksHeader';
-import SettingsLink from './SettingsLink'
-import base from '../styles/base';
-import {connect} from 'react-redux';
+import Component          from './Component';
+import Text               from './Text';
+import EggDrop            from './EggDrop';
+import DifficultySwitch   from './DifficultySwitch'
+import LinksHeader        from './LinksHeader';
+import SettingsLink       from './SettingsLink'
+import base               from '../styles/base';
+import {connect}          from 'react-redux';
 import {
   StatusBar,
   StyleSheet,

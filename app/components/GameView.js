@@ -1,16 +1,16 @@
 'use strict';
 
 import React, {PropTypes} from 'react';
-import Component from './Component';
-import Text from './Text';
-import Result from './Result'
-import Victory from './Victory'
-import GameHeader from './GameHeader'
-import GameOver from './GameOver'
-import Level from './Level'
-import SettingsLink from './SettingsLink'
-import base from '../styles/base'
-import config from '../config'
+import Component          from './Component';
+import Text               from './Text';
+import Result             from './Result'
+import Victory            from './Victory'
+import GameHeader         from './GameHeader'
+import GameOver           from './GameOver'
+import Level              from './Level'
+import SettingsLink       from './SettingsLink'
+import base               from '../styles/base'
+import config             from '../config'
 import {
   Dimensions,
   StatusBar,

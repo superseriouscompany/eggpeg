@@ -1,5 +1,5 @@
 import config, {changeConfig} from '../config'
-import {AsyncStorage} from 'react-native'
+import {AsyncStorage}         from 'react-native'
 
 export function changeMode(mode) {
   return function(dispatch) {

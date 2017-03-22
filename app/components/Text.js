@@ -1,7 +1,7 @@
 'use strict';
 
 // https://facebook.github.io/react-native/docs/text.html#limited-style-inheritance
-import React from 'react';
+import React     from 'react';
 import Component from './Component';
 import {
   Text,

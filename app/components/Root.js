@@ -1,16 +1,16 @@
 'use strict';
 
-import React from 'react';
-import Component from './Component';
-import FollowUs from './FollowUs';
-import Start from './Start';
-import Game from '../containers/Game';
-import Settings from './Settings'
+import React            from 'react';
+import Component        from './Component';
+import FollowUs         from './FollowUs';
+import Start            from './Start';
+import Game             from '../containers/Game';
+import Settings         from './Settings'
 import DeeplinkProvider from '../containers/DeeplinkProvider'
-import IAPProvider from '../containers/IAPProvider'
-import {Provider} from 'react-redux'
-import store from '../reducers'
-import {changeMode} from '../actions/difficulty'
+import IAPProvider      from '../containers/IAPProvider'
+import {Provider}       from 'react-redux'
+import store            from '../reducers'
+import {changeMode}     from '../actions/difficulty'
 import {
   AsyncStorage,
   StyleSheet,

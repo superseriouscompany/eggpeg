@@ -1,9 +1,9 @@
 'use strict';
 
 import React, { PropTypes } from 'react';
-import Component from './Component';
-import base from '../styles/base'
-import config from '../config'
+import Component            from './Component';
+import base                 from '../styles/base'
+import config               from '../config'
 import {
   Animated,
   Dimensions,

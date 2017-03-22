@@ -1,8 +1,8 @@
 'use strict';
 
-import React from 'react';
+import React     from 'react';
 import {connect} from 'react-redux';
-import branch from 'react-native-branch';
+import branch    from 'react-native-branch';
 
 class DeeplinkProvider extends React.Component {
   componentDidMount() {

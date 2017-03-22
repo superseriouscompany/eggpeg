@@ -1,10 +1,10 @@
 'use strict';
 
-import React from 'react';
-import Component from './Component';
-import Text from './Text';
+import React                  from 'react';
+import Component              from './Component';
+import Text                   from './Text';
 import config, {changeConfig} from '../config'
-import {connect} from 'react-redux'
+import {connect}              from 'react-redux'
 import {
   ScrollView,
   Slider,

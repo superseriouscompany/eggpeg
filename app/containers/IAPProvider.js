@@ -1,7 +1,7 @@
 'use strict';
 
-import React from 'react';
-import {connect} from 'react-redux';
+import React          from 'react';
+import {connect}      from 'react-redux';
 import {loadProducts} from '../actions/purchases'
 
 class IAPProvider extends React.Component {
