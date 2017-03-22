@@ -37,7 +37,7 @@ export default class Root extends Component {
     })
   }
 
-  render() { return ( // TODO: add MigrateProvider
+  render() { return (
     <View style={style.container}>
       <Provider store={store}>
         <DeeplinkProvider>

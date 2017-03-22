@@ -7,6 +7,8 @@ import {changeMode}       from '../actions/difficulty';
 class DifficultyProvider extends Component {
   componentWillReceiveProps(props)  {
     if( this.props.difficulty.mode != props.difficulty.mode ) {
+      // TODO: this feels janky.
+      // we should ideally be relying entirely on redux state instead of on config
       this.props.dispatch(changeMode(props.difficulty.mode))
     }
   }
