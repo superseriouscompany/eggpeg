@@ -10,6 +10,11 @@ export function loadFirstLevel(showTutorial) {
 }
 
 export function loadLevel(index) {
+  if( index > levels.length ) {
+    console.warn('Level not found', index);
+    index = 0;
+  }
+
   return function(dispatch) {
     dispatch({type: 'level:clear'})
     dispatch({type: 'level:load', index: index})

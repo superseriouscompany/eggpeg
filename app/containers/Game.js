@@ -24,12 +24,10 @@ class Game extends Component {
   }
 
   continue() {
-    // TODO: make sure this doesn't happen on upgrade
     this.loadLevel(this.props.level.index)
   }
 
   nextLevel() {
-    // TODO: make sure this doesn't happen on upgrade
     if( !this.props.level.index ) { console.warn('No level index found'); this.loadLevel(0); }
     this.loadLevel(this.props.level.index + 1)
   }
