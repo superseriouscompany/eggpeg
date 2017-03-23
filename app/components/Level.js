@@ -112,7 +112,7 @@ class Level extends Component {
           score *= hits.length
         }
         this.props.dispatch({type: 'bullets:hit', index: bi, score: score, count: hits.length})
-      } else if( bullet.spent && !bullet.missed ){
+      } else if( bullet.spent && !bullet.hit && !bullet.missed ){
         this.props.dispatch({type: 'bullets:miss', index: bi})
         sounds.fart.play((success) => {
           console.log('finished')
