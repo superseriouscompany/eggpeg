@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 
 let running = true;
+let bombwhistleTimeout = false;
 
 class Level extends Component {
   static propTypes = {
@@ -50,13 +51,15 @@ class Level extends Component {
     if( this.props.level.done || this.props.level.finishTime ) { return; }
     const {pageX, pageY} = e.nativeEvent;
     this.props.dispatch({type: 'bullets:fire', x: pageX, y: pageY})
+    bombwhistleTimeout && clearTimeout(bombwhistleTimeout);
+    sounds.bombwhistle.stop()
     sounds.bombwhistle.play((success) => {
       console.log('finished')
     }, (err) => {
       console.error(err)
     })
 
-    setTimeout(() => {
+    bombwhistleTimeout = setTimeout(() => {
       sounds.bombwhistle.stop()
     }, config.bullet.delay)
   }
@@ -102,12 +105,14 @@ class Level extends Component {
       })
       if( hits.length ) {
         if( hits.find((h) => { return h.ring == 'bullseye'}) ) {
+          sounds.ding.stop()
           sounds.ding.play((success) => {
             console.log('finished')
           }, (err) => {
             console.error(err)
           })
         } else {
+          sounds.splat.stop()
           sounds.splat.play((success) => {
             console.log('finished')
           }, (err) => {
@@ -119,11 +124,6 @@ class Level extends Component {
         if( hits.length > 1 ) {
           hadMultihit = true
           score *= hits.length
-          sounds.multiplier.play((success) => {
-            console.log('finished')
-          }, (err) => {
-            console.error(err)
-          })
         }
         this.props.dispatch({type: 'bullets:hit', index: bi, score: score, count: hits.length})
       } else if( bullet.spent && !bullet.hit && !bullet.missed ){
