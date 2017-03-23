@@ -8,7 +8,7 @@ const files = [
   'fart.m4a',        // game over
   'multiplier.m4a',  // multiplier
   'splat.m4a',       // hit
-  'woohoo.m4a',      // x game over high score
+  'woohoo.m4a',      // game over high score
   'youdabest.m4a',   // x victory
 ]
 
