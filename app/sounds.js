@@ -9,7 +9,7 @@ const files = [
   'multiplier.m4a',  // multiplier
   'splat.m4a',       // hit
   'woohoo.m4a',      // game over high score
-  'youdabest.m4a',   // x victory
+  'youdabest.m4a',   // victory
 ]
 
 const sounds = {}
