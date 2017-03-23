@@ -1,10 +1,10 @@
 'use strict';
 
-import React      from 'react'
-import Component  from './Component'
-import Text       from './Text'
-import {connect}  from 'react-redux'
-import {purchase} from '../actions/purchases'
+import React                        from 'react'
+import Component                    from './Component'
+import Text                         from './Text'
+import {connect}                    from 'react-redux'
+import {purchase, restorePurchases} from '../actions/purchases'
 import {
   TouchableOpacity,
   View,
@@ -14,6 +14,37 @@ class ContinueBundles extends Component {
   constructor(props) {
     super(props)
     this.state = { purchasing: false }
+    this.restorePurchases = this.restorePurchases.bind(this)
+    this.processPurchase  = this.processPurchase.bind(this)
+  }
+
+  processPurchase(productId) {
+    const count =
+      productId == 'com.superserious.eggpeg.continue' ? 1 :
+      productId == 'com.superserious.eggpeg.continue20' ? 20 :
+      productId == 'com.superserious.eggpeg.continue1001' ? 1001 :
+      null;
+
+    if( !count ) {
+      return alert('Oh no! Something went wrong on our end. Please contact help@superserious.co.')
+    }
+
+    this.props.dispatch({type: 'continues:add', pack: productId, count: count})
+  }
+
+  restorePurchases() {
+    restorePurchases((err, productIds) => {
+      if( err ) {
+        if( err.name === 'NotFound' ) {
+          return alert('No purchases found.');
+        }
+        return alert(err.message || JSON.stringify(err));
+      }
+      productIds.forEach((pid) => {
+        this.processPurchase(pid)
+      })
+      alert('Restored purchases.')
+    })
   }
 
   buy(productId) {
@@ -26,20 +57,12 @@ class ContinueBundles extends Component {
         alert(err.message || JSON.stringify(err));
         console.error(err);
         this.setState({purchasing: false});
+        return
       }
 
-      const count =
-        productId == 'com.superserious.eggpeg.continue' ? 1 :
-        productId == 'com.superserious.eggpeg.continue20' ? 20 :
-        productId == 'com.superserious.eggpeg.continue1001' ? 1001 :
-        null;
-
-      if( !count ) {
-        return alert('Oh no! Something went wrong on our end. Please contact help@superserious.co.')
-      }
-
-      this.props.dispatch({type: 'continues:add', pack: productId, count: count})
+      this.processPurchase(productId)
       this.props.dispatch({type: 'scene:pop'})
+
     })
   }
 
@@ -53,6 +76,10 @@ class ContinueBundles extends Component {
           </Text>
         </TouchableOpacity>
       ))}
+
+      <TouchableOpacity onPress={this.restorePurchases}>
+        <Text>Restore Purchases</Text>
+      </TouchableOpacity>
 
       <TouchableOpacity onPress={() => this.props.dispatch({type: 'scene:pop'})}>
         <Text>Back</Text>

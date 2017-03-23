@@ -19,6 +19,23 @@ export function loadProducts(cb) {
   }
 }
 
+export function restorePurchases(cb) {
+  InAppUtils.restorePurchases((err, response)=> {
+    if( err ) { return cb(err); }
+    if( !response.length ) {
+      const err = new Error('No purchases found');
+      err.name = 'NotFound'
+      return cb(err)
+    }
+
+    const productIds = response.map((p) => {
+      return p.productIdentifier
+    })
+
+    return cb(null, productIds)
+  })
+}
+
 export function purchase(identifier, cb) {
   InAppUtils.purchaseProduct(identifier, (err, response) => {
     if( err ) { return cb(err); }
