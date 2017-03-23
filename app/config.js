@@ -36,7 +36,7 @@ if( DeviceInfo.isEmulator() ) {
   config.lossDelay    = 0;
   config.bullet.delay = 0;
   config.playSounds   = false;
-  config.lockLevel    = 0;
+  config.lockLevel    = undefined;
 }
 
 export default config

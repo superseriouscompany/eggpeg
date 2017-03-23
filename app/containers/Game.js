@@ -28,7 +28,7 @@ class Game extends Component {
   }
 
   nextLevel() {
-    if( !this.props.level.index ) { console.warn('No level index found'); this.loadLevel(0); }
+    if( this.props.level.index === undefined ) { console.warn('No level index found'); this.loadLevel(0); }
     this.loadLevel(this.props.level.index + 1)
   }
 
