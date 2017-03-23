@@ -50,13 +50,13 @@ class Level extends Component {
     if( this.props.level.done || this.props.level.finishTime ) { return; }
     const {pageX, pageY} = e.nativeEvent;
     this.props.dispatch({type: 'bullets:fire', x: pageX, y: pageY})
-    config.playSounds && sounds.bombwhistle.play((success) => {
+    sounds.bombwhistle.play((success) => {
       console.log('finished')
     }, (err) => {
       console.error(err)
     })
 
-    config.playSounds && setTimeout(() => {
+    setTimeout(() => {
       sounds.bombwhistle.stop()
     }, config.bullet.delay)
   }
@@ -97,20 +97,33 @@ class Level extends Component {
 
           score *= config.scoreBonus
           this.props.dispatch({type: 'targets:hit', index, score, ring})
-          hits.push({score: score})
+          hits.push({score: score, ring: ring})
         }
       })
       if( hits.length ) {
-        config.playSounds && sounds.splat.play((success) => {
-          console.log('finished')
-        }, (err) => {
-          console.error(err)
-        })
+        if( hits.find((h) => { return h.ring == 'bullseye'}) ) {
+          sounds.ding.play((success) => {
+            console.log('finished')
+          }, (err) => {
+            console.error(err)
+          })
+        } else {
+          sounds.splat.play((success) => {
+            console.log('finished')
+          }, (err) => {
+            console.error(err)
+          })
+        }
 
         let score = hits.reduce((a, v) => { return a + v.score}, 0)
         if( hits.length > 1 ) {
           hadMultihit = true
           score *= hits.length
+          sounds.multiplier.play((success) => {
+            console.log('finished')
+          }, (err) => {
+            console.error(err)
+          })
         }
         this.props.dispatch({type: 'bullets:hit', index: bi, score: score, count: hits.length})
       } else if( bullet.spent && !bullet.hit && !bullet.missed ){

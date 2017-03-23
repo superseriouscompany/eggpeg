@@ -41,6 +41,11 @@
 		3FE053581E833C75005B7F8A /* bombwhistle.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053571E833C75005B7F8A /* bombwhistle.m4a */; };
 		3FE0535B1E834BCE005B7F8A /* fart.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053591E834BCE005B7F8A /* fart.m4a */; };
 		3FE0535C1E834BCE005B7F8A /* splat.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE0535A1E834BCE005B7F8A /* splat.m4a */; };
+		3FE053D71E84230B005B7F8A /* bugles.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053D21E84230B005B7F8A /* bugles.m4a */; };
+		3FE053D81E84230B005B7F8A /* ding.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053D31E84230B005B7F8A /* ding.m4a */; };
+		3FE053D91E84230B005B7F8A /* multiplier.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053D41E84230B005B7F8A /* multiplier.m4a */; };
+		3FE053DA1E84230B005B7F8A /* woohoo.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053D51E84230B005B7F8A /* woohoo.m4a */; };
+		3FE053DB1E84230B005B7F8A /* youdabest.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053D61E84230B005B7F8A /* youdabest.m4a */; };
 		47349FA9561C46CE8D2EC3E2 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1AE8C64E049467BAED014CD /* libRNSound.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		69B7276ED34F43BC92BAC922 /* libreact-native-branch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 552C11F68F5E490D94AB7A05 /* libreact-native-branch.a */; };
@@ -307,6 +312,11 @@
 		3FE053571E833C75005B7F8A /* bombwhistle.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = bombwhistle.m4a; sourceTree = "<group>"; };
 		3FE053591E834BCE005B7F8A /* fart.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = fart.m4a; sourceTree = "<group>"; };
 		3FE0535A1E834BCE005B7F8A /* splat.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = splat.m4a; sourceTree = "<group>"; };
+		3FE053D21E84230B005B7F8A /* bugles.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = bugles.m4a; sourceTree = "<group>"; };
+		3FE053D31E84230B005B7F8A /* ding.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = ding.m4a; sourceTree = "<group>"; };
+		3FE053D41E84230B005B7F8A /* multiplier.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = multiplier.m4a; sourceTree = "<group>"; };
+		3FE053D51E84230B005B7F8A /* woohoo.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = woohoo.m4a; sourceTree = "<group>"; };
+		3FE053D61E84230B005B7F8A /* youdabest.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = youdabest.m4a; sourceTree = "<group>"; };
 		4909137A3E2E418A8444FD90 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		552C11F68F5E490D94AB7A05 /* libreact-native-branch.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libreact-native-branch.a"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -534,6 +544,11 @@
 		3FE0535D1E834F37005B7F8A /* sounds */ = {
 			isa = PBXGroup;
 			children = (
+				3FE053D21E84230B005B7F8A /* bugles.m4a */,
+				3FE053D31E84230B005B7F8A /* ding.m4a */,
+				3FE053D41E84230B005B7F8A /* multiplier.m4a */,
+				3FE053D51E84230B005B7F8A /* woohoo.m4a */,
+				3FE053D61E84230B005B7F8A /* youdabest.m4a */,
 				3FE053591E834BCE005B7F8A /* fart.m4a */,
 				3FE0535A1E834BCE005B7F8A /* splat.m4a */,
 				3FE053571E833C75005B7F8A /* bombwhistle.m4a */,
@@ -1034,9 +1049,14 @@
 			files = (
 				3FE0535C1E834BCE005B7F8A /* splat.m4a in Resources */,
 				3FE053581E833C75005B7F8A /* bombwhistle.m4a in Resources */,
+				3FE053DA1E84230B005B7F8A /* woohoo.m4a in Resources */,
+				3FE053DB1E84230B005B7F8A /* youdabest.m4a in Resources */,
 				3FE0535B1E834BCE005B7F8A /* fart.m4a in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				3FE053D71E84230B005B7F8A /* bugles.m4a in Resources */,
+				3FE053D91E84230B005B7F8A /* multiplier.m4a in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				3FE053D81E84230B005B7F8A /* ding.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
