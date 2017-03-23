@@ -17,10 +17,20 @@ export default function bullet(state = [], action) {
       return []
     case 'bullets:hit':
       return state.map(hit(action.index, action.score, action.count))
+    case 'bullets:miss':
+      return state.map(miss(action.index))
     case 'tick':
       return state.map(tick)
     default:
       return state;
+  }
+}
+
+function miss(index) {
+  return function(bullet, i) {
+    if( i != index ) { return bullet; }
+    bullet.missed = true;
+    return bullet;
   }
 }
 

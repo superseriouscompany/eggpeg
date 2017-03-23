@@ -38,7 +38,9 @@
 		3FBEF9E11E6A53AF00782101 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FBEF9E01E6A53AF00782101 /* StoreKit.framework */; };
 		3FD77C0E1E6D0D0100E199DD /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FD77C0C1E6D0D0100E199DD /* Fabric.framework */; };
 		3FD77C0F1E6D0D0100E199DD /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FD77C0D1E6D0D0100E199DD /* Crashlytics.framework */; };
-		3FE053531E8327EC005B7F8A /* bombdrop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053521E8327EC005B7F8A /* bombdrop.wav */; };
+		3FE053581E833C75005B7F8A /* bombwhistle.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053571E833C75005B7F8A /* bombwhistle.m4a */; };
+		3FE0535B1E834BCE005B7F8A /* fart.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053591E834BCE005B7F8A /* fart.m4a */; };
+		3FE0535C1E834BCE005B7F8A /* splat.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE0535A1E834BCE005B7F8A /* splat.m4a */; };
 		47349FA9561C46CE8D2EC3E2 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1AE8C64E049467BAED014CD /* libRNSound.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		69B7276ED34F43BC92BAC922 /* libreact-native-branch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 552C11F68F5E490D94AB7A05 /* libreact-native-branch.a */; };
@@ -302,7 +304,9 @@
 		3FBEF9E01E6A53AF00782101 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		3FD77C0C1E6D0D0100E199DD /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		3FD77C0D1E6D0D0100E199DD /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		3FE053521E8327EC005B7F8A /* bombdrop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = bombdrop.wav; path = ../sounds/bombdrop.wav; sourceTree = "<group>"; };
+		3FE053571E833C75005B7F8A /* bombwhistle.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = bombwhistle.m4a; path = ../bombwhistle.m4a; sourceTree = "<group>"; };
+		3FE053591E834BCE005B7F8A /* fart.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = fart.m4a; path = ../fart.m4a; sourceTree = "<group>"; };
+		3FE0535A1E834BCE005B7F8A /* splat.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = splat.m4a; path = ../splat.m4a; sourceTree = "<group>"; };
 		4909137A3E2E418A8444FD90 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		552C11F68F5E490D94AB7A05 /* libreact-native-branch.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libreact-native-branch.a"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -578,7 +582,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				3FE053521E8327EC005B7F8A /* bombdrop.wav */,
+				3FE053591E834BCE005B7F8A /* fart.m4a */,
+				3FE0535A1E834BCE005B7F8A /* splat.m4a */,
+				3FE053571E833C75005B7F8A /* bombwhistle.m4a */,
 				13B07FAE1A68108700A75B9A /* eggpeg */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* eggpegTests */,
@@ -1017,8 +1023,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FE0535C1E834BCE005B7F8A /* splat.m4a in Resources */,
+				3FE053581E833C75005B7F8A /* bombwhistle.m4a in Resources */,
+				3FE0535B1E834BCE005B7F8A /* fart.m4a in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				3FE053531E8327EC005B7F8A /* bombdrop.wav in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

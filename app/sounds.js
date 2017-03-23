@@ -1,12 +1,20 @@
 const Sound = require('react-native-sound');
 
-Sound.setCategory('Playback');
+const files = [
+  'bombwhistle.m4a',
+  'fart.m4a',
+  'splat.m4a',
+]
 
-const bombdrop = new Sound('bombdrop.wav', Sound.MAIN_BUNDLE, (err) => {
-  if( err ) {
-    console.error(err);
-    return;
-  }
+const sounds = {}
+files.forEach((filename) => {
+  const name = filename.split('.')[0];
+  sounds[name] = new Sound(filename, Sound.MAIN_BUNDLE, (err) => {
+    if( err ) {
+      console.error(err);
+      return;
+    }
+  })
 })
 
-export default bombdrop
+export default sounds
