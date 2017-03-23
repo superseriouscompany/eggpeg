@@ -70,6 +70,7 @@ function mapStateToProps(state) {
     beat:         state.victory,
     showTutorial: !state.tutorial.complete,
     difficulty:   state.difficulty,
+    leaderboard:  state.leaderboard,
   }
 }
 
