@@ -39,7 +39,7 @@ class ContinueBundles extends Component {
       }
 
       this.props.dispatch({type: 'continues:add', pack: productId, count: count})
-      alert('success!')
+      this.props.dispatch({type: 'scene:pop'})
     })
   }
 
@@ -53,6 +53,10 @@ class ContinueBundles extends Component {
           </Text>
         </TouchableOpacity>
       ))}
+
+      <TouchableOpacity onPress={() => this.props.dispatch({type: 'scene:pop'})}>
+        <Text>Back</Text>
+      </TouchableOpacity>
     </View>
   )}
 }
