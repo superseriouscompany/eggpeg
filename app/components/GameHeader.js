@@ -5,6 +5,7 @@ import Component  from './Component';
 import Text       from './Text';
 import RainbowBar from './RainbowBar'
 import config     from '../config'
+import sounds     from '../sounds'
 import {
   Animated,
   Dimensions,
@@ -50,6 +51,11 @@ export default class GameHeader extends Component {
           score: props.score,
         })
       });
+      if( props.newHighScore ) {
+        sounds.bugles.play(null, (err) => {
+          console.error(err)
+        })
+      }
     }
   }
 

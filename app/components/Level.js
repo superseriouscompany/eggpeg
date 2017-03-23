@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 
 let running = true;
+let bombwhistleTimeout = false;
 
 class Level extends Component {
   static propTypes = {
@@ -50,13 +51,13 @@ class Level extends Component {
     if( this.props.level.done || this.props.level.finishTime ) { return; }
     const {pageX, pageY} = e.nativeEvent;
     this.props.dispatch({type: 'bullets:fire', x: pageX, y: pageY})
-    config.playSounds && sounds.bombwhistle.play((success) => {
-      console.log('finished')
-    }, (err) => {
+    bombwhistleTimeout && clearTimeout(bombwhistleTimeout);
+    sounds.bombwhistle.stop()
+    sounds.bombwhistle.play(null, (err) => {
       console.error(err)
     })
 
-    config.playSounds && setTimeout(() => {
+    bombwhistleTimeout = setTimeout(() => {
       sounds.bombwhistle.stop()
     }, config.bullet.delay)
   }
@@ -97,15 +98,21 @@ class Level extends Component {
 
           score *= config.scoreBonus
           this.props.dispatch({type: 'targets:hit', index, score, ring})
-          hits.push({score: score})
+          hits.push({score: score, ring: ring})
         }
       })
       if( hits.length ) {
-        config.playSounds && sounds.splat.play((success) => {
-          console.log('finished')
-        }, (err) => {
-          console.error(err)
-        })
+        if( hits.find((h) => { return h.ring == 'bullseye'}) ) {
+          sounds.ding.stop()
+          sounds.ding.play(null, (err) => {
+            console.error(err)
+          })
+        } else {
+          sounds.splat.stop()
+          sounds.splat.play(null, (err) => {
+            console.error(err)
+          })
+        }
 
         let score = hits.reduce((a, v) => { return a + v.score}, 0)
         if( hits.length > 1 ) {

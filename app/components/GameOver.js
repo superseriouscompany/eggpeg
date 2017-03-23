@@ -9,6 +9,7 @@ import LinksHeader        from './LinksHeader'
 import SettingsLink       from './SettingsLink'
 import DifficultySwitch   from './DifficultySwitch'
 import config             from '../config'
+import sounds             from '../sounds'
 import {connect}          from 'react-redux'
 import {
   StyleSheet,
@@ -36,6 +37,15 @@ class GameOver extends Component {
 
   componentDidMount() {
     this.timeout = setInterval(this.countdown, 1000)
+    if( this.props.isHighScore ) {
+      sounds.woohoo.play(null, (err) => {
+        console.error(err)
+      })
+    } else {
+      sounds.fart.play(null, (err) => {
+        console.error(err)
+      })
+    }
   }
 
   componentWillUnmount() {

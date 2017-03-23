@@ -6,6 +6,7 @@ import Text               from './Text';
 import LinksHeader        from './LinksHeader'
 import HighScores         from './HighScores'
 import DifficultySwitch   from './DifficultySwitch'
+import sounds             from '../sounds'
 import {
   Image,
   StyleSheet,
@@ -19,6 +20,12 @@ export default class Victory extends Component {
     reset: PropTypes.func.isRequired,
     isHighScore: PropTypes.bool.isRequired,
     highScores:  PropTypes.arrayOf(PropTypes.number).isRequired,
+  }
+
+  componentDidMount() {
+    sounds.youdabest.play(null, (err) => {
+      console.error(err)
+    })
   }
 
   render() { return (

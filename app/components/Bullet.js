@@ -1,15 +1,16 @@
 'use strict';
 
-import React, {PropTypes} from 'react';
-import Component          from './Component';
-import Text               from './Text';
-import config             from '../config';
-import base               from '../styles/base';
+import React, {PropTypes} from 'react'
+import Component          from './Component'
+import Text               from './Text'
+import config             from '../config'
+import base               from '../styles/base'
+import sounds             from '../sounds'
 import {
   Animated,
   StyleSheet,
   View,
-} from 'react-native';
+} from 'react-native'
 
 export default class Bullet extends Component {
   static propTypes = {
@@ -42,6 +43,13 @@ export default class Bullet extends Component {
     if( props.hit && !this.props.hit && props.bullet.count > 1 ) {
       const startDelay   = config.timings.multiplierDelay;
       const betweenDelay = config.timings.multiplierBetween;
+      setTimeout(() => {
+        sounds.multiplier.stop()
+        sounds.multiplier.play(null, (err) => {
+          console.error(err)
+        })
+      }, startDelay)
+
       Animated.stagger(betweenDelay, [
         Animated.timing(
           this.state.multAnim,
