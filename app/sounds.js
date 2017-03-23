@@ -3,7 +3,7 @@ const config = require('./config');
 
 const files = [
   'bombwhistle.m4a', // egg drop
-  'bugles.m4a',      // x high score surpassed
+  'bugles.m4a',      // high score surpassed
   'ding.m4a',        // bullseye
   'fart.m4a',        // game over
   'multiplier.m4a',  // multiplier
