@@ -256,6 +256,16 @@ const levels = [
     color: colors.purple,
   },
   {
+    name: 'Circle',
+    targets: [
+      {
+        points: circle(xcenter, ycenter, 80),
+        velocity: 1,
+      },
+    ],
+    color: colors.purple,
+  },
+  {
     name: 'Crossing',
     targets: [
       {
@@ -570,6 +580,17 @@ function steps(opts) {
   const stepsBack = points.slice(1).reverse();
   stepsBack.shift()
   points = points.concat(stepsBack);
+  return points;
+}
+
+// http://gamedev.stackexchange.com/questions/9607/moving-an-object-in-a-circular-path
+function circle(x, y, radius) {
+  let points = []
+  for( var deg = 0; deg < 360; deg += 10 ) {
+    // http://www.rapidtables.com/convert/number/degrees-to-radians.htm
+    const radians = deg * Math.PI / 180;
+    points.push({x: x + Math.cos(radians) * radius, y: y + Math.sin(radians) * radius})
+  }
   return points;
 }
 

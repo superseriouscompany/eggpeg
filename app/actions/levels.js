@@ -15,6 +15,10 @@ export function loadLevel(index) {
     index = 0;
   }
 
+  if( config.lockLevel !== undefined ) {
+    index = config.lockLevel;
+  }
+
   return function(dispatch) {
     dispatch({type: 'level:clear'})
     dispatch({type: 'level:load', index: index})

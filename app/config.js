@@ -27,7 +27,7 @@ const config = {
   },
   gravity: 0,//9.80665,
   countdown: 20, // game over countdown timer
-  playSounds: true,
+  playSounds: false,
   startingLevel: __DEV__ ? 'Stationary' : 'Stationary',
 }
 
@@ -36,6 +36,7 @@ if( DeviceInfo.isEmulator() ) {
   config.lossDelay    = 0;
   config.bullet.delay = 0;
   config.playSounds   = false;
+  config.lockLevel    = 0;
 }
 
 export default config
