@@ -1,5 +1,5 @@
-const Sound  = require('react-native-sound');
-const config = require('./config');
+import Sound  from 'react-native-sound'
+import config from './config'
 
 const files = [
   'bombwhistle.m4a', // egg drop
@@ -26,8 +26,6 @@ files.forEach((filename) => {
     sounds[name] = { play: noop, stop: noop, }
   }
 })
-
-console.log('Exporting', Object.keys(sounds));
 
 function noop() {}
 
