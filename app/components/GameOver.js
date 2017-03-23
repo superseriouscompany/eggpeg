@@ -38,15 +38,11 @@ class GameOver extends Component {
   componentDidMount() {
     this.timeout = setInterval(this.countdown, 1000)
     if( this.props.isHighScore ) {
-      sounds.woohoo.play((success) => {
-        console.log('finished')
-      }, (err) => {
+      sounds.woohoo.play(null, (err) => {
         console.error(err)
       })
     } else {
-      sounds.fart.play((success) => {
-        console.log('finished')
-      }, (err) => {
+      sounds.fart.play(null, (err) => {
         console.error(err)
       })
     }

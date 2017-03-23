@@ -45,9 +45,7 @@ export default class Bullet extends Component {
       const betweenDelay = config.timings.multiplierBetween;
       setTimeout(() => {
         sounds.multiplier.stop()
-        sounds.multiplier.play((success) => {
-          console.log('finished')
-        }, (err) => {
+        sounds.multiplier.play(null, (err) => {
           console.error(err)
         })
       }, startDelay)

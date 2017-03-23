@@ -52,9 +52,7 @@ export default class GameHeader extends Component {
         })
       });
       if( props.newHighScore ) {
-        sounds.bugles.play((success) => {
-          console.log('finished')
-        }, (err) => {
+        sounds.bugles.play(null, (err) => {
           console.error(err)
         })
       }

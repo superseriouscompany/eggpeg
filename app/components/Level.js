@@ -53,9 +53,7 @@ class Level extends Component {
     this.props.dispatch({type: 'bullets:fire', x: pageX, y: pageY})
     bombwhistleTimeout && clearTimeout(bombwhistleTimeout);
     sounds.bombwhistle.stop()
-    sounds.bombwhistle.play((success) => {
-      console.log('finished')
-    }, (err) => {
+    sounds.bombwhistle.play(null, (err) => {
       console.error(err)
     })
 
@@ -106,16 +104,12 @@ class Level extends Component {
       if( hits.length ) {
         if( hits.find((h) => { return h.ring == 'bullseye'}) ) {
           sounds.ding.stop()
-          sounds.ding.play((success) => {
-            console.log('finished')
-          }, (err) => {
+          sounds.ding.play(null, (err) => {
             console.error(err)
           })
         } else {
           sounds.splat.stop()
-          sounds.splat.play((success) => {
-            console.log('finished')
-          }, (err) => {
+          sounds.splat.play(null, (err) => {
             console.error(err)
           })
         }

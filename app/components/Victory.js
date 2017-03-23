@@ -23,9 +23,7 @@ export default class Victory extends Component {
   }
 
   componentDidMount() {
-    sounds.youdabest.play((success) => {
-      console.log('finished')
-    }, (err) => {
+    sounds.youdabest.play(null, (err) => {
       console.error(err)
     })
   }
