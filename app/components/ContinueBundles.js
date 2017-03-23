@@ -27,8 +27,19 @@ class ContinueBundles extends Component {
         console.error(err);
         this.setState({purchasing: false});
       }
-      alert('Success! Check console.')
-      console.log(response)
+
+      const count =
+        productId == 'com.superserious.eggpeg.continue' ? 1 :
+        productId == 'com.superserious.eggpeg.continue20' ? 20 :
+        productId == 'com.superserious.eggpeg.continue1001' ? 1001 :
+        null;
+
+      if( !count ) {
+        return alert('Oh no! Something went wrong on our end. Please contact help@superserious.co.')
+      }
+
+      this.props.dispatch({type: 'continues:add', pack: productId, count: count})
+      alert('success!')
     })
   }
 

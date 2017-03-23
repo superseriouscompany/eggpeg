@@ -46,6 +46,8 @@ class GameOver extends Component {
   )}
 }
 
+
+
 function mapStateToProps(state) {
   const score       = state.session.score;
   const leaderboard = state.leaderboard;
@@ -65,6 +67,7 @@ function mapStateToProps(state) {
     carrot:      carrot,
     firstRun:    !state.session.goal,
     totalScore:  state.worlds.all.reduce((acc, w) => { return acc + (w.score || 0)}, 0),
+    continues:   state.continues.count || 0,
   }
 }
 

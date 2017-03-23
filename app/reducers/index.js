@@ -12,6 +12,7 @@ import {
 // Register reducers from this directory. http://redux.js.org/docs/api/combineReducers.html
 import bullets     from './bullets'
 import chamber     from './chamber'
+import continues  from './continues'
 import leaderboard from './leaderboard'
 import level       from './level'
 import purchase    from './purchase'
@@ -26,6 +27,7 @@ import worlds      from './worlds'
 
 const reducers = combineReducers({
   bullets,
+  continues,
   chamber,
   leaderboard,
   level,
@@ -73,6 +75,7 @@ const store = createStore(reducers, undefined, compose(
 ))
 
 const persistence = persistStore(store, {storage: AsyncStorage, whitelist: [
+  'continues',
   'purchase',
   'retry',
   'shareLink',
