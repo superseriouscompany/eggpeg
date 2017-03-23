@@ -13,6 +13,7 @@ import IAPProvider        from '../containers/IAPProvider'
 import MigrateProvider    from '../containers/MigrateProvider'
 import store              from '../reducers'
 import {changeMode}       from '../actions/difficulty'
+import sounds             from '../sounds'
 import {
   AsyncStorage,
   StyleSheet,

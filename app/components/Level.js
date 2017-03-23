@@ -9,6 +9,7 @@ import Text               from './Text';
 import {recordScore}      from '../actions/scores'
 import {connect}          from 'react-redux'
 import config             from '../config'
+import sounds             from '../sounds'
 import {
   StyleSheet,
   TouchableWithoutFeedback,
@@ -49,6 +50,15 @@ class Level extends Component {
     if( this.props.level.done || this.props.level.finishTime ) { return; }
     const {pageX, pageY} = e.nativeEvent;
     this.props.dispatch({type: 'bullets:fire', x: pageX, y: pageY})
+    config.playSounds && sounds.bombwhistle.play((success) => {
+      console.log('finished')
+    }, (err) => {
+      console.error(err)
+    })
+
+    config.playSounds && setTimeout(() => {
+      sounds.bombwhistle.stop()
+    }, config.bullet.delay)
   }
 
   iterate() {
@@ -90,12 +100,20 @@ class Level extends Component {
         }
       })
       if( hits.length ) {
+        config.playSounds && sounds.splat.play((success) => {
+          console.log('finished')
+        }, (err) => {
+          console.error(err)
+        })
+
         let score = hits.reduce((a, v) => { return a + v.score}, 0)
         if( hits.length > 1 ) {
           hadMultihit = true
           score *= hits.length
         }
         this.props.dispatch({type: 'bullets:hit', index: bi, score: score, count: hits.length})
+      } else if( bullet.spent && !bullet.hit && !bullet.missed ){
+        this.props.dispatch({type: 'bullets:miss', index: bi})
       }
     })
 

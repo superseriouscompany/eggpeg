@@ -7,7 +7,7 @@
 
 ## Running iOS
 
-    $ open ios/sniper.xcodeproj
+    $ open ios/eggpeg.xcodeproj
 
 ## Running Android
 

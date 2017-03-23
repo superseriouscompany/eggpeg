@@ -3,6 +3,7 @@ package com.superserious.eggpeg;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.zmxv.RNSound.RNSoundPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.idehub.Billing.InAppBillingBridgePackage;
 import io.branch.rnbranch.RNBranchPackage;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNSoundPackage(),
             new RNDeviceInfo(),
             new InAppBillingBridgePackage(),
             new RNBranchPackage()
