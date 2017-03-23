@@ -50,13 +50,13 @@ class Level extends Component {
     if( this.props.level.done || this.props.level.finishTime ) { return; }
     const {pageX, pageY} = e.nativeEvent;
     this.props.dispatch({type: 'bullets:fire', x: pageX, y: pageY})
-    sounds.bombwhistle.play((success) => {
+    config.playSounds && sounds.bombwhistle.play((success) => {
       console.log('finished')
     }, (err) => {
       console.error(err)
     })
 
-    setTimeout(() => {
+    config.playSounds && setTimeout(() => {
       sounds.bombwhistle.stop()
     }, config.bullet.delay)
   }
@@ -100,7 +100,7 @@ class Level extends Component {
         }
       })
       if( hits.length ) {
-        sounds.splat.play((success) => {
+        config.playSounds && sounds.splat.play((success) => {
           console.log('finished')
         }, (err) => {
           console.error(err)
@@ -114,11 +114,6 @@ class Level extends Component {
         this.props.dispatch({type: 'bullets:hit', index: bi, score: score, count: hits.length})
       } else if( bullet.spent && !bullet.hit && !bullet.missed ){
         this.props.dispatch({type: 'bullets:miss', index: bi})
-        sounds.fart.play((success) => {
-          console.log('finished')
-        }, (err) => {
-          console.error(err)
-        })
       }
     })
 
