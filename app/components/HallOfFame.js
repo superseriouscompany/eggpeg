@@ -20,6 +20,9 @@ class HallOfFame extends Component {
   }
 
   postScore() {
+    if( !this.state.name.length ) { return alert('You must enter your name.') }
+    if( this.state.name.length > 20 ) { return alert('Your name can only be 20 characters') }
+
     return this.props.dispatch(postScore(this.props.score, this.state.name)).then(() => {
       this.props.dispatch({type: 'scene:change', scene: 'Start'})
     }).catch((err) => {
