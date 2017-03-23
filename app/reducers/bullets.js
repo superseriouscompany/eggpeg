@@ -29,7 +29,9 @@ export default function bullet(state = [], action) {
 function miss(index) {
   return function(bullet, i) {
     if( i != index ) { return bullet; }
-    bullet.missed = true;
+    bullet.missed  = true;
+    bullet.spent   = true;
+    bullet.visible = false;
     return bullet;
   }
 }

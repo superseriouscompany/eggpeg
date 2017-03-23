@@ -63,12 +63,13 @@ class Level extends Component {
 
   iterate() {
     if( this.props.level.done ) { return; }
+
+    this.props.dispatch({type: 'tick'})
+
     if( this.props.level.finishTime ) {
-      console.log('level', this.props.level)
       if( +new Date <= this.props.level.finishTime ) { return; }
       return this.props.dispatch({type: 'level:finish'})
     }
-    this.props.dispatch({type: 'tick'})
 
     const {bullets, targets} = this.props;
 

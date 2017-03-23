@@ -66,7 +66,7 @@ export default class Bullet extends Component {
     const containerWidth = Math.max(config.sizes.shadow, config.sizes.bullet)
     let shadowWidth = Math.round(config.sizes.shadow * bullet.shadow);
   return (
-    <View style={[style.bulletContainer, bullet.hit || bullet.spent ? style.bg : null, {
+    <View style={[style.bulletContainer, bullet.hit ? style.bg : bullet.spent ? style.bgspent : null, {
       left:   bullet.x - containerWidth / 2,
       top:    bullet.y - containerWidth / 2,
       width:  containerWidth,
@@ -105,17 +105,17 @@ export default class Bullet extends Component {
           height: bullet.width,
           borderRadius: bullet.width / 2,
         }]} />
-      : bullet.shadow > 0 ?
-        <View style={[style.shadow, {
-          width:  shadowWidth,
-          height: shadowWidth,
-          borderRadius: shadowWidth / 2,
-        }]} />
       : bullet.spent ?
         <View style={[style.casing, {
           width:  bullet.width,
           height: bullet.width,
           borderRadius: bullet.width / 2,
+        }]} />
+      : bullet.shadow > 0 ?
+        <View style={[style.shadow, {
+          width:  shadowWidth,
+          height: shadowWidth,
+          borderRadius: shadowWidth / 2,
         }]} />
       : null
       }
@@ -133,6 +133,7 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     borderColor:     base.colors.purple,
     borderWidth:     1,
+    zIndex:          1,
   },
   bullet: {
     backgroundColor: base.colors.yellow,
@@ -145,10 +146,12 @@ const style = StyleSheet.create({
   bg: {
     zIndex: -1,
   },
+  bgspent: {
+    zIndex: -2,
+  },
   casing: {
     position: 'absolute',
     borderColor: 'white',
     borderWidth: 1,
-    zIndex: -1,
   },
 })
