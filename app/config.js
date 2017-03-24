@@ -32,8 +32,8 @@ const config = {
 }
 
 if( DeviceInfo.isEmulator() ) {
-  config.winDelay     = 0;
-  config.lossDelay    = 0;
+  // config.winDelay     = 0;
+  // config.lossDelay    = 0;
   config.bullet.delay = 0;
   config.playSounds   = false;
   config.lockLevel    = undefined;
