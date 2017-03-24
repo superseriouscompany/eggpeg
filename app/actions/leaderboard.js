@@ -8,8 +8,8 @@ const baseUrl = __DEV__ ?
 
 export function loadScores() {
   return function(dispatch) {
-    return api.leaderboard.load().then((scores) => {
-      dispatch({type: 'leaderboard:load', scores: scores })
+    return api.get('/leaderboard').then((json) => {
+      dispatch({type: 'leaderboard:load', scores: json.scores })
     }).catch((err) => {
       console.error(err)
     })
@@ -18,7 +18,7 @@ export function loadScores() {
 
 export function postScore(score, name) {
   return function(dispatch) {
-    return api.leaderboard.update(score, name).catch((err) => {
+    return api.signedPost('/leaderboard', {score, name}).catch((err) => {
       console.error(err)
     })
   }
