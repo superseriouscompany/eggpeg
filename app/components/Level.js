@@ -29,7 +29,7 @@ class Level extends Component {
     super(props)
     this.shoot = this.shoot.bind(this)
     this.state = {
-      swapAnim: new Animated.Value(0),
+      swapAnim: new Animated.Value(.5),
       targets:     [],
       nextTargets: [],
     }
@@ -41,12 +41,9 @@ class Level extends Component {
 
   componentWillReceiveProps(props) {
     if( props.level.index != this.props.level.index ) {
-      console.log(props.targets, this.props.targets)
-
       this.setState({
         nextTargets: props.targets,
       })
-
       Animated.timing(
         this.state.swapAnim,
         {toValue: 1, duration: config.timings.levelOut}
@@ -56,9 +53,10 @@ class Level extends Component {
           nextTargets: [],
         })
 
+        this.state.swapAnim.setValue(0)
         Animated.timing(
           this.state.swapAnim,
-          {toValue: 0, duration: config.timings.levelIn }
+          {toValue: .5, duration: config.timings.levelIn }
         ).start()
       })
     }
@@ -85,9 +83,17 @@ class Level extends Component {
         <Animated.View style={{
           flex: 1,
           opacity: this.state.swapAnim.interpolate({
-            inputRange:  [0, 1],
-            outputRange: [1, 0],
-          })
+            inputRange:  [0, 0.5, 1],
+            outputRange: [0, 1, 0],
+          }),
+          transform: [
+            {
+              scale: this.state.swapAnim.interpolate({
+                inputRange:  [0, 0.5, 1],
+                outputRange: [0.5, 1, 2],
+              })
+            },
+          ]
         }}>
           { this.state.targets.map((target, key) => (
             <Target key={this.props.level.index + '-' + key} target={target} hit={target.hit}/>
