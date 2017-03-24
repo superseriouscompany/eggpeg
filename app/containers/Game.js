@@ -13,10 +13,16 @@ import {changeMode}                from '../actions/difficulty'
 class Game extends Component {
   constructor(props) {
     super(props)
-    this.reset             = this.reset.bind(this)
-    this.nextLevel         = this.nextLevel.bind(this)
-    this.loadLevel         = this.loadLevel.bind(this)
-    this.continue          = this.continue.bind(this)
+    this.reset     = this.reset.bind(this)
+    this.nextLevel = this.nextLevel.bind(this)
+    this.loadLevel = this.loadLevel.bind(this)
+    this.continue  = this.continue.bind(this)
+  }
+
+  componentWillReceiveProps(props) {
+    if( props.level.done && props.level.win ) {
+      this.nextLevel()
+    }
   }
 
   componentDidMount() {
@@ -56,7 +62,6 @@ class Game extends Component {
     <GameView
       reset={this.reset}
       continue={this.continue}
-      nextLevel={this.nextLevel}
       currentScore={this.props.score.total}
       {...this.props} />
   )}
