@@ -29,17 +29,37 @@ class Level extends Component {
     super(props)
     this.shoot = this.shoot.bind(this)
     this.state = {
-      newLevelAnim: new Animated.Value(0)
+      swapAnim: new Animated.Value(0),
+      targets:     [],
+      nextTargets: [],
     }
+  }
+
+  componentDidMount() {
+    this.setState({targets: this.props.targets})
   }
 
   componentWillReceiveProps(props) {
     if( props.level.index != this.props.level.index ) {
+      console.log(props.targets, this.props.targets)
+
+      this.setState({
+        nextTargets: props.targets,
+      })
+
       Animated.timing(
-        this.state.newLevelAnim,
-        {toValue: 1, duration: config.timings.levelTransition}
+        this.state.swapAnim,
+        {toValue: 1, duration: config.timings.levelOut}
       ).start(() => {
-        this.state.newLevelAnim.setValue(0)
+        this.setState({
+          targets:     this.state.nextTargets,
+          nextTargets: [],
+        })
+
+        Animated.timing(
+          this.state.swapAnim,
+          {toValue: 0, duration: config.timings.levelIn }
+        ).start()
       })
     }
   }
@@ -64,12 +84,12 @@ class Level extends Component {
       <TouchableWithoutFeedback onPress={this.shoot}>
         <Animated.View style={{
           flex: 1,
-          opacity: this.state.newLevelAnim.interpolate({
-            inputRange:  [0, 0.0000001, 1],
-            outputRange: [1, 0, 1],
-          }),
+          opacity: this.state.swapAnim.interpolate({
+            inputRange:  [0, 1],
+            outputRange: [1, 0],
+          })
         }}>
-          { this.props.targets.map((target, key) => (
+          { this.state.targets.map((target, key) => (
             <Target key={this.props.level.index + '-' + key} target={target} hit={target.hit}/>
           ))}
           { this.props.bullets.map((bullet, key) => (

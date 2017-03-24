@@ -15,7 +15,9 @@ const config = {
     bullet: 7,
   },
   timings: {
-    levelTransition:       1000,
+    // gonna leave 69s in here for timings to change
+    levelIn:               1069,
+    levelOut:              1069,
     multiplierDelay:       1000,
     multiplierBetween:     500,
     rainbowDelay:          150,
