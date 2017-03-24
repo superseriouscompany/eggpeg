@@ -15,6 +15,7 @@ const config = {
     bullet: 7,
   },
   timings: {
+    levelTransition:       1000,
     multiplierDelay:       1000,
     multiplierBetween:     500,
     rainbowDelay:          150,
@@ -32,8 +33,6 @@ const config = {
 }
 
 if( DeviceInfo.isEmulator() ) {
-  // config.winDelay     = 0;
-  // config.lossDelay    = 0;
   config.bullet.delay = 0;
   config.playSounds   = false;
   config.lockLevel    = undefined;

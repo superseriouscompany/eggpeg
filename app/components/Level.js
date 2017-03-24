@@ -11,6 +11,7 @@ import {connect}          from 'react-redux'
 import config             from '../config'
 import sounds             from '../sounds'
 import {
+  Animated,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
@@ -29,11 +30,25 @@ class Level extends Component {
     this.gameLoop = this.gameLoop.bind(this)
     this.iterate  = this.iterate.bind(this)
     this.shoot    = this.shoot.bind(this)
+    this.state    = {
+      newLevelAnim: new Animated.Value(0)
+    }
   }
 
   componentDidMount() {
     running = true;
     this.gameLoop()
+  }
+
+  componentWillReceiveProps(props) {
+    if( props.level.index != this.props.level.index ) {
+      Animated.timing(
+        this.state.newLevelAnim,
+        {toValue: 1, duration: config.timings.levelTransition}
+      ).start(() => {
+        this.state.newLevelAnim.setValue(0)
+      })
+    }
   }
 
   componentWillUnmount() {
@@ -149,12 +164,18 @@ class Level extends Component {
 
   render() { return (
     <TouchableWithoutFeedback onPress={this.shoot}>
-      <View style={{flex: 1}}>
+      <Animated.View style={{
+        flex: 1,
+        opacity: this.state.newLevelAnim.interpolate({
+          inputRange:  [0, 0.0000001, 1],
+          outputRange: [1, 0, 1],
+        }),
+      }}>
         { this.props.targets.map((target, key) => (
-          <Target key={key} target={target} hit={target.hit}/>
+          <Target key={this.props.level.index + '-' + key} target={target} hit={target.hit}/>
         ))}
         { this.props.bullets.map((bullet, key) => (
-          <Bullet key={key} bullet={bullet} hit={bullet.hit}/>
+          <Bullet key={this.props.level.index + '-' + key} bullet={bullet} hit={bullet.hit}/>
         ))}
         { this.props.hint ?
           <View style={style.hintContainer}>
@@ -163,7 +184,7 @@ class Level extends Component {
         :
           <ScoreText />
         }
-      </View>
+      </Animated.View>
     </TouchableWithoutFeedback>
   )}
 }
