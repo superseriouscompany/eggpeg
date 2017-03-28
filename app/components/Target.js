@@ -7,6 +7,8 @@ import base               from '../styles/base';
 import config             from '../config'
 import {
   Animated,
+  Dimensions,
+  Easing,
   StyleSheet,
   View,
 } from 'react-native';
@@ -23,8 +25,27 @@ export default class Target extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      ghostAnim: new Animated.Value(0)
+      ghostAnim: new Animated.Value(0),
+      targetAnim: new Animated.Value(0),
     }
+
+    this.animate = this.animate.bind(this)
+  }
+
+  animate() {
+    this.state.targetAnim.setValue(0)
+    Animated.timing(
+      this.state.targetAnim,
+      {
+        toValue: 1,
+        duration: 2800*4,
+        easing: Easing.linear,
+      },
+    ).start(this.animate)
+  }
+
+  componentDidMount() {
+    this.animate()
   }
 
   componentWillReceiveProps(props) {
@@ -39,8 +60,13 @@ export default class Target extends Component {
   render() {
     const {target} = this.props;
   return (
-    <View style={[style.targetContainer, target.hit ? style.hitContainer : null, {
-      left:   target.x - target.width / 2,
+    <Animated.View style={[style.targetContainer, target.hit ? style.hitContainer : null, {
+      transform: [{
+        translateX: this.state.targetAnim.interpolate({
+          inputRange: [0, 0.5, 1],
+          outputRange: [target.width / 2, Dimensions.get('window').width - target.width / 2, target.width / 2],
+        })
+      }],
       top:    target.y - target.width / 2,
       width:  target.width,
       height: target.width,
@@ -87,7 +113,7 @@ export default class Target extends Component {
           fontSize: Math.round(16 + target.width / 20),
         }]}>{target.score}</Animated.Text>
       : null }
-    </View>
+    </Animated.View>
   )}
 }
 

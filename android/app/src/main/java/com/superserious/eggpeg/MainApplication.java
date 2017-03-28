@@ -3,10 +3,10 @@ package com.superserious.eggpeg;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.branch.rnbranch.RNBranchPackage;
 import com.zmxv.RNSound.RNSoundPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.idehub.Billing.InAppBillingBridgePackage;
-import io.branch.rnbranch.RNBranchPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -30,10 +30,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNBranchPackage(),
             new RNSoundPackage(),
             new RNDeviceInfo(),
-            new InAppBillingBridgePackage(),
-            new RNBranchPackage()
+            new InAppBillingBridgePackage()
       );
     }
   };
