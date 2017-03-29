@@ -34,9 +34,10 @@ class HallOfFame extends Component {
   }
 
   render() {
-    const score = 69;
-    const scores = fakeScores()
-    insertScore(score, scores)
+    const score    = 69;
+    const scores   = fakeScores()
+    const position = insertScore(score, scores)
+    const y        = Math.max(0, position - 3) * 83.5
   return (
     <View style={style.container}>
       <View style={style.header}>
@@ -45,7 +46,9 @@ class HallOfFame extends Component {
         </TouchableOpacity>
         <Text>hall of fame</Text>
       </View>
-      <ScrollView style={style.leaderboard}>
+      <ScrollView ref="scrollView"
+                  onContentSizeChange={(width, height) => this.refs.scrollView.scrollTo({y: y})}
+                  style={style.leaderboard}>
         {scores.map((s, key) => (
           <View key={key}>
             { s.name ?
@@ -91,7 +94,7 @@ function fakeScores() {
 function insertScore(score, scores) {
   let slot = -1;
   for( var i = 0; i < scores.length; i++ ) {
-    if( scores[i].score <= score ) {
+    if( scores[i].name && scores[i].score <= score ) {
       slot = i;
       break;
     }
@@ -99,7 +102,7 @@ function insertScore(score, scores) {
 
   if( slot == - 1 ) { return scores }
   scores.splice(slot, 0, {score: score, name: false,});
-  return scores
+  return slot
 }
 
 const style = StyleSheet.create({
