@@ -3,7 +3,7 @@
 import React, {Component}         from 'react'
 import {connect}                  from 'react-redux'
 import {enqueueRetry, clearRetry} from '../actions/retry.js'
-import {loadScores}               from '../actions/leaderboard'
+import {loadScores, postScore}    from '../actions/leaderboard'
 import {NetInfo}                  from 'react-native'
 import {api}                      from '../actions/api'
 
@@ -17,7 +17,7 @@ class LeaderboardProvider extends Component {
     NetInfo.isConnected.addEventListener('change', this.handleConnectionChange);
     this.props.dispatch(loadScores()).catch((err) => {
       console.warn("Couldn't load leaderboard. You might be offline?");
-      this.props.dispatch(enqueueRetry('loadScores'));
+      this.props.dispatch(enqueueRetry({type: 'loadScores'}));
     })
   }
 
@@ -30,8 +30,12 @@ class LeaderboardProvider extends Component {
 
     if( connected ) {
       this.props.retry.forEach((request) => {
-        if( request.type === 'loadScores') {
+        if( request.type === 'loadScores' ) {
           this.props.dispatch(loadScores()).then(() => {
+            this.props.dispatch(clearRetry(request.id))
+          })
+        } else if( request.type === 'postScore' ) {
+          this.props.dispatch(postScore(request.score, request.name)).then(() => {
             this.props.dispatch(clearRetry(request.id))
           })
         } else {

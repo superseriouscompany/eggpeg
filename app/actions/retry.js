@@ -1,10 +1,9 @@
-// request.path:    path
-// request.body:    body (if applicable)
-// request.signed:  is signed request
-// request.options: fetch options
-export function enqueueRetry(requestType) {
+export function enqueueRetry(request) {
   return function(dispatch) {
-    dispatch({type: 'retry:enqueue', request: {id: Math.random(), type: requestType}})
+    dispatch({type: 'retry:enqueue', request: Object.assign({
+      id:   Math.random(),
+      time: +new Date,
+    }, request)})
   }
 }
 

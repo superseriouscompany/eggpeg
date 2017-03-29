@@ -16,8 +16,6 @@ export function loadScores() {
 
 export function postScore(score, name) {
   return function(dispatch) {
-    return api.signedPost('/leaderboard', {score, name}).catch((err) => {
-      console.error(err)
-    })
+    return api.signedPost('/leaderboard', {score, name})
   }
 }
