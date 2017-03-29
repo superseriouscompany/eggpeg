@@ -90,6 +90,9 @@ class GameLoop extends Component {
         this.props.dispatch({type: 'bullets:hit', index: bi, score: score, count: hits.length})
       } else if( bullet.spent && !bullet.hit && !bullet.missed ){
         this.props.dispatch({type: 'bullets:miss', index: bi})
+        if( this.props.level.index < 5 ) {
+          this.props.dispatch({type: 'chamber:reload'})
+        }
       }
     })
 
