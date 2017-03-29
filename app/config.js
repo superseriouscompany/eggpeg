@@ -18,6 +18,7 @@ const config = {
     // gonna leave 69s in here for timings to change
     levelIn:               1069,
     levelOut:              1069,
+    gameOverIn:            1069,
     multiplierDelay:       1000,
     multiplierBetween:     500,
     rainbowDelay:          150,

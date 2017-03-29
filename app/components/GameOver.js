@@ -12,6 +12,7 @@ import config             from '../config'
 import sounds             from '../sounds'
 import {connect}          from 'react-redux'
 import {
+  Animated,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -32,7 +33,10 @@ class GameOver extends Component {
     this.pause = this.pause.bind(this)
     this.resume = this.resume.bind(this)
     this.showSettings = this.showSettings.bind(this)
-    this.state = { timer: config.countdown }
+    this.state = {
+      timer: config.countdown,
+      enterAnim: new Animated.Value(0),
+    }
   }
 
   componentDidMount() {
@@ -46,6 +50,10 @@ class GameOver extends Component {
         console.error(err)
       })
     }
+
+    Animated.timing(this.state.enterAnim, {
+      duration: config.timings.gameOverIn, toValue: 1,
+    }).start()
   }
 
   componentWillUnmount() {
@@ -79,8 +87,11 @@ class GameOver extends Component {
   render() { return (
     <View style={style.container}>
       <LinksHeader textStyle={{color: 'white'}} />
-      <View style={[style.top, {
-
+      <Animated.View style={[style.top, {
+        marginTop: this.state.enterAnim.interpolate({
+          inputRange:  [0, 1],
+          outputRange: [-1000, 0],
+        })
       }]}>
         <Text style={style.score}>{this.props.score}!</Text>
         <Text style={style.carrot}>
@@ -90,15 +101,19 @@ class GameOver extends Component {
         <TouchableOpacity onPress={() => alert('nope')}>
           <Text style={style.topScores}>top scores</Text>
         </TouchableOpacity>
-      </View>
+      </Animated.View>
 
-      <View style={[style.bottom, {
+      <Animated.View style={[style.bottom, {
+        marginBottom: this.state.enterAnim.interpolate({
+          inputRange:  [0, 1],
+          outputRange: [-200, 0],
+        })
       }]}>
         <TouchableOpacity style={[style.button, style.retry]} onPress={this.props.reset}>
           <Text style={[style.buttonText, {color: 'hotpink'}]}>Q</Text>
         </TouchableOpacity>
         <PayButton style={[style.button, style.continueButton]} textStyle={style.buttonText} continue={this.props.continue} />
-      </View>
+      </Animated.View>
       <SettingsLink />
     </View>
   )}
