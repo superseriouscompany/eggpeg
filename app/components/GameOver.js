@@ -113,7 +113,7 @@ class GameOver extends Component {
           <Text style={{color: 'hotpink'}}>Y</Text> {this.props.highScore}
         </Text>
 
-        <TouchableOpacity onPress={() => alert('nope')}>
+        <TouchableOpacity onPress={() => this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})}>
           <Text style={style.topScores}>top scores</Text>
         </TouchableOpacity>
       </Animated.View>
