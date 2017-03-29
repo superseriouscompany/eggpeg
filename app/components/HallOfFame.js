@@ -128,7 +128,7 @@ function color(index) {
   const sectionSize = 100 / stops.length;
   let section       = Math.floor(index / sectionSize)
   let relativeIndex = index % sectionSize;
-  if( section == stops.length - 1 ) { section--; }
+  if( section == stops.length - 1 ) { return 'rgb(0,0,0)' }
 
   const src = stops[section];
   const dst = stops[section+1];
