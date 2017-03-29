@@ -27,7 +27,7 @@ import {
 export default class Root extends Component {
   constructor(props) {
     super(props)
-    this.state = { scene: 'Start' }
+    this.state = { scene: 'Start'}
   }
 
   componentDidMount() {

@@ -9,6 +9,7 @@ import {postScore, stubScore} from '../actions/leaderboard'
 import {
   TextInput,
   TouchableOpacity,
+  ScrollView,
   StyleSheet,
   View,
 } from 'react-native';
@@ -32,25 +33,44 @@ class HallOfFame extends Component {
     })
   }
 
-  render() { return (
-    <View style={style.container}>
-      <TouchableOpacity onPress={() => this.props.dispatch({type: 'scene:pop'})}>
-        <Text>&larr; Back</Text>
-      </TouchableOpacity>
-      <Text>You scored {this.props.score}!</Text>
-      <TextInput style={style.input} onChangeText={(name) => this.setState({name})} value={this.state.text} />
+  render() {
+    const score = 69;
+    const scores = fakeScores()
 
-      <TouchableOpacity onPress={this.postScore}>
-        <Text>Post Score</Text>
-      </TouchableOpacity>
+  return (
+    <View style={style.container}>
+      <View style={style.header}>
+        <TouchableOpacity onPress={() => this.props.dispatch({type: 'scene:pop'})}>
+          <Text>&larr; Back</Text>
+        </TouchableOpacity>
+        <Text>hall of fame</Text>
+      </View>
+      <ScrollView style={style.leaderboard}>
+        {scores.map((s, key) => (
+          <Text key={key}>
+            {s.name} {s.score}
+          </Text>
+        ))}
+        <TextInput style={style.input} onChangeText={(name) => this.setState({name})} value={this.state.text} />
+        <TouchableOpacity onPress={this.postScore}>
+          <Text>Post Score</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   )}
 }
 
 function mapStateToProps(state) {
   return {
-    score: state.score.total,
+    score:  state.score.total,
+    scores: state.leaderboard.scores,
   }
+}
+
+function fakeScores() {
+  return "Hello is it me you're looking for? so santi told me to fill the leaderboard with 100 scores with fake names on them so that we don't have to make an empty state for this screen. it's going pretty well. I'm not sure if I'm close to 100 yet. Watching a sunset out the window right now, it's pretty beautiful. Ok anyway we should be around 100 now. Byeeeeeee. Oh goddamnit I still have to make like 30 more scores hm ok Kevin lost his sim card today that was pretty scary are we good yet? damnit. ok just four more".split(' ').map((name, i) => {
+    return {name: name, score: 100 - i}
+  })
 }
 
 const style = StyleSheet.create({
