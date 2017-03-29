@@ -6,27 +6,29 @@ import branch    from 'react-native-branch';
 
 class DeeplinkProvider extends React.Component {
   componentDidMount() {
-    let branchUniversalObject = branch.createBranchUniversalObject(
+    branch.createBranchUniversalObject(
       `default`,
       {
         metadata: {
           link_type: 'default',
         }
       }
-    )
+    ).then((buo) => {
+      let linkProperties = {
+        feature: 'friend-invitation',
+        channel: 'app'
+      }
 
-    let linkProperties = {
-      feature: 'friend-invitation',
-      channel: 'app'
-    }
+      let controlParams = {
+        '$ios_deepview': 'egg_peg_deepview_ckbe',
+      }
+      controlParams = {};
 
-    let controlParams = {
-      '$ios_deepview': 'egg_peg_deepview_ckbe',
-    }
-    controlParams = {};
-
-    branchUniversalObject.generateShortUrl(linkProperties, controlParams).then((payload) => {
-      this.props.dispatch({type: 'shareLink:set', shareLink: payload.url})
+      buo.generateShortUrl(linkProperties, controlParams).then((payload) => {
+        this.props.dispatch({type: 'shareLink:set', shareLink: payload.url})
+      })
+    }).catch((err) => {
+      console.warn("Couldn't generate deep link", err);
     })
   }
 
