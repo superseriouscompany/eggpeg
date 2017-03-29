@@ -79,28 +79,25 @@ class GameOver extends Component {
   render() { return (
     <View style={style.container}>
       <LinksHeader textStyle={{color: 'white'}} />
-      <View style={style.mainContainer}>
-        <HighScores explanationText={'high score!'} scores={this.props.highScores} score={this.props.score} isHigh={this.props.isHighScore} />
+      <View style={[style.top, {
+
+      }]}>
+        <Text style={style.score}>{this.props.score}!</Text>
+        <Text style={style.carrot}>
+          <Text style={{color: 'hotpink'}}>Y</Text> 187
+        </Text>
+
+        <TouchableOpacity onPress={() => alert('nope')}>
+          <Text style={style.topScores}>top scores</Text>
+        </TouchableOpacity>
       </View>
 
-      <View style={style.buttonsContainer}>
-        { !this.state.expired && this.props.highScores.length >= 3 ?
-          <View style={style.continueContainer}>
-            <PayButton style={style.button}
-             countdown={this.state.timer}
-             continue={this.props.continue}
-             pause={this.pause}
-             resume={this.resume} />
-          </View>
-        :
-          <View style={style.continueContainer}>
-            <View style={{height: 91, width: '100%'}}></View>
-          </View>
-        }
-        <TouchableOpacity style={style.button} onPress={this.props.reset}>
-          <Text style={{fontStyle: 'italic', fontSize: 32, color: 'white'}}>game over</Text>
+      <View style={[style.bottom, {
+      }]}>
+        <TouchableOpacity style={[style.button, style.retry]} onPress={this.props.reset}>
+          <Text style={[style.buttonText, {color: 'hotpink'}]}>Q</Text>
         </TouchableOpacity>
-        <DifficultySwitch dark={true} style={{marginTop: 20}}/>
+        <PayButton style={[style.button, style.continueButton]} textStyle={style.buttonText} continue={this.props.continue} />
       </View>
       <SettingsLink />
     </View>
@@ -115,34 +112,56 @@ const style = StyleSheet.create({
     right:           0,
     top:             0,
     bottom:          0,
-    alignItems:      'center',
-    zIndex:          50,
+    zIndex:          1,
   },
-  mainContainer: {
-    flex: .4,
-    alignItems: 'center',
+  top: {
+    flex:           1,
+    alignItems:     'center',
     justifyContent: 'center',
-    marginTop: 60,
-  },
-  buttonsContainer: {
-    flex: .6,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   countdown: {
     color: 'white',
   },
-  button: {
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 5,
-    width: 200,
-    height: 75,
-    paddingBottom: 6,
+  score: {
+    fontSize: 64,
+    color:    'white',
+  },
+  carrot: {
+    fontSize: 18,
+    color:    'white',
+  },
+  topScores: {
+    color:     'white',
+    fontStyle: 'italic',
+  },
+  bottom: {
+    flexDirection:  'row',
+    paddingLeft:    31,
+    paddingRight:   31,
+    paddingBottom:  27,
     justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 8,
-    marginBottom: 8,
+  },
+  button: {
+    backgroundColor: 'white',
+    borderRadius:    5,
+    paddingLeft:     26,
+    paddingRight:    26,
+    paddingTop:      14,
+    paddingBottom:   20,
+    alignItems:      'center',
+    justifyContent:  'center',
+  },
+  continueButton: {
+    width:  174.5,
+    height: 77,
+  },
+  retry: {
+    marginRight: 9,
+  },
+  buttonText: {
+    color: '#4A4A4A',
+    fontStyle: 'italic',
+    fontSize: 32,
   },
 })
 
