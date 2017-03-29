@@ -16,6 +16,7 @@ import difficulty  from './difficulty'
 import leaderboard from './leaderboard'
 import level       from './level'
 import purchase    from './purchase'
+import retry       from './retry'
 import scene       from './scene'
 import score       from './score'
 import shareLink   from './shareLink'
@@ -30,6 +31,7 @@ const reducers = combineReducers({
   targets,
   score,
   purchase,
+  retry,
   scene,
   shareLink,
   victory,
