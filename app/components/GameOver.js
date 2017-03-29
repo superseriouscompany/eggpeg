@@ -95,7 +95,7 @@ class GameOver extends Component {
       }]}>
         <Text style={style.score}>{this.props.score}!</Text>
         <Text style={style.carrot}>
-          <Text style={{color: 'hotpink'}}>Y</Text> 187
+          <Text style={{color: 'hotpink'}}>Y</Text> {this.props.highScore}
         </Text>
 
         <TouchableOpacity onPress={() => alert('nope')}>
@@ -180,4 +180,11 @@ const style = StyleSheet.create({
   },
 })
 
-export default connect()(GameOver)
+function mapStateToProps(state) {
+  return {
+    score:     state.score.total,
+    highScore: state.score.highScores && state.score.highScores[0],
+  }
+}
+
+export default connect(mapStateToProps)(GameOver)
