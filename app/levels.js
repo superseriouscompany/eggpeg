@@ -207,11 +207,39 @@ const levels = [
     targets: [
       {
         points: [
+          { x: 0, y: ycenter - 100 },
+          { x: width, y: ycenter - 100 }
+        ],
+        velocity: 1,
+      },
+      {
+        points: [
+          { x: 0, y: ycenter - 50 },
+          { x: width, y: ycenter - 50 }
+        ],
+        velocity: 1,
+      },
+      {
+        points: [
           { x: 0, y: ycenter },
           { x: width, y: ycenter }
         ],
         velocity: 1,
-      }
+      },
+      {
+        points: [
+          { x: 0, y: ycenter + 50 },
+          { x: width, y: ycenter + 50 }
+        ],
+        velocity: 1,
+      },
+      {
+        points: [
+          { x: 0, y: ycenter + 100 },
+          { x: width, y: ycenter + 100 }
+        ],
+        velocity: 1,
+      },
     ],
     color: colors.purple,
   },

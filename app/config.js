@@ -31,7 +31,8 @@ const config = {
   gravity: 0,//9.80665,
   countdown: 20, // game over countdown timer
   playSounds: false,
-  startingLevel: __DEV__ ? 'Solo' : 'Stationary',
+  animate:    true,
+  startingLevel: __DEV__ ? 'Solo' : 'Solo',
 }
 
 if( DeviceInfo.isEmulator() ) {

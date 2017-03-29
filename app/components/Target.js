@@ -59,14 +59,13 @@ export default class Target extends Component {
 
   render() {
     const {target} = this.props;
+    const left = config.animate
+      ? this.state.targetAnim.interpolate({inputRange: [0, 0.5, 1], outputRange: [target.width / 2, Dimensions.get('window').width - target.width / 2, target.width / 2]})
+      : target.x - target.width / 2;
+
   return (
     <Animated.View style={[style.targetContainer, target.hit ? style.hitContainer : null, {
-      transform: [{
-        translateX: this.state.targetAnim.interpolate({
-          inputRange: [0, 0.5, 1],
-          outputRange: [target.width / 2, Dimensions.get('window').width - target.width / 2, target.width / 2],
-        })
-      }],
+      left: left,
       top:    target.y - target.width / 2,
       width:  target.width,
       height: target.width,
