@@ -122,13 +122,12 @@ function color(index) {
     { r: 234, g: 138, b: 57 },
     { r: 209, g: 83,  b: 74 },
     { r: 139, g: 80,  b: 151 },
-    // { r: 56,  g: 158, b: 217 },
+    { r: 56,  g: 158, b: 217 },
   ]
 
-  const sectionSize = 100 / stops.length;
+  const sectionSize = 100 / (stops.length-1);
   let section       = Math.floor(index / sectionSize)
   let relativeIndex = index % sectionSize;
-  if( section == stops.length - 1 ) { return 'rgb(0,0,0)' }
 
   const src = stops[section];
   const dst = stops[section+1];
