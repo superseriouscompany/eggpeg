@@ -109,9 +109,14 @@ class GameOver extends Component {
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: '#532D5A',
-    flex:            1,
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    position:        'absolute',
+    left:            0,
+    right:           0,
+    top:             0,
+    bottom:          0,
     alignItems:      'center',
+    zIndex:          50,
   },
   mainContainer: {
     flex: .4,

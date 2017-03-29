@@ -69,20 +69,22 @@ export default class GameView extends Component {
             reset={this.props.reset}
             highScores={this.props.score.highScores}
             isHighScore={true} />
-        : this.props.level.done && !this.props.level.win ?
-          <GameOver
-            score={this.props.score.total}
-            highScores={this.props.score.highScores}
-            isHighScore={this.props.score.isHigh || false}
-            reset={this.props.reset}
-            continue={this.props.continue} />
         :
           <View style={{flex: 1, backgroundColor: this.props.level.color}}>
-            <GameHeader
-              tries={this.props.chamber}
-              score={this.props.score.total || 0}
-              newHighScore={this.state.newHighScore}
-              completeRainbowAnimation={this.completeRainbowAnimation} />
+            { true || this.props.level.done && !this.props.level.win ?
+              <GameOver
+                score={this.props.score.total}
+                highScores={this.props.score.highScores}
+                isHighScore={this.props.score.isHigh || false}
+                reset={this.props.reset}
+                continue={this.props.continue} />
+            :
+              <GameHeader
+                tries={this.props.chamber}
+                score={this.props.score.total || 0}
+                newHighScore={this.state.newHighScore}
+                completeRainbowAnimation={this.completeRainbowAnimation} />
+            }
             <Level />
             { this.props.level.name !== 'Stationary' ?
               <SettingsLink />
