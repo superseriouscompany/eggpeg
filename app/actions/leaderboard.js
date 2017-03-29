@@ -11,7 +11,7 @@ export function loadScores() {
     return api.get('/leaderboard').then((json) => {
       dispatch({type: 'leaderboard:load', scores: json.scores })
     }).catch((err) => {
-      console.error(err)
+      console.error("Couldn't load leaderboard", err.message)
     })
   }
 }
