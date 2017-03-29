@@ -30,6 +30,9 @@ class LeaderboardProvider extends Component {
 
     if( connected ) {
       this.props.retry.forEach((request) => {
+        // TODO: duplicating logic is an easy place for errors to pop up, and the caller api for this sucks.
+        // ideally, retry would be an option that you pass along to the api request? or to the action.
+        // needs some more thought.
         if( request.type === 'loadScores' ) {
           this.props.dispatch(loadScores()).then(() => {
             this.props.dispatch(clearRetry(request.id))
