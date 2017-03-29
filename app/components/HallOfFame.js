@@ -54,11 +54,19 @@ class HallOfFame extends Component {
             { s.name ?
               <Score place={key+1} name={s.name} score={s.score} />
             :
-              <View>
-                <TextInput style={style.input} onChangeText={(name) => this.setState({name})} value={this.state.text} />
-                <TouchableOpacity onPress={this.postScore}>
-                  <Text>Post Score</Text>
-                </TouchableOpacity>
+              <View style={[style.scoreContainer, style.scoreInputContainer]}>
+                <Text style={style.place}>{key+1}</Text>
+                <TextInput
+                  autoCapitalize={'none'}
+                  autoCorrect={false}
+                  autoFocus={true}
+                  placeholder={'your name'}
+                  returnKeyType={'go'}
+                  style={style.input}
+                  onSubmitEditing={this.postScore}
+                  onChangeText={(name) => this.setState({name})}
+                  value={this.state.text} />
+                <Text style={style.score}>{s.score}!</Text>
               </View>
             }
           </View>
@@ -111,8 +119,10 @@ const style = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderWidth: 1,
-    borderColor: 'hotpink',
+    flex: 1,
+    backgroundColor: 'cornflowerblue',
+    color: 'white',
+    fontSize: 32,
   },
   leaderboard: {
     flex: 1,
@@ -123,6 +133,8 @@ const style = StyleSheet.create({
     position: 'absolute',
     top: 3,
     left: 8,
+    zIndex: 1,
+    backgroundColor: 'transparent',
   },
   scoreContainer: {
     flexDirection: 'row',
@@ -131,6 +143,9 @@ const style = StyleSheet.create({
     paddingTop: 19,
     paddingBottom: 22,
     paddingRight: 21,
+  },
+  scoreInputContainer: {
+    backgroundColor: 'hotpink',
   },
   name: {
     flex: 1,
