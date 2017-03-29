@@ -52,9 +52,11 @@ class HallOfFame extends Component {
         {scores.map((s, key) => (
           <View key={key}>
             { s.name ?
-              <Score place={key+1} name={s.name} score={s.score} />
+              <Score place={key+1} name={s.name} score={s.score} color={color(key)}/>
             :
-              <View style={[style.scoreContainer, style.scoreInputContainer]}>
+              <View style={[style.scoreContainer, style.scoreInputContainer, {
+                backgroundColor: color(key),
+              }]}>
                 <Text style={style.place}>{key+1}</Text>
                 <TextInput
                   autoCapitalize={'none'}
@@ -78,9 +80,9 @@ class HallOfFame extends Component {
 
 function Score(props) {
   return (
-    <View style={style.scoreContainer}>
+    <View style={[style.scoreContainer, {backgroundColor: props.color}]}>
       <Text style={style.place}>{props.place}</Text>
-      <Text style={style.name}>{props.name}</Text>
+      <Text style={style.name}>{props.color}</Text>
       <Text style={style.score}>{props.score}</Text>
     </View>
   )
@@ -111,6 +113,35 @@ function insertScore(score, scores) {
   if( slot == - 1 ) { return scores }
   scores.splice(slot, 0, {score: score, name: false,});
   return slot
+}
+
+function color(index) {
+  const stops = [
+    { r: 121, g: 178, b: 73 },
+    { r: 245, g: 184, b: 64 },
+    { r: 234, g: 138, b: 57 },
+    { r: 209, g: 83,  b: 74 },
+    { r: 139, g: 80,  b: 151 },
+    // { r: 56,  g: 158, b: 217 },
+  ]
+
+  const sectionSize = 100 / stops.length;
+  let section       = Math.floor(index / sectionSize)
+  let relativeIndex = index % sectionSize;
+  if( section == stops.length - 1 ) { section--; }
+
+  const src = stops[section];
+  const dst = stops[section+1];
+
+  const rdelta = (dst.r - src.r) / sectionSize;
+  const gdelta = (dst.g - src.g) / sectionSize;
+  const bdelta = (dst.b - src.b) / sectionSize;
+
+  const r = src.r + (rdelta*relativeIndex);
+  const g = src.g + (gdelta*relativeIndex);
+  const b = src.b + (bdelta*relativeIndex);
+
+  return `rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`
 }
 
 const style = StyleSheet.create({
