@@ -3,7 +3,6 @@
 import React, {PropTypes} from 'react';
 import Component          from './Component';
 import Text               from './Text';
-import Result             from './Result'
 import Victory            from './Victory'
 import GameHeader         from './GameHeader'
 import GameOver           from './GameOver'
@@ -22,7 +21,6 @@ import {
 export default class GameView extends Component {
   static propTypes = {
     reset:     PropTypes.func.isRequired,
-    nextLevel: PropTypes.func.isRequired,
     continue:  PropTypes.func.isRequired,
   }
 
@@ -34,6 +32,8 @@ export default class GameView extends Component {
 
   componentWillReceiveProps(props) {
     // TODO: clean this up and move it somewhere it belongs
+    if( props.level.index < 5 ) { return; }
+
     const {highScores} = this.props.score
     if( !highScores.length || props.currentScore === this.props.currentScore ) { return; }
     if( this.state.scoreIndex && this.state.scoreIndex < 0 ) { return; }
@@ -77,13 +77,6 @@ export default class GameView extends Component {
             isHighScore={this.props.score.isHigh || false}
             reset={this.props.reset}
             continue={this.props.continue} />
-        : this.props.level.done && this.props.level.win ?
-          <Result
-            score={this.props.score.total}
-            levelScore={this.props.score.level}
-            win={this.props.level.win}
-            reset={this.props.reset}
-            nextLevel={this.props.nextLevel} />
         :
           <View style={{flex: 1, backgroundColor: this.props.level.color}}>
             <GameHeader
