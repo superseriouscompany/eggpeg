@@ -73,9 +73,6 @@ export default class GameView extends Component {
           <View style={{flex: 1, backgroundColor: this.props.level.color}}>
             { true || this.props.level.done && !this.props.level.win ?
               <GameOver
-                score={this.props.score.total}
-                highScores={this.props.score.highScores}
-                isHighScore={this.props.score.isHigh || false}
                 reset={this.props.reset}
                 continue={this.props.continue} />
             :
