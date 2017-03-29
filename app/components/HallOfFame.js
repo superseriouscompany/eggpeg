@@ -1,11 +1,11 @@
 'use strict';
 
-import React          from 'react'
-import Component      from './Component'
-import Text           from './Text'
-import {connect}      from 'react-redux'
-import {enqueueRetry} from '../actions/retry'
-import {postScore}    from '../actions/leaderboard'
+import React                  from 'react'
+import Component              from './Component'
+import Text                   from './Text'
+import {connect}              from 'react-redux'
+import {enqueueRetry}         from '../actions/retry'
+import {postScore, stubScore} from '../actions/leaderboard'
 import {
   TextInput,
   TouchableOpacity,
@@ -25,6 +25,7 @@ class HallOfFame extends Component {
     if( this.state.name.length > 20 ) { return alert('Your name can only be 20 characters') }
 
     return this.props.dispatch(postScore(this.props.score, this.state.name)).catch((err) => {
+      this.props.dispatch(stubScore(this.props.score, this.state.name))
       this.props.dispatch(enqueueRetry({type: 'postScore', score: this.props.score, name: this.state.name}))
     }).then(() => {
       this.props.dispatch({type: 'scene:change', scene: 'Start'})
