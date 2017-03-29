@@ -5,7 +5,7 @@ import { connect }                 from 'react-redux';
 import GameView                    from '../components/GameView'
 import config                      from '../config'
 import {loadLevel, loadFirstLevel} from '../actions/levels'
-import {loadScores, recordScore}   from '../actions/scores'
+import {recordScore}   from '../actions/scores'
 import levels                      from '../levels'
 import {AsyncStorage}              from 'react-native'
 import {changeMode}                from '../actions/difficulty'
@@ -17,10 +17,6 @@ class Game extends Component {
     this.nextLevel         = this.nextLevel.bind(this)
     this.loadLevel         = this.loadLevel.bind(this)
     this.continue          = this.continue.bind(this)
-  }
-
-  componentDidMount() {
-    this.props.dispatch(loadScores())
   }
 
   continue() {
