@@ -25,7 +25,9 @@ class Game extends Component {
   }
 
   componentDidMount() {
-    this.reset()
+    if( this.props.scene.previous ) {
+      this.reset()
+    }
   }
 
   continue() {
@@ -85,6 +87,7 @@ class Game extends Component {
 
 function mapStateToProps(state) {
   return {
+    // TODO: we definitely don't need all of these
     chamber:      state.chamber,
     levels:       state.worlds.current.levels,
     world:        state.worlds.current,
@@ -94,6 +97,7 @@ function mapStateToProps(state) {
     showTutorial: !state.tutorial.complete,
     difficulty:   state.difficulty,
     leaderboard:  state.leaderboard,
+    scene:        state.scene,
   }
 }
 
