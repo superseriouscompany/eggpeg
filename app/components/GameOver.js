@@ -11,6 +11,7 @@ import sounds             from '../sounds'
 import {connect}          from 'react-redux'
 import {
   Animated,
+  Image,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -102,6 +103,7 @@ class GameOver extends Component {
           outputRange: [-1000, 0],
         })
       }]}>
+
         { this.props.score > this.props.highScore ?
           <RainbowBar />
         : null }
@@ -118,6 +120,12 @@ class GameOver extends Component {
 
         <TouchableOpacity onPress={() => this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})}>
           <Text style={style.topScores}>top scores</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={style.leftNav}>
+          <View style={[style.button, {height: 38, width: 38, paddingLeft: 1}]}>
+            <Image source={require('../images/HomeIcon.png')}/>
+          </View>
         </TouchableOpacity>
       </Animated.View>
 
@@ -145,6 +153,14 @@ const style = StyleSheet.create({
     top:             0,
     bottom:          0,
     zIndex:          1,
+  },
+  leftNav: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    padding: 20,
+    paddingRight: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0)'
   },
   top: {
     flex:           1,
@@ -176,10 +192,6 @@ const style = StyleSheet.create({
   button: {
     backgroundColor: 'white',
     borderRadius:    5,
-    paddingLeft:     26,
-    paddingRight:    26,
-    paddingTop:      14,
-    paddingBottom:   20,
     alignItems:      'center',
     justifyContent:  'center',
   },
