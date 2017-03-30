@@ -24,7 +24,7 @@ class LinksHeader extends Component {
         <Text style={[this.props.textStyle,{fontStyle: 'italic'}]}>who?</Text>
       </TouchableOpacity>
       <TouchableOpacity style={style.rightNav} onPress={this.shareDialog}>
-        <Text style={[this.props.textStyle, {fontStyle: 'italic', textAlign: 'right'}]}>link</Text>
+        <Text style={[this.props.textStyle, {fontStyle: 'italic', textAlign: 'right'}]}>invite</Text>
       </TouchableOpacity>
     </View>
   )}

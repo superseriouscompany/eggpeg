@@ -7,6 +7,7 @@ import {connect}              from 'react-redux'
 import {enqueueRetry}         from '../actions/retry'
 import {postScore, stubScore} from '../actions/leaderboard'
 import {
+  Image,
   TextInput,
   TouchableOpacity,
   ScrollView,
@@ -47,11 +48,11 @@ class HallOfFame extends Component {
         <View style={{position: 'absolute', paddingTop: 20, left: 0, right: 0, flexDirection: 'row', justifyContent: 'center'}}>
           <Text>HALL OF FAME</Text>
         </View>
-        <TouchableOpacity onPress={() => this.props.dispatch({type: 'scene:pop'})}>
-          <Text>B</Text>
+        <TouchableOpacity style={[style.leftNav, {justifyContent: 'center'}]} onPress={() => this.props.dispatch({type: 'scene:pop'})}>
+          <Image source={require('../images/UpArrow.png')}/>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text>invite</Text>
+        <TouchableOpacity style={style.rightNav} onPress={this.shareDialog}>
+          <Text style={[this.props.textStyle, {fontStyle: 'italic', textAlign: 'right'}]}>invite</Text>
         </TouchableOpacity>
       </View>
       <ScrollView ref="scrollView"
@@ -156,11 +157,8 @@ const style = StyleSheet.create({
     flex: 1,
   },
   header: {
-
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 20,
-
   },
   input: {
     height: 40,
@@ -201,6 +199,18 @@ const style = StyleSheet.create({
   score: {
     fontSize: 32,
     color: 'white',
+  },
+  leftNav: {
+    width: 120,
+    padding: 20,
+    paddingRight: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0)'
+  },
+  rightNav: {
+    width: 120,
+    padding: 20,
+    paddingLeft: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0)'
   },
 })
 
