@@ -5,6 +5,7 @@ import Component        from './Component'
 import Text             from './Text'
 import {connect}        from 'react-redux'
 import {loadFirstLevel} from '../actions/levels'
+import {colors}         from '../styles/base'
 import {
   StyleSheet,
   TouchableOpacity,
@@ -14,7 +15,6 @@ import {
 class Worlds extends Component {
   loadLevel(name) {
     return () => {
-      alert('loading ' + name)
       this.props.dispatch({type: 'game:reset'})
       this.props.dispatch(loadFirstLevel(this.props.showTutorial))
       this.props.dispatch({type: 'scene:change', scene: 'Game'})
@@ -22,24 +22,37 @@ class Worlds extends Component {
   }
 
   render() { return (
-    <View style={style.grid}>
-      {this.props.worlds.map((w, key) => (
-        <View key={key} style={style.worldContainer}>
-          { w.comingSoon ?
-            <View style={style.greyedOut}>
-              <World world={w} key={key} load={this.loadLevel(w.name)}/>
-            </View>
-          : w.locked ?
-            <View>
-              <World world={w} key={key} load={this.loadLevel(w.name)}/>
-            </View>
-          :
-            <TouchableOpacity onPress={() => this.loadLevel(w.name)}>
-              <World world={w} key={key} load={this.loadLevel(w.name)}/>
-            </TouchableOpacity>
-          }
+    <View style={style.container}>
+      <View style={style.header}>
+        <TouchableOpacity onPress={() => this.props.dispatch({type: 'scene:pop'})}>
+          <Text>back</Text>
+        </TouchableOpacity>
+        <View style={style.scoresContainer}>
+          <Text style={style.topScore}>420</Text>
+          <TouchableOpacity onPress={() => this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})}>
+            <Text style={style.leaderboard}>see top scores</Text>
+          </TouchableOpacity>
         </View>
-      ))}
+      </View>
+      <View style={style.grid}>
+        {this.props.worlds.map((w, key) => (
+          <View key={key} style={style.worldContainer}>
+            { w.comingSoon ?
+              <View style={style.greyedOut}>
+                <World world={w} key={key} />
+              </View>
+            : w.locked ?
+              <View style={style.greyedOut}>
+                <World world={w} key={key} />
+              </View>
+            :
+              <TouchableOpacity onPress={() => this.loadLevel(w.name)}>
+                <World world={w} key={key} />
+              </TouchableOpacity>
+            }
+          </View>
+        ))}
+      </View>
     </View>
   )}
 }
@@ -47,27 +60,26 @@ class Worlds extends Component {
 function World(props) {
   return (
     <View style={style.world}>
-      <Text style={style.number}>{props.world.name}</Text>
       <View style={[style.preview, {
         backgroundColor: props.world.color,
       }]}>
         <Text style={style.status}>
           { props.world.locked ?
             '🔒'
-          : props.world.beaten ?
-            '✅'
           : props.world.comingSoon ?
             '⏳'
-          : null}
+          : props.world.name}
         </Text>
       </View>
       <Text style={style.maxScore}>
         { props.world.comingSoon ?
           'coming soon...'
+        : props.world.locked ?
+          'locked'
         : props.world.score ?
           `${props.world.score}/${props.world.maxScore}`
         :
-          `${props.world.maxScore} points`
+          `0%`
         }
       </Text>
     </View>
@@ -82,42 +94,64 @@ function mapStateToProps(state) {
 }
 
 const style = StyleSheet.create({
+  container: {
+    backgroundColor: colors.beige,
+    flex:            1,
+  },
   grid: {
     flexDirection: 'row',
     flexWrap:      'wrap',
     paddingTop:    40,
-    alignItems: 'flex-start',
+    alignItems:    'flex-start',
+  },
+  header: {
+    padding: 20,
+  },
+  scoresContainer: {
+    justifyContent: 'center',
+    alignItems:     'center',
+  },
+  topScore: {
+    fontSize: 64,
+  },
+  leaderboard: {
+    fontSize: 18,
+    fontStyle: 'italic',
+    marginTop: -5,
   },
   worldContainer: {
-    width:          '33.333333%',
+    width:           '50%',
     alignItems:     'center',
     justifyContent: 'center',
-    marginBottom:   40,
-  },
-  world: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginBottom:   37,
   },
   greyedOut: {
     opacity: 0.5,
   },
-  number: {
-    fontSize: 32,
-  },
-  status: {
-    fontSize: 32,
+  world: {
+    alignItems:        'center',
+    justifyContent:    'center',
   },
   preview: {
-    width:          100,
-    height:         100,
+    width:          '90%',
+    aspectRatio:    1,
     justifyContent: 'center',
     alignItems:     'center',
     borderRadius:   5,
     marginTop:      5,
     marginBottom:   5,
+    borderBottomWidth: 2,
+    borderColor:       'rgba(0,0,0,0.5)',
+  },
+  number: {
+    fontSize: 32,
+  },
+  status: {
+    fontSize: 64,
+    color:    'rgba(0,0,0,0.4)',
   },
   maxScore: {
-    fontSize: 14,
+    fontSize: 18,
   }
 })
 

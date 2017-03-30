@@ -519,8 +519,6 @@ const levels = [].concat.apply([], worlds.map((w) => {
   return w.levels
 }))
 
-export worlds
-
 export default levels.map((l) => {
   return {
     ...l,
