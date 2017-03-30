@@ -19,7 +19,7 @@ class Game extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if( props.level.done && props.level.win ) {
+    if( props.level.done && props.level.win && !props.beat ) {
       this.nextLevel()
     }
   }
@@ -56,7 +56,6 @@ class Game extends Component {
     this.props.dispatch({type: 'worlds:unlock'})
     if( this.props.world.name == '3' ) {
       // TODO: delete difficulty reducer and actions
-      this.props.dispatch({type: 'difficulty:unlock'})
       return this.props.dispatch({type: 'victory:yes'})
     } else {
       if( this.props.world.name == 'Demo' ) {

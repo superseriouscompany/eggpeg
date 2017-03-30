@@ -418,7 +418,7 @@ const worlds = [{
     },
     {
       name: 'Star of David',
-      max: 25,
+      max: 20,
       targets: [
         {
           points: [
