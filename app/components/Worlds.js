@@ -14,11 +14,10 @@ import {
 
 class Worlds extends Component {
   loadLevel(name) {
-    return () => {
-      this.props.dispatch({type: 'game:reset'})
-      this.props.dispatch(loadFirstLevel(this.props.showTutorial))
-      this.props.dispatch({type: 'scene:change', scene: 'Game'})
-    }
+    this.props.dispatch({type: 'worlds:select', name: name})
+    this.props.dispatch({type: 'game:reset'})
+    this.props.dispatch(loadFirstLevel(this.props.showTutorial))
+    this.props.dispatch({type: 'scene:change', scene: 'Game'})
   }
 
   render() { return (
@@ -88,7 +87,7 @@ function World(props) {
 
 function mapStateToProps(state) {
   return {
-    worlds:       state.worlds,
+    worlds:       state.worlds.all,
     showTutorial: !state.tutorial.complete,
   }
 }
