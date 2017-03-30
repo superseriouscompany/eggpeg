@@ -6,7 +6,6 @@ import Text               from './Text';
 import PayButton          from './PayButton'
 import HighScores         from './HighScores'
 import LinksHeader        from './LinksHeader'
-import SettingsLink       from './SettingsLink'
 import DifficultySwitch   from './DifficultySwitch'
 import RainbowBar         from './RainbowBar'
 import config             from '../config'
@@ -136,7 +135,6 @@ class GameOver extends Component {
         </TouchableOpacity>
         <PayButton style={[style.button, style.continueButton]} textStyle={style.buttonText} continue={this.props.continue} />
       </Animated.View>
-      <SettingsLink />
     </View>
   )}
 }

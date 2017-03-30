@@ -6,7 +6,6 @@ import Text               from './Text';
 import EggDrop            from './EggDrop';
 import DifficultySwitch   from './DifficultySwitch'
 import LinksHeader        from './LinksHeader';
-import SettingsLink       from './SettingsLink'
 import base               from '../styles/base';
 import {connect}          from 'react-redux';
 import {loadFirstLevel}   from '../actions/levels';
@@ -41,7 +40,6 @@ class Start extends Component {
             <DifficultySwitch style={{marginTop: 20}}/>
           </View>
         </View>
-        <SettingsLink textColor={base.colors.grey}/>
       </View>
     </View>
   )}
