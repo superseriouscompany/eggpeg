@@ -37,7 +37,7 @@ export default class Target extends Component {
   }
 
   render() {
-    const {target} = this.props;
+    const {target, color, deadColor} = this.props;
   return (
     <View style={[style.targetContainer, target.hit ? style.hitContainer : null, {
       left:   target.x - target.width / 2,
@@ -63,7 +63,7 @@ export default class Target extends Component {
       : null }
 
       { target.hit ?
-        <Bullseye hit={target.hit} ring={target.ring} width={target.width} height={target.width} rewardStyle={{
+        <Bullseye hit={target.hit} ring={target.ring} width={target.width} height={target.width} color={color} deadColor={deadColor} rewardStyle={{
           ...style.reward,
           backgroundColor: base.colors.reward,
           opacity: this.state.ghostAnim.interpolate({
@@ -72,7 +72,7 @@ export default class Target extends Component {
           }),
         }}/>
       :
-        <Bullseye width={target.width} height={target.width}/>
+        <Bullseye width={target.width} height={target.width} color={color} deadColor={deadColor}/>
       }
       { target.hit ?
         <Animated.Text style={[style.score, {
@@ -104,7 +104,10 @@ function Aura(props) {
 }
 
 function Bullseye(props) {
-  const {width, height, hit, ring} = props;
+  const {width, height, hit, ring, color, deadColor } = props;
+
+  const filledStyle = { backgroundColor: color || 'hotpink' }
+  const deadStyle   = { backgroundColor: deadColor || 'cornflowerblue' }
   const rings = [
     { width: width, height: height },
     { width: width - width / 5, height: height - height / 5 },
@@ -114,30 +117,30 @@ function Bullseye(props) {
   ]
 
   return (
-    <Animated.View style={[hit ? ring == 'outer' ? style.dead : style.dead : style.rim, style.ring, {
-      width: rings[0].width,
-      height: rings[0].height,
-      borderRadius: rings[0].width/2
+    <Animated.View style={[hit ? ring == 'outer' ? deadStyle : deadStyle : filledStyle, style.ring, style.rim, {
+      width:           rings[0].width,
+      height:          rings[0].height,
+      borderRadius:    rings[0].width/2,
     }]}>
-      <Animated.View style={[hit ? ring == 'inner' ? style.dead : style.dead : style.outer, style.ring, {
-        width: rings[1].width,
-        height: rings[1].height,
+      <Animated.View style={[hit ? ring == 'inner' ? deadStyle : deadStyle : style.outer, style.ring, {
+        width:        rings[1].width,
+        height:       rings[1].height,
         borderRadius: rings[1].width/2,
       }]}>
-        <Animated.View style={[hit ? ring == 'inner' ? style.dead : style.dead : style.middle, style.ring, {
-          width: rings[2].width,
-          height: rings[2].height,
-          borderRadius: rings[2].width/2,
+        <Animated.View style={[hit ? ring == 'inner' ? deadStyle : deadStyle : filledStyle, style.ring, {
+          width:           rings[2].width,
+          height:          rings[2].height,
+          borderRadius:    rings[2].width/2,
         }]}>
-          <Animated.View style={[hit ? ring == 'bullseye' ? props.rewardStyle : style.dead : style.inner, style.ring, {
-            width: rings[3].width,
-            height: rings[3].height,
+          <Animated.View style={[hit ? ring == 'bullseye' ? props.rewardStyle : deadStyle : style.inner, style.ring, {
+            width:        rings[3].width,
+            height:       rings[3].height,
             borderRadius: rings[3].width/2,
           }]}>
-            <Animated.View style={[hit ? ring == 'bullseye' ? props.rewardStyle : style.dead : style.bullseye, style.ring, {
-              width: rings[4].width,
-              height: rings[4].height,
-              borderRadius: rings[4].width/2,
+            <Animated.View style={[hit ? ring == 'bullseye' ? props.rewardStyle : deadStyle : filledStyle, style.ring, {
+              width:           rings[4].width,
+              height:          rings[4].height,
+              borderRadius:    rings[4].width/2,
             }]} />
           </Animated.View>
         </Animated.View>
@@ -152,6 +155,15 @@ const style = StyleSheet.create({
     alignItems:     'center',
     justifyContent: 'center',
   },
+  rim: {
+    shadowColor: 'black',
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+  },
   target: {
     position: 'absolute',
     zIndex: 1,
@@ -163,25 +175,11 @@ const style = StyleSheet.create({
   aura: {
     position: 'absolute',
   },
-  rim: {
-    position:        'absolute',
-    backgroundColor: base.colors.red,
-  },
   outer: {
     backgroundColor: 'white'
   },
-  middle: {
-    backgroundColor: base.colors.red,
-  },
   inner: {
     backgroundColor: 'white'
-  },
-  bullseye: {
-    backgroundColor: base.colors.red
-  },
-  dead: {
-    position: 'absolute',
-    backgroundColor: '#532D5A',
   },
   hitContainer: {
     zIndex: -1,

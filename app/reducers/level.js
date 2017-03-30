@@ -1,5 +1,4 @@
 import config from '../config'
-import levels from '../levels'
 
 export default function(state={level: 0}, action) {
   switch(action.type) {
@@ -22,13 +21,7 @@ export default function(state={level: 0}, action) {
         done: true,
       }
     case 'level:load':
-      if( !levels[action.index]) {
-        throw `No level found at index ${action.index}`
-      }
-      return {
-        ...levels[action.index],
-        index: action.index,
-      }
+      return action.level
     default:
       return state
   }

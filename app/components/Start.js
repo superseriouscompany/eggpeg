@@ -8,7 +8,6 @@ import DifficultySwitch   from './DifficultySwitch'
 import LinksHeader        from './LinksHeader';
 import base               from '../styles/base';
 import {connect}          from 'react-redux';
-import {loadFirstLevel}   from '../actions/levels';
 import {
   StatusBar,
   StyleSheet,
@@ -45,9 +44,12 @@ class Start extends Component {
   )}
 
   startGame() {
-    this.props.dispatch({type: 'game:reset'})
-    this.props.dispatch(loadFirstLevel(this.props.showTutorial))
-    this.props.dispatch({type: 'scene:change', scene: 'Game'})
+    if( this.props.showDemo ) {
+      this.props.dispatch({type: 'worlds:select', name: 'Demo'})
+      this.props.dispatch({type: 'scene:change', scene: 'Game'})
+    } else {
+      this.props.dispatch({type: 'scene:change', scene: 'Worlds'})
+    }
   }
 }
 
@@ -80,9 +82,9 @@ const style = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    showTutorial: !state.tutorial.complete,
+    worlds:   state.worlds,
+    showDemo: !state.tutorial.complete,
   }
 }
-
 
 export default connect(mapStateToProps)(Start)

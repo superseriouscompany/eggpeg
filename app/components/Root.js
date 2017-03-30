@@ -6,6 +6,7 @@ import Component           from './Component'
 import FollowUs            from './FollowUs'
 import Start               from './Start'
 import Settings            from './Settings'
+import Worlds             from './Worlds'
 import HallOfFame          from './HallOfFame'
 import DeeplinkProvider    from '../containers/DeeplinkProvider'
 import DifficultyProvider  from '../containers/DifficultyProvider'
@@ -54,6 +55,8 @@ export default class Root extends Component {
                     <FollowUs />
                   : this.state.scene == 'Start' ?
                     <Start shareLink={this.state.shareLink}/>
+                  : this.state.scene == 'Worlds' ?
+                    <Worlds />
                   : this.state.scene == 'Settings' ?
                     <Settings />
                   : this.state.scene == 'HallOfFame' ?

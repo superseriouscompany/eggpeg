@@ -70,9 +70,11 @@ export default class Bullet extends Component {
   }
 
   render() {
-    const {bullet} = this.props;
+    const {bullet, yolkColor} = this.props;
     const containerWidth = Math.max(config.sizes.shadow, config.sizes.bullet)
     let shadowWidth = Math.round(config.sizes.shadow * bullet.shadow);
+    const yolkStyle = { backgroundColor: yolkColor || base.colors.yellow }
+
   return (
     <View style={[style.bulletContainer, bullet.hit ? style.bg : bullet.spent ? style.bgspent : null, {
       left:   bullet.x - containerWidth / 2,
@@ -108,7 +110,7 @@ export default class Bullet extends Component {
       : null }
 
       { bullet.hit || bullet.visible ?
-        <View style={[style.bullet, bullet.hit ? style.bg : null, {
+        <View style={[yolkStyle, bullet.hit ? style.bg : null, {
           width:  bullet.width,
           height: bullet.width,
           borderRadius: bullet.width / 2,
@@ -142,9 +144,6 @@ const style = StyleSheet.create({
     borderColor:     base.colors.purple,
     borderWidth:     1,
     zIndex:          1,
-  },
-  bullet: {
-    backgroundColor: base.colors.yellow,
   },
   ghost: {
     position:        'absolute',
