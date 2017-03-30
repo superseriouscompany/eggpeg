@@ -22,7 +22,8 @@ class Start extends Component {
   constructor(props) {
     super(props)
     this.state = {}
-    this.startGame = this.startGame.bind(this)
+    this.startGame       = this.startGame.bind(this)
+    this.showLeaderboard = this.showLeaderboard.bind(this)
   }
 
   render() {
@@ -36,9 +37,12 @@ class Start extends Component {
           <EggDrop />
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <TouchableOpacity onPress={this.startGame} style={style.startButton}>
-              <Text style={{fontStyle: 'italic', fontSize: 32, color: base.colors.grey}}>play</Text>
+              <Text style={style.startButtonText}>play</Text>
             </TouchableOpacity>
             <DifficultySwitch style={{marginTop: 20}}/>
+            <TouchableOpacity onPress={this.showLeaderboard}>
+              <Text style={{color: 'hotpink'}}>Show Leaderboard</Text>
+            </TouchableOpacity>
           </View>
         </View>
         <SettingsLink textColor={base.colors.grey}/>
@@ -50,6 +54,10 @@ class Start extends Component {
     this.props.dispatch({type: 'game:reset'})
     this.props.dispatch(loadFirstLevel(this.props.showTutorial))
     this.props.dispatch({type: 'scene:change', scene: 'Game'})
+  }
+
+  showLeaderboard() {
+    this.props.dispatch({type: 'scene:change', scene: 'Leaderboard'})
   }
 }
 
@@ -73,6 +81,11 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  startButtonText: {
+    fontStyle: 'italic',
+    fontSize: 32,
+    color: base.colors.grey,
+  }
 })
 
 function mapStateToProps(state) {

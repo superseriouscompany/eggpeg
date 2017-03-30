@@ -37,6 +37,21 @@ class GameOver extends Component {
 
   componentDidMount() {
     this.timeout = setInterval(this.countdown, 1000)
+    const {scores} = this.props.leaderboard;
+    const {score}  = this.props;
+
+    // TODO: move this out of here
+    if( !scores.length ) {
+      this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})
+      return;
+    }
+    for( var i = 0; i < scores.length; i++ ) {
+      if( scores[i].score < score ) {
+        this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})
+        return;
+      }
+    }
+
     if( this.props.isHighScore ) {
       sounds.woohoo.play(null, (err) => {
         console.error(err)

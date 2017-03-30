@@ -10,24 +10,28 @@ import {
 } from 'redux';
 
 // Register reducers from this directory. http://redux.js.org/docs/api/combineReducers.html
-import bullets    from './bullets'
-import chamber    from './chamber'
-import difficulty from './difficulty'
-import level      from './level'
-import purchase   from './purchase'
-import scene      from './scene'
-import score      from './score'
-import shareLink  from './shareLink'
-import targets    from './targets'
-import tutorial   from './tutorial'
-import victory    from './victory'
+import bullets     from './bullets'
+import chamber     from './chamber'
+import difficulty  from './difficulty'
+import leaderboard from './leaderboard'
+import level       from './level'
+import purchase    from './purchase'
+import retry       from './retry'
+import scene       from './scene'
+import score       from './score'
+import shareLink   from './shareLink'
+import targets     from './targets'
+import tutorial    from './tutorial'
+import victory     from './victory'
 const reducers = combineReducers({
   bullets,
   chamber,
+  leaderboard,
   level,
   targets,
   score,
   purchase,
+  retry,
   scene,
   shareLink,
   victory,
@@ -49,6 +53,13 @@ const store = createStore(reducers, undefined, compose(
   autoRehydrate()
 ))
 
-persistStore(store, {storage: AsyncStorage, whitelist: ['difficulty', 'score', 'tutorial', 'shareLink', 'purchase']})
+persistStore(store, {storage: AsyncStorage, whitelist: [
+  'difficulty',
+  'purchase',
+  'retry',
+  'score',
+  'shareLink',
+  'tutorial',
+]})
 
 export default store
