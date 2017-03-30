@@ -73,7 +73,7 @@ export default class Bullet extends Component {
     const {bullet, yolkColor} = this.props;
     const containerWidth = Math.max(config.sizes.shadow, config.sizes.bullet)
     let shadowWidth = Math.round(config.sizes.shadow * bullet.shadow);
-    const yolkStyle = { backgroundColor: yolkColor || 'cornflowerblue' }
+    const yolkStyle = { backgroundColor: yolkColor || base.colors.yellow }
 
   return (
     <View style={[style.bulletContainer, bullet.hit ? style.bg : bullet.spent ? style.bgspent : null, {
