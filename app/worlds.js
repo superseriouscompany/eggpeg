@@ -97,8 +97,8 @@ const worlds = [{
   ],
 }, {
   name:        '1',
-  color:       colors.yellow,
-  targetColor: colors.purple,
+  color:       colors.green,
+  targetColor: colors.orange,
   levels: [
     {
       name: 'vibrator',
@@ -211,8 +211,9 @@ const worlds = [{
 },
 {
   name: '2',
-  color:       colors.orange,
-  targetColor: colors.blue,
+  color:       colors.yellow,
+  targetColor: colors.purple,
+  yolkColor:   'orange',
   locked: true,
   levels: [
     {
@@ -316,8 +317,8 @@ const worlds = [{
   ],
 }, {
   name:        '3',
-  color:       colors.red,
-  targetColor: colors.yellow,
+  color:       colors.orange,
+  targetColor: colors.blue,
   locked: true,
   levels: [
     {

@@ -51,6 +51,6 @@ const store = createStore(reducers, undefined, compose(
   autoRehydrate()
 ))
 
-persistStore(store, {storage: AsyncStorage, whitelist: ['difficulty', 'score', 'tutorial', 'shareLink', 'purchase', 'worlds']})
+persistStore(store, {storage: AsyncStorage, whitelist: ['difficulty', 'score', 'tutorial', 'shareLink', 'purchase']})
 
 export default store
