@@ -48,6 +48,9 @@ class HallOfFame extends Component {
           <Text>&larr; Back</Text>
         </TouchableOpacity>
         <Text>hall of fame</Text>
+        <TouchableOpacity>
+          <Text>invite</Text>
+        </TouchableOpacity>
       </View>
       <ScrollView ref="scrollView"
                   onContentSizeChange={(width, height) => this.refs.scrollView.scrollTo({y: y})}
@@ -149,6 +152,13 @@ function color(index) {
 const style = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  header: {
+
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 20,
+
   },
   input: {
     height: 40,
