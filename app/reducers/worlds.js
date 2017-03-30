@@ -18,7 +18,7 @@ export default function(state = initialState, action) {
     case 'worlds:beat':
       return {
         ...state,
-        all: beat(state, action.name, action.score),
+        all: beat(state, action.score),
       }
     case 'worlds:select':
       return {
@@ -30,7 +30,7 @@ export default function(state = initialState, action) {
   }
 }
 
-function unlock(state, name) {
+function unlock(state) {
   let unlock;
   return state.all.map((w, i) => {
     if( w.name == state.current.name ) { unlock = true;}

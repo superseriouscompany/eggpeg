@@ -34,7 +34,7 @@ function mapDispatchToProps(dispatch) {
       dispatch({type: 'scene:change', scene: 'Game'})
     },
     back: () => {
-      dispatch({type: 'scene:pop'})
+      dispatch({type: 'scene:change', scene: 'Start'})
     },
   }
 }
