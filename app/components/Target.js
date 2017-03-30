@@ -37,7 +37,7 @@ export default class Target extends Component {
   }
 
   render() {
-    const {target} = this.props;
+    const {target, color} = this.props;
   return (
     <View style={[style.targetContainer, target.hit ? style.hitContainer : null, {
       left:   target.x - target.width / 2,
@@ -63,7 +63,7 @@ export default class Target extends Component {
       : null }
 
       { target.hit ?
-        <Bullseye hit={target.hit} ring={target.ring} width={target.width} height={target.width} rewardStyle={{
+        <Bullseye hit={target.hit} ring={target.ring} width={target.width} height={target.width} color={color} rewardStyle={{
           ...style.reward,
           backgroundColor: base.colors.reward,
           opacity: this.state.ghostAnim.interpolate({
@@ -72,7 +72,7 @@ export default class Target extends Component {
           }),
         }}/>
       :
-        <Bullseye width={target.width} height={target.width}/>
+        <Bullseye width={target.width} height={target.width} color={color}/>
       }
       { target.hit ?
         <Animated.Text style={[style.score, {
@@ -114,35 +114,38 @@ function Bullseye(props) {
   ]
 
   return (
-    <Animated.View style={[hit ? ring == 'outer' ? style.dead : style.dead : style.rim, style.ring, {
-      width: rings[0].width,
-      height: rings[0].height,
-      borderRadius: rings[0].width/2
+    <View style={[hit ? ring == 'outer' ? style.dead : style.dead : style.rim, style.ring, {
+      width:           rings[0].width,
+      height:          rings[0].height,
+      borderRadius:    rings[0].width/2,
+      backgroundColor: props.color || 'hotpink',
     }]}>
-      <Animated.View style={[hit ? ring == 'inner' ? style.dead : style.dead : style.outer, style.ring, {
-        width: rings[1].width,
-        height: rings[1].height,
+      <View style={[hit ? ring == 'inner' ? style.dead : style.dead : style.outer, style.ring, {
+        width:        rings[1].width,
+        height:       rings[1].height,
         borderRadius: rings[1].width/2,
       }]}>
-        <Animated.View style={[hit ? ring == 'inner' ? style.dead : style.dead : style.middle, style.ring, {
-          width: rings[2].width,
-          height: rings[2].height,
-          borderRadius: rings[2].width/2,
+        <View style={[hit ? ring == 'inner' ? style.dead : style.dead : style.middle, style.ring, {
+          width:           rings[2].width,
+          height:          rings[2].height,
+          borderRadius:    rings[2].width/2,
+          backgroundColor: props.color || 'hotpink',
         }]}>
-          <Animated.View style={[hit ? ring == 'bullseye' ? props.rewardStyle : style.dead : style.inner, style.ring, {
-            width: rings[3].width,
-            height: rings[3].height,
+          <View style={[hit ? ring == 'bullseye' ? props.rewardStyle : style.dead : style.inner, style.ring, {
+            width:        rings[3].width,
+            height:       rings[3].height,
             borderRadius: rings[3].width/2,
           }]}>
-            <Animated.View style={[hit ? ring == 'bullseye' ? props.rewardStyle : style.dead : style.bullseye, style.ring, {
-              width: rings[4].width,
-              height: rings[4].height,
-              borderRadius: rings[4].width/2,
+            <View style={[hit ? ring == 'bullseye' ? props.rewardStyle : style.dead : style.bullseye, style.ring, {
+              width:           rings[4].width,
+              height:          rings[4].height,
+              borderRadius:    rings[4].width/2,
+              backgroundColor: props.color || 'hotpink',
             }]} />
-          </Animated.View>
-        </Animated.View>
-      </Animated.View>
-    </Animated.View>
+          </View>
+        </View>
+      </View>
+    </View>
   )
 }
 
@@ -165,19 +168,12 @@ const style = StyleSheet.create({
   },
   rim: {
     position:        'absolute',
-    backgroundColor: base.colors.red,
   },
   outer: {
     backgroundColor: 'white'
   },
-  middle: {
-    backgroundColor: base.colors.red,
-  },
   inner: {
     backgroundColor: 'white'
-  },
-  bullseye: {
-    backgroundColor: base.colors.red
   },
   dead: {
     position: 'absolute',

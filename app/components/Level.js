@@ -96,7 +96,7 @@ class Level extends Component {
           ]
         }}>
           { this.state.targets.map((target, key) => (
-            <Target key={this.props.level.index + '-' + key} target={target} hit={target.hit}/>
+            <Target key={this.props.level.index + '-' + key} target={target} hit={target.hit} color={this.props.level.targetColor}/>
           ))}
           { this.props.bullets.map((bullet, key) => (
             <Bullet key={this.props.level.index + '-' + key} bullet={bullet} hit={bullet.hit}/>

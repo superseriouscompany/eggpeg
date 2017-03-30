@@ -10,8 +10,9 @@ const ycenter    = height / 2;
 const {colors}   = require('./styles/base')
 
 const worlds = [{
-  name:   'Demo',
-  color:  colors.green,
+  name:        'Demo',
+  color:       colors.green,
+  targetColor: colors.orange,
   levels: [
     {
       name: 'Stationary',
@@ -95,8 +96,9 @@ const worlds = [{
     },
   ],
 }, {
-  name: '1',
-  color: colors.yellow,
+  name:        '1',
+  color:       colors.yellow,
+  targetColor: colors.purple,
   levels: [
     {
       name: 'vibrator',
@@ -203,7 +205,8 @@ const worlds = [{
 },
 {
   name: '2',
-  color: colors.orange,
+  color:       colors.orange,
+  targetColor: colors.blue,
   locked: true,
   levels: [
     {
@@ -300,8 +303,9 @@ const worlds = [{
     },
   ],
 }, {
-  name: '3',
-  color: colors.red,
+  name:        '3',
+  color:       colors.red,
+  targetColor: colors.yellow,
   locked: true,
   levels: [
     {
@@ -514,7 +518,8 @@ const worlds = [{
 
 const levels = [].concat.apply([], worlds.map((w) => {
   return w.levels.map((l) => {
-    l.color = w.color
+    l.color       = w.color
+    l.targetColor = w.targetColor
     return l
   })
 }))
