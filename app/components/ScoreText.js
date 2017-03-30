@@ -46,12 +46,13 @@ class ScoreText extends Component {
         outputRange: [1, 0.5, 0.05, 0],
       }),
     }]}>
-      <Animated.Text style={[style.text, {
+      <Animated.Text style={{
+        color: this.props.textColor,
         fontSize: this.state.leaveAnim.interpolate({
           inputRange:  [0, 1],
           outputRange: [32, 64],
         })
-      }]}>{this.props.text}</Animated.Text>
+      }}>{this.props.text}</Animated.Text>
     </Animated.View>
   )}
 }

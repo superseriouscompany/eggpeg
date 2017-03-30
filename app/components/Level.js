@@ -104,10 +104,10 @@ class Level extends Component {
           ))}
           { this.props.hint ?
             <View style={style.hintContainer}>
-              <Text style={style.hint}>{this.props.hint}</Text>
+              <Text style={[style.hint, {color: this.props.deadColor}]}>{this.props.hint}</Text>
             </View>
           :
-            <ScoreText />
+            <ScoreText textColor={this.props.level.deadColor}/>
           }
         </Animated.View>
       </TouchableWithoutFeedback>
@@ -123,7 +123,6 @@ const style = StyleSheet.create({
     zIndex: -1,
   },
   hint: {
-    color: '#532D5A',
     fontSize: 16,
     marginBottom: 20,
   },
