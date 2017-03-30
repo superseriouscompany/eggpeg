@@ -64,7 +64,7 @@ function World(props) {
       <Text style={style.maxScore}>
         { props.world.comingSoon ?
           'coming soon...'
-        : props.world.beaten ?
+        : props.world.score ?
           `${props.world.score}/${props.world.maxScore}`
         :
           `${props.world.maxScore} points`
