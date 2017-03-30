@@ -8,6 +8,7 @@ import HighScores         from './HighScores'
 import LinksHeader        from './LinksHeader'
 import SettingsLink       from './SettingsLink'
 import DifficultySwitch   from './DifficultySwitch'
+import RainbowBar         from './RainbowBar'
 import config             from '../config'
 import sounds             from '../sounds'
 import {connect}          from 'react-redux'
@@ -42,16 +43,16 @@ class GameOver extends Component {
     const {score}  = this.props;
 
     // TODO: move this out of here
-    if( !scores.length ) {
-      this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})
-      return;
-    }
-    for( var i = 0; i < scores.length; i++ ) {
-      if( scores[i].score < score ) {
-        this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})
-        return;
-      }
-    }
+    // if( !scores.length ) {
+    //   this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})
+    //   return;
+    // }
+    // for( var i = 0; i < scores.length; i++ ) {
+    //   if( scores[i].score < score ) {
+    //     this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})
+    //     return;
+    //   }
+    // }
 
     if( this.props.isHighScore ) {
       sounds.woohoo.play(null, (err) => {
@@ -105,6 +106,9 @@ class GameOver extends Component {
           outputRange: [-1000, 0],
         })
       }]}>
+        { this.props.score > this.props.highScore ?
+          <RainbowBar />
+        : null }
         <Text style={style.score}>{this.props.score}!</Text>
         { this.props.score < this.props.highScore ?
           <Text style={style.carrot}>
