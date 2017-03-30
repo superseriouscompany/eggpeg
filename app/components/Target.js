@@ -117,7 +117,7 @@ function Bullseye(props) {
   ]
 
   return (
-    <Animated.View style={[hit ? ring == 'outer' ? deadStyle : deadStyle : filledStyle, style.ring, {
+    <Animated.View style={[hit ? ring == 'outer' ? deadStyle : deadStyle : filledStyle, style.ring, style.rim, {
       width:           rings[0].width,
       height:          rings[0].height,
       borderRadius:    rings[0].width/2,
@@ -155,6 +155,15 @@ const style = StyleSheet.create({
     alignItems:     'center',
     justifyContent: 'center',
   },
+  rim: {
+    shadowColor: 'black',
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+  },
   target: {
     position: 'absolute',
     zIndex: 1,
@@ -164,9 +173,6 @@ const style = StyleSheet.create({
     justifyContent: 'center',
   },
   aura: {
-    position: 'absolute',
-  },
-  rim: {
     position: 'absolute',
   },
   outer: {
