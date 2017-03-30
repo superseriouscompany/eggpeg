@@ -114,38 +114,38 @@ function Bullseye(props) {
   ]
 
   return (
-    <View style={[hit ? ring == 'outer' ? style.dead : style.dead : style.rim, style.ring, {
+    <Animated.View style={[hit ? ring == 'outer' ? style.dead : style.dead : style.rim, style.ring, {
       width:           rings[0].width,
       height:          rings[0].height,
       borderRadius:    rings[0].width/2,
-      backgroundColor: props.color || 'hotpink',
+      backgroundColor: props.color,
     }]}>
-      <View style={[hit ? ring == 'inner' ? style.dead : style.dead : style.outer, style.ring, {
+      <Animated.View style={[hit ? ring == 'inner' ? style.dead : style.dead : style.outer, style.ring, {
         width:        rings[1].width,
         height:       rings[1].height,
         borderRadius: rings[1].width/2,
       }]}>
-        <View style={[hit ? ring == 'inner' ? style.dead : style.dead : style.middle, style.ring, {
+        <Animated.View style={[hit ? ring == 'inner' ? style.dead : style.dead : style.middle, style.ring, {
           width:           rings[2].width,
           height:          rings[2].height,
           borderRadius:    rings[2].width/2,
-          backgroundColor: props.color || 'hotpink',
+          backgroundColor: props.color,
         }]}>
-          <View style={[hit ? ring == 'bullseye' ? props.rewardStyle : style.dead : style.inner, style.ring, {
+          <Animated.View style={[hit ? ring == 'bullseye' ? props.rewardStyle : style.dead : style.inner, style.ring, {
             width:        rings[3].width,
             height:       rings[3].height,
             borderRadius: rings[3].width/2,
           }]}>
-            <View style={[hit ? ring == 'bullseye' ? props.rewardStyle : style.dead : style.bullseye, style.ring, {
+            <Animated.View style={[hit ? ring == 'bullseye' ? props.rewardStyle : style.dead : style.bullseye, style.ring, {
               width:           rings[4].width,
               height:          rings[4].height,
               borderRadius:    rings[4].width/2,
-              backgroundColor: props.color || 'hotpink',
+              backgroundColor: props.color,
             }]} />
-          </View>
-        </View>
-      </View>
-    </View>
+          </Animated.View>
+        </Animated.View>
+      </Animated.View>
+    </Animated.View>
   )
 }
 

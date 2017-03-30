@@ -90,7 +90,7 @@ class GameLoop extends Component {
         this.props.dispatch({type: 'bullets:hit', index: bi, score: score, count: hits.length})
       } else if( bullet.spent && !bullet.hit && !bullet.missed ){
         this.props.dispatch({type: 'bullets:miss', index: bi})
-        if( this.props.level.index < 5 ) {
+        if( this.props.world.name == 'Demo' ) {
           this.props.dispatch({type: 'chamber:reload'})
         }
       }
@@ -143,6 +143,7 @@ function mapStateToProps(state) {
     chamber:    state.chamber,
     level:      state.level,
     score:      state.score,
+    world:      state.worlds.current,
   }
 }
 

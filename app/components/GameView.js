@@ -32,7 +32,7 @@ export default class GameView extends Component {
 
   componentWillReceiveProps(props) {
     // TODO: clean this up and move it somewhere it belongs
-    if( props.level.index < 5 ) { return; }
+    if( props.world.name === 'Demo' ) { return; }
 
     const {highScores} = this.props.score
     if( !highScores.length || props.currentScore === this.props.currentScore ) { return; }

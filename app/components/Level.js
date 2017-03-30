@@ -40,7 +40,7 @@ class Level extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if( props.level.index != this.props.level.index ) {
+    if( props.level.name != this.props.level.name ) {
       this.setState({
         nextTargets: props.targets,
       })
@@ -96,10 +96,10 @@ class Level extends Component {
           ]
         }}>
           { this.state.targets.map((target, key) => (
-            <Target key={this.props.level.index + '-' + key} target={target} hit={target.hit} color={this.props.level.targetColor}/>
+            <Target key={this.props.level.name + '-' + key} target={target} hit={target.hit} color={this.props.level.targetColor}/>
           ))}
           { this.props.bullets.map((bullet, key) => (
-            <Bullet key={this.props.level.index + '-' + key} bullet={bullet} hit={bullet.hit}/>
+            <Bullet key={this.props.level.name + '-' + key} bullet={bullet} hit={bullet.hit}/>
           ))}
           { this.props.hint ?
             <View style={style.hintContainer}>

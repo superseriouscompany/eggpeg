@@ -98,6 +98,7 @@ const style = StyleSheet.create({
   },
   topScore: {
     fontSize: 64,
+    textAlign: 'center',
   },
   leaderboard: {
     fontSize: 18,

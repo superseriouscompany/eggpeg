@@ -9,7 +9,6 @@ import LinksHeader        from './LinksHeader';
 import SettingsLink       from './SettingsLink'
 import base               from '../styles/base';
 import {connect}          from 'react-redux';
-import {loadFirstLevel}   from '../actions/levels';
 import {
   StatusBar,
   StyleSheet,
@@ -48,7 +47,6 @@ class Start extends Component {
 
   startGame() {
     this.props.dispatch({type: 'game:reset'})
-    this.props.dispatch(loadFirstLevel(this.props.showTutorial))
     this.props.dispatch({type: 'scene:change', scene: 'Worlds'})
   }
 }

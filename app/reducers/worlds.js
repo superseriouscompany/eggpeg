@@ -11,9 +11,15 @@ const initialState = {
 export default function(state = initialState, action) {
   switch(action.type) {
     case 'worlds:unlock':
-      return unlock(state, action.name)
+      return {
+        ...state,
+        all: unlock(state)
+      }
     case 'worlds:beat':
-      return beat(state, action.name, action.score)
+      return {
+        ...state,
+        all: beat(state, action.name, action.score),
+      }
     case 'worlds:select':
       return {
         ...state,
@@ -25,17 +31,17 @@ export default function(state = initialState, action) {
 }
 
 function unlock(state, name) {
-  return state.all.map((w) => {
-    if( w.name == name ) {
-      w.locked = false
-    }
+  let unlock;
+  return state.all.map((w, i) => {
+    if( w.name == state.current.name ) { unlock = true;}
+    else if( unlock ) { w.locked = false; unlock = false; }
     return w
   })
 }
 
-function beat(state, name, score) {
+function beat(state, score) {
   return state.all.map((w) => {
-    if( w.name == name ) {
+    if( w.name == state.current.name ) {
       w.beaten = true
       w.score = Math.max(score, w.score || 0)
     }
