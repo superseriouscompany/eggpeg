@@ -35,7 +35,6 @@ const api = {
       return k + ':' + body[k]
     }).join(',')
     const digest = path + ',' + bodyString
-    console.log('using digest', digest)
     const hash = md5.b64_hmac_md5(digest, 'sicknasty');
 
     const params = Object.assign({
