@@ -103,6 +103,7 @@ class GameLoop extends Component {
       // TODO: ideally, this would happen directly from a callback
       const delay = hadMultihit ? 2250 : 0;
 
+      this.props.dispatch({type: 'worlds:score', score: this.props.score.total})
       return this.props.dispatch({type: 'level:win', delay: delay});
     }
 
@@ -113,6 +114,7 @@ class GameLoop extends Component {
         this.props.dispatch(recordScore(this.props.score.total)).catch((err) => {
           console.error(err)
         })
+        this.props.dispatch({type: 'worlds:score', score: this.props.score.total})
         this.props.dispatch({type: 'level:loss'})
       }
     }

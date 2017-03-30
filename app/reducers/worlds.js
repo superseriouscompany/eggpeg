@@ -18,7 +18,12 @@ export default function(state = initialState, action) {
     case 'worlds:beat':
       return {
         ...state,
-        all: beat(state, action.score),
+        all: score(state, action.score, true),
+      }
+    case 'worlds:score':
+      return {
+        ...state,
+        all: score(state, action.score),
       }
     case 'worlds:select':
       return {
@@ -39,10 +44,10 @@ function unlock(state) {
   })
 }
 
-function beat(state, score) {
+function score(state, score, beaten) {
   return state.all.map((w) => {
     if( w.name == state.current.name ) {
-      w.beaten = true
+      w.beaten = beaten
       w.score = Math.max(score, w.score || 0)
     }
     return w
