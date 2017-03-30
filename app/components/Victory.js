@@ -5,7 +5,6 @@ import Component          from './Component';
 import Text               from './Text';
 import LinksHeader        from './LinksHeader'
 import HighScores         from './HighScores'
-import DifficultySwitch   from './DifficultySwitch'
 import sounds             from '../sounds'
 import {
   Image,
@@ -44,7 +43,6 @@ export default class Victory extends Component {
           <TouchableOpacity onPress={this.props.reset} style={style.button}>
             <Text style={style.buttonText}>again</Text>
           </TouchableOpacity>
-          <DifficultySwitch />
         </View>
       </View>
     </View>
