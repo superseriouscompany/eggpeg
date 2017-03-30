@@ -67,17 +67,15 @@ function World(props) {
       <View style={[style.preview, {
         backgroundColor: props.world.color,
       }]}>
-        <Text style={style.status}>
           { props.world.locked ?
             <Image source={lockImages[props.world.name]}/>
           : props.world.comingSoon ?
-            '⏳'
-          : props.world.name}
-        </Text>
+            <Text style={style.status}>...</Text>
+          : <Text style={style.status}>{props.world.name}</Text>}
       </View>
       <Text style={style.maxScore}>
         { props.world.comingSoon ?
-          'coming soon...'
+          'coming soon'
         : props.world.locked ?
           'locked'
         : props.world.score ?
