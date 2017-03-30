@@ -13,7 +13,7 @@ const worlds = [{
   name:        'Demo',
   color:       colors.green,
   targetColor: colors.orange,
-  deadColor:   'cornflowerblue',
+  deadColor:   colors.darkgreen,
   levels: [
     {
       name: 'Stationary',
@@ -100,7 +100,7 @@ const worlds = [{
   name:        '1',
   color:       colors.green,
   targetColor: colors.orange,
-  deadColor:   'cornflowerblue',
+  deadColor:   colors.darkgreen,
   levels: [
     {
       name: 'vibrator',
@@ -215,7 +215,7 @@ const worlds = [{
   name: '2',
   color:       colors.yellow,
   targetColor: colors.purple,
-  deadColor:   'cornflowerblue',
+  deadColor:   colors.darkyellow,
   yolkColor:   'orange',
   locked: true,
   levels: [
@@ -322,7 +322,7 @@ const worlds = [{
   name:        '3',
   color:       colors.orange,
   targetColor: colors.blue,
-  deadColor:   'cornflowerblue',
+  deadColor:   colors.darkorange,
   locked: true,
   levels: [
     {

@@ -11,6 +11,12 @@ const colors = {
   red: '#D1534A',
   purple: '#8B5097',
   blue: '#389ED9',
+  darkgreen: '#406720',
+  darkyellow: '#AA7711',
+  darkorange: '#9A5012',
+  darkred: '#9F352D',
+  darkpurple: '#532D5A',
+  darkblue: '#2B7FB0',
   reward: '#F8F4E5',
 }
 const fontSizes = {
