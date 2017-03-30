@@ -64,6 +64,7 @@ class Level extends Component {
 
   shoot(e) {
     if( this.props.level.done || this.props.level.finishTime ) { return; }
+    if( !this.props.chamber ) { return; }
     const {pageX, pageY} = e.nativeEvent;
     this.props.dispatch({type: 'bullets:fire', x: pageX, y: pageY})
     bombwhistleTimeout && clearTimeout(bombwhistleTimeout);
@@ -133,6 +134,7 @@ function mapStateToProps(state) {
     bullets:    state.bullets,
     targets:    state.targets,
     level:      state.level,
+    chamber:    state.chamber,
   }
 }
 
