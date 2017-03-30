@@ -166,6 +166,7 @@ const style = StyleSheet.create({
     backgroundColor: 'cornflowerblue',
     color: 'white',
     fontSize: 32,
+    marginRight: 20,
   },
   leaderboard: {
     flex: 1,
@@ -193,7 +194,7 @@ const style = StyleSheet.create({
   name: {
     flex: 1,
     fontSize: 32,
-    paddingRight: 30,
+    paddingRight: 20,
     color: 'white',
     backgroundColor: 'transparent',
   },
