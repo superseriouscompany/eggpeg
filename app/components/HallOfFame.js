@@ -34,8 +34,7 @@ class HallOfFame extends Component {
   }
 
   render() {
-    const score    = 69;
-    const scores   = fakeScores()
+    const {score, scores} = this.props;
     const position = insertScore(score, scores)
     const y        = Math.max(0, position - 3) * 83.5
   return (
@@ -95,12 +94,6 @@ function mapStateToProps(state) {
   }
 }
 
-function fakeScores() {
-  return "Hello is it me you're looking for? so santi told me to fill the leaderboard with 100 scores with fake names on them so that we don't have to make an empty state for this screen. it's going pretty well. I'm not sure if I'm close to 100 yet. Watching a sunset out the window right now, it's pretty beautiful. Ok anyway we should be around 100 now. Byeeeeeee. Oh goddamnit I still have to make like 30 more scores hm ok Kevin lost his sim card today that was pretty scary are we good yet? damnit. ugh finally".split(' ').map((name, i) => {
-    return {name: name, score: 100 - i}
-  })
-}
-
 function insertScore(score, scores) {
   let slot = -1;
   for( var i = 0; i < scores.length; i++ ) {
@@ -112,6 +105,7 @@ function insertScore(score, scores) {
 
   if( slot == - 1 ) { return scores }
   scores.splice(slot, 0, {score: score, name: false,});
+  scores.pop();
   return slot
 }
 

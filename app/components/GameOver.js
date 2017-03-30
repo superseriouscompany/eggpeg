@@ -20,11 +20,8 @@ import {
 
 class GameOver extends Component {
   static propTypes = {
-    score:       PropTypes.number.isRequired,
     reset:       PropTypes.func.isRequired,
     continue:    PropTypes.func.isRequired,
-    isHighScore: PropTypes.bool.isRequired,
-    highScores:  PropTypes.arrayOf(PropTypes.number).isRequired,
   }
 
   constructor(props) {
@@ -109,9 +106,15 @@ class GameOver extends Component {
         })
       }]}>
         <Text style={style.score}>{this.props.score}!</Text>
-        <Text style={style.carrot}>
-          <Text style={{color: 'hotpink'}}>Y</Text> {this.props.highScore}
-        </Text>
+        { this.props.score < this.props.highScore ?
+          <Text style={style.carrot}>
+            <Text style={{color: 'hotpink'}}>Y</Text> {this.props.highScore}
+          </Text>
+        : this.props.carrot !== 'boss' ?
+          <Text style={style.carrot}>default {this.props.carrot.name}'s {this.props.carrot.score}</Text>
+        :
+          <Text style={style.carrot}>you're a boss.</Text>
+        }
 
         <TouchableOpacity onPress={() => this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})}>
           <Text style={style.topScores}>top scores</Text>
@@ -196,10 +199,22 @@ const style = StyleSheet.create({
 })
 
 function mapStateToProps(state) {
+  const score       = state.score.total;
+  const leaderboard = state.leaderboard;
+
+  let carrot = 'boss';
+  for( var i = 0; i < leaderboard.length; i++ ) {
+    if( leaderboard[i].score < score ) {
+      carrot = i === 0 ? 'boss' : leaderboard[i-1]
+      break;
+    }
+  }
+
   return {
-    score:       state.score.total,
+    score:       score,
     highScore:   state.score.highScores && state.score.highScores[0],
-    leaderboard: state.leaderboard,
+    leaderboard: leaderboard,
+    carrot:      carrot,
   }
 }
 

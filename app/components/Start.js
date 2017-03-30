@@ -23,7 +23,6 @@ class Start extends Component {
     super(props)
     this.state = {}
     this.startGame       = this.startGame.bind(this)
-    this.showLeaderboard = this.showLeaderboard.bind(this)
   }
 
   render() {
@@ -40,9 +39,6 @@ class Start extends Component {
               <Text style={style.startButtonText}>play</Text>
             </TouchableOpacity>
             <DifficultySwitch style={{marginTop: 20}}/>
-            <TouchableOpacity onPress={this.showLeaderboard}>
-              <Text style={{color: 'hotpink'}}>Show Leaderboard</Text>
-            </TouchableOpacity>
           </View>
         </View>
         <SettingsLink textColor={base.colors.grey}/>
@@ -54,10 +50,6 @@ class Start extends Component {
     this.props.dispatch({type: 'game:reset'})
     this.props.dispatch(loadFirstLevel(this.props.showTutorial))
     this.props.dispatch({type: 'scene:change', scene: 'Game'})
-  }
-
-  showLeaderboard() {
-    this.props.dispatch({type: 'scene:change', scene: 'Leaderboard'})
   }
 }
 
