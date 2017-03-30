@@ -37,8 +37,7 @@ export default class GameView extends Component {
     if( props.currentScore > highScores[0] ) {
       this.setState({
         newHighScore: true,
-        topScore: index === 0,
-        scoreIndex: --index,
+        topScore:     true,
       })
     }
   }
