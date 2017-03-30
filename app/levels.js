@@ -513,7 +513,10 @@ const worlds = [{
 }]
 
 const levels = [].concat.apply([], worlds.map((w) => {
-  return w.levels
+  return w.levels.map((l) => {
+    l.color = w.color
+    return l
+  })
 }))
 
 module.exports.worlds = worlds;
