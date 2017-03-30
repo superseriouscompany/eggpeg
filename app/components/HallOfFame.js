@@ -90,7 +90,7 @@ function Score(props) {
   return (
     <View style={[style.scoreContainer, {backgroundColor: props.color}]}>
       <Text style={style.place}>{props.place}</Text>
-      <Text style={style.name}>{props.name}</Text>
+      <Text style={style.name} numberOfLines={1}>{props.name}</Text>
       <Text style={style.score}>{props.score}</Text>
     </View>
   )
@@ -187,6 +187,7 @@ const style = StyleSheet.create({
   name: {
     flex: 1,
     fontSize: 32,
+    paddingRight: 30,
     color: 'white',
     backgroundColor: 'transparent',
   },
