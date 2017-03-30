@@ -1,7 +1,7 @@
 import {REHYDRATE} from 'redux-persist/constants'
 
 const initialState = {
-  current: 'HallOfFame',
+  current: 'Start',
   previous: null,
 }
 
