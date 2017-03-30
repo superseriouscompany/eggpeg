@@ -120,12 +120,12 @@ function insertScore(score, scores) {
 
 function color(index) {
   const stops = [
-    { r: 121, g: 178, b: 73 },
-    { r: 245, g: 184, b: 64 },
-    { r: 234, g: 138, b: 57 },
-    { r: 209, g: 83,  b: 74 },
-    { r: 139, g: 80,  b: 151 },
     { r: 56,  g: 158, b: 217 },
+    { r: 139, g: 80,  b: 151 },
+    { r: 209, g: 83,  b: 74 },
+    { r: 234, g: 138, b: 57 },
+    { r: 245, g: 184, b: 64 },
+    { r: 121, g: 178, b: 73 },
   ]
 
   const sectionSize = 100 / (stops.length-1);
