@@ -3,7 +3,6 @@
 import React            from 'react'
 import Component        from './Component'
 import {connect}        from 'react-redux'
-import {loadFirstLevel} from '../actions/levels'
 import WorldsView       from '../views/WorldsView'
 import {
   StyleSheet,
@@ -32,8 +31,6 @@ function mapDispatchToProps(dispatch) {
     },
     loadLevel: (name) => {
       dispatch({type: 'worlds:select', name: name})
-      dispatch({type: 'game:reset'})
-      dispatch(loadFirstLevel())
       dispatch({type: 'scene:change', scene: 'Game'})
     },
     back: () => {

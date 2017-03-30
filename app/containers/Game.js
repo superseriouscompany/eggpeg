@@ -26,6 +26,7 @@ class Game extends Component {
 
   componentDidMount() {
     this.props.dispatch(loadScores())
+    this.reset()
   }
 
   continue() {
@@ -35,32 +36,36 @@ class Game extends Component {
   nextLevel() {
     for( var i = 0; i < this.props.levels.length; i++ ) {
       if( this.props.levels[i].name == this.props.level.name ) {
-        return this.loadLevel(this.props.levels[i+1])
+        if( i == this.props.levels.length - 1 ) {
+          return this.victory()
+        } else {
+          return this.loadLevel(this.props.levels[i+1])
+        }
       }
     }
   }
 
-  loadLevel(level) {
-    debugger
-    if( level >= this.props.levels.length ) {
-      const score = this.props.score.total;
-      this.props.dispatch(recordScore(score)).catch((err) => {
-        console.error(err)
-      })
-      this.props.dispatch({type: 'worlds:beat', score: score})
-      this.props.dispatch({type: 'worlds:unlock'})
-      if( this.props.world.name == '3' ) {
-        // TODO: delete difficulty reducer and actions
-        this.props.dispatch({type: 'difficulty:unlock'})
-        return this.props.dispatch({type: 'victory:yes'})
-      } else {
-        if( this.props.world.name == 'Demo' ) {
-          this.props.dispatch({type: 'tutorial:complete'})
-        }
-
-        return this.props.dispatch({type: 'scene:change', scene: 'Worlds'})
+  victory() {
+    const score = this.props.score.total;
+    this.props.dispatch(recordScore(score)).catch((err) => {
+      console.error(err)
+    })
+    this.props.dispatch({type: 'worlds:beat', score: score})
+    this.props.dispatch({type: 'worlds:unlock'})
+    if( this.props.world.name == '3' ) {
+      // TODO: delete difficulty reducer and actions
+      this.props.dispatch({type: 'difficulty:unlock'})
+      return this.props.dispatch({type: 'victory:yes'})
+    } else {
+      if( this.props.world.name == 'Demo' ) {
+        this.props.dispatch({type: 'tutorial:complete'})
       }
+
+      return this.props.dispatch({type: 'scene:change', scene: 'Worlds'})
     }
+  }
+
+  loadLevel(level) {
     this.props.dispatch(loadLevel(level))
   }
 
