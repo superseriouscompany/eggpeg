@@ -88,8 +88,14 @@ const style = StyleSheet.create({
   grid: {
     flexDirection: 'row',
     flexWrap:      'wrap',
-    paddingTop:    40,
+    paddingTop:    30,
     alignItems:    'flex-start',
+  },
+  worldContainer: {
+    width:           '50%',
+    alignItems:     'center',
+    justifyContent: 'center',
+
   },
   leftNav: {
     width: 120,
@@ -113,12 +119,6 @@ const style = StyleSheet.create({
     fontSize: 18,
     fontStyle: 'italic',
     marginTop: -5,
-  },
-  worldContainer: {
-    width:           '50%',
-    alignItems:     'center',
-    justifyContent: 'center',
-    marginBottom:   37,
   },
   greyedOut: {
     opacity: 0.5,
