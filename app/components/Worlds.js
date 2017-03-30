@@ -31,10 +31,10 @@ function mapDispatchToProps(dispatch) {
       dispatch({type: 'scene:change', scene: 'HallOfFame'})
     },
     loadLevel: (name) => {
-      this.props.dispatch({type: 'worlds:select', name: name})
-      this.props.dispatch({type: 'game:reset'})
-      this.props.dispatch(loadFirstLevel(this.props.showTutorial))
-      this.props.dispatch({type: 'scene:change', scene: 'Game'})
+      dispatch({type: 'worlds:select', name: name})
+      dispatch({type: 'game:reset'})
+      dispatch(loadFirstLevel())
+      dispatch({type: 'scene:change', scene: 'Game'})
     },
     back: () => {
       dispatch({type: 'scene:pop'})
