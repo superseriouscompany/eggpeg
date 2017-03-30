@@ -1,7 +1,9 @@
+import config from '../config'
+
 import {REHYDRATE} from 'redux-persist/constants'
 
 const initialState = {
-  current: 'Start',
+  current: config.startingScene,
   previous: null,
 }
 

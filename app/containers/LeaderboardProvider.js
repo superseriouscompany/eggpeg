@@ -16,7 +16,7 @@ class LeaderboardProvider extends Component {
   componentDidMount() {
     NetInfo.isConnected.addEventListener('change', this.handleConnectionChange);
     this.props.dispatch(loadScores()).catch((err) => {
-      console.warn("Couldn't load leaderboard. You might be offline?");
+      console.warn("Couldn't load leaderboard. You might be offline?", err);
       this.props.dispatch(enqueueRetry({type: 'loadScores'}));
     })
   }
@@ -43,7 +43,7 @@ class LeaderboardProvider extends Component {
           this.props.dispatch(postScore(request.score, request.name)).then(() => {
             this.props.dispatch(clearRetry(request.id))
           }).catch((err) => {
-            console.warn('Queued postScore request failed', request, err)
+            console.warn('Queued postScore request failed', request, err.message, err)
           })
         } else {
           console.warn('Unknown request type to retry', request.type)

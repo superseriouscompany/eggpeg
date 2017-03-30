@@ -12,7 +12,6 @@ export function loadScores() {
 
 export function postScore(score, name) {
   return function(dispatch) {
-    return Promise.reject(new Error('nope'))
     return api.signedPost('/leaderboard', {score, name}).then(() => {
       return loadScores()(dispatch)
     })
