@@ -9,513 +9,517 @@ const ycenter    = height / 2;
 
 const {colors}   = require('./styles/base')
 
-const levels = [
-  {
-    name: 'Stationary',
-    targets: [
-      {
-        width: 200,
-        points: [
-          { x: xcenter, y: ycenter },
-        ],
-        velocity: 0,
-      },
-    ],
-    color: colors.purple,
-    hint: 'Tap the target to drop an egg on it.',
-  },
-  {
-    name: 'Big line',
-    targets: [
-      {
-        width: 200,
-        points: [
-          { x: xcenter, y: ycenter - 200 },
-          { x: xcenter, y: ycenter + 200 },
-        ],
-        velocity: 1,
+const worlds = [{
+  name:   'Demo',
+  color:  colors.green,
+  levels: [
+    {
+      name: 'Stationary',
+      targets: [
+        {
+          width: 200,
+          points: [
+            { x: xcenter, y: ycenter },
+          ],
+          velocity: 0,
+        },
+      ],
+      color: colors.purple,
+      hint: 'Tap the target to drop an egg on it.',
+    },
+    {
+      name: 'Big line',
+      targets: [
+        {
+          width: 200,
+          points: [
+            { x: xcenter, y: ycenter - 200 },
+            { x: xcenter, y: ycenter + 200 },
+          ],
+          velocity: 1,
+        }
+      ],
+      color: colors.purple,
+      hint: 'Anticipate the movement.',
+    },
+    {
+      name: 'Big line diagonal',
+      targets: [
+        {
+          width: 200,
+          points: [
+            { x: 0, y: 0 },
+            { x: width, y: height },
+          ],
+          velocity: 1,
+        }
+      ],
+      color: colors.purple,
+      hint: 'Targets move in many directions.',
+    },
+    {
+      name: 'Big square',
+      targets: [
+        {
+          width: 200,
+          points: [
+            { x: xcenter, y: 0 },
+            { x: width, y: 0 },
+            { x: width, y: height },
+            { x: 0, y: height },
+            { x: 0, y: 0 },
+          ],
+          velocity: 1,
+        }
+      ],
+      color: colors.purple,
+      hint: 'Watch for patterns.'
+    },
+    {
+      name: 'Big double',
+      targets: [
+        {
+          width: 200,
+          points: [
+            { x: 0, y: ycenter },
+            { x: width, y: ycenter },
+          ],
+          velocity: 1,
+        },
+        {
+          width: 200,
+          points: [
+            { x: width, y: ycenter },
+            { x: 0, y: ycenter },
+          ],
+          velocity: 1,
+        },
+      ],
+      color: colors.purple,
+      hint: 'Hitting two targets doubles the score',
+    },
+  ],
+}, {
+  name: '1',
+  color: colors.yellow,
+  levels: [
+    {
+      name: 'vibrator',
+      targets: [
+        {
+          points: [
+            { x: xcenter - 10, y: ycenter },
+            { x: xcenter + 10, y: ycenter },
+          ],
+          velocity: .5,
       }
-    ],
-    color: colors.purple,
-    hint: 'Anticipate the movement.',
-  },
-  {
-    name: 'Big line diagonal',
-    targets: [
-      {
-        width: 200,
-        points: [
-          { x: 0, y: 0 },
-          { x: width, y: height },
-        ],
-        velocity: 1,
-      }
-    ],
-    color: colors.purple,
-    hint: 'Targets move in many directions.',
-  },
-  {
-    name: 'Big square',
-    targets: [
-      {
-        width: 200,
-        points: [
-          { x: xcenter, y: 0 },
-          { x: width, y: 0 },
-          { x: width, y: height },
-          { x: 0, y: height },
-          { x: 0, y: 0 },
-        ],
-        velocity: 1,
-      }
-    ],
-    color: colors.purple,
-    hint: 'Watch for patterns.'
-  },
-  {
-    name: 'Big double',
-    targets: [
-      {
-        width: 200,
-        points: [
-          { x: 0, y: ycenter },
-          { x: width, y: ycenter },
-        ],
-        velocity: 1,
-      },
-      {
-        width: 200,
-        points: [
-          { x: width, y: ycenter },
-          { x: 0, y: ycenter },
-        ],
-        velocity: 1,
-      },
-    ],
-    color: colors.purple,
-    hint: 'Hitting two targets doubles the score',
-  },
-  {
-    name: 'vibrator',
-    targets: [
-      {
-        points: [
-          { x: xcenter - 10, y: ycenter },
-          { x: xcenter + 10, y: ycenter },
-        ],
-        velocity: .5,
+      ],
+    },
+    {
+      name: 'two headed vibrator',
+      targets: [
+        {
+          points: [
+            { x: xcenter - 50, y: ycenter - 10 - 100},
+            { x: xcenter - 50, y: ycenter + 10 - 100},
+          ],
+          velocity: .5,
+        },
+        {
+          points: [
+            { x: xcenter + 50, y: ycenter - 10 + 100},
+            { x: xcenter + 50, y: ycenter + 10 + 100},
+          ],
+          velocity: .5,
+        },
+      ],
+    },
+    {
+      name: 'Solo slow',
+      targets: [
+        {
+          points: [
+            { x: 0, y: ycenter },
+            { x: width, y: ycenter }
+          ],
+          velocity: .5,
+        }
+      ],
+    },
+    {
+      name: 'Slow Stairs',
+      targets: [
+        {
+          points: steps({x: xcenter - 100, y: ycenter - 100, distance: 20, steps: 10}),
+          velocity: .5,
+        }
+      ],
+    },
+    {
+      name: 'Slow Meeting',
+      targets: [
+        {
+          points: [
+            { x: xcenter - 100, y: ycenter - 50 },
+            { x: xcenter - 5,   y: ycenter - 50 },
+            { x: xcenter - 5,   y: ycenter + 50, velocity: 0.3 },
+            { x: xcenter - 100, y: ycenter + 50 },
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: xcenter + 100, y: ycenter - 50 },
+            { x: xcenter + 5,   y: ycenter - 50 },
+            { x: xcenter + 5,   y: ycenter + 50, velocity: 0.3 },
+            { x: xcenter + 100, y: ycenter + 50 },
+          ],
+          velocity: 1,
+        },
+      ],
+    },
+    {
+      name: 'three headed vibrator',
+      targets: [
+        {
+          points: [
+            { x: xcenter - 50, y: ycenter - 10 - 100},
+            { x: xcenter - 50, y: ycenter + 10 - 100},
+          ],
+          velocity: .5,
+        },
+        {
+          points: [
+            { x: xcenter - 10, y: ycenter },
+            { x: xcenter + 10, y: ycenter },
+          ],
+          velocity: .5,
+        },
+        {
+          points: [
+            { x: xcenter + 50, y: ycenter - 10 + 100},
+            { x: xcenter + 50, y: ycenter + 10 + 100},
+          ],
+          velocity: .5,
+        },
+      ],
+    },
+  ],
+},
+{
+  name: '2',
+  color: colors.orange,
+  levels: [
+    {
+      name: 'Solo',
+      targets: [
+        {
+          points: [
+            { x: 0, y: ycenter },
+            { x: width, y: ycenter }
+          ],
+          velocity: 1,
+        }
+      ],
+    },
+    {
+      name: 'hyperactive brother',
+      targets: [
+        {
+          points: [
+            { x: 0, y: ycenter },
+            { x: width, y: ycenter },
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: xcenter, y: ycenter },
+          ],
+          velocity: 0,
+        },
+      ],
+    },
+    {
+      name: 'linked',
+      targets: [
+        {
+          points: [
+            { x: 0, y: ycenter },
+            { x: width, y:ycenter },
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: config.sizes.target, y: ycenter },
+            { x: width, y:ycenter },
+            { x: 0, y: ycenter },
+          ],
+          velocity: 1,
+        },
+      ],
+    },
+    {
+      name: 'Circle',
+      targets: [
+        {
+          points: circle(xcenter, ycenter, 80),
+          velocity: 1,
+        },
+      ],
+    },
+    {
+      name: 'Crossing',
+      targets: [
+        {
+          points: [
+            { x: 0, y: ycenter },
+            { x: width, y: ycenter },
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: xcenter, y: ycenter - (width - config.sizes.target) / 2},
+            { x: xcenter, y: ycenter + (width - config.sizes.target) / 2},
+          ],
+          velocity: 1,
+        }
+      ],
+    },
+    {
+      name: 'Whole Phone',
+      targets: [
+        {
+          points: [
+            { x: 0, y: 0 },
+            { x: width, y: 0 },
+            { x: width, y: height },
+            { x: 0, y: height },
+          ],
+          velocity: 1,
+        },
+      ],
+    },
+  ],
+}, {
+  name: '3',
+  color: colors.red,
+  levels: [
+    {
+      name: 'Concentric Box',
+      targets: [
+        {
+          points: concentric({x: xcenter, y: ycenter, step: 20, max: 200}),
+          velocity: 1,
+        }
+      ],
+    },
+    {
+      name: 'Jagged Edge',
+      targets: [
+        {
+          points: backtrack([
+            { x: xcenter - 150, y: ycenter - 100 },
+            { x: xcenter - 100, y: ycenter + 100 },
+            { x: xcenter - 50, y: ycenter - 100 },
+            { x: xcenter, y: ycenter + 100 },
+            { x: xcenter + 50, y: ycenter - 100 },
+            { x: xcenter + 100, y: ycenter + 100 },
+            { x: xcenter + 150, y: ycenter - 100 },
+          ]),
+          velocity: 1,
+        }
+      ],
+    },
+    {
+      name: 'Fast Guy',
+      targets: [
+        {
+          points: [
+            { x: 0, y: ycenter },
+            { x: width, y: ycenter },
+          ],
+          velocity: 2,
+        }
+      ],
+    },
+    {
+      name: 'Fast Meeting',
+      targets: [
+        {
+          points: [
+            { x: 0,       y: ycenter },
+            { x: xcenter, y: ycenter, velocity: 2 },
+          ],
+          velocity: 0.5,
+        },
+        {
+          points: [
+            { x: width, y: ycenter },
+            { x: xcenter,   y: ycenter, velocity: 2},
+          ],
+          velocity: 0.5,
+        },
+      ],
+    },
+    {
+      name: 'Argyle',
+      targets: [
+        {
+          points: backtrack([
+            { x: xcenter - 150, y: ycenter - 100 },
+            { x: xcenter - 100, y: ycenter + 100 },
+            { x: xcenter - 50, y: ycenter - 100 },
+            { x: xcenter, y: ycenter + 100 },
+            { x: xcenter + 50, y: ycenter - 100 },
+            { x: xcenter + 100, y: ycenter + 100 },
+            { x: xcenter + 150, y: ycenter - 100 },
+          ]),
+          velocity: 1,
+        },
+        {
+          points: backtrack([
+            { x: xcenter - 150, y: ycenter + 100 },
+            { x: xcenter - 100, y: ycenter - 100 },
+            { x: xcenter - 50, y: ycenter + 100 },
+            { x: xcenter, y: ycenter - 100 },
+            { x: xcenter + 50, y: ycenter + 100 },
+            { x: xcenter + 100, y: ycenter - 100 },
+            { x: xcenter + 150, y: ycenter + 100 },
+          ]),
+          velocity: 1,
+        },
+      ],
+    },
+    {
+      name: 'Star of David',
+      targets: [
+        {
+          points: [
+            { x: xcenter - 50, y: ycenter - 10 + 25 * Math.sqrt(3)},
+            { x: xcenter, y: ycenter - 10 - 25 * Math.sqrt(3) },
+            { x: xcenter + 50, y: ycenter - 10 + 25 * Math.sqrt(3)},
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: xcenter + 50, y: ycenter + 10 - 25 * Math.sqrt(3)},
+            { x: xcenter - 50, y: ycenter + 10 - 25 * Math.sqrt(3)},
+            { x: xcenter, y: ycenter + 10 + 25 * Math.sqrt(3) },
+          ],
+          velocity: 1,
+        },
+      ],
+    },
+    {
+      name: 'Two Speed',
+      targets: [
+        {
+          points: [
+            { x: 0, y: ycenter },
+            { x: width, y: ycenter}
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: 20, y: ycenter },
+            { x: width, y: ycenter },
+            { x: 0, y: ycenter },
+          ],
+          velocity: 2,
+        }
+      ],
+    },
+    {
+      name: 'X Marks the Spot',
+      targets: [
+        {
+          points: [
+            { x: xcenter - 100, y: ycenter - 100 },
+            { x: xcenter + 100, y: ycenter + 100 }
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: xcenter + 100, y: ycenter - 100 },
+            { x: xcenter - 100, y: ycenter + 100 }
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: xcenter - 100, y: ycenter + 100 },
+            { x: xcenter + 100, y: ycenter - 100 }
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: xcenter + 100, y: ycenter + 100 },
+            { x: xcenter - 100, y: ycenter - 100 }
+          ],
+          velocity: 1,
+        },
+      ],
+    },
+    {
+      name: 'Superfast',
+      targets: [
+        {
+          points: [
+            { x: 0, y: height },
+            { x: width, y: 0},
+          ],
+          velocity: 3,
+        }
+      ],
+    },
+    {
+      name: 'The Santi Special',
+      targets: [
+        {
+          points: [
+            { x: xcenter - 50, y: ycenter },
+            { x: xcenter - 50, y: ycenter - 50 },
+            { x: xcenter, y: ycenter - 50 },
+            { x: xcenter, y: ycenter }
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: xcenter - 50, y: ycenter },
+            { x: xcenter - 50, y: ycenter + 50 },
+            { x: xcenter, y: ycenter + 50 },
+            { x: xcenter, y: ycenter }
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: xcenter, y: ycenter },
+            { x: xcenter, y: ycenter - 25 },
+            { x: xcenter + 125, y: ycenter - 25 },
+            { x: xcenter + 125, y: ycenter + 25 },
+            { x: xcenter, y: ycenter + 25 },
+          ],
+          velocity: 1,
+        }
+      ],
     }
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'two headed vibrator',
-    targets: [
-      {
-        points: [
-          { x: xcenter - 50, y: ycenter - 10 - 100},
-          { x: xcenter - 50, y: ycenter + 10 - 100},
-        ],
-        velocity: .5,
-      },
-      {
-        points: [
-          { x: xcenter + 50, y: ycenter - 10 + 100},
-          { x: xcenter + 50, y: ycenter + 10 + 100},
-        ],
-        velocity: .5,
-      },
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'Solo slow',
-    targets: [
-      {
-        points: [
-          { x: 0, y: ycenter },
-          { x: width, y: ycenter }
-        ],
-        velocity: .5,
-      }
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'Slow Stairs',
-    targets: [
-      {
-        points: steps({x: xcenter - 100, y: ycenter - 100, distance: 20, steps: 10}),
-        velocity: .5,
-      }
-    ],
-    color: colors.purple
-  },
-  {
-    name: 'Slow Meeting',
-    targets: [
-      {
-        points: [
-          { x: xcenter - 100, y: ycenter - 50 },
-          { x: xcenter - 5,   y: ycenter - 50 },
-          { x: xcenter - 5,   y: ycenter + 50, velocity: 0.3 },
-          { x: xcenter - 100, y: ycenter + 50 },
-        ],
-        velocity: 1,
-      },
-      {
-        points: [
-          { x: xcenter + 100, y: ycenter - 50 },
-          { x: xcenter + 5,   y: ycenter - 50 },
-          { x: xcenter + 5,   y: ycenter + 50, velocity: 0.3 },
-          { x: xcenter + 100, y: ycenter + 50 },
-        ],
-        velocity: 1,
-      },
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'three headed vibrator',
-    targets: [
-      {
-        points: [
-          { x: xcenter - 50, y: ycenter - 10 - 100},
-          { x: xcenter - 50, y: ycenter + 10 - 100},
-        ],
-        velocity: .5,
-      },
-      {
-        points: [
-          { x: xcenter - 10, y: ycenter },
-          { x: xcenter + 10, y: ycenter },
-        ],
-        velocity: .5,
-      },
-      {
-        points: [
-          { x: xcenter + 50, y: ycenter - 10 + 100},
-          { x: xcenter + 50, y: ycenter + 10 + 100},
-        ],
-        velocity: .5,
-      },
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'Solo',
-    targets: [
-      {
-        points: [
-          { x: 0, y: ycenter },
-          { x: width, y: ycenter }
-        ],
-        velocity: 1,
-      }
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'hyperactive brother',
-    targets: [
-      {
-        points: [
-          { x: 0, y: ycenter },
-          { x: width, y: ycenter },
-        ],
-        velocity: 1,
-      },
-      {
-        points: [
-          { x: xcenter, y: ycenter },
-        ],
-        velocity: 0,
-      },
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'linked',
-    targets: [
-      {
-        points: [
-          { x: 0, y: ycenter },
-          { x: width, y:ycenter },
-        ],
-        velocity: 1,
-      },
-      {
-        points: [
-          { x: config.sizes.target, y: ycenter },
-          { x: width, y:ycenter },
-          { x: 0, y: ycenter },
-        ],
-        velocity: 1,
-      },
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'Circle',
-    targets: [
-      {
-        points: circle(xcenter, ycenter, 80),
-        velocity: 1,
-      },
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'Crossing',
-    targets: [
-      {
-        points: [
-          { x: 0, y: ycenter },
-          { x: width, y: ycenter },
-        ],
-        velocity: 1,
-      },
-      {
-        points: [
-          { x: xcenter, y: ycenter - (width - config.sizes.target) / 2},
-          { x: xcenter, y: ycenter + (width - config.sizes.target) / 2},
-        ],
-        velocity: 1,
-      }
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'Whole Phone',
-    targets: [
-      {
-        points: [
-          { x: 0, y: 0 },
-          { x: width, y: 0 },
-          { x: width, y: height },
-          { x: 0, y: height },
-        ],
-        velocity: 1,
-      },
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'Concentric Box',
-    targets: [
-      {
-        points: concentric({x: xcenter, y: ycenter, step: 20, max: 200}),
-        velocity: 1,
-      }
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'Jagged Edge',
-    targets: [
-      {
-        points: backtrack([
-          { x: xcenter - 150, y: ycenter - 100 },
-          { x: xcenter - 100, y: ycenter + 100 },
-          { x: xcenter - 50, y: ycenter - 100 },
-          { x: xcenter, y: ycenter + 100 },
-          { x: xcenter + 50, y: ycenter - 100 },
-          { x: xcenter + 100, y: ycenter + 100 },
-          { x: xcenter + 150, y: ycenter - 100 },
-        ]),
-        velocity: 1,
-      }
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'Fast Guy',
-    targets: [
-      {
-        points: [
-          { x: 0, y: ycenter },
-          { x: width, y: ycenter },
-        ],
-        velocity: 2,
-      }
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'Fast Meeting',
-    targets: [
-      {
-        points: [
-          { x: 0,       y: ycenter },
-          { x: xcenter, y: ycenter, velocity: 2 },
-        ],
-        velocity: 0.5,
-      },
-      {
-        points: [
-          { x: width, y: ycenter },
-          { x: xcenter,   y: ycenter, velocity: 2},
-        ],
-        velocity: 0.5,
-      },
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'Argyle',
-    targets: [
-      {
-        points: backtrack([
-          { x: xcenter - 150, y: ycenter - 100 },
-          { x: xcenter - 100, y: ycenter + 100 },
-          { x: xcenter - 50, y: ycenter - 100 },
-          { x: xcenter, y: ycenter + 100 },
-          { x: xcenter + 50, y: ycenter - 100 },
-          { x: xcenter + 100, y: ycenter + 100 },
-          { x: xcenter + 150, y: ycenter - 100 },
-        ]),
-        velocity: 1,
-      },
-      {
-        points: backtrack([
-          { x: xcenter - 150, y: ycenter + 100 },
-          { x: xcenter - 100, y: ycenter - 100 },
-          { x: xcenter - 50, y: ycenter + 100 },
-          { x: xcenter, y: ycenter - 100 },
-          { x: xcenter + 50, y: ycenter + 100 },
-          { x: xcenter + 100, y: ycenter - 100 },
-          { x: xcenter + 150, y: ycenter + 100 },
-        ]),
-        velocity: 1,
-      },
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'Star of David',
-    targets: [
-      {
-        points: [
-          { x: xcenter - 50, y: ycenter - 10 + 25 * Math.sqrt(3)},
-          { x: xcenter, y: ycenter - 10 - 25 * Math.sqrt(3) },
-          { x: xcenter + 50, y: ycenter - 10 + 25 * Math.sqrt(3)},
-        ],
-        velocity: 1,
-      },
-      {
-        points: [
-          { x: xcenter + 50, y: ycenter + 10 - 25 * Math.sqrt(3)},
-          { x: xcenter - 50, y: ycenter + 10 - 25 * Math.sqrt(3)},
-          { x: xcenter, y: ycenter + 10 + 25 * Math.sqrt(3) },
-        ],
-        velocity: 1,
-      },
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'Two Speed',
-    targets: [
-      {
-        points: [
-          { x: 0, y: ycenter },
-          { x: width, y: ycenter}
-        ],
-        velocity: 1,
-      },
-      {
-        points: [
-          { x: 20, y: ycenter },
-          { x: width, y: ycenter },
-          { x: 0, y: ycenter },
-        ],
-        velocity: 2,
-      }
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'X Marks the Spot',
-    targets: [
-      {
-        points: [
-          { x: xcenter - 100, y: ycenter - 100 },
-          { x: xcenter + 100, y: ycenter + 100 }
-        ],
-        velocity: 1,
-      },
-      {
-        points: [
-          { x: xcenter + 100, y: ycenter - 100 },
-          { x: xcenter - 100, y: ycenter + 100 }
-        ],
-        velocity: 1,
-      },
-      {
-        points: [
-          { x: xcenter - 100, y: ycenter + 100 },
-          { x: xcenter + 100, y: ycenter - 100 }
-        ],
-        velocity: 1,
-      },
-      {
-        points: [
-          { x: xcenter + 100, y: ycenter + 100 },
-          { x: xcenter - 100, y: ycenter - 100 }
-        ],
-        velocity: 1,
-      },
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'Superfast',
-    targets: [
-      {
-        points: [
-          { x: 0, y: height },
-          { x: width, y: 0},
-        ],
-        velocity: 3,
-      }
-    ],
-    color: colors.purple,
-  },
-  {
-    name: 'The Santi Special',
-    targets: [
-      {
-        points: [
-          { x: xcenter - 50, y: ycenter },
-          { x: xcenter - 50, y: ycenter - 50 },
-          { x: xcenter, y: ycenter - 50 },
-          { x: xcenter, y: ycenter }
-        ],
-        velocity: 1,
-      },
-      {
-        points: [
-          { x: xcenter - 50, y: ycenter },
-          { x: xcenter - 50, y: ycenter + 50 },
-          { x: xcenter, y: ycenter + 50 },
-          { x: xcenter, y: ycenter }
-        ],
-        velocity: 1,
-      },
-      {
-        points: [
-          { x: xcenter, y: ycenter },
-          { x: xcenter, y: ycenter - 25 },
-          { x: xcenter + 125, y: ycenter - 25 },
-          { x: xcenter + 125, y: ycenter + 25 },
-          { x: xcenter, y: ycenter + 25 },
-        ],
-        velocity: 1,
-      }
-    ],
-    color: colors.purple,
-  }
-]
+  ],
+}]
+
+const levels = [].concat.apply([], worlds.map((w) => {
+  return w.levels
+}))
+
+export worlds
 
 export default levels.map((l) => {
   return {
