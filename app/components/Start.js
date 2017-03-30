@@ -46,8 +46,12 @@ class Start extends Component {
   )}
 
   startGame() {
-    this.props.dispatch({type: 'game:reset'})
-    this.props.dispatch({type: 'scene:change', scene: 'Worlds'})
+    if( this.props.showDemo ) {
+      this.props.dispatch({type: 'worlds:select', name: 'Demo'})
+      this.props.dispatch({type: 'scene:change', scene: 'Game'})
+    } else {
+      this.props.dispatch({type: 'scene:change', scene: 'Worlds'})
+    }
   }
 }
 
@@ -74,8 +78,10 @@ const style = StyleSheet.create({
 })
 
 function mapStateToProps(state) {
-  return {}
+  return {
+    worlds:   state.worlds,
+    showDemo: !state.tutorial.complete,
+  }
 }
-
 
 export default connect(mapStateToProps)(Start)

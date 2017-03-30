@@ -47,10 +47,12 @@ class Game extends Component {
 
   victory() {
     const score = this.props.score.total;
-    this.props.dispatch(recordScore(score)).catch((err) => {
-      console.error(err)
-    })
-    this.props.dispatch({type: 'worlds:beat', score: score})
+    if( this.props.world.name !== 'Demo' ) {
+      this.props.dispatch(recordScore(score)).catch((err) => {
+        console.error(err)
+      })
+      this.props.dispatch({type: 'worlds:beat', score: score})
+    }
     this.props.dispatch({type: 'worlds:unlock'})
     if( this.props.world.name == '3' ) {
       // TODO: delete difficulty reducer and actions
