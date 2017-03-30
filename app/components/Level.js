@@ -100,7 +100,7 @@ class Level extends Component {
             <Target key={this.props.level.name + '-' + key} target={target} hit={target.hit} color={this.props.level.targetColor} deadColor={this.props.level.deadColor}/>
           ))}
           { this.props.bullets.map((bullet, key) => (
-            <Bullet key={this.props.level.name + '-' + key} bullet={bullet} hit={bullet.hit} yolkColor={this.props.level.yolkColor}/>
+            <Bullet key={this.props.level.name + '-' + key} bullet={bullet} hit={bullet.hit} yolkColor={this.props.level.yolkColor} shadowColor={this.props.level.color}/>
           ))}
           { this.props.hint ?
             <View style={style.hintContainer}>

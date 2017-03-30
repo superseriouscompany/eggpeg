@@ -70,7 +70,7 @@ export default class Bullet extends Component {
   }
 
   render() {
-    const {bullet, yolkColor} = this.props;
+    const {bullet, yolkColor, shadowColor} = this.props;
     const containerWidth = Math.max(config.sizes.shadow, config.sizes.bullet)
     let shadowWidth = Math.round(config.sizes.shadow * bullet.shadow);
     const yolkStyle = { backgroundColor: yolkColor || base.colors.yellow }
@@ -126,6 +126,7 @@ export default class Bullet extends Component {
           width:  shadowWidth,
           height: shadowWidth,
           borderRadius: shadowWidth / 2,
+          borderColor: shadowColor
         }]} />
       : null
       }
@@ -141,7 +142,6 @@ const style = StyleSheet.create({
   },
   shadow: {
     backgroundColor: 'white',
-    borderColor:     base.colors.purple,
     borderWidth:     1,
     zIndex:          1,
   },
