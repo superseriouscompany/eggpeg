@@ -49,7 +49,7 @@ class Start extends Component {
   startGame() {
     this.props.dispatch({type: 'game:reset'})
     this.props.dispatch(loadFirstLevel(this.props.showTutorial))
-    this.props.dispatch({type: 'scene:change', scene: 'Game'})
+    this.props.dispatch({type: 'scene:change', scene: 'Worlds'})
   }
 }
 
@@ -76,9 +76,7 @@ const style = StyleSheet.create({
 })
 
 function mapStateToProps(state) {
-  return {
-    showTutorial: !state.tutorial.complete,
-  }
+  return {}
 }
 
 

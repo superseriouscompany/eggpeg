@@ -21,6 +21,7 @@ import shareLink  from './shareLink'
 import targets    from './targets'
 import tutorial   from './tutorial'
 import victory    from './victory'
+import worlds     from './worlds'
 const reducers = combineReducers({
   bullets,
   chamber,
@@ -33,6 +34,7 @@ const reducers = combineReducers({
   victory,
   difficulty,
   tutorial,
+  worlds,
 })
 
 // Add middleware http://redux.js.org/docs/advanced/Middleware.html
