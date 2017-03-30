@@ -43,16 +43,16 @@ class GameOver extends Component {
     const {score}  = this.props;
 
     // TODO: move this out of here
-    // if( !scores.length ) {
-    //   this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})
-    //   return;
-    // }
-    // for( var i = 0; i < scores.length; i++ ) {
-    //   if( scores[i].score < score ) {
-    //     this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})
-    //     return;
-    //   }
-    // }
+    if( !scores.length ) {
+      this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})
+      return;
+    }
+    for( var i = 0; i < scores.length; i++ ) {
+      if( scores[i].score < score ) {
+        this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})
+        return;
+      }
+    }
 
     if( this.props.isHighScore ) {
       sounds.woohoo.play(null, (err) => {
