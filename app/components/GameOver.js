@@ -135,8 +135,9 @@ class GameOver extends Component {
           outputRange: [-200, 0],
         })
       }]}>
-        <TouchableOpacity style={[style.button, style.retry]} onPress={this.props.reset}>
-          <Text style={[style.buttonText, {color: 'hotpink'}]}>Q</Text>
+
+        <TouchableOpacity style={[style.button, {height: 75, width: 75, marginRight: 9}]} onPress={this.props.reset}>
+          <Image source={require('../images/ReplayIcon.png')}/>
         </TouchableOpacity>
         <PayButton style={[style.button, style.continueButton]} textStyle={style.buttonText} continue={this.props.continue} />
       </Animated.View>
@@ -197,15 +198,13 @@ const style = StyleSheet.create({
   },
   continueButton: {
     width:  174.5,
-    height: 77,
-  },
-  retry: {
-    marginRight: 9,
+    height: 75,
   },
   buttonText: {
     color: '#4A4A4A',
     fontStyle: 'italic',
     fontSize: 32,
+    paddingBottom: 3,
   },
 })
 
