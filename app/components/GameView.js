@@ -7,7 +7,6 @@ import Victory            from './Victory'
 import GameHeader         from './GameHeader'
 import GameOver           from './GameOver'
 import Level              from './Level'
-import SettingsLink       from './SettingsLink'
 import base               from '../styles/base'
 import config             from '../config'
 import {
@@ -75,9 +74,6 @@ export default class GameView extends Component {
                 completeRainbowAnimation={this.completeRainbowAnimation} />
             }
             <Level />
-            { this.props.level.name !== 'Stationary' ?
-              <SettingsLink />
-            : null }
           </View>
         }
       </View>
