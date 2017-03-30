@@ -13,6 +13,7 @@ const worlds = [{
   name:        'Demo',
   color:       colors.green,
   targetColor: colors.orange,
+  deadColor:   'cornflowerblue',
   levels: [
     {
       name: 'Stationary',
@@ -99,6 +100,7 @@ const worlds = [{
   name:        '1',
   color:       colors.green,
   targetColor: colors.orange,
+  deadColor:   'cornflowerblue',
   levels: [
     {
       name: 'vibrator',
@@ -213,6 +215,7 @@ const worlds = [{
   name: '2',
   color:       colors.yellow,
   targetColor: colors.purple,
+  deadColor:   'cornflowerblue',
   yolkColor:   'orange',
   locked: true,
   levels: [
@@ -319,6 +322,7 @@ const worlds = [{
   name:        '3',
   color:       colors.orange,
   targetColor: colors.blue,
+  deadColor:   'cornflowerblue',
   locked: true,
   levels: [
     {
@@ -551,6 +555,7 @@ export default worlds.map((w) => {
       color:       w.color,
       targetColor: w.targetColor,
       yolkColor:   w.yolkColor,
+      deadColor:   w.deadColor,
       targets: l.targets.map((t) => {
         const radius = (t.width || config.sizes.target)/2
         t.points = t.points.map((p) => {
