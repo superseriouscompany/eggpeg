@@ -96,7 +96,6 @@ const style = StyleSheet.create({
   grid: {
     flexDirection: 'row',
     flexWrap:      'wrap',
-    paddingTop:    30,
     alignItems:    'flex-start',
   },
   worldContainer: {
@@ -106,6 +105,7 @@ const style = StyleSheet.create({
 
   },
   leftNav: {
+    position: 'absolute',
     width: 120,
     padding: 20,
     paddingRight: 0,
@@ -114,6 +114,8 @@ const style = StyleSheet.create({
   scoresContainer: {
     justifyContent: 'center',
     alignItems:     'center',
+    paddingTop: 40,
+    paddingBottom: 20,
   },
   topScore: {
     fontSize: 64,
