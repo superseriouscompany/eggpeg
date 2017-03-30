@@ -107,7 +107,7 @@ function Bullseye(props) {
   const {width, height, hit, ring, color, deadColor } = props;
 
   const filledStyle = { backgroundColor: color || 'hotpink' }
-  const deadStyle   = { backgroundColor: deadColor || 'cornflowerblue' }
+  const deadStyle   = { backgroundColor: deadColor || 'hotpink' }
   const rings = [
     { width: width, height: height },
     { width: width - width / 5, height: height - height / 5 },
@@ -161,7 +161,7 @@ const style = StyleSheet.create({
     shadowRadius: 1,
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 1,
     },
   },
   target: {
