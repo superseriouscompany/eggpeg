@@ -41,9 +41,17 @@ class Level extends Component {
 
   componentWillReceiveProps(props) {
     if( props.level.name != this.props.level.name ) {
+      if( !this.props.level.name ) {
+        this.setState({
+          targets: props.targets
+        })
+        this.state.swapAnim.setValue(0.5)
+        return
+      }
       this.setState({
         nextTargets: props.targets,
       })
+      this.props.dispatch({type: 'level:loading'})
       Animated.timing(
         this.state.swapAnim,
         {toValue: 1, duration: config.timings.levelOut}
@@ -57,13 +65,15 @@ class Level extends Component {
         Animated.timing(
           this.state.swapAnim,
           {toValue: .5, duration: config.timings.levelIn }
-        ).start()
+        ).start(() => {
+          this.props.dispatch({type: 'level:loading:finished'})
+        })
       })
     }
   }
 
   shoot(e) {
-    if( this.props.level.done || this.props.level.finishTime ) { return; }
+    if( this.props.level.done || this.props.level.finishTime || this.props.level.loading ) { return; }
     if( !this.props.chamber ) { return; }
     const {pageX, pageY} = e.nativeEvent;
     this.props.dispatch({type: 'bullets:fire', x: pageX, y: pageY})
