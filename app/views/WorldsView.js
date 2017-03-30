@@ -12,8 +12,8 @@ export default function(props) {
 return(
   <View style={style.container}>
     <StatusBar hidden/>
-    <View style={style.header}>
-      <TouchableOpacity onPress={props.back}>
+    <View>
+      <TouchableOpacity style={style.leftNav} onPress={props.back}>
         <Text>back</Text>
       </TouchableOpacity>
       <View style={style.scoresContainer}>
@@ -91,8 +91,11 @@ const style = StyleSheet.create({
     paddingTop:    40,
     alignItems:    'flex-start',
   },
-  header: {
+  leftNav: {
+    width: 120,
     padding: 20,
+    paddingRight: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0)'
   },
   scoresContainer: {
     justifyContent: 'center',
@@ -140,5 +143,5 @@ const style = StyleSheet.create({
   },
   maxScore: {
     fontSize: 18,
-  }
+  },
 })
