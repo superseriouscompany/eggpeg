@@ -31,7 +31,7 @@ const config = {
   },
   gravity: 0,//9.80665,
   countdown: 20, // game over countdown timer
-  playSounds: true,
+  playSounds: false,
   startingLevel: __DEV__ ? 'Stationary' : 'Stationary',
 }
 
