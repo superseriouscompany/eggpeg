@@ -157,11 +157,11 @@ const style = StyleSheet.create({
   },
   rim: {
     shadowColor: 'black',
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
+    shadowOpacity: 0.4,
+    shadowRadius: 1,
     shadowOffset: {
       width: 0,
-      height: 0,
+      height: 2,
     },
   },
   target: {
