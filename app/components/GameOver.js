@@ -6,12 +6,13 @@ import Text               from './Text';
 import PayButton          from './PayButton'
 import HighScores         from './HighScores'
 import LinksHeader        from './LinksHeader'
-import SettingsLink       from './SettingsLink'
 import DifficultySwitch   from './DifficultySwitch'
+import RainbowBar         from './RainbowBar'
 import config             from '../config'
 import sounds             from '../sounds'
 import {connect}          from 'react-redux'
 import {
+  Animated,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -19,11 +20,8 @@ import {
 
 class GameOver extends Component {
   static propTypes = {
-    score:       PropTypes.number.isRequired,
     reset:       PropTypes.func.isRequired,
     continue:    PropTypes.func.isRequired,
-    isHighScore: PropTypes.bool.isRequired,
-    highScores:  PropTypes.arrayOf(PropTypes.number).isRequired,
   }
 
   constructor(props) {
@@ -32,7 +30,10 @@ class GameOver extends Component {
     this.pause = this.pause.bind(this)
     this.resume = this.resume.bind(this)
     this.showSettings = this.showSettings.bind(this)
-    this.state = { timer: config.countdown }
+    this.state = {
+      timer: config.countdown,
+      enterAnim: new Animated.Value(0),
+    }
   }
 
   componentDidMount() {
@@ -61,6 +62,10 @@ class GameOver extends Component {
         console.error(err)
       })
     }
+
+    Animated.timing(this.state.enterAnim, {
+      duration: config.timings.gameOverIn, toValue: 1,
+    }).start()
   }
 
   componentWillUnmount() {
@@ -94,66 +99,125 @@ class GameOver extends Component {
   render() { return (
     <View style={style.container}>
       <LinksHeader textStyle={{color: 'white'}} />
-      <View style={style.mainContainer}>
-        <HighScores explanationText={'high score!'} scores={this.props.highScores} score={this.props.score} isHigh={this.props.isHighScore} />
-      </View>
-
-      <View style={style.buttonsContainer}>
-        { !this.state.expired && this.props.highScores.length >= 3 ?
-          <View style={style.continueContainer}>
-            <PayButton style={style.button}
-             countdown={this.state.timer}
-             continue={this.props.continue}
-             pause={this.pause}
-             resume={this.resume} />
-          </View>
+      <Animated.View style={[style.top, {
+        marginTop: this.state.enterAnim.interpolate({
+          inputRange:  [0, 1],
+          outputRange: [-1000, 0],
+        })
+      }]}>
+        { this.props.score > this.props.highScore ?
+          <RainbowBar />
+        : null }
+        <Text style={style.score}>{this.props.score}!</Text>
+        { this.props.score < this.props.highScore ?
+          <Text style={style.carrot}>
+            <Text style={{color: 'hotpink'}}>Y</Text> {this.props.highScore}
+          </Text>
+        : this.props.carrot !== 'boss' ?
+          <Text style={style.carrot}>default {this.props.carrot.name}'s {this.props.carrot.score}</Text>
         :
-          <View style={style.continueContainer}>
-            <View style={{height: 91, width: '100%'}}></View>
-          </View>
+          <Text style={style.carrot}>you're a boss.</Text>
         }
-        <TouchableOpacity style={style.button} onPress={this.props.reset}>
-          <Text style={{fontStyle: 'italic', fontSize: 32, color: 'white'}}>game over</Text>
+
+        <TouchableOpacity onPress={() => this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})}>
+          <Text style={style.topScores}>top scores</Text>
         </TouchableOpacity>
-        <DifficultySwitch dark={true} style={{marginTop: 20}}/>
-      </View>
-      <SettingsLink />
+      </Animated.View>
+
+      <Animated.View style={[style.bottom, {
+        marginBottom: this.state.enterAnim.interpolate({
+          inputRange:  [0, 1],
+          outputRange: [-200, 0],
+        })
+      }]}>
+        <TouchableOpacity style={[style.button, style.retry]} onPress={this.props.reset}>
+          <Text style={[style.buttonText, {color: 'hotpink'}]}>Q</Text>
+        </TouchableOpacity>
+        <PayButton style={[style.button, style.continueButton]} textStyle={style.buttonText} continue={this.props.continue} />
+      </Animated.View>
     </View>
   )}
 }
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: '#532D5A',
-    flex:            1,
-    alignItems:      'center',
+    backgroundColor: 'rgba(0,0,0,0.7)',
+    position:        'absolute',
+    left:            0,
+    right:           0,
+    top:             0,
+    bottom:          0,
+    zIndex:          1,
   },
-  mainContainer: {
-    flex: .4,
-    alignItems: 'center',
+  top: {
+    flex:           1,
+    alignItems:     'center',
     justifyContent: 'center',
-    marginTop: 60,
-  },
-  buttonsContainer: {
-    flex: .6,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   countdown: {
     color: 'white',
   },
-  button: {
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 5,
-    width: 200,
-    height: 75,
-    paddingBottom: 6,
+  score: {
+    fontSize: 64,
+    color:    'white',
+  },
+  carrot: {
+    fontSize: 18,
+    color:    'white',
+  },
+  topScores: {
+    color:     'white',
+    fontStyle: 'italic',
+  },
+  bottom: {
+    flexDirection:  'row',
+    paddingLeft:    31,
+    paddingRight:   31,
+    paddingBottom:  27,
     justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 8,
-    marginBottom: 8,
+  },
+  button: {
+    backgroundColor: 'white',
+    borderRadius:    5,
+    paddingLeft:     26,
+    paddingRight:    26,
+    paddingTop:      14,
+    paddingBottom:   20,
+    alignItems:      'center',
+    justifyContent:  'center',
+  },
+  continueButton: {
+    width:  174.5,
+    height: 77,
+  },
+  retry: {
+    marginRight: 9,
+  },
+  buttonText: {
+    color: '#4A4A4A',
+    fontStyle: 'italic',
+    fontSize: 32,
   },
 })
 
-export default connect()(GameOver)
+function mapStateToProps(state) {
+  const score       = state.score.total;
+  const leaderboard = state.leaderboard;
+
+  let carrot = 'boss';
+  for( var i = 0; i < leaderboard.length; i++ ) {
+    if( leaderboard[i].score < score ) {
+      carrot = i === 0 ? 'boss' : leaderboard[i-1]
+      break;
+    }
+  }
+
+  return {
+    score:       score,
+    highScore:   state.score.highScores && state.score.highScores[0],
+    leaderboard: leaderboard,
+    carrot:      carrot,
+  }
+}
+
+export default connect(mapStateToProps)(GameOver)
