@@ -25,7 +25,7 @@ return(
             </TouchableOpacity>
           </View>
         :
-          <Text style={style.topScore}>Levels</Text>
+          <Text style={style.hint}>choose a level</Text>
         }
       </View>
     </View>
@@ -103,6 +103,10 @@ const style = StyleSheet.create({
   },
   topScore: {
     fontSize: 64,
+    textAlign: 'center',
+  },
+  hint: {
+    fontSize: 32,
     textAlign: 'center',
   },
   leaderboard: {
