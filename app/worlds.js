@@ -548,7 +548,7 @@ export default worlds.map((w) => {
   w.maxScore = 0;
 
   w.levels = w.levels.map((l) => {
-    if( !l.max ) { console.warn('No max score defined for', l.name)}
+    if( !l.max && w.name !== 'Demo' ) { console.warn('No max score defined for', l.name)}
     w.maxScore += l.max || 0
     return {
       ...l,

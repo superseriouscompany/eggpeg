@@ -19,8 +19,30 @@ import {
 class HallOfFame extends Component {
   constructor(props) {
     super(props)
-    this.postScore = this.postScore.bind(this)
-    this.state = { name: '' }
+    this.postScore   = this.postScore.bind(this)
+    this.handleProps = this.handleProps.bind(this)
+    this.state       = { name: '' }
+  }
+
+  componentDidMount() {
+    this.handleProps(this.props)
+  }
+
+  componentWillReceiveProps(props) {
+    this.handleProps(props)
+  }
+
+  handleProps(props) {
+    // TODO: this is all messy, feels error prone
+    if( this.state.inserted ) { return console.warn('Already inserted score'); }
+    let state = {
+      scores: [].concat(props.scores),
+    }
+    if( props.score ) {
+      state.scorePosition = insertScore(props.score, state.scores)
+      state.inserted = state.scorePosition != -1
+    }
+    this.setState(state);
   }
 
   postScore() {
@@ -36,9 +58,7 @@ class HallOfFame extends Component {
   }
 
   render() {
-    const {score, scores} = this.props;
-    const position = insertScore(score, scores)
-    const y        = Math.max(0, position - 3) * 83.5
+    const y = (this.state.scorePosition && Math.max(0, this.state.scorePosition - 3) * 83.5) || 0
   return (
     <View style={style.container}>
       <StatusBar hidden/>
@@ -57,7 +77,7 @@ class HallOfFame extends Component {
       <ScrollView ref="scrollView"
                   onContentSizeChange={(width, height) => this.refs.scrollView.scrollTo({y: y})}
                   style={style.leaderboard}>
-        {scores.map((s, key) => (
+        {(this.state.scores || []).map((s, key) => (
           <View key={key}>
             { s.name ?
               <Score place={key+1} name={s.name} score={s.score} color={color(key)}/>
@@ -106,13 +126,14 @@ function mapStateToProps(state) {
 function insertScore(score, scores) {
   let slot = -1;
   for( var i = 0; i < scores.length; i++ ) {
-    if( scores[i].name && scores[i].score <= score ) {
+    if( scores[i].score <= score ) {
+      if( !scores[i].name ) { return i; }
       slot = i;
       break;
     }
   }
 
-  if( slot == - 1 ) { return scores }
+  if( slot == - 1 ) { return -1 }
   scores.splice(slot, 0, {score: score, name: false,});
   scores.pop();
   return slot
