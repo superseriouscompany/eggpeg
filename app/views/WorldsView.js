@@ -2,6 +2,7 @@ import React    from 'react'
 import {colors} from '../styles/base'
 import Text     from '../components/Text'
 import {
+  StatusBar,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -10,6 +11,7 @@ import {
 export default function(props) {
 return(
   <View style={style.container}>
+    <StatusBar hidden/>
     <View style={style.header}>
       <TouchableOpacity onPress={props.back}>
         <Text>back</Text>
