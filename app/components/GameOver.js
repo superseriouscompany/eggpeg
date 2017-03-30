@@ -5,7 +5,6 @@ import Component          from './Component';
 import Text               from './Text';
 import PayButton          from './PayButton'
 import HighScores         from './HighScores'
-import LinksHeader        from './LinksHeader'
 import RainbowBar         from './RainbowBar'
 import config             from '../config'
 import sounds             from '../sounds'
@@ -97,7 +96,6 @@ class GameOver extends Component {
 
   render() { return (
     <View style={style.container}>
-      <LinksHeader textStyle={{color: 'white'}} />
       <Animated.View style={[style.top, {
         marginTop: this.state.enterAnim.interpolate({
           inputRange:  [0, 1],
