@@ -64,7 +64,7 @@ return(
 function World(props) {
   return (
     <View style={style.world}>
-      <View style={[style.preview, {
+      <View style={[style.preview, props.world.locked || props.world.comingSoon ? null : style.shadow, {
         backgroundColor: props.world.color,
       }]}>
           { props.world.locked ?
@@ -144,6 +144,9 @@ const style = StyleSheet.create({
     marginTop:      5,
     marginBottom:   5,
     borderBottomWidth: 2,
+    borderColor:       'rgba(0,0,0,0)',
+  },
+  shadow: {
     borderColor:       'rgba(0,0,0,0.5)',
   },
   number: {
