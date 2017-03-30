@@ -1,4 +1,4 @@
-import {worlds} from '../levels'
+import worlds from '../worlds'
 import {colors} from '../styles/base'
 
 const teaser = {name: Number(worlds[worlds.length-1]), comingSoon: true, color: colors.purple}

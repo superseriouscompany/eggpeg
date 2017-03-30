@@ -1,10 +1,4 @@
 import config from '../config'
-import levels from '../levels'
-
-export function loadFirstLevel() {
-  let level = levelByName(config.startingLevel);
-  return loadLevel(level)
-}
 
 export function loadLevel(level) {
   return function(dispatch) {
@@ -17,13 +11,4 @@ export function loadLevel(level) {
       })
     })
   }
-}
-
-function levelByName(name) {
-  let level;
-  for( var i = 0; i < levels.length; i++ ) {
-    if( levels[i].name.toLowerCase() !== name.toLowerCase() ) { continue; }
-    return levels[i];
-  }
-  throw `Level not found: ${name}`
 }

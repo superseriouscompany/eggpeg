@@ -38,6 +38,8 @@ if( DeviceInfo.isEmulator() ) {
   config.bullet.delay = 0;
   config.playSounds   = false;
   config.lockLevel    = undefined;
+  config.timings.levelIn = 1;
+  config.timings.levelOut = 1;
 }
 
 export default config

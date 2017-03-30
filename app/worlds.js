@@ -102,6 +102,7 @@ const worlds = [{
   levels: [
     {
       name: 'vibrator',
+      max: 5,
       targets: [
         {
           points: [
@@ -114,6 +115,7 @@ const worlds = [{
     },
     {
       name: 'two headed vibrator',
+      max: 10,
       targets: [
         {
           points: [
@@ -133,6 +135,7 @@ const worlds = [{
     },
     {
       name: 'Solo slow',
+      max: 5,
       targets: [
         {
           points: [
@@ -145,6 +148,7 @@ const worlds = [{
     },
     {
       name: 'Slow Stairs',
+      max: 5,
       targets: [
         {
           points: steps({x: xcenter - 100, y: ycenter - 100, distance: 20, steps: 10}),
@@ -154,12 +158,13 @@ const worlds = [{
     },
     {
       name: 'Slow Meeting',
+      max: 20,
       targets: [
         {
           points: [
             { x: xcenter - 100, y: ycenter - 50 },
-            { x: xcenter - 5,   y: ycenter - 50 },
-            { x: xcenter - 5,   y: ycenter + 50, velocity: 0.3 },
+            { x: xcenter - 4,   y: ycenter - 50 },
+            { x: xcenter - 4,   y: ycenter + 50, velocity: 0.3 },
             { x: xcenter - 100, y: ycenter + 50 },
           ],
           velocity: 1,
@@ -167,8 +172,8 @@ const worlds = [{
         {
           points: [
             { x: xcenter + 100, y: ycenter - 50 },
-            { x: xcenter + 5,   y: ycenter - 50 },
-            { x: xcenter + 5,   y: ycenter + 50, velocity: 0.3 },
+            { x: xcenter + 4,   y: ycenter - 50 },
+            { x: xcenter + 4,   y: ycenter + 50, velocity: 0.3 },
             { x: xcenter + 100, y: ycenter + 50 },
           ],
           velocity: 1,
@@ -177,6 +182,7 @@ const worlds = [{
     },
     {
       name: 'three headed vibrator',
+      max: 15,
       targets: [
         {
           points: [
@@ -211,6 +217,7 @@ const worlds = [{
   levels: [
     {
       name: 'Solo',
+      max: 5,
       targets: [
         {
           points: [
@@ -223,6 +230,7 @@ const worlds = [{
     },
     {
       name: 'hyperactive brother',
+      max: 20,
       targets: [
         {
           points: [
@@ -241,6 +249,7 @@ const worlds = [{
     },
     {
       name: 'linked',
+      max: 14,
       targets: [
         {
           points: [
@@ -261,6 +270,7 @@ const worlds = [{
     },
     {
       name: 'Circle',
+      max: 5,
       targets: [
         {
           points: circle(xcenter, ycenter, 80),
@@ -270,6 +280,7 @@ const worlds = [{
     },
     {
       name: 'Crossing',
+      max: 20,
       targets: [
         {
           points: [
@@ -289,6 +300,7 @@ const worlds = [{
     },
     {
       name: 'Whole Phone',
+      max: 5,
       targets: [
         {
           points: [
@@ -310,6 +322,7 @@ const worlds = [{
   levels: [
     {
       name: 'Concentric Box',
+      max: 5,
       targets: [
         {
           points: concentric({x: xcenter, y: ycenter, step: 20, max: 200}),
@@ -319,6 +332,7 @@ const worlds = [{
     },
     {
       name: 'Jagged Edge',
+      max: 5,
       targets: [
         {
           points: backtrack([
@@ -336,6 +350,7 @@ const worlds = [{
     },
     {
       name: 'Fast Guy',
+      max: 5,
       targets: [
         {
           points: [
@@ -348,6 +363,7 @@ const worlds = [{
     },
     {
       name: 'Fast Meeting',
+      max: 20,
       targets: [
         {
           points: [
@@ -367,6 +383,7 @@ const worlds = [{
     },
     {
       name: 'Argyle',
+      max: 20,
       targets: [
         {
           points: backtrack([
@@ -396,6 +413,7 @@ const worlds = [{
     },
     {
       name: 'Star of David',
+      max: 25,
       targets: [
         {
           points: [
@@ -417,6 +435,7 @@ const worlds = [{
     },
     {
       name: 'Two Speed',
+      max: 20,
       targets: [
         {
           points: [
@@ -437,6 +456,7 @@ const worlds = [{
     },
     {
       name: 'X Marks the Spot',
+      max: 80,
       targets: [
         {
           points: [
@@ -470,6 +490,7 @@ const worlds = [{
     },
     {
       name: 'Superfast',
+      max: 5,
       targets: [
         {
           points: [
@@ -482,6 +503,7 @@ const worlds = [{
     },
     {
       name: 'The Santi Special',
+      max: 45,
       targets: [
         {
           points: [
@@ -516,31 +538,33 @@ const worlds = [{
   ],
 }]
 
-const levels = [].concat.apply([], worlds.map((w) => {
-  return w.levels.map((l) => {
-    l.color       = w.color
-    l.targetColor = w.targetColor
-    return l
-  })
-}))
 
-module.exports.worlds = worlds;
+export default worlds.map((w) => {
+  w.maxScore = 0;
 
-export default levels.map((l) => {
-  return {
-    ...l,
-    targets: l.targets.map((t) => {
-      const radius = (t.width || config.sizes.target)/2
-      t.points = t.points.map((p) => {
-        p.x = Math.max(radius, p.x);
-        p.x = Math.min(width - radius, p.x);
-        p.y = Math.max(50 + radius, p.y);
-        p.y = Math.min(height - radius, p.y)
-        return p
+  w.levels = w.levels.map((l) => {
+    if( !l.max ) { console.warn('No max score defined for', l.name)}
+    w.maxScore += l.max || 0
+    return {
+      ...l,
+      color:       w.color,
+      targetColor: w.targetColor,
+      yolkColor:   w.yolkColor,
+      targets: l.targets.map((t) => {
+        const radius = (t.width || config.sizes.target)/2
+        t.points = t.points.map((p) => {
+          p.x = Math.max(radius, p.x);
+          p.x = Math.min(width - radius, p.x);
+          p.y = Math.max(50 + radius, p.y);
+          p.y = Math.min(height - radius, p.y)
+          return p
+        })
+        return t
       })
-      return t
-    })
-  }
+    }
+  })
+
+  return w
 })
 
 function concentric(opts) {

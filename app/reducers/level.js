@@ -1,5 +1,4 @@
 import config from '../config'
-import levels from '../levels'
 
 export default function(state={level: 0}, action) {
   switch(action.type) {
