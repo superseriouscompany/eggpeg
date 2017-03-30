@@ -6,7 +6,6 @@ import Text               from './Text';
 import EggDrop            from './EggDrop';
 import DifficultySwitch   from './DifficultySwitch'
 import LinksHeader        from './LinksHeader';
-import SettingsLink       from './SettingsLink'
 import base               from '../styles/base';
 import {connect}          from 'react-redux';
 import {
@@ -21,7 +20,7 @@ class Start extends Component {
   constructor(props) {
     super(props)
     this.state = {}
-    this.startGame = this.startGame.bind(this)
+    this.startGame       = this.startGame.bind(this)
   }
 
   render() {
@@ -35,12 +34,11 @@ class Start extends Component {
           <EggDrop />
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <TouchableOpacity onPress={this.startGame} style={style.startButton}>
-              <Text style={{fontStyle: 'italic', fontSize: 32, color: base.colors.grey}}>play</Text>
+              <Text style={style.startButtonText}>play</Text>
             </TouchableOpacity>
             <DifficultySwitch style={{marginTop: 20}}/>
           </View>
         </View>
-        <SettingsLink textColor={base.colors.grey}/>
       </View>
     </View>
   )}
@@ -75,6 +73,11 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  startButtonText: {
+    fontStyle: 'italic',
+    fontSize: 32,
+    color: base.colors.grey,
+  }
 })
 
 function mapStateToProps(state) {

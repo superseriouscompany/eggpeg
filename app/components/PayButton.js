@@ -14,11 +14,8 @@ import {
 
 class PayButton extends Component {
   static propTypes = {
-    pause:     PropTypes.func.isRequired,
-    resume:    PropTypes.func.isRequired,
     continue:  PropTypes.func.isRequired,
     products:  PropTypes.array.isRequired,
-    countdown: PropTypes.number.isRequired,
   }
 
   constructor(props) {
@@ -28,40 +25,24 @@ class PayButton extends Component {
   }
 
   render() { return (
-    <View>
+    <TouchableOpacity style={[...this.props.style]} onPress={this.pay}>
       { this.state.purchasing ?
-        <View style={style.activityContainer}>
-          <ActivityIndicator />
-        </View>
+        <ActivityIndicator />
       :
-        <TouchableOpacity style={this.props.style} onPress={this.pay}>
-            <Text style={{fontStyle: 'italic', fontSize: 32, color: 'white'}}>
-              buy a life
-            </Text>
-            <Text style={style.countdown}>
-              {this.props.countdown}
-            </Text>
-            { this.props.products && this.props.products.length ?
-              <Text style={style.priceString}>
-                {this.props.products[0].priceString}
-              </Text>
-            : null }
-        </TouchableOpacity>
+        <Text style={[this.props.textStyle]}>continue</Text>
       }
-    </View>
+    </TouchableOpacity>
   )}
 
   pay() {
+    if( this.state.purchasing ) { return; }
     this.setState({
       purchasing: true,
     })
-    this.props.pause()
-
     purchase('com.superserious.eggpeg.continue', (err, ok) => {
       if( err ) {
         alert(err.message || JSON.stringify(err));
         this.setState({purchasing: false})
-        this.props.resume()
         return
       }
 
@@ -78,38 +59,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(PayButton)
-
-const style = StyleSheet.create({
-  explanation: {
-    color: 'white',
-  },
-  countdown: {
-    color: 'white',
-    position: 'absolute',
-    top: 5,
-    right: 7,
-    fontSize: 12,
-  },
-  priceString: {
-    color: 'white',
-    position: 'absolute',
-    bottom: 5,
-    right: 7,
-    fontSize: 12,
-  },
-  button: {
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 5,
-    width: 200,
-    height: 75,
-    paddingBottom: 6,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  activityContainer: {
-    height: 90,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})

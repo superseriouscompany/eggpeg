@@ -1,13 +1,13 @@
 'use strict';
 
-import React, {Component}          from 'react';
-import { connect }                 from 'react-redux';
-import GameView                    from '../components/GameView'
-import config                      from '../config'
-import {loadLevel} from '../actions/levels'
-import {loadScores, recordScore}   from '../actions/scores'
-import {AsyncStorage}              from 'react-native'
-import {changeMode}                from '../actions/difficulty'
+import React, {Component} from 'react';
+import { connect }        from 'react-redux';
+import GameView           from '../components/GameView'
+import config             from '../config'
+import {loadLevel}        from '../actions/levels'
+import {recordScore}      from '../actions/scores'
+import {AsyncStorage}     from 'react-native'
+import {changeMode}       from '../actions/difficulty'
 
 class Game extends Component {
   constructor(props) {
@@ -25,7 +25,6 @@ class Game extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(loadScores())
     this.reset()
   }
 
@@ -94,6 +93,7 @@ function mapStateToProps(state) {
     beat:         state.victory,
     showTutorial: !state.tutorial.complete,
     difficulty:   state.difficulty,
+    leaderboard:  state.leaderboard,
   }
 }
 
