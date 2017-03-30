@@ -31,25 +31,17 @@ export default class GameView extends Component {
   }
 
   componentWillReceiveProps(props) {
-    // TODO: clean this up and move it somewhere it belongs
     if( props.world.name === 'Demo' ) { return; }
 
     const {highScores} = this.props.score
     if( !highScores.length || props.currentScore === this.props.currentScore ) { return; }
-    if( this.state.scoreIndex && this.state.scoreIndex < 0 ) { return; }
-    let index;
-    for(var i = 0; i < (this.state.scoreIndex + 1 || highScores.length); i++ ) {
-      if( props.currentScore > highScores[i] ){
-        index = i;
-        break;
-      }
+    if( props.currentScore > highScores[0] ) {
+      this.setState({
+        newHighScore: true,
+        topScore: index === 0,
+        scoreIndex: --index,
+      })
     }
-    if( index === undefined ) { return; }
-    this.setState({
-      newHighScore: true,
-      topScore: index === 0,
-      scoreIndex: --index,
-    })
   }
 
   completeRainbowAnimation() {
