@@ -43,10 +43,12 @@ class HallOfFame extends Component {
       <StatusBar hidden/>
 
       <View style={style.header}>
+        <View style={{position: 'absolute', paddingTop: 20, left: 0, right: 0, flexDirection: 'row', justifyContent: 'center'}}>
+          <Text>HALL OF FAME</Text>
+        </View>
         <TouchableOpacity onPress={() => this.props.dispatch({type: 'scene:pop'})}>
-          <Text>&larr; Back</Text>
+          <Text>B</Text>
         </TouchableOpacity>
-        <Text>hall of fame</Text>
         <TouchableOpacity>
           <Text>invite</Text>
         </TouchableOpacity>
