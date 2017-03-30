@@ -10,6 +10,7 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  StatusBar,
   StyleSheet,
   View,
 } from 'react-native';
@@ -40,6 +41,8 @@ class HallOfFame extends Component {
     const y        = Math.max(0, position - 3) * 83.5
   return (
     <View style={style.container}>
+      <StatusBar hidden/>
+
       <View style={style.header}>
         <TouchableOpacity onPress={() => this.props.dispatch({type: 'scene:pop'})}>
           <Text>&larr; Back</Text>
