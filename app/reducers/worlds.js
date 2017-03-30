@@ -1,12 +1,10 @@
-import base from '../styles/base'
+import {worlds} from '../levels'
+import {colors} from '../styles/base'
+
+const teaser = {name: Number(worlds[worlds.length-1]), comingSoon: true, color: colors.purple}
 
 const initialState = {
-  all: [
-    { name: 1, maxScore: 69, beaten: true, score: 50, color: base.colors.green },
-    { name: 2, maxScore: 100, color: base.colors.yellow, score: 66, },
-    { name: 3, maxScore: 420, locked: true, color: base.colors.orange },
-    { name: 4, comingSoon: true, color: base.colors.red },
-  ],
+  all: worlds.concat(teaser),
   current: null,
 }
 

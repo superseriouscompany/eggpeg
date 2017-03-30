@@ -24,7 +24,6 @@ const worlds = [{
           velocity: 0,
         },
       ],
-      color: colors.purple,
       hint: 'Tap the target to drop an egg on it.',
     },
     {
@@ -39,7 +38,6 @@ const worlds = [{
           velocity: 1,
         }
       ],
-      color: colors.purple,
       hint: 'Anticipate the movement.',
     },
     {
@@ -54,7 +52,6 @@ const worlds = [{
           velocity: 1,
         }
       ],
-      color: colors.purple,
       hint: 'Targets move in many directions.',
     },
     {
@@ -72,7 +69,6 @@ const worlds = [{
           velocity: 1,
         }
       ],
-      color: colors.purple,
       hint: 'Watch for patterns.'
     },
     {
@@ -95,7 +91,6 @@ const worlds = [{
           velocity: 1,
         },
       ],
-      color: colors.purple,
       hint: 'Hitting two targets doubles the score',
     },
   ],
@@ -209,6 +204,7 @@ const worlds = [{
 {
   name: '2',
   color: colors.orange,
+  locked: true,
   levels: [
     {
       name: 'Solo',
@@ -306,6 +302,7 @@ const worlds = [{
 }, {
   name: '3',
   color: colors.red,
+  locked: true,
   levels: [
     {
       name: 'Concentric Box',
@@ -518,6 +515,8 @@ const worlds = [{
 const levels = [].concat.apply([], worlds.map((w) => {
   return w.levels
 }))
+
+module.exports.worlds = worlds;
 
 export default levels.map((l) => {
   return {
