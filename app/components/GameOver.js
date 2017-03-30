@@ -6,7 +6,6 @@ import Text               from './Text';
 import PayButton          from './PayButton'
 import HighScores         from './HighScores'
 import LinksHeader        from './LinksHeader'
-import DifficultySwitch   from './DifficultySwitch'
 import RainbowBar         from './RainbowBar'
 import config             from '../config'
 import sounds             from '../sounds'

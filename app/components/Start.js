@@ -4,7 +4,6 @@ import React, {PropTypes} from 'react';
 import Component          from './Component';
 import Text               from './Text';
 import EggDrop            from './EggDrop';
-import DifficultySwitch   from './DifficultySwitch'
 import LinksHeader        from './LinksHeader';
 import base               from '../styles/base';
 import {connect}          from 'react-redux';
@@ -36,7 +35,6 @@ class Start extends Component {
             <TouchableOpacity onPress={this.startGame} style={style.startButton}>
               <Text style={style.startButtonText}>play</Text>
             </TouchableOpacity>
-            <DifficultySwitch style={{marginTop: 20}}/>
           </View>
         </View>
       </View>
