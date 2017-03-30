@@ -2,11 +2,21 @@ import React    from 'react'
 import {colors} from '../styles/base'
 import Text     from '../components/Text'
 import {
+  Image,
   StatusBar,
   StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
+
+const lockImages = {
+  '1': require('../images/Lock1.png'),
+  '2': require('../images/Lock2.png'),
+  '3': require('../images/Lock3.png'),
+  '4': require('../images/Lock4.png'),
+  '5': require('../images/Lock5.png'),
+  '6': require('../images/Lock6.png'),
+}
 
 export default function(props) {
 return(
@@ -59,7 +69,7 @@ function World(props) {
       }]}>
         <Text style={style.status}>
           { props.world.locked ?
-            '🔒'
+            <Image source={lockImages[props.world.name]}/>
           : props.world.comingSoon ?
             '⏳'
           : props.world.name}
