@@ -106,8 +106,18 @@ function Aura(props) {
 function Bullseye(props) {
   const {width, height, hit, ring, color, deadColor } = props;
 
-  const filledStyle = { backgroundColor: color || 'hotpink' }
-  const deadStyle   = { backgroundColor: deadColor || 'cornflowerblue' }
+  const deadStyle   = { backgroundColor: deadColor || 'hotpink' }
+  const filledStyle = {
+    backgroundColor: color || 'hotpink',
+    shadowColor: 'black',
+    shadowOpacity: 0.4,
+    shadowRadius: 1,
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+  }
+
   const rings = [
     { width: width, height: height },
     { width: width - width / 5, height: height - height / 5 },
@@ -117,7 +127,7 @@ function Bullseye(props) {
   ]
 
   return (
-    <Animated.View style={[hit ? ring == 'outer' ? deadStyle : deadStyle : filledStyle, style.ring, style.rim, {
+    <Animated.View style={[hit ? ring == 'outer' ? deadStyle : deadStyle : filledStyle, style.ring, {
       width:           rings[0].width,
       height:          rings[0].height,
       borderRadius:    rings[0].width/2,
@@ -154,15 +164,6 @@ const style = StyleSheet.create({
     position:       'absolute',
     alignItems:     'center',
     justifyContent: 'center',
-  },
-  rim: {
-    shadowColor: 'black',
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
   },
   target: {
     position: 'absolute',
