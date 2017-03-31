@@ -10,9 +10,13 @@ import Worlds             from './Worlds'
 import HallOfFame         from './HallOfFame'
 import {
   Animated,
+  Dimensions,
+  Easing,
   StyleSheet,
   View,
 } from 'react-native'
+
+const {width, height} = Dimensions.get('window')
 
 class Stage extends Component {
   constructor(props) {
@@ -33,6 +37,19 @@ class Stage extends Component {
         this.state.fadeAnim.setValue(0)
         Animated.timing(this.state.fadeAnim, {
           duration: 1000, toValue: 1,
+        }).start(() => {
+          this.setState({
+            scene: props.scene,
+            nextScene: null,
+          })
+        })
+      } else if( props.scene.animation === 'dropIn') {
+        this.setState({
+          nextScene: props.scene,
+        })
+        this.state.dropAnim.setValue(0)
+        Animated.timing(this.state.dropAnim, {
+          duration: 1000, toValue: 1, easing: Easing.elastic(1),
         }).start(() => {
           this.setState({
             scene: props.scene,
@@ -60,7 +77,11 @@ class Stage extends Component {
             opacity: this.state.fadeAnim.interpolate({
               inputRange:  [0, 1],
               outputRange: [0, 1],
-            })
+            }),
+            top: this.state.dropAnim.interpolate({
+              inputRange: [0, 1],
+              outputRange: [-height, 0],
+            }),
           }]}>
             { this.showScene(this.state.nextScene) }
           </Animated.View>
