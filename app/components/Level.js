@@ -69,6 +69,10 @@ class Level extends Component {
           this.props.dispatch({type: 'level:loading:finished'})
         })
       })
+    } else {
+      this.setState({
+        targets: props.targets,
+      })
     }
   }
 

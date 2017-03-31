@@ -74,9 +74,4 @@ const style = StyleSheet.create({
     flex: 1,
     backgroundColor: base.colors.purple,
   },
-  tries: {
-    position: 'absolute',
-    top: 20,
-    left: 20,
-  },
 })
