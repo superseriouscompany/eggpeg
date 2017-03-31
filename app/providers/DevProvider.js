@@ -14,7 +14,7 @@ class DevProvider extends Component {
     }
   }
 
-  render() { return this.props.children }
+  render() { return null }
 }
 
 function worldForLevel(levelName) {

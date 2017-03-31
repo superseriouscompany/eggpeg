@@ -52,7 +52,7 @@ class LeaderboardProvider extends Component {
     }
   }
 
-  render() { return this.props.children }
+  render() { return null }
 }
 
 function mapStateToProps(state) {

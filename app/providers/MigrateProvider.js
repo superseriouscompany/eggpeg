@@ -16,7 +16,7 @@ class MigrateProvider extends Component {
     })
   }
 
-  render() { return this.props.children }
+  render() { return null }
 }
 
 export default connect()(MigrateProvider)

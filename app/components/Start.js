@@ -93,8 +93,9 @@ const style = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    worlds:   state.worlds,
-    showDemo: !state.tutorial.complete && !config.skipDemo,
+    shareLink: state.shareLink,
+    worlds:    state.worlds,
+    showDemo:  !state.tutorial.complete && !config.skipDemo,
   }
 }
 

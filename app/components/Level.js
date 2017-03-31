@@ -7,7 +7,7 @@ import ScoreText          from './ScoreText';
 import Target             from './Target';
 import Text               from './Text';
 import {connect}          from 'react-redux'
-import GameLoop           from '../containers/GameLoop'
+import GameLoop           from '../providers/GameLoop'
 import sounds             from '../sounds'
 import config             from '../config'
 import {

@@ -30,7 +30,7 @@ class DeeplinkProvider extends React.Component {
     })
   }
 
-  render() { return this.props.children }
+  render() { return null }
 }
 
 export default connect()(DeeplinkProvider)
