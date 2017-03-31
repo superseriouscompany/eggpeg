@@ -123,6 +123,7 @@ function mapStateToProps(state) {
     leaderboard:  state.leaderboard,
     scene:        state.scene,
     progress:     state.level.index / state.worlds.current.levels.length,
+    hint:         state.level.hint,
   }
 }
 

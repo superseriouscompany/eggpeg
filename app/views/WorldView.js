@@ -4,6 +4,7 @@ import React, {Component, PropTypes} from 'react';
 import Victory                       from '../components/Victory'
 import GameHeader                    from '../components/GameHeader'
 import GameOver                      from '../components/GameOver'
+import ScoreText                     from '../components/ScoreText'
 import Level                         from '../components/Level'
 import {colors}                      from '../styles/base'
 import config                        from '../config'
@@ -39,6 +40,14 @@ export default function(props) {
             backgroundColor: props.level.deadColor,
             width:           props.progressAnim,
           }]} />
+
+          { props.hint ?
+            <View style={style.hintContainer}>
+              <Text style={[style.hint, {color: props.level.deadColor}]}>{props.hint}</Text>
+            </View>
+          :
+            <ScoreText textColor={props.level.deadColor}/>
+          }
         </View>
       }
     </View>
@@ -56,5 +65,15 @@ const style = StyleSheet.create({
     bottom: 0,
     height: 7,
     width: '17%',
+  },
+  hintContainer: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    flex: 1,
+    zIndex: -1,
+  },
+  hint: {
+    fontSize: 16,
+    marginBottom: 20,
   },
 })

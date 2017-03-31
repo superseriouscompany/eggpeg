@@ -39,7 +39,7 @@ export default class Target extends Component {
   render() {
     const {target, color, deadColor} = this.props;
   return (
-    <View style={[style.targetContainer, target.hit ? style.hitContainer : null, {
+    <Animated.View style={[style.targetContainer, target.hit ? style.hitContainer : null, {
       left:   target.x - target.width / 2,
       top:    target.y - target.width / 2,
       width:  target.width,
@@ -87,7 +87,7 @@ export default class Target extends Component {
           fontSize: Math.round(16 + target.width / 20),
         }]}>{target.score}</Animated.Text>
       : null }
-    </View>
+    </Animated.View>
   )}
 }
 

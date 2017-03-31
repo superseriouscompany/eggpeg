@@ -12,6 +12,7 @@ import sounds             from '../sounds'
 import config             from '../config'
 import {
   Animated,
+  Dimensions,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
@@ -19,6 +20,8 @@ import {
 
 let running = true;
 let bombwhistleTimeout = false;
+
+const {width, height} = Dimensions.get('window')
 
 class Level extends Component {
   static propTypes = {
@@ -91,32 +94,21 @@ class Level extends Component {
       <TouchableWithoutFeedback onPress={this.shoot}>
         <Animated.View style={{
           flex: 1,
-          opacity: this.state.swapAnim.interpolate({
-            inputRange:  [0, 0.5, 1],
-            outputRange: [0, 1, 0],
-          }),
           transform: [
             {
-              scale: this.state.swapAnim.interpolate({
+              translateX: this.state.swapAnim.interpolate({
                 inputRange:  [0, 0.5, 1],
-                outputRange: [0.5, 1, 2],
+                outputRange: [width, 0, -width],
               })
             },
-          ]
+          ],
         }}>
           { this.state.targets.map((target, key) => (
-            <Target key={this.props.level.name + '-' + key} target={target} hit={target.hit} color={this.props.level.targetColor} deadColor={this.props.level.deadColor}/>
+            <Target key={this.props.level.name + '-' + key} target={target} hit={target.hit} color={this.props.level.targetColor} deadColor={this.props.level.deadColor} swapAnim={this.state.swapAnim}/>
           ))}
           { this.props.bullets.map((bullet, key) => (
             <Bullet key={this.props.level.name + '-' + key} bullet={bullet} hit={bullet.hit} yolkColor={this.props.level.yolkColor} shadowColor={this.props.level.color}/>
           ))}
-          { this.props.hint ?
-            <View style={style.hintContainer}>
-              <Text style={[style.hint, {color: this.props.deadColor}]}>{this.props.hint}</Text>
-            </View>
-          :
-            <ScoreText textColor={this.props.level.deadColor}/>
-          }
         </Animated.View>
       </TouchableWithoutFeedback>
     </GameLoop>
@@ -124,16 +116,6 @@ class Level extends Component {
 }
 
 const style = StyleSheet.create({
-  hintContainer: {
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    flex: 1,
-    zIndex: -1,
-  },
-  hint: {
-    fontSize: 16,
-    marginBottom: 20,
-  },
 })
 
 function mapStateToProps(state) {
