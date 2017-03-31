@@ -19,11 +19,11 @@ export default function(props) { return (
       })
     }]}>
 
-      { props.score > props.highScore ?
+      { props.score > props.worldScore ?
         <RainbowBar />
       : null }
       <Text style={style.score}>{props.score}!</Text>
-      { props.score < props.highScore ?
+      { props.score < props.worldScore ?
         <View style={{flexDirection: 'row'}}>
           <Image style={{marginRight: 6}} source={require('../images/Trophy.png')}/>
           <Text style={style.carrot}>{props.worldScore}</Text>

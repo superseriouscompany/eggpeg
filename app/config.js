@@ -33,6 +33,7 @@ const config = {
   playSounds: false,
   startingScene: __DEV__ ? 'Start' : 'Start',
   startingLevel: __DEV__ ? 'Stationary' : 'Stationary',
+  skipDemo:      __DEV__ ? true : false,
 }
 
 if( DeviceInfo.isEmulator() ) {
