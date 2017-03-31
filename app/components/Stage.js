@@ -25,8 +25,8 @@ class Stage extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if( props.scene != this.props.scene ) {
-      if( props.animation === 'fade' ) {
+    if( props.scene.name != this.props.scene.name ) {
+      if( props.scene.animation === 'fade' ) {
         this.setState({
           nextScene: props.scene,
         })
@@ -51,7 +51,7 @@ class Stage extends Component {
   render() { return (
     <View style={style.container}>
       <View style={style.container}>
-        { this.showScene(this.state.scene, this.state.sceneProps)}
+        { this.showScene(this.state.scene)}
       </View>
 
       { this.state.nextScene ?
@@ -62,17 +62,15 @@ class Stage extends Component {
               outputRange: [0, 1],
             })
           }]}>
-            {
-              this.showScene(this.state.nextScene, this.state.nextSceneProps)
-            }
+            { this.showScene(this.state.nextScene) }
           </Animated.View>
         </View>
       : null }
     </View>
   )}
 
-  showScene(scene, sceneProps) {
-    switch(scene) {
+  showScene(scene) {
+    switch(scene.name) {
       case 'World':
         return <World />
       case 'AboutUs':
@@ -80,11 +78,11 @@ class Stage extends Component {
       case 'Start':
         return <Start />
       case 'Worlds':
-        return <Worlds {...sceneProps} />
+        return <Worlds {...scene.props} />
       case 'Settings':
         return <Settings />
       case 'HallOfFame':
-        return <HallOfFame {...sceneProps} />
+        return <HallOfFame {...scene.props} />
       default:
         return <View style={{backgroundColor: 'indianred', width: 100, height: 100}}/>
     }
@@ -93,9 +91,7 @@ class Stage extends Component {
 
 function mapStateToProps(state) {
   return {
-    scene:      state.scene.current,
-    sceneProps: state.scene.props,
-    animation:  state.scene.animation,
+    scene: state.scene.current,
   }
 }
 

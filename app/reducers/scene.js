@@ -1,7 +1,9 @@
 import config from '../config'
 
 const initialState = {
-  current:  config.startingScene,
+  current: {
+    name: config.startingScene
+  },
   previous: null,
 }
 
@@ -9,10 +11,12 @@ export default function(state = initialState, action) {
   switch(action.type) {
     case 'scene:change':
       return {
-        current:  action.scene,
+        current: {
+          name:      action.scene,
+          animation: action.animation,
+          props:     action.props,
+        },
         previous: state.current,
-        props:    action.props,
-        animation: action.animation,
       }
     case 'scene:pop':
       // TODO: reverse animation on pop
