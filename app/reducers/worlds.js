@@ -48,6 +48,9 @@ function score(state, score, beaten) {
   return state.all.map((w) => {
     if( w.name == state.current.name ) {
       w.beaten = beaten
+      if( isNaN(score) ) {
+        console.error(`${score} is not a number`)
+      }
       w.score = Math.max(score, w.score || 0)
     }
     return w

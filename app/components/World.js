@@ -8,6 +8,7 @@ import {loadLevel}        from '../actions/levels'
 import {AsyncStorage}     from 'react-native'
 import {
   Animated,
+  Easing,
   Dimensions,
 } from 'react-native'
 
@@ -29,8 +30,10 @@ class World extends Component {
     }
 
     if( props.progress != this.props.progress ) {
-      Animated.timing(this.state.progressAnim, {
-        toValue: props.progress * width, duration: config.timings.progressIncrease,
+      Animated.spring(this.state.progressAnim, {
+        toValue:  props.progress * width,
+        friction: 4,
+        tension:  40,
       }).start()
     }
   }
@@ -58,7 +61,7 @@ class World extends Component {
   }
 
   victory() {
-    const score = this.props.score.total;
+    const score = this.props.score;
     if( this.props.world.name !== 'Demo' ) {
       this.props.dispatch({type: 'worlds:beat', score: score})
     }
@@ -89,7 +92,7 @@ class World extends Component {
     <WorldView
       reset={this.reset}
       continue={this.continue}
-      currentScore={this.props.score.total}
+      currentScore={this.props.score}
       progressAnim={this.state.progressAnim}
       {...this.props} />
   )}
