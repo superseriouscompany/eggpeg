@@ -109,11 +109,12 @@ class GameOver extends Component {
         : null }
         <Text style={style.score}>{this.props.score}!</Text>
         { this.props.score < this.props.highScore ?
-          <Text style={style.carrot}>
-            <Text style={{color: 'hotpink'}}>Y</Text> {this.props.highScore}
-          </Text>
+          <View style={{flexDirection: 'row'}}>
+            <Image style={{marginRight: 6}} source={require('../images/Trophy.png')}/>
+            <Text style={style.carrot}>{this.props.highScore}</Text>
+          </View>
         : this.props.carrot !== 'boss' ?
-          <Text style={style.carrot}>default {this.props.carrot.name}'s {this.props.carrot.score}</Text>
+          <Text style={style.carrot}>defeat {this.props.carrot.name}'s {this.props.carrot.score}</Text>
         :
           <Text style={style.carrot}>you're a boss.</Text>
         }
