@@ -17,7 +17,6 @@ class GameOver extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      timer: config.countdown,
       enterAnim: new Animated.Value(0),
     }
   }
