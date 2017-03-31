@@ -33,6 +33,10 @@ export default function(props) {
             <GameHeader />
           }
           <Level />
+          <View style={[style.progressBar, {
+            backgroundColor: props.level.deadColor,
+            width: `${Math.round((props.level.index / props.world.levels.length) * 100)}%`
+          }]} />
         </View>
       }
     </View>
@@ -43,5 +47,12 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.purple,
+  },
+  progressBar: {
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+    height: 7,
+    width: '17%',
   },
 })
