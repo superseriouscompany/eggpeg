@@ -6,6 +6,12 @@ import WorldView          from '../views/WorldView'
 import config             from '../config'
 import {loadLevel}        from '../actions/levels'
 import {AsyncStorage}     from 'react-native'
+import {
+  Animated,
+  Dimensions,
+} from 'react-native'
+
+const {width} = Dimensions.get('window')
 
 class World extends Component {
   constructor(props) {
@@ -14,11 +20,18 @@ class World extends Component {
     this.nextLevel = this.nextLevel.bind(this)
     this.loadLevel = this.loadLevel.bind(this)
     this.continue  = this.continue.bind(this)
+    this.state = { progressAnim: new Animated.Value(0) }
   }
 
   componentWillReceiveProps(props) {
     if( props.level.done && props.level.win && !props.beat ) {
       this.nextLevel()
+    }
+
+    if( props.progress != this.props.progress ) {
+      Animated.timing(this.state.progressAnim, {
+        toValue: props.progress * width, duration: config.timings.progressIncrease,
+      }).start()
     }
   }
 
@@ -77,6 +90,7 @@ class World extends Component {
       reset={this.reset}
       continue={this.continue}
       currentScore={this.props.score.total}
+      progressAnim={this.state.progressAnim}
       {...this.props} />
   )}
 }

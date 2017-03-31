@@ -8,8 +8,10 @@ import Level                         from '../components/Level'
 import {colors}                      from '../styles/base'
 import config                        from '../config'
 import {
+  Animated,
   StatusBar,
   StyleSheet,
+  Text,
   View,
 } from 'react-native';
 
@@ -33,9 +35,9 @@ export default function(props) {
             <GameHeader />
           }
           <Level />
-          <View style={[style.progressBar, {
+          <Animated.View style={[style.progressBar, {
             backgroundColor: props.level.deadColor,
-            width: `${Math.round((props.level.index / props.world.levels.length) * 100)}%`
+            width:           props.progressAnim,
           }]} />
         </View>
       }

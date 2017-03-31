@@ -23,6 +23,7 @@ const config = {
     gameOverIn:            900,
     multiplierDelay:       1000,
     multiplierBetween:     500,
+    progressIncrease:      1069,
     rainbowDelay:          150,
     rainbow:               500,
     rainbowLeaveDuration:  150,
