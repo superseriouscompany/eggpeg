@@ -53,7 +53,7 @@ class HallOfFame extends Component {
       this.props.dispatch(stubScore(this.props.score, this.state.name))
       this.props.dispatch(enqueueRetry({type: 'postScore', score: this.props.score, name: this.state.name}))
     }).then(() => {
-      this.props.dispatch({type: 'scene:change', scene: 'Start'})
+      this.props.dispatch({type: 'scene:change', scene: 'Worlds'})
     })
   }
 

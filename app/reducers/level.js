@@ -22,6 +22,16 @@ export default function(state={level: 0}, action) {
       }
     case 'level:load':
       return action.level
+    case 'level:loading':
+      return {
+        ...state,
+        loading: true,
+      }
+    case 'level:loading:finished':
+      return {
+        ...state,
+        loading: false,
+      }
     default:
       return state
   }

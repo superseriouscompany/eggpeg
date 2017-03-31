@@ -20,7 +20,7 @@ function mapStateToProps(state) {
   return {
     worlds:       state.worlds.all.filter((w) => { return w.name !== 'Demo'}),
     showTutorial: !state.tutorial.complete,
-    topScore:     (state.score.highScores || [])[0],
+    topScore:     state.worlds.all.reduce((acc, w) => { return acc + (w.score || 0)}, 0),
   }
 }
 
