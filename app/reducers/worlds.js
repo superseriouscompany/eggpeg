@@ -28,7 +28,7 @@ export default function(state = initialState, action) {
     case 'worlds:select':
       return {
         ...state,
-        current: state.all.find((w) => {return w.name == action.name})
+        current: state.all.find((w) => {return w.name == action.name}),
       }
     default:
       return state

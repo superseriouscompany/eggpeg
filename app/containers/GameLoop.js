@@ -97,21 +97,22 @@ class GameLoop extends Component {
 
     const allHit = !this.props.targets.find((t) => { return !t.hit })
     // check if all hit
-    if( this.props.targets.length && allHit ) {
-      // TODO: this magic number should be generated from config
-      // TODO: ideally, this would happen directly from a callback
-      const delay = hadMultihit ? 2250 : 0;
+    if( this.props.level.targets && !this.props.level.finishTime && !this.props.level.done ) {
+      if( this.props.targets.length && allHit ) {
+        // TODO: this magic number should be generated from config
+        // TODO: ideally, this would happen directly from a callback
+        const delay = hadMultihit ? 2250 : 0;
 
-      this.props.dispatch({type: 'worlds:score', score: this.props.score.total})
-      return this.props.dispatch({type: 'level:win', delay: delay});
-    }
-
-
-    if( this.props.chamber <= 0 && !this.props.level.finishTime && !this.props.level.done ) {
-      const allSpent = !this.props.bullets.find((b) => { return !b.spent })
-      if( allSpent ) {
         this.props.dispatch({type: 'worlds:score', score: this.props.score.total})
-        this.props.dispatch({type: 'level:loss'})
+        return this.props.dispatch({type: 'level:win', delay: delay});
+      }
+
+      if( this.props.chamber <= 0 ) {
+        const allSpent = !this.props.bullets.find((b) => { return !b.spent })
+        if( allSpent ) {
+          this.props.dispatch({type: 'worlds:score', score: this.props.score.total})
+          this.props.dispatch({type: 'level:loss'})
+        }
       }
     }
   }
