@@ -66,10 +66,11 @@ function mapStateToProps(state) {
   }
 
   return {
-    worldScore:  state.worlds.current.score,
+    worldScore:  state.session.score,
     score:       score,
     leaderboard: leaderboard,
     carrot:      carrot,
+    firstRun:    !state.session.goal,
     totalScore:  state.worlds.all.reduce((acc, w) => { return acc + (w.score || 0)}, 0),
   }
 }

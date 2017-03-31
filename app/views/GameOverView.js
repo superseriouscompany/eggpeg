@@ -32,6 +32,8 @@ export default function(props) { return (
         </View>
       : props.carrot !== 'boss' ?
         <Text style={style.carrot}>defeat {props.carrot.name}'s {props.carrot.score}</Text>
+      : props.firstRun ?
+        <Text style={style.carrot}>nice run.</Text>
       : props.score > 0 ?
         <Text style={style.carrot}>you're a boss.</Text>
       :

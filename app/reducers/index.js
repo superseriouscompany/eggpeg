@@ -77,7 +77,6 @@ const store = createStore(reducers, undefined, compose(
 const persistence = persistStore(store, {storage: AsyncStorage, whitelist: [
   'purchase',
   'retry',
-  'score',
   'shareLink',
   'tutorial',
   'worlds',

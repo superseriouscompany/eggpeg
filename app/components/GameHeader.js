@@ -117,7 +117,7 @@ const style = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     isDemo:      state.worlds.current && state.worlds.current.name === 'Demo',
-    isHighScore: state.session.score >= state.session.goal,
+    isHighScore: state.session.goal && state.session.score >= state.session.goal,
     tries:       state.chamber,
     score:       state.score.total || 0,
   }
