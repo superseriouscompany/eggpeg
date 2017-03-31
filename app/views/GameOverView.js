@@ -4,6 +4,7 @@ import PayButton  from '../components/PayButton'
 import RainbowBar from '../components/RainbowBar'
 import {
   Animated,
+  Easing,
   Image,
   View,
   StyleSheet,
@@ -16,6 +17,7 @@ export default function(props) { return (
       marginTop: props.enterAnim.interpolate({
         inputRange:  [0, 1],
         outputRange: [-1000, 0],
+        easing: Easing.elastic(1),
       })
     }]}>
 
@@ -52,6 +54,7 @@ export default function(props) { return (
       marginBottom: props.enterAnim.interpolate({
         inputRange:  [0, 1],
         outputRange: [-200, 0],
+        easing: Easing.elastic(1.3),
       })
     }]}>
 

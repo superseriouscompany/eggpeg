@@ -68,10 +68,6 @@ const style = StyleSheet.create({
     right: 0,
     alignItems: 'center',
   },
-
-  text: {
-    color: '#532D5A',
-  },
 })
 
 function mapStateToProps(state) {
