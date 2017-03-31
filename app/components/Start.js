@@ -1,25 +1,14 @@
 'use strict';
 
-import React, {PropTypes} from 'react'
-import Component          from './Component'
-import Text               from './Text'
-import EggDrop            from './EggDrop'
-import LinksHeader        from './LinksHeader'
-import base               from '../styles/base'
-import config             from '../config'
-import {connect}          from 'react-redux'
-import {clear}            from '../reducers'
-import {
-  StatusBar,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, {Component, PropTypes} from 'react'
+import {connect}                     from 'react-redux'
+import {clear}                       from '../reducers'
+import config                        from '../config'
+import StartView                     from '../views/StartView'
 
 class Start extends Component {
   constructor(props) {
     super(props)
-    this.state     = {}
     this.startGame = this.startGame.bind(this)
   }
 
@@ -30,28 +19,8 @@ class Start extends Component {
     })
   }
 
-  render() {
-    return (
-    <View style={[style.container]}>
-      <StatusBar hidden/>
-
-      <View style={{flex: 1}}>
-        <LinksHeader />
-        <View style={style.main}>
-          <EggDrop />
-          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <TouchableOpacity onPress={this.startGame} style={style.startButton}>
-              <Text style={style.startButtonText}>play</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        { __DEV__ ?
-          <TouchableOpacity onPress={this.clearStore}>
-            <Text>Clear all data</Text>
-          </TouchableOpacity>
-        : null}
-      </View>
-    </View>
+  render() { return (
+    <StartView {...this.props} startGame={this.startGame} clearStore={this.clearStore} />
   )}
 
   startGame() {
@@ -63,33 +32,6 @@ class Start extends Component {
     }
   }
 }
-
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: base.colors.beige,
-  },
-  main: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  startButton: {
-    borderWidth: 1,
-    borderColor: base.colors.grey,
-    borderRadius: 5,
-    width: 200,
-    height: 75,
-    paddingBottom: 6,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  startButtonText: {
-    fontStyle: 'italic',
-    fontSize: 32,
-    color: base.colors.grey,
-  }
-})
 
 function mapStateToProps(state) {
   return {

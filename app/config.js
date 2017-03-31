@@ -27,6 +27,7 @@ const config = {
     rainbow:               500,
     rainbowLeaveDuration:  150,
     rainbowLeaveDelay:     650,
+    sceneFade:             1069,
     scoreIncrement:        525,
     scoreExplanationLeave: 500,
     winDelay:              1000,

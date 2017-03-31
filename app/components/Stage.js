@@ -14,6 +14,7 @@ import {
   Dimensions,
   Easing,
   StyleSheet,
+  Text,
   View,
 } from 'react-native'
 
@@ -23,9 +24,9 @@ class Stage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      fadeAnim: new Animated.Value(1),
-      dropAnim: new Animated.Value(1),
-      backAnim: new Animated.Value(1),
+      fadeAnim: new Animated.Value(0),
+      dropAnim: new Animated.Value(0),
+      backAnim: new Animated.Value(0),
       scene:    props.scene,
     }
   }
@@ -38,7 +39,7 @@ class Stage extends Component {
         })
         this.state.fadeAnim.setValue(0)
         Animated.timing(this.state.fadeAnim, {
-          duration: 1000, toValue: 1,
+          duration: config.timings.sceneFade, toValue: 1,
         }).start(() => {
           this.setState({
             scene: props.scene,
@@ -59,8 +60,9 @@ class Stage extends Component {
           })
         })
       } else if( props.scene.animation === 'dropBack' ) {
+        console.log('setting scenes', props.scene, this.props.scene)
         this.setState({
-          scene: props.scene,
+          // scene: props.scene,
           nextScene: this.props.scene,
         })
         this.state.backAnim.setValue(0)
@@ -68,7 +70,7 @@ class Stage extends Component {
           duration: config.timings.dropOut, toValue: 1,
         }).start(() => {
           this.setState({
-            nextScene: null,
+            scene: props.scene,
           })
         })
       } else {
@@ -88,28 +90,36 @@ class Stage extends Component {
 
       { this.state.nextScene ?
         <View style={style.overlay}>
-          <Animated.View style={[style.container, {
-            zIndex: this.state.backAnim.interpolate({
-              inputRange: [0, .1, 1],
-              outputRange: [0, -1, -1],
-            }),
-            transform: [{
-              translateY: this.state.backAnim.interpolate({
+          { this.props.scene.animation === 'fade' ?
+            <Animated.View style={[style.container, {
+              opacity: this.state.fadeAnim.interpolate({
+                inputRange:  [0, 1],
+                outputRange: [0, 1],
+              }),
+            }]}>
+              { this.showScene(this.state.nextScene) }
+            </Animated.View>
+          : this.props.scene.animation === 'dropIn' ?
+            <Animated.View style={[style.container, {
+              top: this.state.dropAnim.interpolate({
                 inputRange: [0, 1],
-                outputRange: [0, -height],
-              })
-            }],
-            opacity: this.state.fadeAnim.interpolate({
-              inputRange:  [0, 1],
-              outputRange: [0, 1],
-            }),
-            top: this.state.dropAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [-height, 0],
-            }),
-          }]}>
-            { this.showScene(this.state.nextScene) }
-          </Animated.View>
+                outputRange: [-height, 0],
+              }),
+            }]}>
+              { this.showScene(this.state.nextScene) }
+            </Animated.View>
+          : this.props.scene.animation === 'dropBack' ?
+            <Animated.View style={[style.container, {
+              opacity: this.state.backAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 1],
+              }),
+              zIndex: 50,
+            }]}>
+            </Animated.View>
+          :
+            <Text>Nope</Text>
+          }
         </View>
       : null }
     </View>
