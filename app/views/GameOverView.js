@@ -30,8 +30,10 @@ export default function(props) { return (
         </View>
       : props.carrot !== 'boss' ?
         <Text style={style.carrot}>defeat {props.carrot.name}'s {props.carrot.score}</Text>
-      :
+      : props.score > 0 ?
         <Text style={style.carrot}>you're a boss.</Text>
+      :
+        null
       }
 
       <TouchableOpacity style={{position: 'absolute', left: 0, right: 0, paddingTop: 200, alignItems: 'center'}} onPress={props.visitHOF}>
