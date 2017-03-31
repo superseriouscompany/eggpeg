@@ -121,7 +121,7 @@ class GameOver extends Component {
           <Image style={{marginTop: 6}} source={require('../images/BottomCarrot.png')}/>
         </TouchableOpacity>
 
-        <TouchableOpacity style={style.leftNav}>
+        <TouchableOpacity style={style.leftNav} onPress={() => this.props.dispatch({type: 'scene:change', scene: 'Worlds'})}>
           <View style={[style.button, {height: 38, width: 38, paddingLeft: 1}]}>
             <Image source={require('../images/HomeIcon.png')}/>
           </View>
