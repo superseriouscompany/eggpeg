@@ -31,7 +31,7 @@ class GameLoop extends Component {
   }
 
   iterate() {
-    if( this.props.level.done || this.props.level.loading ) { return; }
+    if( this.props.level.loading ) { return; }
 
     this.props.dispatch({type: 'tick'})
 

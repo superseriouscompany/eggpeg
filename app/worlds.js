@@ -547,11 +547,12 @@ const worlds = [{
 export default worlds.map((w) => {
   w.maxScore = 0;
 
-  w.levels = w.levels.map((l) => {
+  w.levels = w.levels.map((l, li) => {
     if( !l.max && w.name !== 'Demo' ) { console.warn('No max score defined for', l.name)}
     w.maxScore += l.max || 0
     return {
       ...l,
+      index: li,
       color:       w.color,
       targetColor: w.targetColor,
       yolkColor:   w.yolkColor,

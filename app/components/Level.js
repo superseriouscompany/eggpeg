@@ -41,7 +41,7 @@ class Level extends Component {
 
   componentWillReceiveProps(props) {
     if( props.level.name != this.props.level.name ) {
-      if( !this.props.level.name ) {
+      if( !this.props.level.name || props.level.index === 0 ) {
         this.setState({
           targets: props.targets
         })
