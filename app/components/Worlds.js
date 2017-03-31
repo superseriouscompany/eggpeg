@@ -31,7 +31,7 @@ function mapDispatchToProps(dispatch) {
     },
     loadLevel: (name) => {
       dispatch({type: 'worlds:select', name: name})
-      dispatch({type: 'scene:change', scene: 'Game'})
+      dispatch({type: 'scene:change', scene: 'World'})
     },
     back: () => {
       dispatch({type: 'scene:change', scene: 'Start'})

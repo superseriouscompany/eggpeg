@@ -1,14 +1,13 @@
 'use strict';
 
-import React, {PropTypes} from 'react';
-import Component          from './Component';
-import Text               from './Text';
-import Victory            from './Victory'
-import GameHeader         from './GameHeader'
-import GameOver           from './GameOver'
-import Level              from './Level'
-import base               from '../styles/base'
-import config             from '../config'
+import React, {Component, PropTypes} from 'react';
+import Text                          from '../components/Text';
+import Victory                       from '../components/Victory'
+import GameHeader                    from '../components/GameHeader'
+import GameOver                      from '../components/GameOver'
+import Level                         from '../components/Level'
+import base                          from '../styles/base'
+import config                        from '../config'
 import {
   Dimensions,
   StatusBar,
@@ -17,7 +16,7 @@ import {
   View,
 } from 'react-native';
 
-export default class GameView extends Component {
+export default class WorldView extends Component {
   static propTypes = {
     reset:     PropTypes.func.isRequired,
     continue:  PropTypes.func.isRequired,

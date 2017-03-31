@@ -2,12 +2,12 @@
 
 import React, {Component} from 'react';
 import { connect }        from 'react-redux';
-import GameView           from '../components/GameView'
+import WorldView          from '../views/WorldView'
 import config             from '../config'
 import {loadLevel}        from '../actions/levels'
 import {AsyncStorage}     from 'react-native'
 
-class Game extends Component {
+class World extends Component {
   constructor(props) {
     super(props)
     this.reset     = this.reset.bind(this)
@@ -72,7 +72,7 @@ class Game extends Component {
   }
 
   render() { return (
-    <GameView
+    <WorldView
       reset={this.reset}
       continue={this.continue}
       currentScore={this.props.score.total}
@@ -107,4 +107,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Game);
+export default connect(mapStateToProps)(World);

@@ -10,7 +10,7 @@ class DevProvider extends Component {
     if( config.startingLevel ) {
       const world = worldForLevel(config.startingLevel)
       this.props.dispatch({type: 'worlds:select', name: world.name})
-      this.props.dispatch({type: 'scene:change', scene: 'Game'})
+      this.props.dispatch({type: 'scene:change', scene: 'World'})
     }
   }
 

@@ -6,10 +6,10 @@ import Component           from './Component'
 import FollowUs            from './FollowUs'
 import Start               from './Start'
 import Settings            from './Settings'
+import World               from './World';
 import Worlds              from './Worlds'
 import HallOfFame          from './HallOfFame'
 import DeeplinkProvider    from '../containers/DeeplinkProvider'
-import Game                from '../containers/Game';
 import IAPProvider         from '../containers/IAPProvider'
 import MigrateProvider     from '../containers/MigrateProvider'
 import LeaderboardProvider from '../containers/LeaderboardProvider'
@@ -50,8 +50,8 @@ export default class Root extends Component {
             <MigrateProvider>
               <LeaderboardProvider>
                 <DevProvider>
-                  { this.state.scene == 'Game' ?
-                    <Game />
+                  { this.state.scene == 'World' ?
+                    <World />
                   : this.state.scene == 'AboutUs' ?
                     <FollowUs />
                   : this.state.scene == 'Start' ?

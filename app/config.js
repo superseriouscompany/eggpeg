@@ -38,10 +38,10 @@ const config = {
 
 if( DeviceInfo.isEmulator() ) {
   config.bullet.delay      = 0;
-  config.timings.winDelay  = 0;
-  config.timings.lossDelay = 0;
-  config.timings.levelIn   = 1;
-  config.timings.levelOut  = 1;
+  // config.timings.winDelay  = 0;
+  // config.timings.lossDelay = 0;
+  // config.timings.levelIn   = 1;
+  // config.timings.levelOut  = 1;
 }
 
 export default config
