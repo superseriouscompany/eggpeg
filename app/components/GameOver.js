@@ -5,13 +5,13 @@ import Component          from './Component';
 import Text               from './Text';
 import PayButton          from './PayButton'
 import HighScores         from './HighScores'
-import LinksHeader        from './LinksHeader'
 import RainbowBar         from './RainbowBar'
 import config             from '../config'
 import sounds             from '../sounds'
 import {connect}          from 'react-redux'
 import {
   Animated,
+  Image,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -94,29 +94,37 @@ class GameOver extends Component {
 
   render() { return (
     <View style={style.container}>
-      <LinksHeader textStyle={{color: 'white'}} />
       <Animated.View style={[style.top, {
         marginTop: this.state.enterAnim.interpolate({
           inputRange:  [0, 1],
           outputRange: [-1000, 0],
         })
       }]}>
+
         { this.props.score > this.props.highScore ?
           <RainbowBar />
         : null }
         <Text style={style.score}>{this.props.score}!</Text>
         { this.props.score < this.props.highScore ?
-          <Text style={style.carrot}>
-            <Text style={{color: 'hotpink'}}>Y</Text> {this.props.worldScore}
-          </Text>
+          <View style={{flexDirection: 'row'}}>
+            <Image style={{marginRight: 6}} source={require('../images/Trophy.png')}/>
+            <Text style={style.carrot}>{this.props.worldScore}</Text>
+          </View>
         : this.props.carrot !== 'boss' ?
-          <Text style={style.carrot}>default {this.props.carrot.name}'s {this.props.carrot.score}</Text>
+          <Text style={style.carrot}>defeat {this.props.carrot.name}'s {this.props.carrot.score}</Text>
         :
           <Text style={style.carrot}>you're a boss.</Text>
         }
 
-        <TouchableOpacity onPress={() => this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})}>
+        <TouchableOpacity style={{position: 'absolute', left: 0, right: 0, paddingTop: 200, alignItems: 'center'}} onPress={() => this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})}>
           <Text style={style.topScores}>top scores</Text>
+          <Image style={{marginTop: 6}} source={require('../images/BottomCarrot.png')}/>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={style.leftNav}>
+          <View style={[style.button, {height: 38, width: 38, paddingLeft: 1}]}>
+            <Image source={require('../images/HomeIcon.png')}/>
+          </View>
         </TouchableOpacity>
       </Animated.View>
 
@@ -126,8 +134,9 @@ class GameOver extends Component {
           outputRange: [-200, 0],
         })
       }]}>
-        <TouchableOpacity style={[style.button, style.retry]} onPress={this.props.reset}>
-          <Text style={[style.buttonText, {color: 'hotpink'}]}>Q</Text>
+
+        <TouchableOpacity style={[style.button, {height: 75, width: 75, marginRight: 9}]} onPress={this.props.reset}>
+          <Image source={require('../images/ReplayIcon.png')}/>
         </TouchableOpacity>
         <PayButton style={[style.button, style.continueButton]} textStyle={style.buttonText} continue={this.props.continue} />
       </Animated.View>
@@ -145,6 +154,14 @@ const style = StyleSheet.create({
     bottom:          0,
     zIndex:          1,
   },
+  leftNav: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    padding: 20,
+    paddingRight: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0)'
+  },
   top: {
     flex:           1,
     alignItems:     'center',
@@ -158,12 +175,14 @@ const style = StyleSheet.create({
     color:    'white',
   },
   carrot: {
+    paddingBottom: 6,
     fontSize: 18,
     color:    'white',
   },
   topScores: {
     color:     'white',
     fontStyle: 'italic',
+    textAlign: 'center',
   },
   bottom: {
     flexDirection:  'row',
@@ -175,24 +194,18 @@ const style = StyleSheet.create({
   button: {
     backgroundColor: 'white',
     borderRadius:    5,
-    paddingLeft:     26,
-    paddingRight:    26,
-    paddingTop:      14,
-    paddingBottom:   20,
     alignItems:      'center',
     justifyContent:  'center',
   },
   continueButton: {
     width:  174.5,
-    height: 77,
-  },
-  retry: {
-    marginRight: 9,
+    height: 75,
   },
   buttonText: {
     color: '#4A4A4A',
     fontStyle: 'italic',
     fontSize: 32,
+    paddingBottom: 3,
   },
 })
 

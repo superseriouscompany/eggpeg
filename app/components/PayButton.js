@@ -26,6 +26,7 @@ class PayButton extends Component {
 
   render() { return (
     <TouchableOpacity style={[...this.props.style]} onPress={this.pay}>
+      <Text style={{position: 'absolute', color: 'white', backgroundColor: 'transparent', top: -31}}>3 left</Text>
       { this.state.purchasing ?
         <ActivityIndicator />
       :
