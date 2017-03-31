@@ -1,6 +1,6 @@
 const initialState = {
   goal:  null,
-  score: null,
+  score: 0,
 }
 export default function(state=initialState, action) {
   switch(action.type) {
@@ -9,10 +9,11 @@ export default function(state=initialState, action) {
         ...state,
         goal: action.goal,
       }
-    case 'worlds:score':
+    case 'bullets:hit':
       return {
         ...state,
         score: (state.score || 0) + action.score,
+        encouragement: encouragement(action.score, action.count),
       }
     case 'game:reset':
       return {
@@ -21,5 +22,27 @@ export default function(state=initialState, action) {
       }
     default:
       return state
+  }
+}
+
+function encouragement(score, number) {
+  switch(number) {
+    case 2:
+      return 'double!'
+    case 3:
+      return 'triple!'
+    case 4:
+      return 'quadruple!'
+  }
+
+  switch(score / config.scoreBonus) {
+    case 1:
+      return 'hit!'
+    case 2:
+      return 'nice hit!'
+    case 5:
+      return 'bullseye!'
+    default:
+      return 'wha happen?'
   }
 }

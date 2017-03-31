@@ -100,7 +100,7 @@ function mapStateToProps(state) {
     levels:       state.worlds.current.levels,
     world:        state.worlds.current,
     level:        state.level,
-    score:        state.score,
+    score:        state.session.score,
     beat:         state.victory,
     showTutorial: !state.tutorial.complete,
     leaderboard:  state.leaderboard,

@@ -20,9 +20,8 @@ export default function(props) {
 
       { props.beat ?
         <Victory
-          score={props.score.total}
+          score={props.score}
           reset={props.reset}
-          highScores={props.score.highScores}
           isHighScore={true} />
       :
         <View style={{flex: 1, backgroundColor: props.level.color}}>

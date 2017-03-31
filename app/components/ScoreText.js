@@ -72,7 +72,7 @@ const style = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    text: state.score.encouragement,
+    text: state.session.encouragement,
   }
 }
 

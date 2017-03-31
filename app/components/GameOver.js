@@ -54,7 +54,7 @@ class GameOver extends Component {
 }
 
 function mapStateToProps(state) {
-  const score       = state.score.total;
+  const score       = state.session.score;
   const leaderboard = state.leaderboard;
 
   let carrot = 'boss';
@@ -66,7 +66,7 @@ function mapStateToProps(state) {
   }
 
   return {
-    worldScore:  state.session.score,
+    worldScore:  state.worlds.current.score,
     score:       score,
     leaderboard: leaderboard,
     carrot:      carrot,

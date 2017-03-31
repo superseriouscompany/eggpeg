@@ -103,14 +103,14 @@ class GameLoop extends Component {
         // TODO: ideally, this would happen directly from a callback
         const delay = hadMultihit ? 2250 : 0;
 
-        this.props.dispatch({type: 'worlds:score', score: this.props.score.total})
+        this.props.dispatch({type: 'worlds:score', score: this.props.score})
         return this.props.dispatch({type: 'level:win', delay: delay});
       }
 
       if( this.props.chamber <= 0 ) {
         const allSpent = !this.props.bullets.find((b) => { return !b.spent })
         if( allSpent ) {
-          this.props.dispatch({type: 'worlds:score', score: this.props.score.total})
+          this.props.dispatch({type: 'worlds:score', score: this.props.score})
           this.props.dispatch({type: 'level:loss'})
         }
       }
@@ -141,7 +141,7 @@ function mapStateToProps(state) {
     targets:    state.targets,
     chamber:    state.chamber,
     level:      state.level,
-    score:      state.score,
+    score:      state.session.score,
     world:      state.worlds.current,
   }
 }

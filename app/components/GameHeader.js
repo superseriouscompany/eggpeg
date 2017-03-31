@@ -119,7 +119,7 @@ function mapStateToProps(state) {
     isDemo:      state.worlds.current && state.worlds.current.name === 'Demo',
     isHighScore: state.session.goal && state.session.score >= state.session.goal,
     tries:       state.chamber,
-    score:       state.score.total || 0,
+    score:       state.session.score,
   }
 }
 
