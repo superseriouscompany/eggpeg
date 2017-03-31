@@ -67,7 +67,8 @@ class Game extends Component {
 
   reset() {
     this.props.dispatch({type: 'game:reset'})
-    this.props.dispatch(loadLevel(this.props.levels[0]))
+    const index = startingLevelIndex(this.props.levels)
+    this.props.dispatch(loadLevel(this.props.levels[index]))
   }
 
   render() { return (
@@ -77,6 +78,18 @@ class Game extends Component {
       currentScore={this.props.score.total}
       {...this.props} />
   )}
+}
+
+function startingLevelIndex(levels) {
+  if( !config.startingLevel ) return 0;
+  for( var i = 0; i < levels.length; i++ ) {
+    if( levels[i].name.toLowerCase() === config.startingLevel.toLowerCase() ) {
+      return i
+    }
+  }
+
+  console.warn(`Couldn't find level ${config.startingLevel}`)
+  return 0
 }
 
 function mapStateToProps(state) {
