@@ -24,7 +24,10 @@ class Start extends Component {
   }
 
   clearStore() {
-    clear()
+    clear((err) => {
+      if( err ) { console.error(err) }
+      alert('Store purged!')
+    })
   }
 
   render() {

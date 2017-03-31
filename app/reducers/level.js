@@ -6,12 +6,12 @@ export default function(state={}, action) {
       return {
         ...state,
         win:     true,
-        finishTime: +new Date + config.winDelay + action.delay,
+        finishTime: +new Date + config.timings.winDelay + action.delay,
       }
     case 'level:loss':
       return {
         ...state,
-        finishTime: +new Date + config.lossDelay,
+        finishTime: +new Date + config.timings.lossDelay,
         win: false,
       }
     case 'level:finish':

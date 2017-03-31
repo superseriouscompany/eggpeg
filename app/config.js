@@ -1,8 +1,9 @@
 const DeviceInfo = require('react-native-device-info')
 
 const config = {
-  winDelay:  1000,
-  lossDelay: 200,
+  startingScene: __DEV__ ? 'Start' : 'Start',
+  startingLevel: __DEV__ ? 'Two Speed' : null,
+  skipDemo:      __DEV__ ? true : false,
   bullet: {
     delay:  2800,
     linger: 100,
@@ -18,6 +19,7 @@ const config = {
     // gonna leave 69s in here for timings to change
     levelIn:               369,
     levelOut:              169,
+    lossDelay:             200,
     gameOverIn:            900,
     multiplierDelay:       1000,
     multiplierBetween:     500,
@@ -27,21 +29,19 @@ const config = {
     rainbowLeaveDelay:     650,
     scoreIncrement:        525,
     scoreExplanationLeave: 500,
+    winDelay:              1000,
     targetGhost:           1750,
   },
   gravity: 0,//9.80665,
   playSounds: false,
-  startingScene: __DEV__ ? 'Start' : 'Start',
-  startingLevel: __DEV__ ? 'Stationary' : 'Stationary',
-  skipDemo:      __DEV__ ? true : false,
 }
 
 if( DeviceInfo.isEmulator() ) {
-  config.bullet.delay     = 0;
-  config.playSounds       = false;
-  config.lockLevel        = undefined;
-  config.timings.levelIn  = 1;
-  config.timings.levelOut = 1;
+  config.bullet.delay      = 0;
+  config.timings.winDelay  = 0;
+  config.timings.lossDelay = 0;
+  config.timings.levelIn   = 1;
+  config.timings.levelOut  = 1;
 }
 
 export default config

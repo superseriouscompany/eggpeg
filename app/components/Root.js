@@ -6,15 +6,17 @@ import Component           from './Component'
 import FollowUs            from './FollowUs'
 import Start               from './Start'
 import Settings            from './Settings'
-import Worlds             from './Worlds'
+import Worlds              from './Worlds'
 import HallOfFame          from './HallOfFame'
 import DeeplinkProvider    from '../containers/DeeplinkProvider'
 import Game                from '../containers/Game';
 import IAPProvider         from '../containers/IAPProvider'
 import MigrateProvider     from '../containers/MigrateProvider'
 import LeaderboardProvider from '../containers/LeaderboardProvider'
+import DevProvider         from '../containers/DevProvider'
 import store               from '../reducers'
 import sounds              from '../sounds'
+import config              from '../config'
 import {
   AsyncStorage,
   StyleSheet,
@@ -47,21 +49,23 @@ export default class Root extends Component {
           <IAPProvider>
             <MigrateProvider>
               <LeaderboardProvider>
-                { this.state.scene == 'Game' ?
-                  <Game />
-                : this.state.scene == 'AboutUs' ?
-                  <FollowUs />
-                : this.state.scene == 'Start' ?
-                  <Start shareLink={this.state.shareLink}/>
-                : this.state.scene == 'Worlds' ?
-                  <Worlds />
-                : this.state.scene == 'Settings' ?
-                  <Settings />
-                : this.state.scene == 'HallOfFame' ?
-                  <HallOfFame {...this.state.sceneProps}/>
-                :
-                  <View style={{backgroundColor: 'indianred', width: 100, height: 100}}/>
-                }
+                <DevProvider>
+                  { this.state.scene == 'Game' ?
+                    <Game />
+                  : this.state.scene == 'AboutUs' ?
+                    <FollowUs />
+                  : this.state.scene == 'Start' ?
+                    <Start shareLink={this.state.shareLink}/>
+                  : this.state.scene == 'Worlds' ?
+                    <Worlds />
+                  : this.state.scene == 'Settings' ?
+                    <Settings />
+                  : this.state.scene == 'HallOfFame' ?
+                    <HallOfFame {...this.state.sceneProps}/>
+                  :
+                    <View style={{backgroundColor: 'indianred', width: 100, height: 100}}/>
+                  }
+                </DevProvider>
               </LeaderboardProvider>
             </MigrateProvider>
           </IAPProvider>

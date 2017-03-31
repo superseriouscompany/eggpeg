@@ -128,7 +128,6 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
         },
         {
           points: [
-            { x: 20, y: ycenter },
             { x: width, y: ycenter },
             { x: 0, y: ycenter },
           ],
