@@ -18,25 +18,33 @@ class Stage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      enterAnim: new Animated.Value(1),
-      scene:     props.scene,
+      fadeAnim: new Animated.Value(1),
+      dropAnim: new Animated.Value(1),
+      scene:    props.scene,
     }
   }
 
   componentWillReceiveProps(props) {
     if( props.scene != this.props.scene ) {
-      this.state.enterAnim.setValue(0)
-      this.setState({
-        nextScene: props.scene,
-      })
-      Animated.timing(this.state.enterAnim, {
-        duration: 1000, toValue: 1,
-      }).start(() => {
+      if( props.animation === 'fade' ) {
+        this.setState({
+          nextScene: props.scene,
+        })
+        this.state.fadeAnim.setValue(0)
+        Animated.timing(this.state.fadeAnim, {
+          duration: 1000, toValue: 1,
+        }).start(() => {
+          this.setState({
+            scene: props.scene,
+            nextScene: null,
+          })
+        })
+      } else {
         this.setState({
           scene: props.scene,
           nextScene: null,
         })
-      })
+      }
     }
   }
 
@@ -49,7 +57,7 @@ class Stage extends Component {
       { this.state.nextScene ?
         <View style={style.overlay}>
           <Animated.View style={[style.container, {
-            opacity: this.state.enterAnim.interpolate({
+            opacity: this.state.fadeAnim.interpolate({
               inputRange:  [0, 1],
               outputRange: [0, 1],
             })
