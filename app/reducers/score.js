@@ -32,6 +32,7 @@ export default function(state = initialState, action) {
         highScores: action.scores,
         isHigh:     action.isHigh,
       }
+    case 'worlds:select':
     case 'score:reset':
     case 'game:reset':
       return {

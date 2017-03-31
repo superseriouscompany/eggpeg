@@ -24,7 +24,10 @@ class ScoreText extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if( props.text && !this.props.text ) {
+    if( props.text != this.props.text ) {
+      this.state.enterAnim.setValue(-100)
+      this.state.leaveAnim.setValue(0)
+
       Animated.sequence([
         Animated.spring(
           this.state.enterAnim,
@@ -61,8 +64,8 @@ const style = StyleSheet.create({
   container: {
     position: 'absolute',
     zIndex: -2,
-    left: -200,
-    right: -200,
+    left: 0,
+    right: 0,
     alignItems: 'center',
   },
 

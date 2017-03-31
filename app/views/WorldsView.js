@@ -18,26 +18,24 @@ const lockImages = {
   '6': require('../images/Lock6.png'),
 }
 
-export default function(props) {
-return(
+export default function(props) { return(
   <View style={style.container}>
     <StatusBar hidden/>
-    <View>
-      <TouchableOpacity style={style.leftNav} onPress={props.back}>
-        <Text>back</Text>
-      </TouchableOpacity>
-      <View style={style.scoresContainer}>
-        { props.topScore ?
-          <View>
-            <Text style={style.topScore}>{props.topScore}</Text>
-            <TouchableOpacity onPress={props.showLeaderboard}>
-              <Text style={style.leaderboard}>see top scores</Text>
-            </TouchableOpacity>
-          </View>
-        :
-          <Text style={style.hint}>choose a level</Text>
-        }
-      </View>
+    <TouchableOpacity onPress={props.back}>
+      <Text style={style.leftNav}>back</Text>
+    </TouchableOpacity>
+
+    <View style={style.scoresContainer}>
+      { props.topScore ?
+        <View>
+          <Text style={style.topScore}>{props.topScore}</Text>
+          <TouchableOpacity onPress={props.showLeaderboard}>
+            <Text style={style.leaderboard}>see top scores</Text>
+          </TouchableOpacity>
+        </View>
+      :
+        <Text style={style.hint}>choose a level</Text>
+      }
     </View>
     <View style={style.grid}>
       {props.worlds.map((w, key) => (
@@ -106,15 +104,13 @@ const style = StyleSheet.create({
   },
   leftNav: {
     position: 'absolute',
-    width: 120,
-    padding: 20,
-    paddingRight: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0)'
+    top:      20,
+    left:     20,
   },
   scoresContainer: {
     justifyContent: 'center',
     alignItems:     'center',
-    paddingTop: 40,
+    marginTop: 40,
     paddingBottom: 20,
   },
   topScore: {

@@ -11,8 +11,9 @@ export default function(state = initialState, action) {
   switch(action.type) {
     case 'scene:change':
       return {
-        current: action.scene,
-        previous: state.current
+        current:  action.scene,
+        previous: state.current,
+        props:    action.props,
       }
     case 'scene:pop':
       return {

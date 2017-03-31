@@ -148,6 +148,7 @@ function mapStateToProps(state) {
     targets:    state.targets,
     level:      state.level,
     chamber:    state.chamber,
+    hint:       state.level.hint,
   }
 }
 

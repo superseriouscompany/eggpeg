@@ -30,10 +30,10 @@ const config = {
     targetGhost:           1750,
   },
   gravity: 0,//9.80665,
-  countdown: 20, // game over countdown timer
   playSounds: false,
   startingScene: __DEV__ ? 'Start' : 'Start',
   startingLevel: __DEV__ ? 'Stationary' : 'Stationary',
+  skipDemo:      __DEV__ ? true : false,
 }
 
 if( DeviceInfo.isEmulator() ) {

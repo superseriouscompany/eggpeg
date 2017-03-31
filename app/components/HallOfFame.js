@@ -8,11 +8,13 @@ import {enqueueRetry}         from '../actions/retry'
 import {postScore, stubScore} from '../actions/leaderboard'
 import {
   Image,
-  TextInput,
-  TouchableOpacity,
+  Platform,
   ScrollView,
+  Share,
   StatusBar,
   StyleSheet,
+  TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -22,6 +24,7 @@ class HallOfFame extends Component {
     this.postScore   = this.postScore.bind(this)
     this.handleProps = this.handleProps.bind(this)
     this.state       = { name: '' }
+    this.shareDialog = this.shareDialog.bind(this)
   }
 
   componentDidMount() {
@@ -38,7 +41,7 @@ class HallOfFame extends Component {
     let state = {
       scores: [].concat(props.scores),
     }
-    if( props.score ) {
+    if( props.induction ) {
       state.scorePosition = insertScore(props.score, state.scores)
       state.inserted = state.scorePosition != -1
     }
@@ -54,6 +57,22 @@ class HallOfFame extends Component {
       this.props.dispatch(enqueueRetry({type: 'postScore', score: this.props.score, name: this.state.name}))
     }).then(() => {
       this.props.dispatch({type: 'scene:change', scene: 'Worlds'})
+    })
+  }
+
+  shareDialog() {
+    this.shareTimeout && clearTimeout(this.shareTimeout);
+    if( !this.props.shareLink ) {
+      this.shareTimeout = setTimeout(this.shareDialog, 200);
+      return;
+    }
+
+    Share.share({
+      message: Platform.OS == 'android' ? `Download Egg Peg ${this.props.shareLink}` : 'Download Egg Peg',
+      url: this.props.shareLink,
+    }, {
+      dialogTitle: 'Invite Friends',
+      tintColor: 'blue'
     })
   }
 
@@ -118,8 +137,8 @@ function Score(props) {
 
 function mapStateToProps(state) {
   return {
-    score:  state.score.total,
-    scores: state.leaderboard.scores,
+    scores:    state.leaderboard.scores,
+    shareLink: state.shareLink,
   }
 }
 

@@ -6,6 +6,7 @@ import Text               from './Text'
 import EggDrop            from './EggDrop'
 import LinksHeader        from './LinksHeader'
 import base               from '../styles/base'
+import config             from '../config'
 import {connect}          from 'react-redux'
 import {clear}            from '../reducers'
 import {
@@ -14,7 +15,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
 
 class Start extends Component {
   constructor(props) {
@@ -91,7 +91,7 @@ const style = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     worlds:   state.worlds,
-    showDemo: !state.tutorial.complete,
+    showDemo: !state.tutorial.complete && !config.skipDemo,
   }
 }
 
