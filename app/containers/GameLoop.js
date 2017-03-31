@@ -63,7 +63,6 @@ class GameLoop extends Component {
             accuracy < 0.6 ? 'inner' :
             'outer';
 
-          score *= config.scoreBonus
           this.props.dispatch({type: 'targets:hit', index, score, ring})
           hits.push({score: score, ring: ring})
         }
