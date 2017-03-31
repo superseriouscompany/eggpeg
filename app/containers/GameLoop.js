@@ -108,7 +108,7 @@ class GameLoop extends Component {
     }
 
 
-    if( this.props.chamber <= 0 ) {
+    if( this.props.chamber <= 0 && !this.props.level.finishTime ) {
       const allSpent = !this.props.bullets.find((b) => { return !b.spent })
       if( allSpent ) {
         this.props.dispatch(recordScore(this.props.score.total)).catch((err) => {
