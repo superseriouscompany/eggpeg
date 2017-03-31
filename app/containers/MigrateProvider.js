@@ -3,7 +3,6 @@
 import React, {Component} from 'react'
 import {connect}          from 'react-redux'
 import {AsyncStorage}     from 'react-native'
-import {changeMode}       from '../actions/difficulty'
 
 class MigrateProvider extends Component {
   componentDidMount() {
