@@ -46,6 +46,24 @@ const reducers = combineReducers({
 const middleware = [thunk]
 if( __DEV__ ) {
   middleware.push(createLogger({
+    stateTransformer: (state) => {
+      return {
+        ...state,
+        leaderboard: {
+          ...state.leaderboard,
+          scores: `TOO LAWNG TO PRINT`,
+        },
+        worlds: {
+          ...state.worlds,
+          all: (state.worlds.all || []).map((w) => {
+            return {
+              ...w,
+              levels: 'TOO LAWNG TO PRINT',
+            }
+          })
+        }
+      }
+    },
     predicate: (getState, action) => action.type != 'tick'
   }))
 }
