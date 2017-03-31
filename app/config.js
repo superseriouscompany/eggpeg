@@ -17,8 +17,8 @@ const config = {
   timings: {
     dropIn:                1069,
     dropOut:               1069,
-    levelIn:               1000,
-    levelOut:              1000,
+    levelIn:               250,
+    levelOut:              450,
     lossDelay:             200,
     gameOverIn:            900,
     multiplierDelay:       1000,

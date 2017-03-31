@@ -12,6 +12,7 @@ import sounds             from '../sounds'
 import config             from '../config'
 import {
   Animated,
+  Easing,
   Dimensions,
   StyleSheet,
   TouchableWithoutFeedback,
@@ -55,7 +56,7 @@ class Level extends Component {
       this.props.dispatch({type: 'level:loading'})
       Animated.timing(
         this.state.swapAnim,
-        {toValue: 1, duration: config.timings.levelOut}
+        {toValue: 1, duration: config.timings.levelOut, easing: Easing.back() }
       ).start(() => {
         this.setState({
           targets:     this.state.nextTargets,
@@ -65,7 +66,7 @@ class Level extends Component {
         this.state.swapAnim.setValue(0)
         Animated.timing(
           this.state.swapAnim,
-          {toValue: .5, duration: config.timings.levelIn }
+          {toValue: .5, easing: Easing.elastic(1), }
         ).start(() => {
           this.props.dispatch({type: 'level:loading:finished'})
         })
