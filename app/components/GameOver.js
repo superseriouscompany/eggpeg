@@ -118,8 +118,9 @@ class GameOver extends Component {
           <Text style={style.carrot}>you're a boss.</Text>
         }
 
-        <TouchableOpacity onPress={() => this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})}>
+        <TouchableOpacity style={{position: 'absolute', left: 0, right: 0, paddingTop: 200, alignItems: 'center'}} onPress={() => this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})}>
           <Text style={style.topScores}>top scores</Text>
+          <Image style={{marginTop: 6}} source={require('../images/BottomCarrot.png')}/>
         </TouchableOpacity>
 
         <TouchableOpacity style={style.leftNav}>
@@ -176,12 +177,14 @@ const style = StyleSheet.create({
     color:    'white',
   },
   carrot: {
+    paddingBottom: 6,
     fontSize: 18,
     color:    'white',
   },
   topScores: {
     color:     'white',
     fontStyle: 'italic',
+    textAlign: 'center',
   },
   bottom: {
     flexDirection:  'row',
