@@ -6,7 +6,6 @@ import GameView           from '../components/GameView'
 import config             from '../config'
 import {loadLevel}        from '../actions/levels'
 import {AsyncStorage}     from 'react-native'
-import {changeMode}       from '../actions/difficulty'
 
 class Game extends Component {
   constructor(props) {
@@ -52,7 +51,6 @@ class Game extends Component {
     }
     this.props.dispatch({type: 'worlds:unlock'})
     if( this.props.world.name == '3' ) {
-      // TODO: delete difficulty reducer and actions
       return this.props.dispatch({type: 'victory:yes'})
     } else {
       if( this.props.world.name == 'Demo' ) {
@@ -91,7 +89,6 @@ function mapStateToProps(state) {
     score:        state.score,
     beat:         state.victory,
     showTutorial: !state.tutorial.complete,
-    difficulty:   state.difficulty,
     leaderboard:  state.leaderboard,
     scene:        state.scene,
   }
