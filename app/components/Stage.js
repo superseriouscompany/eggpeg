@@ -33,13 +33,13 @@ class Stage extends Component {
 
   componentWillReceiveProps(props) {
     if( props.scene.name != this.props.scene.name ) {
-      if( props.scene.animation === 'fade' ) {
+      if( props.scene.animation === 'fadeIn' ) {
         this.setState({
           nextScene: props.scene,
         })
         this.state.fadeAnim.setValue(0)
         Animated.timing(this.state.fadeAnim, {
-          duration: config.timings.sceneFade, toValue: 1,
+          duration: config.timings.sceneFadeIn, toValue: 1,
         }).start(() => {
           this.setState({
             scene: props.scene,
@@ -52,25 +52,24 @@ class Stage extends Component {
         })
         this.state.dropAnim.setValue(0)
         Animated.timing(this.state.dropAnim, {
-          duration: config.timings.dropIn, toValue: 1,
+          duration: config.timings.sceneDropIn, toValue: 1,
         }).start(() => {
           this.setState({
             scene: props.scene,
             nextScene: null,
           })
         })
-      } else if( props.scene.animation === 'dropBack' ) {
-        console.log('setting scenes', props.scene, this.props.scene)
+      } else if( props.scene.animation === 'riseOut' ) {
         this.setState({
-          // scene: props.scene,
+          scene: props.scene,
           nextScene: this.props.scene,
         })
         this.state.backAnim.setValue(0)
         Animated.timing(this.state.backAnim, {
-          duration: config.timings.dropOut, toValue: 1,
+          duration: config.timings.sceneRiseOut, toValue: 1,
         }).start(() => {
           this.setState({
-            scene: props.scene,
+            nextScene: null,
           })
         })
       } else {
@@ -90,7 +89,7 @@ class Stage extends Component {
 
       { this.state.nextScene ?
         <View style={style.overlay}>
-          { this.props.scene.animation === 'fade' ?
+          { this.props.scene.animation === 'fadeIn' ?
             <Animated.View style={[style.container, {
               opacity: this.state.fadeAnim.interpolate({
                 inputRange:  [0, 1],
@@ -108,14 +107,14 @@ class Stage extends Component {
             }]}>
               { this.showScene(this.state.nextScene) }
             </Animated.View>
-          : this.props.scene.animation === 'dropBack' ?
+          : this.props.scene.animation === 'riseOut' ?
             <Animated.View style={[style.container, {
-              opacity: this.state.backAnim.interpolate({
+              top: this.state.backAnim.interpolate({
                 inputRange: [0, 1],
-                outputRange: [0, 1],
+                outputRange: [0, -height],
               }),
-              zIndex: 50,
             }]}>
+              { this.showScene(this.state.nextScene) }
             </Animated.View>
           :
             <Text>Nope</Text>
