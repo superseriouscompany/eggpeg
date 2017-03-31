@@ -40,14 +40,12 @@ class Level extends Component {
   }
 
   componentWillReceiveProps(props) {
+    if( props.level.index === 0 ) {
+      this.setState({targets: props.targets})
+      this.state.swapAnim.setValue(0.5)
+    }
+
     if( props.level.name != this.props.level.name ) {
-      if( !this.props.level.name || props.level.index === 0 ) {
-        this.setState({
-          targets: props.targets
-        })
-        this.state.swapAnim.setValue(0.5)
-        return
-      }
       this.setState({
         nextTargets: props.targets,
       })
@@ -68,10 +66,6 @@ class Level extends Component {
         ).start(() => {
           this.props.dispatch({type: 'level:loading:finished'})
         })
-      })
-    } else {
-      this.setState({
-        targets: props.targets,
       })
     }
   }
