@@ -15,7 +15,8 @@ const config = {
     bullet: 7,
   },
   timings: {
-    // gonna leave 69s in here for timings to change
+    dropIn:                1069,
+    dropOut:               1069,
     levelIn:               369,
     levelOut:              169,
     lossDelay:             200,

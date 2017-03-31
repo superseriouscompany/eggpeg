@@ -8,6 +8,7 @@ import Settings           from './Settings'
 import World              from './World';
 import Worlds             from './Worlds'
 import HallOfFame         from './HallOfFame'
+import config             from '../config'
 import {
   Animated,
   Dimensions,
@@ -24,6 +25,7 @@ class Stage extends Component {
     this.state = {
       fadeAnim: new Animated.Value(1),
       dropAnim: new Animated.Value(1),
+      backAnim: new Animated.Value(1),
       scene:    props.scene,
     }
   }
@@ -43,16 +45,29 @@ class Stage extends Component {
             nextScene: null,
           })
         })
-      } else if( props.scene.animation === 'dropIn') {
+      } else if( props.scene.animation === 'dropIn' ) {
         this.setState({
           nextScene: props.scene,
         })
         this.state.dropAnim.setValue(0)
         Animated.timing(this.state.dropAnim, {
-          duration: 1000, toValue: 1, easing: Easing.elastic(1),
+          duration: config.timings.dropIn, toValue: 1,
         }).start(() => {
           this.setState({
             scene: props.scene,
+            nextScene: null,
+          })
+        })
+      } else if( props.scene.animation === 'dropBack' ) {
+        this.setState({
+          scene: props.scene,
+          nextScene: this.props.scene,
+        })
+        this.state.backAnim.setValue(0)
+        Animated.timing(this.state.backAnim, {
+          duration: config.timings.dropOut, toValue: 1,
+        }).start(() => {
+          this.setState({
             nextScene: null,
           })
         })
@@ -67,13 +82,23 @@ class Stage extends Component {
 
   render() { return (
     <View style={style.container}>
-      <View style={style.container}>
+      <View style={[style.container]}>
         { this.showScene(this.state.scene)}
       </View>
 
       { this.state.nextScene ?
         <View style={style.overlay}>
           <Animated.View style={[style.container, {
+            zIndex: this.state.backAnim.interpolate({
+              inputRange: [0, .1, 1],
+              outputRange: [0, -1, -1],
+            }),
+            transform: [{
+              translateY: this.state.backAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, -height],
+              })
+            }],
             opacity: this.state.fadeAnim.interpolate({
               inputRange:  [0, 1],
               outputRange: [0, 1],
