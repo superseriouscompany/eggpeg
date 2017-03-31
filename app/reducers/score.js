@@ -16,6 +16,16 @@ export default function(state = initialState, action) {
         level: 0,
         encouragement: null,
       }
+    case 'score:newRecord':
+      return {
+        ...state,
+        newRecord: true,
+      }
+    case 'score:clear':
+      return {
+        ...state,
+        newRecord: false,
+      }
     case 'score:setHighScores':
       return {
         ...state,

@@ -26,26 +26,16 @@ export default class GameView extends Component {
   constructor(props) {
     super(props)
     this.state = { newHighScore: false }
-    this.completeRainbowAnimation = this.completeRainbowAnimation.bind(this)
   }
 
   componentWillReceiveProps(props) {
     if( props.world.name === 'Demo' ) { return; }
 
-    const {highScores} = this.props.score
-    if( !highScores.length || props.currentScore === this.props.currentScore ) { return; }
-    if( props.currentScore > highScores[0] ) {
-      this.setState({
-        newHighScore: true,
-        topScore:     true,
-      })
+    // TODO: move this out of here
+    if( this.state.topScore ) { return; }
+    if( props.currentScore > props.world.score)  {
+      this.setState({topScore: true})
     }
-  }
-
-  completeRainbowAnimation() {
-    this.setState({
-      newHighScore: false
-    })
   }
 
   render() {
@@ -69,8 +59,7 @@ export default class GameView extends Component {
               <GameHeader
                 tries={this.props.chamber}
                 score={this.props.score.total || 0}
-                newHighScore={this.state.newHighScore}
-                completeRainbowAnimation={this.completeRainbowAnimation} />
+                topScore={this.state.topScore} />
             }
             <Level />
           </View>
@@ -84,10 +73,5 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: base.colors.purple,
-  },
-  tries: {
-    position: 'absolute',
-    top: 20,
-    left: 20,
   },
 })

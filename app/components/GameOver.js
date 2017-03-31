@@ -17,6 +17,7 @@ import {
   View,
 } from 'react-native';
 
+// TODO: break this into functional component
 class GameOver extends Component {
   static propTypes = {
     reset:       PropTypes.func.isRequired,
@@ -38,24 +39,20 @@ class GameOver extends Component {
   componentDidMount() {
     this.timeout = setInterval(this.countdown, 1000)
     const {scores} = this.props.leaderboard;
-    const {score}  = this.props;
+    const {score, worldScore}  = this.props;
 
     // TODO: move this out of here
-    // if( !scores.length ) {
-    //   this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})
-    //   return;
-    // }
-    // for( var i = 0; i < scores.length; i++ ) {
-    //   if( scores[i].score < score ) {
-    //     this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})
-    //     return;
-    //   }
-    // }
-
-    if( this.props.isHighScore ) {
+    if( score > worldScore ) {
       sounds.woohoo.play(null, (err) => {
         console.error(err)
       })
+
+      for( var i = 0; i < scores.length; i++ ) {
+        if( scores[i].score < score ) {
+          this.props.dispatch({type: 'scene:change', scene: 'HallOfFame'})
+          return;
+        }
+      }
     } else {
       sounds.fart.play(null, (err) => {
         console.error(err)
@@ -111,7 +108,7 @@ class GameOver extends Component {
         { this.props.score < this.props.highScore ?
           <View style={{flexDirection: 'row'}}>
             <Image style={{marginRight: 6}} source={require('../images/Trophy.png')}/>
-            <Text style={style.carrot}>{this.props.highScore}</Text>
+            <Text style={style.carrot}>{this.props.worldScore}</Text>
           </View>
         : this.props.carrot !== 'boss' ?
           <Text style={style.carrot}>defeat {this.props.carrot.name}'s {this.props.carrot.score}</Text>
@@ -225,6 +222,7 @@ function mapStateToProps(state) {
   }
 
   return {
+    worldScore:  state.worlds.current.score,
     score:       score,
     highScore:   state.score.highScores && state.score.highScores[0],
     leaderboard: leaderboard,
