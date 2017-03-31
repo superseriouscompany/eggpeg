@@ -6,6 +6,7 @@ import Text       from './Text';
 import RainbowBar from './RainbowBar'
 import config     from '../config'
 import sounds     from '../sounds'
+import {connect}  from 'react-redux'
 import {
   Animated,
   Dimensions,
@@ -16,7 +17,7 @@ import {
 
 const screenWidth = Dimensions.get('window').width;
 
-export default class GameHeader extends Component {
+class GameHeader extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -38,6 +39,9 @@ export default class GameHeader extends Component {
   }
 
   componentWillReceiveProps(props) {
+    // TODO:
+    if( props.isDemo ) { return; }
+
     if( props.score != this.props.score ) {
       this.setState({
         delta: props.score - (this.props.score || 0),
@@ -61,7 +65,7 @@ export default class GameHeader extends Component {
 
   render() { return (
     <View style={style.header}>
-      { this.props.topScore ?
+      { this.props.isHighScore ?
         <RainbowBar barHeight={7.5} finalOffset={screenWidth - 50} leave={true} complete={this.props.completeRainbowAnimation}/>
       :
         null
@@ -83,13 +87,9 @@ export default class GameHeader extends Component {
   )}
 }
 
-class Egg extends Component {
-  render() {
-    const image = this.props.filled ? '../images/Egg.png' : '../images/EggEmpty.png';
-    return this.props.filled
-      ? <Image source={require('../images/Egg.png')} style={style.egg}/>
-      : <Image source={require('../images/EggEmpty.png')} style={style.egg}/>
-  }
+function Egg(props) {
+  const image = props.filled ? require('../images/Egg.png') : require('../images/EggEmpty.png');
+  return (<Image source={image} style={style.egg}/>)
 }
 
 const style = StyleSheet.create({
@@ -113,3 +113,14 @@ const style = StyleSheet.create({
     backgroundColor: 'transparent',
   }
 })
+
+function mapStateToProps(state) {
+  return {
+    isDemo:      state.worlds.current && state.worlds.current.name === 'Demo',
+    isHighScore: state.session.score >= state.session.goal,
+    tries:       state.chamber,
+    score:       state.score.total || 0,
+  }
+}
+
+export default connect(mapStateToProps)(GameHeader)

@@ -67,6 +67,7 @@ class World extends Component {
 
   reset() {
     this.props.dispatch({type: 'game:reset'})
+    this.props.dispatch({type: 'session:goal', goal: this.props.world.score, })
     const index = startingLevelIndex(this.props.levels)
     this.props.dispatch(loadLevel(this.props.levels[index]))
   }

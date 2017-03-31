@@ -18,25 +18,27 @@ import purchase    from './purchase'
 import retry       from './retry'
 import scene       from './scene'
 import score       from './score'
+import session     from './session'
 import shareLink   from './shareLink'
 import targets     from './targets'
 import tutorial    from './tutorial'
 import victory     from './victory'
-import worlds     from './worlds'
+import worlds      from './worlds'
 
 const reducers = combineReducers({
   bullets,
   chamber,
   leaderboard,
   level,
-  targets,
-  score,
   purchase,
-  retry,
   scene,
+  score,
+  session,
   shareLink,
-  victory,
+  retry,
+  targets,
   tutorial,
+  victory,
   worlds,
 })
 
