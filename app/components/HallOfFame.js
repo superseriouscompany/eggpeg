@@ -7,6 +7,7 @@ import {connect}              from 'react-redux'
 import {enqueueRetry}         from '../actions/retry'
 import {postScore, stubScore} from '../actions/leaderboard'
 import {
+  Platform,
   Share,
 } from 'react-native';
 
