@@ -78,7 +78,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     visitHOF: () => {
-      dispatch({type: 'scene:change', scene: 'HallOfFame'})
+      dispatch({type: 'scene:change', scene: 'HallOfFame', animation: 'dropIn'})
     },
 
     visitWorlds: () => {
@@ -86,7 +86,7 @@ function mapDispatchToProps(dispatch) {
     },
 
     induct: (score) => {
-      dispatch({type: 'scene:change', scene: 'HallOfFame', props: { induction: true, score: score }})
+      dispatch({type: 'scene:change', scene: 'HallOfFame', animation: 'dropIn', props: { induction: true, score: score }})
     }
   }
 }

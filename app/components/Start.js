@@ -28,7 +28,7 @@ class Start extends Component {
       this.props.dispatch({type: 'worlds:select', name: 'Demo'})
       this.props.dispatch({type: 'scene:change', scene: 'World'})
     } else {
-      this.props.dispatch({type: 'scene:change', scene: 'Worlds', animation: 'dropIn'})
+      this.props.dispatch({type: 'scene:change', scene: 'Worlds'})
     }
   }
 }

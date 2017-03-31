@@ -105,7 +105,7 @@ class Stage extends Component {
                 outputRange: [-height, 0],
               }),
             }]}>
-              { this.showScene(this.state.nextScene) }
+              { this.showScene(this.state.nextScene, {animating: true}) }
             </Animated.View>
           : this.props.scene.animation === 'riseOut' ?
             <Animated.View style={[style.container, {
@@ -114,7 +114,7 @@ class Stage extends Component {
                 outputRange: [0, -height],
               }),
             }]}>
-              { this.showScene(this.state.nextScene) }
+              { this.showScene(this.state.nextScene, {animating: true}) }
             </Animated.View>
           :
             <Text>Nope</Text>
@@ -124,7 +124,12 @@ class Stage extends Component {
     </View>
   )}
 
-  showScene(scene) {
+  showScene(scene, props) {
+    props = {
+      ...props,
+      ...scene.props,
+    }
+
     switch(scene.name) {
       case 'World':
         return <World />
@@ -133,11 +138,11 @@ class Stage extends Component {
       case 'Start':
         return <Start />
       case 'Worlds':
-        return <Worlds {...scene.props} />
+        return <Worlds {...props} />
       case 'Settings':
         return <Settings />
       case 'HallOfFame':
-        return <HallOfFame {...scene.props} />
+        return <HallOfFame {...props} />
       default:
         return <View style={{backgroundColor: 'indianred', width: 100, height: 100}}/>
     }

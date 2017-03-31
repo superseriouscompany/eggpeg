@@ -27,14 +27,14 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     showLeaderboard: () => {
-      dispatch({type: 'scene:change', scene: 'HallOfFame'})
+      dispatch({type: 'scene:change', scene: 'HallOfFame', animation: 'dropIn'})
     },
     loadLevel: (name) => {
       dispatch({type: 'worlds:select', name: name})
       dispatch({type: 'scene:change', scene: 'World'})
     },
     back: () => {
-      dispatch({type: 'scene:pop', animation: 'riseOut'})
+      dispatch({type: 'scene:pop' })
     },
   }
 }
