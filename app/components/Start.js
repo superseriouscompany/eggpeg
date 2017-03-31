@@ -16,7 +16,6 @@ import {
   View,
 } from 'react-native';
 
-
 class Start extends Component {
   constructor(props) {
     super(props)

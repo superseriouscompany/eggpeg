@@ -1,6 +1,6 @@
 import config from '../config'
 
-export default function(state={level: 0}, action) {
+export default function(state={}, action) {
   switch(action.type) {
     case 'level:win':
       return {
@@ -32,6 +32,8 @@ export default function(state={level: 0}, action) {
         ...state,
         loading: false,
       }
+    case 'worlds:select':
+      return {}
     default:
       return state
   }

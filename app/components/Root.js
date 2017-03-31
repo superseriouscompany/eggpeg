@@ -35,7 +35,8 @@ export default class Root extends Component {
       const state = store.getState()
       if( state.scene.current ) {
         this.setState({
-          scene: state.scene.current,
+          scene:      state.scene.current,
+          sceneProps: state.scene.props,
         })
       }
     })
@@ -60,7 +61,7 @@ export default class Root extends Component {
                   : this.state.scene == 'Settings' ?
                     <Settings />
                   : this.state.scene == 'HallOfFame' ?
-                    <HallOfFame />
+                    <HallOfFame {...this.state.sceneProps}/>
                   :
                     <View style={{backgroundColor: 'indianred', width: 100, height: 100}}/>
                   }

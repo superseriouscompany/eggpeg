@@ -5,7 +5,6 @@ import { connect }        from 'react-redux';
 import GameView           from '../components/GameView'
 import config             from '../config'
 import {loadLevel}        from '../actions/levels'
-import {recordScore}      from '../actions/scores'
 import {AsyncStorage}     from 'react-native'
 import {changeMode}       from '../actions/difficulty'
 
@@ -49,9 +48,6 @@ class Game extends Component {
   victory() {
     const score = this.props.score.total;
     if( this.props.world.name !== 'Demo' ) {
-      this.props.dispatch(recordScore(score)).catch((err) => {
-        console.error(err)
-      })
       this.props.dispatch({type: 'worlds:beat', score: score})
     }
     this.props.dispatch({type: 'worlds:unlock'})

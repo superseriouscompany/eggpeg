@@ -25,7 +25,7 @@ class GameOver extends Component {
     const {scores} = this.props.leaderboard;
     const {totalScore, score, worldScore}  = this.props;
 
-    if( score > worldScore ) {
+    if( score >= worldScore ) {
       sounds.woohoo.play(null, (err) => {
         console.error(err)
       })
@@ -33,7 +33,7 @@ class GameOver extends Component {
       // TODO: move this out of here
       for( var i = 0; i < scores.length; i++ ) {
         if( scores[i].score < totalScore ) {
-          this.props.dispatch({type: 'scene:change', scene: 'HallOfFame', props: { induction: true }})
+          this.props.induct(totalScore)
           return;
         }
       }
@@ -70,7 +70,7 @@ function mapStateToProps(state) {
     score:       score,
     leaderboard: leaderboard,
     carrot:      carrot,
-    totalScore:  score + 100,
+    totalScore:  state.worlds.all.reduce((acc, w) => { return acc + (w.score || 0)}, 0),
   }
 }
 
@@ -83,6 +83,10 @@ function mapDispatchToProps(dispatch) {
     visitWorlds: () => {
       dispatch({type: 'scene:change', scene: 'Worlds'})
     },
+
+    induct: (score) => {
+      dispatch({type: 'scene:change', scene: 'HallOfFame', props: { induction: true, score: score }})
+    }
   }
 }
 

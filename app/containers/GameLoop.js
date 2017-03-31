@@ -4,7 +4,6 @@ import React, {Component} from 'react'
 import {connect}          from 'react-redux'
 import config             from '../config'
 import sounds             from '../sounds'
-import {recordScore}      from '../actions/scores'
 
 let running = true;
 class GameLoop extends Component {
@@ -108,12 +107,9 @@ class GameLoop extends Component {
     }
 
 
-    if( this.props.chamber <= 0 && !this.props.level.finishTime ) {
+    if( this.props.chamber <= 0 && !this.props.level.finishTime && !this.props.level.done ) {
       const allSpent = !this.props.bullets.find((b) => { return !b.spent })
       if( allSpent ) {
-        this.props.dispatch(recordScore(this.props.score.total)).catch((err) => {
-          console.error(err)
-        })
         this.props.dispatch({type: 'worlds:score', score: this.props.score.total})
         this.props.dispatch({type: 'level:loss'})
       }

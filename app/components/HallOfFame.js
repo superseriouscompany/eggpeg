@@ -38,7 +38,7 @@ class HallOfFame extends Component {
     let state = {
       scores: [].concat(props.scores),
     }
-    if( props.score ) {
+    if( props.induction ) {
       state.scorePosition = insertScore(props.score, state.scores)
       state.inserted = state.scorePosition != -1
     }
@@ -118,7 +118,6 @@ function Score(props) {
 
 function mapStateToProps(state) {
   return {
-    score:  state.score.total,
     scores: state.leaderboard.scores,
   }
 }
