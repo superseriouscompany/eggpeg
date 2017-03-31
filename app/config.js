@@ -9,7 +9,6 @@ const config = {
     linger: 100,
   },
   chamber: 3,
-  scoreBonus: 1,
   sizes: {
     target: 40,
     shadow: 75,
