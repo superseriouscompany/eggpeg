@@ -1,12 +1,13 @@
 'use strict';
 
-import React, {PropTypes} from 'react';
-import Component          from './Component';
-import Text               from './Text';
-import EggDrop            from './EggDrop';
-import LinksHeader        from './LinksHeader';
-import base               from '../styles/base';
-import {connect}          from 'react-redux';
+import React, {PropTypes} from 'react'
+import Component          from './Component'
+import Text               from './Text'
+import EggDrop            from './EggDrop'
+import LinksHeader        from './LinksHeader'
+import base               from '../styles/base'
+import {connect}          from 'react-redux'
+import {clear}            from '../reducers'
 import {
   StatusBar,
   StyleSheet,
@@ -18,8 +19,12 @@ import {
 class Start extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
-    this.startGame       = this.startGame.bind(this)
+    this.state     = {}
+    this.startGame = this.startGame.bind(this)
+  }
+
+  clearStore() {
+    clear()
   }
 
   render() {
@@ -37,6 +42,11 @@ class Start extends Component {
             </TouchableOpacity>
           </View>
         </View>
+        { __DEV__ ?
+          <TouchableOpacity onPress={this.clearStore}>
+            <Text>Clear all data</Text>
+          </TouchableOpacity>
+        : null}
       </View>
     </View>
   )}

@@ -56,7 +56,7 @@ const store = createStore(reducers, undefined, compose(
   autoRehydrate()
 ))
 
-persistStore(store, {storage: AsyncStorage, whitelist: [
+const persistence = persistStore(store, {storage: AsyncStorage, whitelist: [
   'difficulty',
   'purchase',
   'retry',
@@ -67,3 +67,7 @@ persistStore(store, {storage: AsyncStorage, whitelist: [
 ]})
 
 export default store
+
+export function clear() {
+  persistence.purge()
+}
