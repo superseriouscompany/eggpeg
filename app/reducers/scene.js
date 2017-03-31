@@ -21,7 +21,10 @@ export default function(state = initialState, action) {
     case 'scene:pop':
       // TODO: reverse animation on pop
       return {
-        current: state.previous || 'Start',
+        current: {
+          ...(state.previous || initialState.current),
+          animation: action.animation,
+        },
         previous: null,
       }
     default:
