@@ -42,6 +42,10 @@ class GameOver extends Component {
         console.error(err)
       })
     }
+
+    Animated.timing(this.state.enterAnim, {
+      duration: config.timings.gameOverIn, toValue: 1,
+    }).start()
   }
 
   render() { return (
