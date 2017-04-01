@@ -20,6 +20,9 @@ class Worlds extends Component {
   }
 
   loadLevel(name) {
+    this.setState({
+      selectedName: name,
+    })
     Animated.timing(this.state.expandAnim, {
       toValue: 1, duration: config.timings.worldIn,
     }).start(() => {
@@ -28,7 +31,10 @@ class Worlds extends Component {
   }
 
   render() {
-    return <WorldsView {...this.props} loadLevel={this.loadLevel} expandAnim={this.state.expandAnim}/>
+    return <WorldsView {...this.props}
+              loadLevel={this.loadLevel}
+              expandAnim={this.state.expandAnim}
+              selectedName={this.state.selectedName} />
   }
 }
 

@@ -41,7 +41,7 @@ export default function(props) { return(
     </View>
     <View style={style.grid}>
       {props.worlds.map((w, key) => (
-        <View key={key} style={[style.worldContainer, key != 0 ? null : {zIndex: 1}]}>
+        <View key={key} style={[style.worldContainer, w.name === props.selectedName ? style.activeContainer : null]}>
           { w.comingSoon ?
             <View style={style.greyedOut}>
               <World world={w} />
@@ -51,7 +51,7 @@ export default function(props) { return(
               <World world={w} />
             </View>
           :
-            <World expandAnim={props.expandAnim} world={w} keyIndex={key} onPress={() => props.loadLevel(w.name)}/>
+            <World expandAnim={props.expandAnim} world={w} selectedName={props.selectedName} onPress={() => props.loadLevel(w.name)}/>
           }
         </View>
       ))}
@@ -60,12 +60,13 @@ export default function(props) { return(
 )}
 
 function World(props) {
+  const isActivating = props.selectedName && props.selectedName == props.world.name;
   return (
     <TouchableWithoutFeedback onPress={props.onPress}>
       <View style={[style.world]}>
         <Animated.View style={[style.preview, props.world.locked || props.world.comingSoon ? null : style.shadow, {
           backgroundColor: props.world.color,
-        }, props.keyIndex != 0 ? null : {
+        }, isActivating ? {
           transform: [{
             scale: props.expandAnim.interpolate({
               inputRange:  [0, 1],
@@ -73,18 +74,18 @@ function World(props) {
             })
           }],
           zIndex: 1,
-        }]}>
+        } : null]}>
             { props.world.locked ?
               <Image source={lockImages[props.world.name]}/>
             : props.world.comingSoon ?
               <Text style={style.status}>...</Text>
             :
-              <Animated.Text style={[style.status, props.keyIndex != 0 ? null : {
+              <Animated.Text style={[style.status, isActivating ? {
                 opacity: props.expandAnim.interpolate({
                   inputRange: [0, 1],
                   outputRange: [1, 0],
                 })
-              }]}>{props.world.name}</Animated.Text>
+              } : null]}>{props.world.name}</Animated.Text>
             }
         </Animated.View>
         <Text style={style.maxScore}>
@@ -129,6 +130,9 @@ const style = StyleSheet.create({
     alignItems:     'center',
     marginTop: 40,
     paddingBottom: 20,
+  },
+  activeContainer: {
+    zIndex: 1,
   },
   topScore: {
     fontSize: 64,
