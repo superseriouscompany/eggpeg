@@ -47,7 +47,7 @@ export default class WorldsView extends Component {
 
     this.state.expandAnim.setValue(1)
     setTimeout(() => {
-      this.refs['world-1'].measure((ox, oy, w, h, px, py) => {
+      this.refs[`world-${this.props.selectedName}`].measure((ox, oy, w, h, px, py) => {
         Animated.timing(this.state.expandAnim, {
           toValue: 0.0001, duration: config.timings.worldIn,
         }).start()
