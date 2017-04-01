@@ -35,7 +35,7 @@ export default function(props) {
           :
             <GameHeader />
           }
-          <Level />
+          <Level done={props.done}/>
           <Animated.View style={[style.progressBar, {
             backgroundColor: props.level.deadColor,
             width:           props.progressAnim,

@@ -35,7 +35,6 @@ class Level extends Component {
     this.state = {
       swapAnim: new Animated.Value(.5),
       targets:     [],
-      nextTargets: [],
     }
   }
 
@@ -44,22 +43,20 @@ class Level extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if( props.level.index === 0 ) {
-      this.setState({targets: props.targets})
-      this.state.swapAnim.setValue(0.5)
-    }
-
     if( props.level.name != this.props.level.name ) {
-      this.setState({
-        nextTargets: props.targets,
-      })
+      if( props.level.index === 0 ) {
+        this.setState({targets: props.targets})
+        this.state.swapAnim.setValue(.5)
+        return;
+      }
+
       this.props.dispatch({type: 'level:loading'})
       Animated.timing(
         this.state.swapAnim,
         {toValue: 1, duration: config.timings.levelOut, easing: Easing.back() }
       ).start(() => {
         this.setState({
-          targets:     this.state.nextTargets,
+          targets:     props.targets,
           nextTargets: [],
         })
 
@@ -70,6 +67,17 @@ class Level extends Component {
         ).start(() => {
           this.props.dispatch({type: 'level:loading:finished'})
         })
+      })
+    } else if( props.done && props.done != this.props.done ) {
+      this.props.dispatch({type: 'level:loading'})
+      Animated.timing(
+        this.state.swapAnim,
+        {toValue: 1, duration: config.timings.levelOut, easing: Easing.back() }
+      ).start(() => {
+        this.setState({
+          targets:     [],
+        })
+        this.props.dispatch({type: 'level:loading:finished'})
       })
     }
   }

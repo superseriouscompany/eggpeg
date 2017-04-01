@@ -20,8 +20,10 @@ class World extends Component {
     this.reset     = this.reset.bind(this)
     this.nextLevel = this.nextLevel.bind(this)
     this.loadLevel = this.loadLevel.bind(this)
+    this.endLevel  = this.endLevel.bind(this)
     this.continue  = this.continue.bind(this)
-    this.state = { progressAnim: new Animated.Value(0) }
+    this.victory   = this.victory.bind(this)
+    this.state     = { progressAnim: new Animated.Value(0) }
   }
 
   componentWillReceiveProps(props) {
@@ -52,12 +54,19 @@ class World extends Component {
     for( var i = 0; i < this.props.levels.length; i++ ) {
       if( this.props.levels[i].name == this.props.level.name ) {
         if( i == this.props.levels.length - 1 ) {
-          return this.victory()
+          this.endLevel()
+          setTimeout(this.victory, config.timings.worldBeatDelay)
         } else {
           return this.loadLevel(this.props.levels[i+1])
         }
       }
     }
+  }
+
+  endLevel() {
+    this.setState({
+      done: true,
+    })
   }
 
   victory() {
@@ -94,6 +103,7 @@ class World extends Component {
       continue={this.continue}
       currentScore={this.props.score}
       progressAnim={this.state.progressAnim}
+      done={this.state.done}
       {...this.props} />
   )}
 }
