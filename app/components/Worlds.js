@@ -3,16 +3,29 @@
 import React            from 'react'
 import Component        from './Component'
 import {connect}        from 'react-redux'
+import config           from '../config'
 import WorldsView       from '../views/WorldsView'
 import {
+  Animated,
   StyleSheet,
   TouchableOpacity,
   View,
 } from 'react-native';
 
 class Worlds extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { expandAnim: new Animated.Value(0) }
+  }
+
+  componentDidMount() {
+    Animated.timing(this.state.expandAnim, {
+      toValue: 1, duration: config.timings.worldIn,
+    }).start()
+  }
+
   render() {
-    return <WorldsView {...this.props}/>
+    return <WorldsView {...this.props} expandAnim={this.state.expandAnim}/>
   }
 }
 

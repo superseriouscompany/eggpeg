@@ -36,7 +36,7 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
     },
     {
       name: 'linked',
-      max: 14,
+      max: 20,
       targets: [
         {
           points: [
@@ -47,7 +47,7 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
         },
         {
           points: [
-            { x: 5, y: ycenter },
+            { x: 30, y: ycenter },
             { x: width, y:ycenter },
             { x: 0, y: ycenter },
           ],

@@ -33,6 +33,8 @@ const config = {
     sceneRiseOut:          1069,
     scoreIncrement:        525,
     scoreExplanationLeave: 500,
+    worldIn:               250,
+    worldOut:              250,
     winDelay:              1000,
     targetGhost:           1750,
   },

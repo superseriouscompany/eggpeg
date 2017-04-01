@@ -109,5 +109,5 @@ module.exports = function(xcenter, ycenter, width, height) {
         },
       ],
     },
-  ].slice(0, 1)
+  ].slice(0,1)
 }

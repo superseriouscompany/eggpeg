@@ -2,6 +2,7 @@ import React    from 'react'
 import {colors} from '../styles/base'
 import Text     from '../components/Text'
 import {
+  Animated,
   Image,
   StatusBar,
   StyleSheet,
@@ -39,18 +40,18 @@ export default function(props) { return(
     </View>
     <View style={style.grid}>
       {props.worlds.map((w, key) => (
-        <View key={key} style={style.worldContainer}>
+        <View key={key} style={[style.worldContainer, key != 0 ? null : {zIndex: 1}]}>
           { w.comingSoon ?
             <View style={style.greyedOut}>
-              <World world={w} key={key} />
+              <World world={w} />
             </View>
           : w.locked ?
             <View style={style.greyedOut}>
-              <World world={w} key={key} />
+              <World world={w} />
             </View>
           :
             <TouchableOpacity onPress={() => props.loadLevel(w.name)}>
-              <World world={w} key={key} />
+              <World expandAnim={props.expandAnim} world={w} keyIndex={key} />
             </TouchableOpacity>
           }
         </View>
@@ -61,16 +62,31 @@ export default function(props) { return(
 
 function World(props) {
   return (
-    <View style={style.world}>
-      <View style={[style.preview, props.world.locked || props.world.comingSoon ? null : style.shadow, {
+    <View style={[style.world]}>
+      <Animated.View style={[style.preview, props.world.locked || props.world.comingSoon ? null : style.shadow, {
         backgroundColor: props.world.color,
+      }, props.keyIndex != 0 ? null : {
+        transform: [{
+          scale: props.expandAnim.interpolate({
+            inputRange:  [0, 1],
+            outputRange: [1, 8],
+          })
+        }],
+        zIndex: 1,
       }]}>
           { props.world.locked ?
             <Image source={lockImages[props.world.name]}/>
           : props.world.comingSoon ?
             <Text style={style.status}>...</Text>
-          : <Text style={style.status}>{props.world.name}</Text>}
-      </View>
+          :
+            <Animated.Text style={[style.status, props.keyIndex != 0 ? null : {
+              opacity: props.expandAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [1, 0],
+              })
+            }]}>{props.world.name}</Animated.Text>
+          }
+      </Animated.View>
       <Text style={style.maxScore}>
         { props.world.comingSoon ?
           'coming soon'
