@@ -7,6 +7,7 @@ import GameOver                      from '../components/GameOver'
 import ScoreText                     from '../components/ScoreText'
 import Level                         from '../components/Level'
 import ProgressBar                   from './ProgressBar'
+import WorldScore                    from './WorldScore'
 import {colors}                      from '../styles/base'
 import config                        from '../config'
 import {
@@ -18,6 +19,7 @@ import {
 } from 'react-native';
 
 export default function(props) {
+  console.log('score', props.score)
   return (
     <View style={style.container}>
       <StatusBar hidden/>
@@ -33,10 +35,17 @@ export default function(props) {
             <GameOver
               reset={props.reset}
               continue={props.continue} />
-          :
+          : !props.worldDone ?
             <GameHeader />
+          :
+            null
           }
-          <Level done={props.done}/>
+          { props.worldDone ?
+            <View style={[style.worldScoreContainer]}>
+              <WorldScore animate={true} score={props.score || 'nope'} color={props.level.deadColor}/>
+            </View>
+          : null}
+          <Level done={props.worldDone}/>
           <ProgressBar style={style.progressBar} progress={props.progress} color={props.level.deadColor}/>
 
           { props.hint ?
@@ -56,6 +65,15 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.purple,
+  },
+  worldScoreContainer: {
+    position:       'absolute',
+    left:           0,
+    top:            0,
+    bottom:         0,
+    right:          0,
+    justifyContent: 'center',
+    alignItems:     'center',
   },
   progressBar: {
     position: 'absolute',

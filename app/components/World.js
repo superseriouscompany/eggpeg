@@ -95,7 +95,7 @@ class World extends Component {
       progress={this.state.progress || this.props.progress}
       reset={this.reset}
       continue={this.continue}
-      currentScore={this.props.score}
+      worldDone={this.state.progress == 1}
        />
   )}
 }
@@ -114,15 +114,11 @@ function startingLevelIndex(levels) {
 
 function mapStateToProps(state) {
   return {
-    // TODO: we definitely don't need all of these
-    chamber:      state.chamber,
     levels:       state.worlds.current.levels,
     world:        state.worlds.current,
     level:        state.level,
     score:        state.session.score,
     beat:         state.victory,
-    showTutorial: !state.tutorial.complete,
-    leaderboard:  state.leaderboard,
     scene:        state.scene,
     progress:     state.level.index / state.worlds.current.levels.length,
     hint:         state.level.hint,

@@ -15,7 +15,6 @@ export default class HighScores extends Component {
   static propTypes = {
     isHigh: PropTypes.bool.isRequired,
     score:  PropTypes.number,
-    scores: PropTypes.arrayOf(PropTypes.number).isRequired,
   }
 
   render() {

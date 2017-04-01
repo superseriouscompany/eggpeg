@@ -19,6 +19,17 @@ class Worlds extends Component {
     this.loadLevel = this.loadLevel.bind(this)
   }
 
+  componentDidMount() {
+    if( !this.props.lastScore && false ) { return }
+    this.setState({
+      selectedName: this.props.lastWorld.name,
+    })
+    this.state.expandAnim.setValue(1)
+    Animated.timing(this.state.expandAnim, {
+      toValue: 0, duration: config.timings.worldIn,
+    }).start()
+  }
+
   loadLevel(name) {
     this.setState({
       selectedName: name,
@@ -43,6 +54,8 @@ function mapStateToProps(state) {
     worlds:       state.worlds.all.filter((w) => { return w.name !== 'Demo'}),
     showTutorial: !state.tutorial.complete,
     topScore:     state.worlds.all.reduce((acc, w) => { return acc + (w.score || 0)}, 0),
+    lastScore:    state.session.score,
+    lastWorld:    state.worlds.current,
   }
 }
 

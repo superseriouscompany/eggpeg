@@ -1,6 +1,7 @@
-import React    from 'react'
-import {colors} from '../styles/base'
-import Text     from '../components/Text'
+import React      from 'react'
+import {colors}   from '../styles/base'
+import Text       from '../components/Text'
+import WorldScore from './WorldScore'
 import {
   Animated,
   Image,
@@ -39,6 +40,13 @@ export default function(props) { return(
         <Text style={style.hint}>choose a level</Text>
       }
     </View>
+
+    { props.lastScore || true ?
+      <View style={style.scoreContainer}>
+        <WorldScore animate={false} score={props.lastScore} color={props.lastWorld.deadColor}/>
+      </View>
+    : null }
+
     <View style={style.grid}>
       {props.worlds.map((w, key) => (
         <View key={key} style={[style.worldContainer, w.name === props.selectedName ? style.activeContainer : null]}>
@@ -118,7 +126,6 @@ const style = StyleSheet.create({
     width:           '50%',
     alignItems:     'center',
     justifyContent: 'center',
-
   },
   leftNav: {
     position: 'absolute',
@@ -133,6 +140,17 @@ const style = StyleSheet.create({
   },
   activeContainer: {
     zIndex: 1,
+  },
+  scoreContainer: {
+    justifyContent:  'center',
+    alignItems:      'center',
+    position:        'absolute',
+    top:             0,
+    left:            0,
+    right:           0,
+    bottom:          0,
+    zIndex:          1,
+    backgroundColor: 'transparent',
   },
   topScore: {
     fontSize: 64,
