@@ -16,16 +16,19 @@ class Worlds extends Component {
   constructor(props) {
     super(props)
     this.state = { expandAnim: new Animated.Value(0) }
+    this.loadLevel = this.loadLevel.bind(this)
   }
 
-  componentDidMount() {
+  loadLevel(name) {
     Animated.timing(this.state.expandAnim, {
       toValue: 1, duration: config.timings.worldIn,
-    }).start()
+    }).start(() => {
+      this.props.loadLevel(name)
+    })
   }
 
   render() {
-    return <WorldsView {...this.props} expandAnim={this.state.expandAnim}/>
+    return <WorldsView {...this.props} loadLevel={this.loadLevel} expandAnim={this.state.expandAnim}/>
   }
 }
 
