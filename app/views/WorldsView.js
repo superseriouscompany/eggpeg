@@ -51,9 +51,7 @@ export default function(props) { return(
               <World world={w} />
             </View>
           :
-            <TouchableOpacity onPress={() => props.loadLevel(w.name)}>
-              <World expandAnim={props.expandAnim} world={w} keyIndex={key} />
-            </TouchableOpacity>
+            <World expandAnim={props.expandAnim} world={w} keyIndex={key} onPress={() => props.loadLevel(w.name)}/>
           }
         </View>
       ))}
@@ -63,43 +61,45 @@ export default function(props) { return(
 
 function World(props) {
   return (
-    <View style={[style.world]}>
-      <Animated.View style={[style.preview, props.world.locked || props.world.comingSoon ? null : style.shadow, {
-        backgroundColor: props.world.color,
-      }, props.keyIndex != 0 ? null : {
-        transform: [{
-          scale: props.expandAnim.interpolate({
-            inputRange:  [0, 1],
-            outputRange: [1, 8],
-          })
-        }],
-        zIndex: 1,
-      }]}>
-          { props.world.locked ?
-            <Image source={lockImages[props.world.name]}/>
-          : props.world.comingSoon ?
-            <Text style={style.status}>...</Text>
+    <TouchableWithoutFeedback onPress={props.onPress}>
+      <View style={[style.world]}>
+        <Animated.View style={[style.preview, props.world.locked || props.world.comingSoon ? null : style.shadow, {
+          backgroundColor: props.world.color,
+        }, props.keyIndex != 0 ? null : {
+          transform: [{
+            scale: props.expandAnim.interpolate({
+              inputRange:  [0, 1],
+              outputRange: [1, 8],
+            })
+          }],
+          zIndex: 1,
+        }]}>
+            { props.world.locked ?
+              <Image source={lockImages[props.world.name]}/>
+            : props.world.comingSoon ?
+              <Text style={style.status}>...</Text>
+            :
+              <Animated.Text style={[style.status, props.keyIndex != 0 ? null : {
+                opacity: props.expandAnim.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [1, 0],
+                })
+              }]}>{props.world.name}</Animated.Text>
+            }
+        </Animated.View>
+        <Text style={style.maxScore}>
+          { props.world.comingSoon ?
+            'coming soon'
+          : props.world.locked ?
+            'locked'
+          : props.world.score ?
+            `${props.world.score}/${props.world.maxScore}`
           :
-            <Animated.Text style={[style.status, props.keyIndex != 0 ? null : {
-              opacity: props.expandAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [1, 0],
-              })
-            }]}>{props.world.name}</Animated.Text>
+            `0%`
           }
-      </Animated.View>
-      <Text style={style.maxScore}>
-        { props.world.comingSoon ?
-          'coming soon'
-        : props.world.locked ?
-          'locked'
-        : props.world.score ?
-          `${props.world.score}/${props.world.maxScore}`
-        :
-          `0%`
-        }
-      </Text>
-    </View>
+        </Text>
+      </View>
+    </TouchableWithoutFeedback>
   )
 }
 
