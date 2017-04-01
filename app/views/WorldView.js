@@ -6,6 +6,7 @@ import GameHeader                    from '../components/GameHeader'
 import GameOver                      from '../components/GameOver'
 import ScoreText                     from '../components/ScoreText'
 import Level                         from '../components/Level'
+import ProgressBar                   from './ProgressBar'
 import {colors}                      from '../styles/base'
 import config                        from '../config'
 import {
@@ -36,10 +37,7 @@ export default function(props) {
             <GameHeader />
           }
           <Level done={props.done}/>
-          <Animated.View style={[style.progressBar, {
-            backgroundColor: props.level.deadColor,
-            width:           props.progressAnim,
-          }]} />
+          <ProgressBar style={style.progressBar} progress={props.progress} color={props.level.deadColor}/>
 
           { props.hint ?
             <View style={style.hintContainer}>

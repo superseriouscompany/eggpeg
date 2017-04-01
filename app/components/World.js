@@ -23,20 +23,12 @@ class World extends Component {
     this.endLevel  = this.endLevel.bind(this)
     this.continue  = this.continue.bind(this)
     this.victory   = this.victory.bind(this)
-    this.state     = { progressAnim: new Animated.Value(0) }
+    this.state     = { done: false }
   }
 
   componentWillReceiveProps(props) {
     if( props.level.done && props.level.win && !props.beat ) {
       this.nextLevel()
-    }
-
-    if( props.progress != this.props.progress ) {
-      Animated.spring(this.state.progressAnim, {
-        toValue:  props.progress * width,
-        friction: 4,
-        tension:  40,
-      }).start()
     }
   }
 
@@ -102,7 +94,6 @@ class World extends Component {
       reset={this.reset}
       continue={this.continue}
       currentScore={this.props.score}
-      progressAnim={this.state.progressAnim}
       done={this.state.done}
       {...this.props} />
   )}
