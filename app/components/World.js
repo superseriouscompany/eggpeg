@@ -23,7 +23,7 @@ class World extends Component {
     this.endLevel  = this.endLevel.bind(this)
     this.continue  = this.continue.bind(this)
     this.victory   = this.victory.bind(this)
-    this.state     = { done: false }
+    this.state     = { progress: false }
   }
 
   componentWillReceiveProps(props) {
@@ -57,7 +57,7 @@ class World extends Component {
 
   endLevel() {
     this.setState({
-      done: true,
+      progress: 1,
     })
   }
 
@@ -91,11 +91,12 @@ class World extends Component {
 
   render() { return (
     <WorldView
+      {...this.props}
+      progress={this.state.progress || this.props.progress}
       reset={this.reset}
       continue={this.continue}
       currentScore={this.props.score}
-      done={this.state.done}
-      {...this.props} />
+       />
   )}
 }
 
