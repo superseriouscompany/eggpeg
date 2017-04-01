@@ -1,9 +1,11 @@
-import React      from 'react'
+import React, {Component}      from 'react'
 import {colors}   from '../styles/base'
 import Text       from '../components/Text'
 import WorldScore from './WorldScore'
+import config     from '../config'
 import {
   Animated,
+  Dimensions,
   Image,
   StatusBar,
   StyleSheet,
@@ -21,51 +23,100 @@ const lockImages = {
   '6': require('../images/Lock6.png'),
 }
 
-export default function(props) { return(
-  <View style={style.container}>
-    <StatusBar hidden/>
-    <TouchableOpacity onPress={props.back}>
-      <Text style={style.leftNav}>back</Text>
-    </TouchableOpacity>
+const {width, height} = Dimensions.get('window')
 
-    <View style={style.scoresContainer}>
-      { props.topScore ?
-        <View>
-          <Text style={style.topScore}>{props.topScore}</Text>
-          <TouchableOpacity onPress={props.showLeaderboard}>
-            <Text style={style.leaderboard}>see top scores</Text>
-          </TouchableOpacity>
-        </View>
-      :
-        <Text style={style.hint}>choose a level</Text>
-      }
-    </View>
+export default class WorldsView extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      expandAnim: new Animated.Value(0),
+      scoreAnim:  new Animated.ValueXY(),
+    }
+  }
 
-    { props.lastScore || true ?
-      <View style={style.scoreContainer}>
-        <WorldScore animate={false} score={props.lastScore} color={props.lastWorld.deadColor}/>
-      </View>
-    : null }
+  componentWillReceiveProps(props) {
+    if( !props.animateOut || props.animateOut === this.props.animateOut ) { return; }
+    this.state.expandAnim.setValue(0)
+    Animated.timing(this.state.expandAnim, {
+      toValue: 1, duration: config.timings.worldIn,
+    }).start()
+  }
 
-    <View style={style.grid}>
-      {props.worlds.map((w, key) => (
-        <View key={key} style={[style.worldContainer, w.name === props.selectedName ? style.activeContainer : null]}>
-          { w.comingSoon ?
-            <View style={style.greyedOut}>
-              <World world={w} />
-            </View>
-          : w.locked ?
-            <View style={style.greyedOut}>
-              <World world={w} />
+  componentDidMount() {
+    if( !this.props.animateIn ) { return }
+
+    this.state.expandAnim.setValue(1)
+    setTimeout(() => {
+      this.refs['world-1'].measure((ox, oy, w, h, px, py) => {
+        Animated.timing(this.state.expandAnim, {
+          toValue: 0.0001, duration: config.timings.worldIn,
+        }).start()
+
+        Animated.timing(this.state.scoreAnim, {
+          toValue: {
+            x: px - (width / 2) + (w / 2),
+            y: py - (height / 2) + (h / 2) - 10,
+          }
+        }).start()
+      })
+    })
+  }
+
+  render() {
+    const props = this.props
+    return(
+      <View style={style.container}>
+        <StatusBar hidden/>
+        <TouchableOpacity onPress={props.back}>
+          <Text style={style.leftNav}>back</Text>
+        </TouchableOpacity>
+
+        <View style={style.scoresContainer}>
+          { props.topScore ?
+            <View>
+              <Text style={style.topScore}>{props.topScore}</Text>
+              <TouchableOpacity onPress={props.showLeaderboard}>
+                <Text style={style.leaderboard}>see top scores</Text>
+              </TouchableOpacity>
             </View>
           :
-            <World expandAnim={props.expandAnim} world={w} selectedName={props.selectedName} onPress={() => props.loadLevel(w.name)}/>
+            <Text style={style.hint}>choose a level</Text>
           }
         </View>
-      ))}
-    </View>
-  </View>
-)}
+
+        { props.lastScore ?
+          <Animated.View style={[style.scoreContainer, {
+            transform: [{
+              translateX: this.state.scoreAnim.x,
+            }, {
+              translateY: this.state.scoreAnim.y,
+            }]
+          }]}>
+            <WorldScore animate={false} score={props.lastScore} color={props.lastWorld.deadColor}/>
+          </Animated.View>
+        : null }
+
+        <View style={style.grid}>
+          {props.worlds.map((w, key) => (
+            <View ref={`world-${w.name}`} key={key} style={[style.worldContainer, w.name === props.selectedName ? style.activeContainer : null]}>
+              { w.comingSoon ?
+                <View style={style.greyedOut}>
+                  <World world={w} />
+                </View>
+              : w.locked ?
+                <View style={style.greyedOut}>
+                  <World world={w} />
+                </View>
+              :
+                <World expandAnim={this.state.expandAnim} world={w} selectedName={props.selectedName} onPress={() => props.loadLevel(w.name)}/>
+              }
+            </View>
+          ))}
+        </View>
+      </View>
+    )
+  }
+}
 
 function World(props) {
   const isActivating = props.selectedName && props.selectedName == props.world.name;
@@ -90,8 +141,8 @@ function World(props) {
             :
               <Animated.Text style={[style.status, isActivating ? {
                 opacity: props.expandAnim.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [1, 0],
+                  inputRange: [0, 0.0001, 1],
+                  outputRange: [1, 0, 0],
                 })
               } : null]}>{props.world.name}</Animated.Text>
             }

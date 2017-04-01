@@ -15,37 +15,27 @@ import {
 class Worlds extends Component {
   constructor(props) {
     super(props)
-    this.state = { expandAnim: new Animated.Value(0) }
     this.loadLevel = this.loadLevel.bind(this)
-  }
-
-  componentDidMount() {
-    if( !this.props.lastScore && false ) { return }
-    this.setState({
-      selectedName: this.props.lastWorld.name,
-    })
-    this.state.expandAnim.setValue(1)
-    Animated.timing(this.state.expandAnim, {
-      toValue: 0, duration: config.timings.worldIn,
-    }).start()
+    this.state = {}
   }
 
   loadLevel(name) {
     this.setState({
       selectedName: name,
+      animateOut:   true,
     })
-    Animated.timing(this.state.expandAnim, {
-      toValue: 1, duration: config.timings.worldIn,
-    }).start(() => {
+
+    setTimeout(() => {
       this.props.loadLevel(name)
-    })
+    }, config.timings.worldIn)
   }
 
   render() {
     return <WorldsView {...this.props}
+              animateIn={this.props.lastScore}
+              animateOut={this.state.animateOut}
               loadLevel={this.loadLevel}
-              expandAnim={this.state.expandAnim}
-              selectedName={this.state.selectedName} />
+              selectedName={this.state.selectedName || this.props.lastWorld && this.props.lastWorld.name} />
   }
 }
 

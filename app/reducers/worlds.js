@@ -30,6 +30,11 @@ export default function(state = initialState, action) {
         ...state,
         current: state.all.find((w) => {return w.name == action.name}),
       }
+    case 'worlds:clear':
+      return {
+        ...state,
+        current: null,
+      }
     default:
       return state
   }
