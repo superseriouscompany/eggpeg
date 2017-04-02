@@ -63,7 +63,7 @@ export default class WorldsView extends Component {
           { props.topScore ?
 
             <View>
-              { props.shouldInduct && false ?
+              { props.shouldInduct ?
                 <TouchableOpacity onPress={() => props.induct(props.topScore)}>
                   <Text style={style.topScore}>{props.topScore}</Text>
                   <Text style={style.leaderboard}>
