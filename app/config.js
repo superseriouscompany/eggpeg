@@ -37,7 +37,7 @@ const config = {
     worldOut:              250,
     worldBeatDelay:        2500,
     worldScoreDelay:       1000,
-    worldPulse:            1300,
+    worldPulse:            1750,
     winDelay:              1000,
     targetGhost:           1750,
   },
