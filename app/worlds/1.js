@@ -1,7 +1,7 @@
 import {steps} from './patterns'
 
 module.exports = function(xcenter, ycenter, width, height) {
-  return [
+  const levels = [
     {
       name: 'vibrator',
       max: 5,
@@ -109,5 +109,6 @@ module.exports = function(xcenter, ycenter, width, height) {
         },
       ],
     },
-  ].slice(0,1)
+  ]
+  return __DEV__ ? levels.slice(0,1) : levels
 }

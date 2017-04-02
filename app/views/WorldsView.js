@@ -30,7 +30,6 @@ export default class WorldsView extends Component {
     super(props)
     this.state = {
       expandAnim: new Animated.Value(0),
-      scoreAnim:  new Animated.ValueXY(),
     }
   }
 
@@ -46,20 +45,9 @@ export default class WorldsView extends Component {
     if( !this.props.animateIn ) { return }
 
     this.state.expandAnim.setValue(1)
-    setTimeout(() => {
-      this.refs[`world-${this.props.selectedName}`].measure((ox, oy, w, h, px, py) => {
-        Animated.timing(this.state.expandAnim, {
-          toValue: 0.0001, duration: config.timings.worldIn,
-        }).start()
-
-        Animated.timing(this.state.scoreAnim, {
-          toValue: {
-            x: px - (width / 2) + (w / 2),
-            y: py - (height / 2) + (h / 2) - 10,
-          }
-        }).start()
-      })
-    })
+    Animated.timing(this.state.expandAnim, {
+      toValue: 0, duration: config.timings.worldIn,
+    }).start()
   }
 
   render() {
@@ -84,21 +72,9 @@ export default class WorldsView extends Component {
           }
         </View>
 
-        { props.lastScore ?
-          <Animated.View style={[style.scoreContainer, {
-            transform: [{
-              translateX: this.state.scoreAnim.x,
-            }, {
-              translateY: this.state.scoreAnim.y,
-            }]
-          }]}>
-            <WorldScore animate={false} score={props.lastScore} color={props.lastWorld.deadColor}/>
-          </Animated.View>
-        : null }
-
         <View style={style.grid}>
           {props.worlds.map((w, key) => (
-            <View ref={`world-${w.name}`} key={key} style={[style.worldContainer, w.name === props.selectedName ? style.activeContainer : null]}>
+            <View key={key} style={[style.worldContainer, w.name === props.selectedName ? style.activeContainer : null]}>
               { w.comingSoon ?
                 <View style={style.greyedOut}>
                   <World world={w} />
@@ -139,12 +115,21 @@ function World(props) {
             : props.world.comingSoon ?
               <Text style={style.status}>...</Text>
             :
-              <Animated.Text style={[style.status, isActivating ? {
+              <Animated.View style={[isActivating ? {
                 opacity: props.expandAnim.interpolate({
-                  inputRange: [0, 0.0001, 1],
+                  inputRange:  [0, 0.0001, 1],
                   outputRange: [1, 0, 0],
                 })
-              } : null]}>{props.world.name}</Animated.Text>
+              } : null]}>
+                  { props.world.score || true ?
+                    <View>
+                      <Text style={style.status}>{props.world.score || '---'}</Text>
+                      <Text style={[style.status, style.points]}>pts</Text>
+                    </View>
+                  :
+                    <Text style={[style.status, style.new]}>new!</Text>
+                  }
+              </Animated.View>
             }
         </Animated.View>
         <Text style={style.maxScore}>
@@ -240,9 +225,22 @@ const style = StyleSheet.create({
   number: {
     fontSize: 32,
   },
+  statusContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   status: {
+    textAlign: 'center',
     fontSize: 64,
     color:    'rgba(0,0,0,0.4)',
+  },
+  new: {
+    fontSize: 32,
+  },
+  points: {
+    marginTop: -20,
+    fontSize: 32,
+    backgroundColor: 'transparent',
   },
   maxScore: {
     fontSize: 18,
