@@ -6,6 +6,8 @@ import GameHeader                    from '../components/GameHeader'
 import GameOver                      from '../components/GameOver'
 import ScoreText                     from '../components/ScoreText'
 import Level                         from '../components/Level'
+import ProgressBar                   from './ProgressBar'
+import WorldScore                    from './WorldScore'
 import {colors}                      from '../styles/base'
 import config                        from '../config'
 import {
@@ -32,14 +34,18 @@ export default function(props) {
             <GameOver
               reset={props.reset}
               continue={props.continue} />
-          :
+          : !props.worldDone ?
             <GameHeader />
+          :
+            null
           }
-          <Level />
-          <Animated.View style={[style.progressBar, {
-            backgroundColor: props.level.deadColor,
-            width:           props.progressAnim,
-          }]} />
+          { props.worldDone ?
+            <View style={[style.worldScoreContainer]}>
+              <WorldScore animate={true} score={props.score || 'nope'} color={props.level.deadColor}/>
+            </View>
+          : null}
+          <Level done={props.worldDone}/>
+          <ProgressBar style={style.progressBar} progress={props.progress} color={props.level.deadColor}/>
 
           { props.hint ?
             <View style={style.hintContainer}>
@@ -58,6 +64,15 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.purple,
+  },
+  worldScoreContainer: {
+    position:       'absolute',
+    left:           0,
+    top:            0,
+    bottom:         0,
+    right:          0,
+    justifyContent: 'center',
+    alignItems:     'center',
   },
   progressBar: {
     position: 'absolute',

@@ -52,7 +52,9 @@ class Stage extends Component {
         })
         this.state.dropAnim.setValue(0)
         Animated.timing(this.state.dropAnim, {
-          duration: config.timings.sceneDropIn, toValue: 1,
+          duration: config.timings.sceneDropIn,
+          toValue: 1,
+          easing: Easing.quad
         }).start(() => {
           this.setState({
             scene: props.scene,
@@ -66,7 +68,9 @@ class Stage extends Component {
         })
         this.state.backAnim.setValue(0)
         Animated.timing(this.state.backAnim, {
-          duration: config.timings.sceneRiseOut, toValue: 1,
+          duration: config.timings.sceneRiseOut,
+          toValue: 1,
+          easing: Easing.quad
         }).start(() => {
           this.setState({
             nextScene: null,

@@ -1,11 +1,16 @@
-import React    from 'react'
-import {colors} from '../styles/base'
-import Text     from '../components/Text'
+import React, {Component}      from 'react'
+import {colors}   from '../styles/base'
+import Text       from '../components/Text'
+import WorldScore from './WorldScore'
+import config     from '../config'
 import {
+  Animated,
+  Dimensions,
   Image,
   StatusBar,
   StyleSheet,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 
@@ -18,71 +23,128 @@ const lockImages = {
   '6': require('../images/Lock6.png'),
 }
 
-export default function(props) { return(
-  <View style={style.container}>
-    <StatusBar hidden/>
-    <TouchableOpacity onPress={props.back}>
-      <Text style={style.leftNav}>back</Text>
-    </TouchableOpacity>
+const {width, height} = Dimensions.get('window')
 
-    <View style={style.scoresContainer}>
-      { props.topScore ?
-        <View>
-          <Text style={style.topScore}>{props.topScore}</Text>
-          <TouchableOpacity onPress={props.showLeaderboard}>
-            <Text style={style.leaderboard}>see top scores</Text>
-          </TouchableOpacity>
-        </View>
-      :
-        <Text style={style.hint}>choose a level</Text>
-      }
-    </View>
-    <View style={style.grid}>
-      {props.worlds.map((w, key) => (
-        <View key={key} style={style.worldContainer}>
-          { w.comingSoon ?
-            <View style={style.greyedOut}>
-              <World world={w} key={key} />
-            </View>
-          : w.locked ?
-            <View style={style.greyedOut}>
-              <World world={w} key={key} />
+export default class WorldsView extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      expandAnim: new Animated.Value(0),
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    if( !props.animateOut || props.animateOut === this.props.animateOut ) { return; }
+    this.state.expandAnim.setValue(0)
+    Animated.timing(this.state.expandAnim, {
+      toValue: 1, duration: config.timings.worldIn,
+    }).start()
+  }
+
+  componentDidMount() {
+    if( !this.props.animateIn ) { return }
+
+    this.state.expandAnim.setValue(1)
+    Animated.timing(this.state.expandAnim, {
+      toValue: 0, duration: config.timings.worldIn,
+    }).start()
+  }
+
+  render() {
+    const props = this.props
+    return(
+      <View style={style.container}>
+        <StatusBar hidden/>
+        <TouchableOpacity onPress={props.back}>
+          <Text style={style.leftNav}>back</Text>
+        </TouchableOpacity>
+
+        <View style={style.scoresContainer}>
+          { props.topScore ?
+            <View>
+              <Text style={style.topScore}>{props.topScore}</Text>
+              <TouchableOpacity onPress={props.showLeaderboard}>
+                <Text style={style.leaderboard}>see top scores</Text>
+              </TouchableOpacity>
             </View>
           :
-            <TouchableOpacity onPress={() => props.loadLevel(w.name)}>
-              <World world={w} key={key} />
-            </TouchableOpacity>
+            <Text style={style.hint}>choose a level</Text>
           }
         </View>
-      ))}
-    </View>
-  </View>
-)}
+
+        <View style={style.grid}>
+          {props.worlds.map((w, key) => (
+            <View key={key} style={[style.worldContainer, w.name === props.selectedName ? style.activeContainer : null]}>
+              { w.comingSoon ?
+                <View style={style.greyedOut}>
+                  <World world={w} />
+                </View>
+              : w.locked ?
+                <View style={style.greyedOut}>
+                  <World world={w} />
+                </View>
+              :
+                <World expandAnim={this.state.expandAnim} world={w} selectedName={props.selectedName} onPress={() => props.loadLevel(w.name)}/>
+              }
+            </View>
+          ))}
+        </View>
+      </View>
+    )
+  }
+}
 
 function World(props) {
+  const isActivating = props.selectedName && props.selectedName == props.world.name;
   return (
-    <View style={style.world}>
-      <View style={[style.preview, props.world.locked || props.world.comingSoon ? null : style.shadow, {
-        backgroundColor: props.world.color,
-      }]}>
-          { props.world.locked ?
-            <Image source={lockImages[props.world.name]}/>
-          : props.world.comingSoon ?
-            <Text style={style.status}>...</Text>
-          : <Text style={style.status}>{props.world.name}</Text>}
+    <TouchableWithoutFeedback onPress={props.onPress}>
+      <View style={[style.world]}>
+        <Animated.View style={[style.preview, props.world.locked || props.world.comingSoon ? null : style.shadow, {
+          backgroundColor: props.world.color,
+        }, isActivating ? {
+          transform: [{
+            scale: props.expandAnim.interpolate({
+              inputRange:  [0, 1],
+              outputRange: [1, 8],
+            })
+          }],
+          zIndex: 1,
+        } : null]}>
+            { props.world.locked ?
+              <Image source={lockImages[props.world.name]}/>
+            : props.world.comingSoon ?
+              <Text style={style.status}>...</Text>
+            :
+              <Animated.View style={[isActivating ? {
+                opacity: props.expandAnim.interpolate({
+                  inputRange:  [0, 0.0001, 1],
+                  outputRange: [1, 0, 0],
+                })
+              } : null]}>
+                  { props.world.score || true ?
+                    <View>
+                      <Text style={style.status}>{props.world.score || '---'}</Text>
+                      <Text style={[style.status, style.points]}>pts</Text>
+                    </View>
+                  :
+                    <Text style={[style.status, style.new]}>new!</Text>
+                  }
+              </Animated.View>
+            }
+        </Animated.View>
+        <Text style={style.maxScore}>
+          { props.world.comingSoon ?
+            'coming soon'
+          : props.world.locked ?
+            'locked'
+          : props.world.score ?
+            `${props.world.score}/${props.world.maxScore}`
+          :
+            `0%`
+          }
+        </Text>
       </View>
-      <Text style={style.maxScore}>
-        { props.world.comingSoon ?
-          'coming soon'
-        : props.world.locked ?
-          'locked'
-        : props.world.score ?
-          `${props.world.score}/${props.world.maxScore}`
-        :
-          `0%`
-        }
-      </Text>
-    </View>
+    </TouchableWithoutFeedback>
   )
 }
 
@@ -100,7 +162,6 @@ const style = StyleSheet.create({
     width:           '50%',
     alignItems:     'center',
     justifyContent: 'center',
-
   },
   leftNav: {
     position: 'absolute',
@@ -112,6 +173,20 @@ const style = StyleSheet.create({
     alignItems:     'center',
     marginTop: 40,
     paddingBottom: 20,
+  },
+  activeContainer: {
+    zIndex: 1,
+  },
+  scoreContainer: {
+    justifyContent:  'center',
+    alignItems:      'center',
+    position:        'absolute',
+    top:             0,
+    left:            0,
+    right:           0,
+    bottom:          0,
+    zIndex:          1,
+    backgroundColor: 'transparent',
   },
   topScore: {
     fontSize: 64,
@@ -150,9 +225,22 @@ const style = StyleSheet.create({
   number: {
     fontSize: 32,
   },
+  statusContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   status: {
+    textAlign: 'center',
     fontSize: 64,
     color:    'rgba(0,0,0,0.4)',
+  },
+  new: {
+    fontSize: 32,
+  },
+  points: {
+    marginTop: -20,
+    fontSize: 32,
+    backgroundColor: 'transparent',
   },
   maxScore: {
     fontSize: 18,

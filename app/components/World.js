@@ -20,21 +20,15 @@ class World extends Component {
     this.reset     = this.reset.bind(this)
     this.nextLevel = this.nextLevel.bind(this)
     this.loadLevel = this.loadLevel.bind(this)
+    this.endLevel  = this.endLevel.bind(this)
     this.continue  = this.continue.bind(this)
-    this.state = { progressAnim: new Animated.Value(0) }
+    this.victory   = this.victory.bind(this)
+    this.state     = { progress: false }
   }
 
   componentWillReceiveProps(props) {
     if( props.level.done && props.level.win && !props.beat ) {
       this.nextLevel()
-    }
-
-    if( props.progress != this.props.progress ) {
-      Animated.spring(this.state.progressAnim, {
-        toValue:  props.progress * width,
-        friction: 4,
-        tension:  40,
-      }).start()
     }
   }
 
@@ -52,12 +46,19 @@ class World extends Component {
     for( var i = 0; i < this.props.levels.length; i++ ) {
       if( this.props.levels[i].name == this.props.level.name ) {
         if( i == this.props.levels.length - 1 ) {
-          return this.victory()
+          this.endLevel()
+          setTimeout(this.victory, config.timings.worldBeatDelay)
         } else {
           return this.loadLevel(this.props.levels[i+1])
         }
       }
     }
+  }
+
+  endLevel() {
+    this.setState({
+      progress: 1,
+    })
   }
 
   victory() {
@@ -90,11 +91,12 @@ class World extends Component {
 
   render() { return (
     <WorldView
+      {...this.props}
+      progress={this.state.progress || this.props.progress}
       reset={this.reset}
       continue={this.continue}
-      currentScore={this.props.score}
-      progressAnim={this.state.progressAnim}
-      {...this.props} />
+      worldDone={this.state.progress == 1}
+       />
   )}
 }
 
@@ -112,15 +114,11 @@ function startingLevelIndex(levels) {
 
 function mapStateToProps(state) {
   return {
-    // TODO: we definitely don't need all of these
-    chamber:      state.chamber,
     levels:       state.worlds.current.levels,
     world:        state.worlds.current,
     level:        state.level,
     score:        state.session.score,
     beat:         state.victory,
-    showTutorial: !state.tutorial.complete,
-    leaderboard:  state.leaderboard,
     scene:        state.scene,
     progress:     state.level.index / state.worlds.current.levels.length,
     hint:         state.level.hint,
