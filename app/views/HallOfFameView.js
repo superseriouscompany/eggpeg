@@ -21,7 +21,6 @@ export default class HallOfFameView extends Component {
   render() {
     const props = this.props
     const y = (props.scorePosition && Math.max(0, props.scorePosition - 3) * 83.5) || 0
-    console.warn('rendering with', props.scores.length, +new Date)
   return (
     <View style={style.container}>
       <StatusBar hidden/>

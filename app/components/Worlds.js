@@ -52,7 +52,7 @@ function mapStateToProps(state) {
       }
     }
   }
-
+  shouldInduct = true;
   return {
     worlds:       state.worlds.all.filter((w) => { return w.name !== 'Demo'}),
     showTutorial: !state.tutorial.complete,
