@@ -63,9 +63,15 @@ export default class WorldsView extends Component {
           { props.topScore ?
             <View>
               <Text style={style.topScore}>{props.topScore}</Text>
-              <TouchableOpacity onPress={props.showLeaderboard}>
-                <Text style={style.leaderboard}>see top scores</Text>
-              </TouchableOpacity>
+              { true ?
+                <TouchableOpacity onPress={() => props.induct(props.topScore)}>
+                  <Text style={style.leaderboard}>You're in the Hall of Fame! Enter your name.</Text>
+                </TouchableOpacity>
+              :
+                <TouchableOpacity onPress={props.showLeaderboard}>
+                  <Text style={style.leaderboard}>see top scores</Text>
+                </TouchableOpacity>
+              }
             </View>
           :
             <Text style={style.hint}>choose a level</Text>

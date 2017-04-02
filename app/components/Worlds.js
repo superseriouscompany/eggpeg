@@ -61,6 +61,9 @@ function mapDispatchToProps(dispatch) {
     back: () => {
       dispatch({type: 'scene:change', scene: 'Start' })
     },
+    induct: (score) => {
+      dispatch({type: 'scene:change', scene: 'HallOfFame', animation: 'dropIn', props: { induction: true, score: score }})
+    }
   }
 }
 
