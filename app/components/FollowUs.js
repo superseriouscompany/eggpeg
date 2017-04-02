@@ -27,7 +27,7 @@ class FollowUs extends Component {
 
       <View style={style.header}>
         <TouchableOpacity style={style.leftNav} onPress={this.back}>
-          <Text style={{fontStyle: 'italic'}}>esc</Text>
+          <Text style={{fontStyle: 'italic'}}>back</Text>
         </TouchableOpacity>
       </View>
       <View style={style.main}>
@@ -66,10 +66,7 @@ const style = StyleSheet.create({
     justifyContent: 'space-between',
   },
   leftNav: {
-    width: 55,
     padding: 20,
-    paddingTop: 20,
-    paddingRight: 0
   },
   main: {
     marginTop: -60,
