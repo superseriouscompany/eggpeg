@@ -89,58 +89,84 @@ export default class WorldsView extends Component {
   }
 }
 
-function World(props) {
-  const isActivating = props.selectedName && props.selectedName == props.world.name;
-  return (
-    <TouchableWithoutFeedback onPress={props.onPress}>
-      <View style={[style.world, props.world.locked || props.world.comingSoon ? style.greyedOut : null]}>
-        <Animated.View style={[style.preview, props.world.locked || props.world.comingSoon ? null : style.shadow, {
-          backgroundColor: props.world.color,
-        }, isActivating ? {
-          transform: [{
-            scale: props.expandAnim.interpolate({
-              inputRange:  [0, 1],
-              outputRange: [1, 8],
-            })
-          }],
-          zIndex: 1,
-        } : null]}>
-            { props.world.locked ?
-              <Image source={lockImages[props.world.name]}/>
-            : props.world.comingSoon ?
-              <Text style={style.status}>...</Text>
+class World extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {pulse: new Animated.Value(0)}
+    this.pulse = this.pulse.bind(this)
+  }
+
+  componentDidMount() {
+    if( !this.props.world.score && !this.props.world.locked && !this.props.world.comingSoon ) {
+      this.pulse()
+    }
+  }
+
+  pulse() {
+    this.state.pulse.setValue(0)
+    Animated.timing(this.state.pulse, {
+      toValue:  1,
+      duration: config.timings.worldPulse,
+    }).start(this.pulse)
+  }
+
+  render() {
+    const props = this.props
+    const isActivating = props.selectedName && props.selectedName == props.world.name;
+    return (
+      <TouchableWithoutFeedback onPress={props.onPress}>
+        <View style={[style.world, props.world.locked || props.world.comingSoon ? style.greyedOut : null]}>
+          <Animated.View style={[style.preview, props.world.locked || props.world.comingSoon ? null : style.shadow, {
+            backgroundColor: this.state.pulse.interpolate({
+              inputRange: [0, 0.5, 1],
+              outputRange: [props.world.color, props.world.deadColor || colors.grey, props.world.color]
+            }),
+          }, isActivating ? {
+            transform: [{
+              scale: props.expandAnim.interpolate({
+                inputRange:  [0, 1],
+                outputRange: [1, 8],
+              })
+            }],
+            zIndex: 1,
+          } : null]}>
+              { props.world.locked ?
+                <Image source={lockImages[props.world.name]}/>
+              : props.world.comingSoon ?
+                <Text style={style.status}>...</Text>
+              :
+                <Animated.View style={[isActivating ? {
+                  opacity: props.expandAnim.interpolate({
+                    inputRange:  [0, 0.0001, 1],
+                    outputRange: [1, 0, 0],
+                  })
+                } : null]}>
+                    { props.world.score ?
+                      <View>
+                        <Text style={style.status}>{props.world.score || '---'}</Text>
+                        <Text style={[style.status, style.points]}>pts</Text>
+                      </View>
+                    :
+                      <Text style={[style.status, {fontSize: 32}]}>{props.world.name}</Text>
+                    }
+                </Animated.View>
+              }
+          </Animated.View>
+          <Text style={style.maxScore}>
+            { props.world.comingSoon ?
+              'coming soon'
+            : props.world.locked ?
+              'locked'
+            : props.world.score ?
+              `${props.world.score}/${props.world.maxScore}`
             :
-              <Animated.View style={[isActivating ? {
-                opacity: props.expandAnim.interpolate({
-                  inputRange:  [0, 0.0001, 1],
-                  outputRange: [1, 0, 0],
-                })
-              } : null]}>
-                  { props.world.score ?
-                    <View>
-                      <Text style={style.status}>{props.world.score || '---'}</Text>
-                      <Text style={[style.status, style.points]}>pts</Text>
-                    </View>
-                  :
-                    <Text style={[style.status, {fontSize: 32}]}>{props.world.name}</Text>
-                  }
-              </Animated.View>
+              `0%`
             }
-        </Animated.View>
-        <Text style={style.maxScore}>
-          { props.world.comingSoon ?
-            'coming soon'
-          : props.world.locked ?
-            'locked'
-          : props.world.score ?
-            `${props.world.score}/${props.world.maxScore}`
-          :
-            `0%`
-          }
-        </Text>
-      </View>
-    </TouchableWithoutFeedback>
-  )
+          </Text>
+        </View>
+      </TouchableWithoutFeedback>
+    )
+  }
 }
 
 const style = StyleSheet.create({
