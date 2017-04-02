@@ -15,10 +15,10 @@ class LeaderboardProvider extends Component {
 
   componentDidMount() {
     NetInfo.isConnected.addEventListener('change', this.handleConnectionChange);
-    this.props.dispatch(loadScores()).catch((err) => {
-      console.warn("Couldn't load leaderboard. You might be offline?", err);
-      this.props.dispatch(enqueueRetry({type: 'loadScores'}));
-    })
+    // this.props.dispatch(loadScores()).catch((err) => {
+    //   console.warn("Couldn't load leaderboard. You might be offline?", err);
+    //   this.props.dispatch(enqueueRetry({type: 'loadScores'}));
+    // })
   }
 
   componentWillUnmount() {

@@ -1,11 +1,11 @@
 'use strict';
 
-import React                  from 'react'
-import Component              from './Component'
-import HallOfFameView         from '../views/HallOfFameView'
-import {connect}              from 'react-redux'
-import {enqueueRetry}         from '../actions/retry'
-import {postScore, stubScore} from '../actions/leaderboard'
+import React                              from 'react'
+import Component                          from './Component'
+import HallOfFameView                     from '../views/HallOfFameView'
+import {connect}                          from 'react-redux'
+import {enqueueRetry}                     from '../actions/retry'
+import {postScore, stubScore, loadScores} from '../actions/leaderboard'
 import {
   Platform,
   Share,
@@ -108,7 +108,10 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch: dispatch,
-    back: () => dispatch({type: 'scene:pop', animation: 'riseOut'})
+    back: () => dispatch({type: 'scene:pop', animation: 'riseOut'}),
+    retry: () => {
+      dispatch(loadScores())
+    },
   }
 }
 

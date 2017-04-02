@@ -36,6 +36,12 @@ export default class HallOfFameView extends Component {
           <Text style={[props.textStyle, {fontStyle: 'italic', textAlign: 'right'}]}>invite</Text>
         </TouchableOpacity>
       </View>
+      { !props.scores || !props.scores.length ?
+        <TouchableOpacity onPress={props.retry}>
+          <Text>Load leaderboard.</Text>
+        </TouchableOpacity>
+      : null }
+
       <ScrollView ref="scrollView"
                   onContentSizeChange={(width, height) => !this.props.animating && this.refs.scrollView.scrollTo({y: y})}
                   style={style.leaderboard}>
