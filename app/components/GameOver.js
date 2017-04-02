@@ -95,6 +95,10 @@ function mapDispatchToProps(dispatch) {
     resume: () => {
       dispatch({type: 'worlds:resume'})
     },
+
+    continue: () => {
+      dispatch({type: 'level:continue'})
+    },
   }
 }
 
