@@ -42,7 +42,7 @@ export default class HallOfFameView extends Component {
         {(props.scores || []).map((s, key) => (
           <View key={key}>
             { s.name ?
-              <Score place={key+1} name={s.name} score={s.score} color={color(key)}/>
+              <Score place={key+1} name={s.name} mine={s.score == props.myScore.score && s.name == props.myScore.name } score={s.score} color={color(key)}/>
             :
               <View style={[style.scoreContainer, style.scoreInputContainer, {
                 backgroundColor: color(key),
@@ -70,9 +70,12 @@ export default class HallOfFameView extends Component {
 
 function Score(props) {
   return (
-    <View style={[style.scoreContainer, {backgroundColor: props.color}]}>
+    <View style={[style.scoreContainer, {backgroundColor: props.color}, props.mine ? style.mine : null]}>
       <Text style={style.place}>{props.place}</Text>
-      <Text style={style.name} adjustsFontSizeToFit={true} numberOfLines={1}>{props.name}</Text>
+      <Text style={style.name} adjustsFontSizeToFit={true} numberOfLines={1}>
+        {props.mine ? 'ME' : ''}
+        {props.name}
+      </Text>
       <Text style={style.score}>{props.score}</Text>
     </View>
   )
@@ -156,6 +159,9 @@ const style = StyleSheet.create({
   score: {
     fontSize: 32,
     color: 'white',
+  },
+  mine: {
+    backgroundColor: 'hotpink',
   },
   leftNav: {
     width: 120,

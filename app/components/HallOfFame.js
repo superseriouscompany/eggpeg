@@ -34,6 +34,7 @@ class HallOfFame extends Component {
     if( this.state.inserted ) { return console.warn('Already inserted score'); }
     let state = {
       scores: [].concat(props.scores),
+      score: props.score,
     }
     if( props.induction ) {
       state.scorePosition = insertScore(props.score, state.scores)
@@ -54,7 +55,10 @@ class HallOfFame extends Component {
       this.props.dispatch(stubScore(this.props.score, this.state.name))
       this.props.dispatch(enqueueRetry({type: 'postScore', score: this.props.score, name: this.state.name}))
     }).then(() => {
-      this.props.dispatch({type: 'scene:change', scene: 'Worlds'})
+      this.props.dispatch({type: 'score:record', top: this.props.score, name: this.state.name })
+      this.props.back()
+    }).catch((err) => {
+      alert(err.message || JSON.stringify(err))
     })
   }
 
@@ -92,7 +96,13 @@ class HallOfFame extends Component {
 }
 
 function mapStateToProps(state) {
+  const myScore = state.score.top ? {
+    score: state.score.top,
+    name:  state.score.name,
+  } : {};
+
   return {
+    myScore:   myScore,
     scores:    state.leaderboard.scores,
     shareLink: state.shareLink,
   }
@@ -100,6 +110,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    dispatch: dispatch,
     back: () => dispatch({type: 'scene:pop', animation: 'riseOut'})
   }
 }
