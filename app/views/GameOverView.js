@@ -24,7 +24,7 @@ export default function(props) { return (
       { props.score > props.worldScore ?
         <RainbowBar />
       : null }
-      <Text style={style.score}>{props.score}!</Text>
+      <Text style={style.score}>{props.score}{props.paused ? '' : '!'}</Text>
       { props.score < props.worldScore ?
         <View style={{flexDirection: 'row'}}>
           <Image style={{marginRight: 6}} source={require('../images/Trophy.png')}/>
@@ -64,8 +64,8 @@ export default function(props) { return (
         <Image source={require('../images/ReplayIcon.png')}/>
       </TouchableOpacity>
       { props.paused ?
-        <TouchableOpacity style={[style.button, style.continueButton]} onPress={this.pay}>
-          <Text style={style.buttonText}>continue</Text>
+        <TouchableOpacity style={[style.button, style.continueButton]} onPress={props.resume}>
+          <Text style={style.buttonText}>resume</Text>
         </TouchableOpacity>
       :
         <PayButton style={[style.button, style.continueButton]} textStyle={style.buttonText} continue={props.continue} />

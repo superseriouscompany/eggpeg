@@ -54,9 +54,6 @@ export default function(props) {
           <View style={style.pauseContainer}>
             <TouchableOpacity onPress={props.pause}>
               <Text>||</Text>
-              { props.world.paused ?
-                <Text>paused</Text>
-              : null }
             </TouchableOpacity>
           </View>
           <ProgressBar style={style.progressBar} progress={props.progress} color={props.level.deadColor}/>
