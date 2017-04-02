@@ -19,7 +19,6 @@ import {
 } from 'react-native';
 
 export default function(props) {
-  console.log('score', props.score)
   return (
     <View style={style.container}>
       <StatusBar hidden/>

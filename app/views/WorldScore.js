@@ -3,6 +3,7 @@
 import React     from 'react'
 import Component from '../components/Component'
 import Text      from '../components/Text'
+import config    from '../config'
 import {
   Animated,
   StyleSheet,
@@ -23,7 +24,7 @@ export default class WorldScore extends Component {
         friction: 3,
         tension: 40,
       }).start()
-    }, 1000)
+    }, config.worldScoreDelay)
   }
 
   render() { return (
