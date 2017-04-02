@@ -40,12 +40,25 @@ class Worlds extends Component {
 }
 
 function mapStateToProps(state) {
+  const topScore = state.worlds.all.reduce((acc, w) => { return acc + (w.score || 0)}, 0)
+  const {scores}   = state.leaderboard
+
+  let shouldInduct = false;
+  if( scores.length && !state.score.top || topScore > state.score.top ) {
+    for( var i = 0; i < scores.length; i++ ) {
+      if( scores[i].score < topScore ) {
+        shouldInduct = true;
+        break;
+      }
+    }
+  }
   return {
     worlds:       state.worlds.all.filter((w) => { return w.name !== 'Demo'}),
     showTutorial: !state.tutorial.complete,
-    topScore:     state.worlds.all.reduce((acc, w) => { return acc + (w.score || 0)}, 0),
     lastScore:    state.session.score,
     lastWorld:    state.worlds.current,
+    topScore:     topScore,
+    shouldInduct: shouldInduct,
   }
 }
 
@@ -61,6 +74,9 @@ function mapDispatchToProps(dispatch) {
     back: () => {
       dispatch({type: 'scene:change', scene: 'Start' })
     },
+    induct: (score) => {
+      dispatch({type: 'scene:change', scene: 'HallOfFame', animation: 'dropIn', props: { induction: true, score: score }})
+    }
   }
 }
 

@@ -18,6 +18,7 @@ import level       from './level'
 import purchase    from './purchase'
 import retry       from './retry'
 import scene       from './scene'
+import score       from './score'
 import session     from './session'
 import shareLink   from './shareLink'
 import targets     from './targets'
@@ -33,6 +34,7 @@ const reducers = combineReducers({
   level,
   purchase,
   scene,
+  score,
   session,
   shareLink,
   retry,
@@ -81,6 +83,7 @@ const persistence = persistStore(store, {storage: AsyncStorage, whitelist: [
   'shareLink',
   'tutorial',
   'worlds',
+  'score',
 ]})
 
 export default store
