@@ -9,6 +9,7 @@ class DevProvider extends Component {
 
     if( config.startingLevel ) {
       const world = worldForLevel(config.startingLevel)
+      if( !world ) { console.error("Couldn't find world for level", config.startingLevel)}
       this.props.dispatch({type: 'worlds:select', name: world.name})
       this.props.dispatch({type: 'scene:change', scene: 'World'})
     }
@@ -20,7 +21,7 @@ class DevProvider extends Component {
 function worldForLevel(levelName) {
   return worlds.find((w) => {
     return !!w.levels.find((l) => {
-      return l.name === levelName
+      return l.name.toLowerCase() === levelName.toLowerCase()
     })
   })
 }

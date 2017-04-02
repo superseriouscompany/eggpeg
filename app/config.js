@@ -2,7 +2,7 @@ const DeviceInfo = require('react-native-device-info')
 
 const config = {
   startingScene: __DEV__ ? 'Start' : 'Start',
-  startingLevel: __DEV__ ? null : null,
+  startingLevel: __DEV__ ? 'superfast' : null,
   skipDemo:      __DEV__ ? false : false,
   bullet: {
     delay:  2800,

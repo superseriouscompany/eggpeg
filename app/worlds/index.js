@@ -56,7 +56,7 @@ export default worlds.map((w) => {
           p.x = Math.max(radius, p.x);
           p.x = Math.min(width - radius, p.x);
           p.y = Math.max(50 + radius, p.y);
-          p.y = Math.min(height - radius, p.y)
+          p.y = Math.min(height - radius - 50, p.y)
           return p
         })
         return t
