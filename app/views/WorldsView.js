@@ -167,10 +167,12 @@ class World extends Component {
               'coming soon'
             : props.world.locked ?
               'locked'
-            : props.world.score ?
+            : !props.world.percentage ?
+              '0%'
+            : props.world.percentage === 1 ?
               `${props.world.score}/${props.world.maxScore}`
             :
-              `0%`
+              `${Math.round(props.world.percentage*100)}%`
             }
           </Text>
         </View>

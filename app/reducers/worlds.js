@@ -25,6 +25,11 @@ export default function(state = initialState, action) {
         ...state,
         all: score(state, action.score),
       }
+    case 'level:load':
+      return {
+        ...state,
+        all: reachLevel(state, action.level.index),
+      }
     case 'worlds:pause':
       return {
         ...state,
@@ -69,10 +74,22 @@ function score(state, score, beaten) {
   return state.all.map((w) => {
     if( w.name == state.current.name && w.name !== 'Demo') {
       w.beaten = beaten
+      if( beaten ) { w.percentage = 1; }
       if( isNaN(score) ) {
         console.error(`${score} is not a number`)
       }
       w.score = Math.max(score, w.score || 0)
+    }
+    return w
+  })
+}
+
+function reachLevel(state, index) {
+  return state.all.map((w) => {
+    if( w.name == state.current.name ) {
+      console.log('figuring out', index, w.levels.length)
+      const percentage = index / w.levels.length
+      w.percentage = Math.max(w.percentage || 0, percentage)
     }
     return w
   })
