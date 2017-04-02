@@ -15,6 +15,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -45,6 +46,14 @@ export default function(props) {
             </View>
           : null}
           <Level done={props.worldDone}/>
+          <View style={style.pauseContainer}>
+            <TouchableOpacity onPress={props.pause}>
+              <Text>||</Text>
+              { props.world.paused ?
+                <Text>paused</Text>
+              : null }
+            </TouchableOpacity>
+          </View>
           <ProgressBar style={style.progressBar} progress={props.progress} color={props.level.deadColor}/>
 
           { props.hint ?
@@ -90,5 +99,10 @@ const style = StyleSheet.create({
   hint: {
     fontSize: 16,
     marginBottom: 20,
+  },
+  pauseContainer: {
+    position: 'absolute',
+    left: 10,
+    bottom: 15,
   },
 })

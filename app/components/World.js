@@ -125,4 +125,11 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(World);
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch: dispatch,
+    pause:    () => dispatch({type: 'worlds:pause'}),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(World);
