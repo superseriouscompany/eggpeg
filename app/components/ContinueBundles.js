@@ -25,7 +25,7 @@ class ContinueBundles extends Component {
       productIds.forEach((pid) => {
         this.processPurchase(pid)
       })
-      alert('Restored purchases.')
+      alert(`Restored ${productIds.length} purchases.`)
     })
   }
 
@@ -78,7 +78,7 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatch: dispatch,
     back: () => {
-      this.props.dispatch({type: 'scene:pop'})
+      dispatch({type: 'scene:pop'})
     },
   }
 }
