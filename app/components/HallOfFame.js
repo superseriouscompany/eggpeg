@@ -102,6 +102,7 @@ function mapStateToProps(state) {
     myScore:   myScore,
     scores:    state.leaderboard.scores,
     shareLink: state.shareLink,
+    loading:   state.leaderboard.loading,
   }
 }
 

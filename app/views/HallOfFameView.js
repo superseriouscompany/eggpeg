@@ -6,6 +6,7 @@ import Text      from '../components/Text'
 import {
   Image,
   Platform,
+  RefreshControl,
   ScrollView,
   Share,
   StatusBar,
@@ -20,7 +21,7 @@ export default class HallOfFameView extends Component {
   render() {
     const props = this.props
     const y = (props.scorePosition && Math.max(0, props.scorePosition - 3) * 83.5) || 0
-
+    console.warn('rendering with', props.scores.length, +new Date)
   return (
     <View style={style.container}>
       <StatusBar hidden/>
@@ -36,15 +37,26 @@ export default class HallOfFameView extends Component {
           <Text style={[props.textStyle, {fontStyle: 'italic', textAlign: 'right'}]}>invite</Text>
         </TouchableOpacity>
       </View>
-      { !props.scores || !props.scores.length ?
-        <TouchableOpacity onPress={props.retry}>
-          <Text>Load leaderboard.</Text>
-        </TouchableOpacity>
-      : null }
 
       <ScrollView ref="scrollView"
                   onContentSizeChange={(width, height) => !this.props.animating && this.refs.scrollView.scrollTo({y: y})}
-                  style={style.leaderboard}>
+                  style={style.leaderboard}
+                  refreshControl={
+                    <RefreshControl
+                      tintColor={'hotpink'}
+                      refreshing={props.loading || false}
+                      onRefresh={props.retry} />}>
+
+        { !props.scores || !props.scores.length ?
+          <Text>
+            { props.loading ?
+              'Loading scores...'
+            :
+              'Scores didn\'t load. Pull to try again.'
+            }
+          </Text>
+        : null }
+
         {(props.scores || []).map((s, key) => (
           <View key={key}>
             { s.name ?

@@ -106,7 +106,7 @@ class Stage extends Component {
                 outputRange: [0, 1],
               }),
             }]}>
-              { this.showScene(this.state.nextScene) }
+              { this.showScene(this.state.nextScene, {animating: true}) }
             </Animated.View>
           : this.props.scene.animation === 'dropIn' ?
             <Animated.View style={[style.container, {

@@ -4,8 +4,12 @@ import api from './api'
 
 export function loadScores() {
   return function(dispatch) {
+    dispatch({type: 'leaderboard:loading'})
     return api.get('/leaderboard').then((json) => {
       dispatch({type: 'leaderboard:load', scores: json.scores })
+    }).catch((err) => {
+      dispatch({type: 'leaderboard:load:failed', err: err})
+      throw err;
     })
   }
 }

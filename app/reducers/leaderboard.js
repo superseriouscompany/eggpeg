@@ -2,10 +2,22 @@ const initialState = {scores: []}
 
 export default function(state=initialState, action) {
   switch(action.type) {
+    case 'leaderboard:loading':
+      return {
+        ...state,
+        loading: true,
+      }
     case 'leaderboard:load':
       return {
         ...state,
         scores: action.scores,
+        loading: false,
+      }
+    case 'leaderboard:load:failed':
+      return {
+        ...state,
+        loading: false,
+        err:     action.err,
       }
     case 'leaderboard:insert':
       return {
