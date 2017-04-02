@@ -21,7 +21,7 @@ export default class WorldScore extends Component {
     setTimeout(() => {
       Animated.spring(this.state.anim, {
         toValue: 1,
-        friction: 3,
+        friction: 3.5,
         tension: 40,
       }).start()
     }, config.timings.worldScoreDelay)
