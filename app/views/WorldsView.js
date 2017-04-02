@@ -75,14 +75,8 @@ export default class WorldsView extends Component {
         <View style={style.grid}>
           {props.worlds.map((w, key) => (
             <View key={key} style={[style.worldContainer, w.name === props.selectedName ? style.activeContainer : null]}>
-              { w.comingSoon ?
-                <View style={style.greyedOut}>
+              { w.comingSoon || w.locked ?
                   <World world={w} />
-                </View>
-              : w.locked ?
-                <View style={style.greyedOut}>
-                  <World world={w} />
-                </View>
               :
                 <World expandAnim={this.state.expandAnim} world={w} selectedName={props.selectedName} onPress={() => props.loadLevel(w.name)}/>
               }
@@ -98,7 +92,7 @@ function World(props) {
   const isActivating = props.selectedName && props.selectedName == props.world.name;
   return (
     <TouchableWithoutFeedback onPress={props.onPress}>
-      <View style={[style.world]}>
+      <View style={[style.world, props.world.locked || props.world.comingSoon ? style.greyedOut : null]}>
         <Animated.View style={[style.preview, props.world.locked || props.world.comingSoon ? null : style.shadow, {
           backgroundColor: props.world.color,
         }, isActivating ? {
