@@ -99,7 +99,7 @@ function mapDispatchToProps(dispatch) {
     },
 
     buyContinues: () => {
-      alert('buying continues')
+      dispatch({type: 'scene:change', scene: 'ContinueBundles'})
     }
   }
 }

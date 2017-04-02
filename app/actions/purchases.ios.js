@@ -5,9 +5,9 @@ const { InAppUtils } = NativeModules;
 export function loadProducts(cb) {
   return function(dispatch) {
     const products = [
-      'com.superserious.eggpeg.continue',
-      'com.superserious.eggpeg.continue20',
-      'com.superserious.eggpeg.continue1001',
+      'com.superserious.eggpeg.continue4',
+      'com.superserious.eggpeg.continue50',
+      'com.superserious.eggpeg.continue5000',
     ];
 
     InAppUtils.loadProducts(products, function(err, products) {

@@ -20,9 +20,9 @@ class ContinueBundles extends Component {
 
   processPurchase(productId) {
     const count =
-      productId == 'com.superserious.eggpeg.continue' ? 1 :
-      productId == 'com.superserious.eggpeg.continue20' ? 20 :
-      productId == 'com.superserious.eggpeg.continue1001' ? 1001 :
+      productId == 'com.superserious.eggpeg.continue4' ? 4 :
+      productId == 'com.superserious.eggpeg.continue50' ? 50 :
+      productId == 'com.superserious.eggpeg.continue5000' ? 5000 :
       null;
 
     if( !count ) {
@@ -71,8 +71,13 @@ class ContinueBundles extends Component {
       { (this.props.products || []).map((p, key) => (
         <TouchableOpacity key={key} onPress={() => this.buy(p.identifier)}>
           <Text style={{marginBottom: 20}}>
-            {p.priceString}&nbsp;
-            {p.title}&nbsp;
+            { p.identifier === 'com.superserious.eggpeg.continue4' ?
+              `4 for ${p.priceString}`
+            : p.identifier === 'com.superserious.eggpeg.continue5000' ?
+              `5,000! ${p.priceString}`
+            :
+              `${p.title} for ${p.priceString}`
+            }
           </Text>
         </TouchableOpacity>
       ))}
