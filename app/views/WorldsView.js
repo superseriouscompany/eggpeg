@@ -55,9 +55,6 @@ export default class WorldsView extends Component {
     return(
       <View style={style.container}>
         <StatusBar hidden/>
-        <TouchableOpacity onPress={props.back}>
-          <Text style={style.leftNav}>back</Text>
-        </TouchableOpacity>
 
         <View style={style.scoresContainer}>
           { props.topScore ?
@@ -83,6 +80,10 @@ export default class WorldsView extends Component {
             </View>
           ))}
         </View>
+
+        <TouchableOpacity style={style.leftNav} onPress={props.back}>
+          <Text>back</Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -158,17 +159,17 @@ const style = StyleSheet.create({
     width:           '50%',
     alignItems:     'center',
     justifyContent: 'center',
+    paddingBottom: 11,
   },
   leftNav: {
     position: 'absolute',
-    top:      20,
-    left:     20,
+    padding:      20,
   },
   scoresContainer: {
     justifyContent: 'center',
     alignItems:     'center',
     marginTop: 40,
-    paddingBottom: 20,
+    paddingBottom: 25,
   },
   activeContainer: {
     zIndex: 1,
@@ -189,8 +190,10 @@ const style = StyleSheet.create({
     textAlign: 'center',
   },
   hint: {
+    marginTop: 15,
     fontSize: 32,
     textAlign: 'center',
+    backgroundColor: 'transparent',
   },
   leaderboard: {
     fontSize: 18,
