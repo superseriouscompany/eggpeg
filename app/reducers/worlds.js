@@ -67,7 +67,7 @@ function unlock(state) {
 
 function score(state, score, beaten) {
   return state.all.map((w) => {
-    if( w.name == state.current.name ) {
+    if( w.name == state.current.name && w.name !== 'Demo') {
       w.beaten = beaten
       if( isNaN(score) ) {
         console.error(`${score} is not a number`)

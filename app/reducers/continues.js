@@ -1,4 +1,9 @@
-export default function(state = {}, action) {
+const initialState = {
+  pack: 'taste',
+  count: 10,
+}
+
+export default function(state = initialState, action) {
   switch(action.type) {
     case 'continues:add':
       return {
