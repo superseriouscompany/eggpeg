@@ -60,7 +60,7 @@ export default function(props) { return (
       })
     }]}>
 
-      <TouchableOpacity style={[style.button, {height: 75, width: 75, marginRight: 9}]} onPress={props.reset}>
+      <TouchableOpacity style={[style.button, {height: 75, width: 75, marginRight: 9}]} onPress={() => {props.paused && props.resume(); props.reset();}}>
         <Image source={require('../images/ReplayIcon.png')}/>
       </TouchableOpacity>
       { props.paused ?

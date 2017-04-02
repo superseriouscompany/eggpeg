@@ -30,14 +30,6 @@ class GameOver extends Component {
       sounds.woohoo.play(null, (err) => {
         console.error(err)
       })
-
-      // TODO: move this out of here
-      for( var i = 0; i < scores.length; i++ ) {
-        if( scores[i].score < totalScore ) {
-          this.props.induct(totalScore)
-          return;
-        }
-      }
     } else {
       sounds.fart.play(null, (err) => {
         console.error(err)
