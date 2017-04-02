@@ -44,7 +44,6 @@ class ContinueBundles extends Component {
 
       this.processPurchase(productId)
       this.props.dispatch({type: 'scene:pop'})
-
     })
   }
 
@@ -77,9 +76,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    dispatch: dispatch,
     back: () => {
       this.props.dispatch({type: 'scene:pop'})
-    }
+    },
   }
 }
 
