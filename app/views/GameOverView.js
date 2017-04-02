@@ -25,7 +25,9 @@ export default function(props) { return (
         <RainbowBar />
       : null }
       <Text style={style.score}>{props.score}{props.paused ? '' : '!'}</Text>
-      { props.score < props.worldScore ?
+      { props.paused ?
+        null
+      : props.score < props.worldScore ?
         <View style={{flexDirection: 'row'}}>
           <Image style={{marginRight: 6}} source={require('../images/Trophy.png')}/>
           <Text style={style.carrot}>{props.worldScore}</Text>

@@ -53,7 +53,7 @@ export default function(props) {
           <Level done={props.worldDone}/>
           { props.world.name !== 'Demo' && !props.worldDone ?
             <View style={style.pauseContainer}>
-              <TouchableOpacity onPress={props.pause}>
+              <TouchableOpacity style={style.pauseButton} onPress={props.pause}>
                 <Text>||</Text>
               </TouchableOpacity>
             </View>
@@ -107,7 +107,10 @@ const style = StyleSheet.create({
   },
   pauseContainer: {
     position: 'absolute',
-    left: 10,
+    left: 0,
     bottom: 15,
+  },
+  pauseButton: {
+    padding: 5,
   },
 })
