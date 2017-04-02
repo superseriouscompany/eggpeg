@@ -1,6 +1,8 @@
+import config from '../config'
+
 const initialState = {
   pack: 'taste',
-  count: 10,
+  count: config.startingContinues,
 }
 
 export default function(state = initialState, action) {

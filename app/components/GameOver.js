@@ -17,6 +17,8 @@ class GameOver extends Component {
 
   constructor(props) {
     super(props)
+    this.buyContinues = this.buyContinues.bind(this)
+    this.exitPurchase = this.exitPurchase.bind(this)
     this.state = {
       enterAnim: new Animated.Value(0),
     }
@@ -28,8 +30,24 @@ class GameOver extends Component {
     }).start()
   }
 
+  buyContinues() {
+    this.setState({
+      wantsPurchase: true
+    })
+  }
+
+  exitPurchase() {
+    this.setState({
+      wantsPurchase: false
+    })
+  }
+
   render() { return (
-    <GameOverView {...this.props} enterAnim={this.state.enterAnim} />
+    <GameOverView {...this.props}
+      buyContinues={this.buyContinues}
+      exitPurchase={this.exitPurchase}
+      wantsPurchase={this.state.wantsPurchase}
+      enterAnim={this.state.enterAnim} />
   )}
 }
 

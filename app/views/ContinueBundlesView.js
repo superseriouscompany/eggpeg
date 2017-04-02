@@ -10,7 +10,7 @@ import {
 export default function ContinueBundlesView(props) {
   return (
     <View style={style.container}>
-      <TouchableOpacity style={style.back} onPress={props.back}>
+      <TouchableOpacity style={style.back} onPress={props.exit}>
         <Text style={style.backText}>&lt;</Text>
       </TouchableOpacity>
       <TouchableOpacity style={style.restore} onPress={props.restorePurchases}>
@@ -58,7 +58,6 @@ function color(id) {
 const style = StyleSheet.create({
   container: {
     flex:            1,
-    backgroundColor: 'rgba(0,0,0,0.7)',
     paddingBottom:   27,
     paddingLeft:     30,
     paddingRight:    30,

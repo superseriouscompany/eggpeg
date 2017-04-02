@@ -12,6 +12,7 @@ class ContinueBundles extends Component {
     this.state = { purchasing: false }
     this.restorePurchases = this.restorePurchases.bind(this)
     this.processPurchase  = this.processPurchase.bind(this)
+    this.buy              = this.buy.bind(this)
   }
 
   restorePurchases() {
@@ -43,7 +44,7 @@ class ContinueBundles extends Component {
       }
 
       this.processPurchase(productId)
-      this.props.dispatch({type: 'scene:pop'})
+      this.props.exit()
     })
   }
 
@@ -77,9 +78,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch: dispatch,
-    back: () => {
-      dispatch({type: 'scene:pop'})
-    },
   }
 }
 
