@@ -87,7 +87,6 @@ function score(state, score, beaten) {
 function reachLevel(state, index) {
   return state.all.map((w) => {
     if( w.name == state.current.name ) {
-      console.log('figuring out', index, w.levels.length)
       const percentage = index / w.levels.length
       w.percentage = Math.max(w.percentage || 0, percentage)
     }

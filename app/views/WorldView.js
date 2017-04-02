@@ -96,9 +96,10 @@ const style = StyleSheet.create({
   },
   hintContainer: {
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    flex: 1,
+    position: 'absolute',
+    bottom: 10,
     zIndex: -1,
+    width: '100%',
   },
   hint: {
     fontSize:     16,
