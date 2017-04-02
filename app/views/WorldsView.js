@@ -116,10 +116,11 @@ class World extends Component {
     return (
       <TouchableWithoutFeedback onPress={props.onPress}>
         <View style={[style.world, props.world.locked || props.world.comingSoon ? style.greyedOut : null]}>
+          <Text>hey {props.world.lightColor}</Text>
           <Animated.View style={[style.preview, props.world.locked || props.world.comingSoon ? null : style.shadow, {
             backgroundColor: this.state.pulse.interpolate({
               inputRange: [0, 0.5, 1],
-              outputRange: [props.world.color, props.world.deadColor || colors.grey, props.world.color]
+              outputRange: [props.world.color, props.world.lightColor || 'hotpink', props.world.color]
             }),
           }, isActivating ? {
             transform: [{

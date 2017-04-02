@@ -18,7 +18,7 @@ const worlds = [{
   color:       colors.green,
   targetColor: colors.orange,
   deadColor:   colors.darkgreen,
-  lightColor:  colors.green,
+  lightColor:  colors.lightgreen,
   levels: require('./1')(xcenter, ycenter, width, height, config.sizes.target)
 },
 {
