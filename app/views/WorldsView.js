@@ -116,13 +116,13 @@ function World(props) {
                   outputRange: [1, 0, 0],
                 })
               } : null]}>
-                  { props.world.score || true ?
+                  { props.world.score ?
                     <View>
                       <Text style={style.status}>{props.world.score || '---'}</Text>
                       <Text style={[style.status, style.points]}>pts</Text>
                     </View>
                   :
-                    <Text style={[style.status, style.new]}>new!</Text>
+                    <Text style={[style.status, {fontSize: 32}]}>{props.world.name}</Text>
                   }
               </Animated.View>
             }
@@ -232,12 +232,11 @@ const style = StyleSheet.create({
     textAlign: 'center',
     fontSize: 64,
     color:    'rgba(0,0,0,0.4)',
-  },
-  new: {
-    fontSize: 32,
+    backgroundColor: 'transparent',
   },
   points: {
     marginTop: -20,
+    marginBottom: 4,
     fontSize: 32,
     backgroundColor: 'transparent',
   },
