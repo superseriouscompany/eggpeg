@@ -157,6 +157,8 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     flexWrap:      'wrap',
     alignItems:    'flex-start',
+    paddingLeft: '2.5%',
+    paddingRight: '2.5%',
   },
   worldContainer: {
     width:           '50%',
