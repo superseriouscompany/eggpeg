@@ -63,7 +63,13 @@ export default function(props) { return (
       <TouchableOpacity style={[style.button, {height: 75, width: 75, marginRight: 9}]} onPress={props.reset}>
         <Image source={require('../images/ReplayIcon.png')}/>
       </TouchableOpacity>
-      <PayButton style={[style.button, style.continueButton]} textStyle={style.buttonText} continue={props.continue} />
+      { props.paused ?
+        <TouchableOpacity style={[style.button, style.continueButton]} onPress={this.pay}>
+          <Text style={style.buttonText}>continue</Text>
+        </TouchableOpacity>
+      :
+        <PayButton style={[style.button, style.continueButton]} textStyle={style.buttonText} continue={props.continue} />
+      }
     </Animated.View>
   </View>
 )}

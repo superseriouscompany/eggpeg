@@ -12,6 +12,7 @@ class GameOver extends Component {
   static propTypes = {
     reset:       PropTypes.func.isRequired,
     continue:    PropTypes.func.isRequired,
+    paused:      PropTypes.bool,
   }
 
   constructor(props) {

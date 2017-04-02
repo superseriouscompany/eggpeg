@@ -35,6 +35,11 @@ export default function(props) {
             <GameOver
               reset={props.reset}
               continue={props.continue} />
+          : props.world.paused ?
+            <GameOver
+              paused={true}
+              reset={props.reset}
+              continue={props.continue} />
           : !props.worldDone ?
             <GameHeader />
           :
