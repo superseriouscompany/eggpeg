@@ -15,6 +15,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -34,6 +35,11 @@ export default function(props) {
             <GameOver
               reset={props.reset}
               continue={props.continue} />
+          : props.world.paused ?
+            <GameOver
+              paused={true}
+              reset={props.reset}
+              continue={props.continue} />
           : !props.worldDone ?
             <GameHeader />
           :
@@ -45,11 +51,18 @@ export default function(props) {
             </View>
           : null}
           <Level done={props.worldDone}/>
+          { props.world.name !== 'Demo' && !props.worldDone ?
+            <View style={style.pauseContainer}>
+              <TouchableOpacity style={style.pauseButton} onPress={props.pause}>
+                <Text>||</Text>
+              </TouchableOpacity>
+            </View>
+          : null }
           <ProgressBar style={style.progressBar} progress={props.progress} color={props.level.deadColor}/>
 
           { props.hint ?
             <View style={style.hintContainer}>
-              <Text style={[style.hint, {color: props.level.deadColor}]}>{props.hint}</Text>
+              <Text style={[style.hint]}>{props.hint}</Text>
             </View>
           :
             <ScoreText textColor={props.level.deadColor}/>
@@ -83,12 +96,22 @@ const style = StyleSheet.create({
   },
   hintContainer: {
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    flex: 1,
+    position: 'absolute',
+    bottom: 10,
     zIndex: -1,
+    width: '100%',
   },
   hint: {
-    fontSize: 16,
+    fontSize:     16,
     marginBottom: 20,
+    color:        'white',
+  },
+  pauseContainer: {
+    position: 'absolute',
+    left: 0,
+    bottom: 15,
+  },
+  pauseButton: {
+    padding: 5,
   },
 })

@@ -8,6 +8,7 @@ import Settings           from './Settings'
 import World              from './World';
 import Worlds             from './Worlds'
 import HallOfFame         from './HallOfFame'
+import ContinueBundles    from './ContinueBundles'
 import config             from '../config'
 import {
   Animated,
@@ -56,9 +57,12 @@ class Stage extends Component {
           toValue: 1,
           easing: Easing.quad
         }).start(() => {
-          this.setState({
-            scene: props.scene,
-            nextScene: null,
+          // animation gets jittery if we do this right when the callback completes, seems like a race condition of some kind
+          setTimeout(() => {
+            this.setState({
+              scene: props.scene,
+              nextScene: null,
+            })
           })
         })
       } else if( props.scene.animation === 'riseOut' ) {
@@ -72,8 +76,11 @@ class Stage extends Component {
           toValue: 1,
           easing: Easing.quad
         }).start(() => {
-          this.setState({
-            nextScene: null,
+          setTimeout(() => {
+            // animation gets jittery if we do this right when the callback completes, seems like a race condition of some kind
+            this.setState({
+              nextScene: null,
+            })
           })
         })
       } else {
@@ -100,7 +107,7 @@ class Stage extends Component {
                 outputRange: [0, 1],
               }),
             }]}>
-              { this.showScene(this.state.nextScene) }
+              { this.showScene(this.state.nextScene, {animating: true}) }
             </Animated.View>
           : this.props.scene.animation === 'dropIn' ?
             <Animated.View style={[style.container, {
@@ -147,6 +154,8 @@ class Stage extends Component {
         return <Settings />
       case 'HallOfFame':
         return <HallOfFame {...props} />
+      case 'ContinueBundles':
+        return <ContinueBundles />
       default:
         return <View style={{backgroundColor: 'indianred', width: 100, height: 100}}/>
     }

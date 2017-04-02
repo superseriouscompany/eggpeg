@@ -20,6 +20,12 @@ export default function(state={}, action) {
         finishTime: null,
         done: true,
       }
+    case 'level:continue':
+      return {
+        ...state,
+        finishTime: null,
+        done: false,
+      }
     case 'level:load':
       return action.level
     case 'level:loading':

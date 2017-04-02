@@ -6,6 +6,7 @@ import Text      from '../components/Text'
 import {
   Image,
   Platform,
+  RefreshControl,
   ScrollView,
   Share,
   StatusBar,
@@ -20,7 +21,6 @@ export default class HallOfFameView extends Component {
   render() {
     const props = this.props
     const y = (props.scorePosition && Math.max(0, props.scorePosition - 3) * 83.5) || 0
-
   return (
     <View style={style.container}>
       <StatusBar hidden/>
@@ -36,15 +36,32 @@ export default class HallOfFameView extends Component {
           <Text style={[props.textStyle, {fontStyle: 'italic', textAlign: 'right'}]}>invite</Text>
         </TouchableOpacity>
       </View>
+
       <ScrollView ref="scrollView"
                   onContentSizeChange={(width, height) => !this.props.animating && this.refs.scrollView.scrollTo({y: y})}
-                  style={style.leaderboard}>
+                  style={style.leaderboard}
+                  refreshControl={
+                    <RefreshControl
+                      tintColor={'hotpink'}
+                      refreshing={props.loading || false}
+                      onRefresh={props.retry} />}>
+
+        { !props.scores || !props.scores.length ?
+          <Text>
+            { props.loading ?
+              'Loading scores...'
+            :
+              'Scores didn\'t load. Pull to try again.'
+            }
+          </Text>
+        : null }
+
         {(props.scores || []).map((s, key) => (
           <View key={key}>
             { s.name ?
-              <Score place={key+1} name={s.name} score={s.score} color={color(key)}/>
+              <Score place={key+1} name={s.name} mine={s.score == props.myScore.score && s.name == props.myScore.name } score={s.score} color={color(key)}/>
             :
-              <View style={[style.scoreContainer, style.scoreInputContainer, {
+              <View style={[style.scoreContainer, style.scoreInputContainer, style.mine, {
                 backgroundColor: color(key),
               }]}>
                 <Text style={style.place}>{key+1}</Text>
@@ -70,9 +87,11 @@ export default class HallOfFameView extends Component {
 
 function Score(props) {
   return (
-    <View style={[style.scoreContainer, {backgroundColor: props.color}]}>
+    <View style={[style.scoreContainer, {backgroundColor: props.color}, props.mine ? style.mine : null]}>
       <Text style={style.place}>{props.place}</Text>
-      <Text style={style.name} adjustsFontSizeToFit={true} numberOfLines={1}>{props.name}</Text>
+      <Text style={style.name} adjustsFontSizeToFit={true} numberOfLines={1}>
+        {props.name}
+      </Text>
       <Text style={style.score}>{props.score}</Text>
     </View>
   )
@@ -91,6 +110,11 @@ function color(index) {
   const sectionSize = 100 / (stops.length-1);
   let section       = Math.floor(index / sectionSize)
   let relativeIndex = index % sectionSize;
+
+  if( section === stops.length -1 ) {
+    console.warn("Unable to render color for", index)
+    return 'rgb(0,0,0)'
+  }
 
   const src = stops[section];
   const dst = stops[section+1];
@@ -156,6 +180,9 @@ const style = StyleSheet.create({
   score: {
     fontSize: 32,
     color: 'white',
+  },
+  mine: {
+    backgroundColor: 'hotpink',
   },
   leftNav: {
     width: 120,

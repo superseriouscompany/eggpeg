@@ -58,6 +58,7 @@ export default class WorldsView extends Component {
 
         <View style={style.scoresContainer}>
           { props.topScore ?
+
             <View>
               { props.shouldInduct ?
                 <TouchableOpacity onPress={() => props.induct(props.topScore)}>
@@ -166,10 +167,12 @@ class World extends Component {
               'coming soon'
             : props.world.locked ?
               'locked'
-            : props.world.score ?
+            : !props.world.percentage ?
+              '0%'
+            : props.world.percentage === 1 ?
               `${props.world.score}/${props.world.maxScore}`
             :
-              `0%`
+              `${Math.round(props.world.percentage*100)}%`
             }
           </Text>
         </View>
@@ -197,8 +200,11 @@ const style = StyleSheet.create({
     paddingBottom: 11,
   },
   leftNav: {
-    position: 'absolute',
-    padding:      20,
+    position:        'absolute',
+    left:            20,
+    top:             20,
+    backgroundColor: 'transparent',
+    zIndex:          -1,
   },
   scoresContainer: {
     justifyContent: 'center',

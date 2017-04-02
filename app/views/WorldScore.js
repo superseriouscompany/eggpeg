@@ -24,7 +24,7 @@ export default class WorldScore extends Component {
         friction: 3,
         tension: 40,
       }).start()
-    }, config.worldScoreDelay)
+    }, config.timings.worldScoreDelay)
   }
 
   render() { return (

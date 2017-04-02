@@ -12,44 +12,42 @@ class GameOver extends Component {
   static propTypes = {
     reset:       PropTypes.func.isRequired,
     continue:    PropTypes.func.isRequired,
+    paused:      PropTypes.bool,
   }
 
   constructor(props) {
     super(props)
+    this.buyContinues = this.buyContinues.bind(this)
+    this.exitPurchase = this.exitPurchase.bind(this)
     this.state = {
       enterAnim: new Animated.Value(0),
     }
   }
 
   componentDidMount() {
-    const {scores} = this.props.leaderboard;
-    const {totalScore, score, worldScore}  = this.props;
-
-    if( score >= worldScore ) {
-      sounds.woohoo.play(null, (err) => {
-        console.error(err)
-      })
-
-      // TODO: move this out of here
-      for( var i = 0; i < scores.length; i++ ) {
-        if( scores[i].score < totalScore ) {
-          this.props.induct(totalScore)
-          return;
-        }
-      }
-    } else {
-      sounds.fart.play(null, (err) => {
-        console.error(err)
-      })
-    }
-
     Animated.timing(this.state.enterAnim, {
       duration: config.timings.gameOverIn, toValue: 1,
     }).start()
   }
 
+  buyContinues() {
+    this.setState({
+      wantsPurchase: true
+    })
+  }
+
+  exitPurchase() {
+    this.setState({
+      wantsPurchase: false
+    })
+  }
+
   render() { return (
-    <GameOverView {...this.props} enterAnim={this.state.enterAnim} />
+    <GameOverView {...this.props}
+      buyContinues={this.buyContinues}
+      exitPurchase={this.exitPurchase}
+      wantsPurchase={this.state.wantsPurchase}
+      enterAnim={this.state.enterAnim} />
   )}
 }
 
@@ -72,6 +70,7 @@ function mapStateToProps(state) {
     carrot:      carrot,
     firstRun:    !state.session.goal,
     totalScore:  state.worlds.all.reduce((acc, w) => { return acc + (w.score || 0)}, 0),
+    continues:   state.continues.count || 0,
   }
 }
 
@@ -85,8 +84,23 @@ function mapDispatchToProps(dispatch) {
       dispatch({type: 'scene:change', scene: 'Worlds'})
     },
 
-    induct: (score) => {
-      dispatch({type: 'scene:change', scene: 'HallOfFame', animation: 'dropIn', props: { induction: true, score: score }})
+    resume: () => {
+      dispatch({type: 'worlds:resume'})
+    },
+
+    continue: (remaining) => {
+      if( remaining == 0 ) {
+        return alert('no continues remaining.')
+      }
+      dispatch({type: 'continues:use'})
+      dispatch({type: 'level:continue'})
+      if( remaining == 1 ) {
+        alert('Should consume purchase here')
+      }
+    },
+
+    buyContinues: () => {
+      dispatch({type: 'scene:change', scene: 'ContinueBundles'})
     }
   }
 }

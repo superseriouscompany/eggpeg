@@ -21,7 +21,6 @@ class World extends Component {
     this.nextLevel = this.nextLevel.bind(this)
     this.loadLevel = this.loadLevel.bind(this)
     this.endLevel  = this.endLevel.bind(this)
-    this.continue  = this.continue.bind(this)
     this.victory   = this.victory.bind(this)
     this.state     = { progress: false }
   }
@@ -36,10 +35,6 @@ class World extends Component {
     if( this.props.scene.previous ) {
       this.reset()
     }
-  }
-
-  continue() {
-    this.loadLevel(this.props.level)
   }
 
   nextLevel() {
@@ -94,7 +89,6 @@ class World extends Component {
       {...this.props}
       progress={this.state.progress || this.props.progress}
       reset={this.reset}
-      continue={this.continue}
       worldDone={this.state.progress == 1}
        />
   )}
@@ -125,4 +119,11 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(World);
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch: dispatch,
+    pause:    () => dispatch({type: 'worlds:pause'}),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(World);
