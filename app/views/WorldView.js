@@ -51,16 +51,18 @@ export default function(props) {
             </View>
           : null}
           <Level done={props.worldDone}/>
-          <View style={style.pauseContainer}>
-            <TouchableOpacity onPress={props.pause}>
-              <Text>||</Text>
-            </TouchableOpacity>
-          </View>
+          { props.world.name !== 'Demo' && !props.worldDone ?
+            <View style={style.pauseContainer}>
+              <TouchableOpacity onPress={props.pause}>
+                <Text>||</Text>
+              </TouchableOpacity>
+            </View>
+          : null }
           <ProgressBar style={style.progressBar} progress={props.progress} color={props.level.deadColor}/>
 
           { props.hint ?
             <View style={style.hintContainer}>
-              <Text style={[style.hint, {color: props.level.deadColor}]}>{props.hint}</Text>
+              <Text style={[style.hint]}>{props.hint}</Text>
             </View>
           :
             <ScoreText textColor={props.level.deadColor}/>
@@ -99,8 +101,9 @@ const style = StyleSheet.create({
     zIndex: -1,
   },
   hint: {
-    fontSize: 16,
+    fontSize:     16,
     marginBottom: 20,
+    color:        'white',
   },
   pauseContainer: {
     position: 'absolute',
