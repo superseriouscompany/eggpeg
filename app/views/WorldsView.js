@@ -198,8 +198,11 @@ const style = StyleSheet.create({
     paddingBottom: 11,
   },
   leftNav: {
-    position: 'absolute',
-    padding:      20,
+    position:        'absolute',
+    left:            20,
+    top:             20,
+    backgroundColor: 'transparent',
+    zIndex:          -1,
   },
   scoresContainer: {
     justifyContent: 'center',

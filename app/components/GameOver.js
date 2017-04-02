@@ -12,6 +12,7 @@ class GameOver extends Component {
   static propTypes = {
     reset:       PropTypes.func.isRequired,
     continue:    PropTypes.func.isRequired,
+    paused:      PropTypes.bool,
   }
 
   constructor(props) {
@@ -51,6 +52,7 @@ function mapStateToProps(state) {
     carrot:      carrot,
     firstRun:    !state.session.goal,
     totalScore:  state.worlds.all.reduce((acc, w) => { return acc + (w.score || 0)}, 0),
+    continues:   state.continues.count || 0,
   }
 }
 
@@ -63,6 +65,25 @@ function mapDispatchToProps(dispatch) {
     visitWorlds: () => {
       dispatch({type: 'scene:change', scene: 'Worlds'})
     },
+
+    resume: () => {
+      dispatch({type: 'worlds:resume'})
+    },
+
+    continue: (remaining) => {
+      if( remaining == 0 ) {
+        return alert('no continues remaining.')
+      }
+      dispatch({type: 'continues:use'})
+      dispatch({type: 'level:continue'})
+      if( remaining == 1 ) {
+        alert('Should consume purchase here')
+      }
+    },
+
+    buyContinues: () => {
+      dispatch({type: 'scene:change', scene: 'ContinueBundles'})
+    }
   }
 }
 

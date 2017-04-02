@@ -7,6 +7,8 @@ export default function(state = config.chamber, action) {
     case 'bullets:hit':
     case 'chamber:reload':
       return state + 1
+    case 'level:continue':
+      return config.chamber;
     case 'level:clear':
       return config.chamber;
     default:

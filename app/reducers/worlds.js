@@ -25,6 +25,22 @@ export default function(state = initialState, action) {
         ...state,
         all: score(state, action.score),
       }
+    case 'worlds:pause':
+      return {
+        ...state,
+        current: {
+          ...state.current,
+          paused: true,
+        }
+      }
+    case 'worlds:resume':
+      return {
+        ...state,
+        current: {
+          ...state.current,
+          paused: false,
+        }
+      }
     case 'worlds:select':
       return {
         ...state,

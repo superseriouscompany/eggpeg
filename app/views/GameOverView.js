@@ -24,7 +24,7 @@ export default function(props) { return (
       { props.score > props.worldScore ?
         <RainbowBar />
       : null }
-      <Text style={style.score}>{props.score}!</Text>
+      <Text style={style.score}>{props.score}{props.paused ? '' : '!'}</Text>
       { props.score < props.worldScore ?
         <View style={{flexDirection: 'row'}}>
           <Image style={{marginRight: 6}} source={require('../images/Trophy.png')}/>
@@ -60,10 +60,24 @@ export default function(props) { return (
       })
     }]}>
 
-      <TouchableOpacity style={[style.button, {height: 75, width: 75, marginRight: 9}]} onPress={props.reset}>
+      <TouchableOpacity style={[style.button, {height: 75, width: 75, marginRight: 9}]} onPress={() => {props.paused && props.resume(); props.reset();}}>
         <Image source={require('../images/ReplayIcon.png')}/>
       </TouchableOpacity>
-      <PayButton style={[style.button, style.continueButton]} textStyle={style.buttonText} continue={props.continue} />
+
+      { props.paused ?
+        <TouchableOpacity style={[style.button, style.continueButton]} onPress={props.resume}>
+          <Text style={style.buttonText}>resume</Text>
+        </TouchableOpacity>
+      : props.continues > 0 ?
+        <TouchableOpacity style={[style.button, style.continueButton]} onPress={props.continue}>
+          <Text style={{position: 'absolute', color: 'white', backgroundColor: 'transparent', top: -31}}>{props.continues} left</Text>
+          <Text style={style.buttonText}>continue</Text>
+        </TouchableOpacity>
+      :
+        <TouchableOpacity style={[style.button, style.continueButton]} onPress={props.buyContinues}>
+          <Text style={style.buttonText}>continue</Text>
+        </TouchableOpacity>
+      }
     </Animated.View>
   </View>
 )}

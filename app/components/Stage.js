@@ -8,6 +8,7 @@ import Settings           from './Settings'
 import World              from './World';
 import Worlds             from './Worlds'
 import HallOfFame         from './HallOfFame'
+import ContinueBundles    from './ContinueBundles'
 import config             from '../config'
 import {
   Animated,
@@ -153,6 +154,8 @@ class Stage extends Component {
         return <Settings />
       case 'HallOfFame':
         return <HallOfFame {...props} />
+      case 'ContinueBundles':
+        return <ContinueBundles />
       default:
         return <View style={{backgroundColor: 'indianred', width: 100, height: 100}}/>
     }
