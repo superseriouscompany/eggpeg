@@ -51,14 +51,11 @@ class HallOfFame extends Component {
     if( !this.state.name.length ) { return alert('You must enter your name.') }
     if( this.state.name.length > 20 ) { return alert('Your name can only be 20 characters') }
 
+    this.props.dispatch(stubScore(this.props.score, this.state.name))
+    this.props.dispatch({type: 'score:record', top: this.props.score, name: this.state.name })
+    this.props.back()
     return this.props.dispatch(postScore(this.props.score, this.state.name)).catch((err) => {
-      this.props.dispatch(stubScore(this.props.score, this.state.name))
       this.props.dispatch(enqueueRetry({type: 'postScore', score: this.props.score, name: this.state.name}))
-    }).then(() => {
-      this.props.dispatch({type: 'score:record', top: this.props.score, name: this.state.name })
-      this.props.back()
-    }).catch((err) => {
-      alert(err.message || JSON.stringify(err))
     })
   }
 

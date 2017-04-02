@@ -44,7 +44,7 @@ export default class HallOfFameView extends Component {
             { s.name ?
               <Score place={key+1} name={s.name} mine={s.score == props.myScore.score && s.name == props.myScore.name } score={s.score} color={color(key)}/>
             :
-              <View style={[style.scoreContainer, style.scoreInputContainer, {
+              <View style={[style.scoreContainer, style.scoreInputContainer, style.mine, {
                 backgroundColor: color(key),
               }]}>
                 <Text style={style.place}>{key+1}</Text>
@@ -73,7 +73,6 @@ function Score(props) {
     <View style={[style.scoreContainer, {backgroundColor: props.color}, props.mine ? style.mine : null]}>
       <Text style={style.place}>{props.place}</Text>
       <Text style={style.name} adjustsFontSizeToFit={true} numberOfLines={1}>
-        {props.mine ? 'ME' : ''}
         {props.name}
       </Text>
       <Text style={style.score}>{props.score}</Text>
@@ -94,6 +93,11 @@ function color(index) {
   const sectionSize = 100 / (stops.length-1);
   let section       = Math.floor(index / sectionSize)
   let relativeIndex = index % sectionSize;
+
+  if( section === stops.length -1 ) {
+    console.warn("Unable to render color for", index)
+    return 'rgb(0,0,0)'
+  }
 
   const src = stops[section];
   const dst = stops[section+1];
