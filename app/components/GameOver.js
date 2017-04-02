@@ -20,15 +20,6 @@ class GameOver extends Component {
     this.state = {
       enterAnim: new Animated.Value(0),
     }
-    this.continue = this.continue.bind(this)
-  }
-
-  continue() {
-    this.props.dispatch({type: 'continues:use'})
-    this.props.continue()
-    if( this.props.continues == 1 ) {
-      alert('Consume purchase.')
-    }
   }
 
   componentDidMount() {
@@ -96,9 +87,20 @@ function mapDispatchToProps(dispatch) {
       dispatch({type: 'worlds:resume'})
     },
 
-    continue: () => {
+    continue: (remaining) => {
+      if( remaining == 0 ) {
+        return alert('no continues remaining.')
+      }
+      dispatch({type: 'continues:use'})
       dispatch({type: 'level:continue'})
+      if( remaining == 1 ) {
+        alert('Should consume purchase here')
+      }
     },
+
+    buyContinues: () => {
+      alert('buying continues')
+    }
   }
 }
 

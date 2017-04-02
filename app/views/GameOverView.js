@@ -63,12 +63,21 @@ export default function(props) { return (
       <TouchableOpacity style={[style.button, {height: 75, width: 75, marginRight: 9}]} onPress={() => {props.paused && props.resume(); props.reset();}}>
         <Image source={require('../images/ReplayIcon.png')}/>
       </TouchableOpacity>
-      <TouchableOpacity style={[style.button, style.continueButton]} onPress={props.paused && props.resume || props.continue}>
-        { !props.paused ?
+
+      { props.paused ?
+        <TouchableOpacity style={[style.button, style.continueButton]} onPress={props.resume}>
+          <Text style={style.buttonText}>resume</Text>
+        </TouchableOpacity>
+      : props.continues > 0 ?
+        <TouchableOpacity style={[style.button, style.continueButton]} onPress={props.continue}>
           <Text style={{position: 'absolute', color: 'white', backgroundColor: 'transparent', top: -31}}>{props.continues} left</Text>
-        : null }
-        <Text style={style.buttonText}>{props.paused ? 'resume' : 'continue'}</Text>
-      </TouchableOpacity>
+          <Text style={style.buttonText}>continue</Text>
+        </TouchableOpacity>
+      :
+        <TouchableOpacity style={[style.button, style.continueButton]} onPress={props.buyContinues}>
+          <Text style={style.buttonText}>continue</Text>
+        </TouchableOpacity>
+      }
     </Animated.View>
   </View>
 )}
