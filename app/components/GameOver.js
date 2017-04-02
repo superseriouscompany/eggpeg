@@ -22,27 +22,6 @@ class GameOver extends Component {
   }
 
   componentDidMount() {
-    const {scores} = this.props.leaderboard;
-    const {totalScore, score, worldScore}  = this.props;
-
-    if( score >= worldScore ) {
-      sounds.woohoo.play(null, (err) => {
-        console.error(err)
-      })
-
-      // TODO: move this out of here
-      for( var i = 0; i < scores.length; i++ ) {
-        if( scores[i].score < totalScore ) {
-          this.props.induct(totalScore)
-          return;
-        }
-      }
-    } else {
-      sounds.fart.play(null, (err) => {
-        console.error(err)
-      })
-    }
-
     Animated.timing(this.state.enterAnim, {
       duration: config.timings.gameOverIn, toValue: 1,
     }).start()
@@ -84,10 +63,6 @@ function mapDispatchToProps(dispatch) {
     visitWorlds: () => {
       dispatch({type: 'scene:change', scene: 'Worlds'})
     },
-
-    induct: (score) => {
-      dispatch({type: 'scene:change', scene: 'HallOfFame', animation: 'dropIn', props: { induction: true, score: score }})
-    }
   }
 }
 

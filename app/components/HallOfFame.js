@@ -1,11 +1,11 @@
 'use strict';
 
-import React                  from 'react'
-import Component              from './Component'
-import HallOfFameView         from '../views/HallOfFameView'
-import {connect}              from 'react-redux'
-import {enqueueRetry}         from '../actions/retry'
-import {postScore, stubScore} from '../actions/leaderboard'
+import React                              from 'react'
+import Component                          from './Component'
+import HallOfFameView                     from '../views/HallOfFameView'
+import {connect}                          from 'react-redux'
+import {enqueueRetry}                     from '../actions/retry'
+import {postScore, stubScore, loadScores} from '../actions/leaderboard'
 import {
   Platform,
   Share,
@@ -34,6 +34,7 @@ class HallOfFame extends Component {
     if( this.state.inserted ) { return console.warn('Already inserted score'); }
     let state = {
       scores: [].concat(props.scores),
+      score: props.score,
     }
     if( props.induction ) {
       state.scorePosition = insertScore(props.score, state.scores)
@@ -50,11 +51,11 @@ class HallOfFame extends Component {
     if( !this.state.name.length ) { return alert('You must enter your name.') }
     if( this.state.name.length > 20 ) { return alert('Your name can only be 20 characters') }
 
+    this.props.dispatch(stubScore(this.props.score, this.state.name))
+    this.props.dispatch({type: 'score:record', top: this.props.score, name: this.state.name })
+    this.props.back()
     return this.props.dispatch(postScore(this.props.score, this.state.name)).catch((err) => {
-      this.props.dispatch(stubScore(this.props.score, this.state.name))
       this.props.dispatch(enqueueRetry({type: 'postScore', score: this.props.score, name: this.state.name}))
-    }).then(() => {
-      this.props.dispatch({type: 'scene:change', scene: 'Worlds'})
     })
   }
 
@@ -92,15 +93,26 @@ class HallOfFame extends Component {
 }
 
 function mapStateToProps(state) {
+  const myScore = state.score.top ? {
+    score: state.score.top,
+    name:  state.score.name,
+  } : {};
+
   return {
+    myScore:   myScore,
     scores:    state.leaderboard.scores,
     shareLink: state.shareLink,
+    loading:   state.leaderboard.loading,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    back: () => dispatch({type: 'scene:pop', animation: 'riseOut'})
+    dispatch: dispatch,
+    back: () => dispatch({type: 'scene:pop', animation: 'riseOut'}),
+    retry: () => {
+      dispatch(loadScores())
+    },
   }
 }
 
