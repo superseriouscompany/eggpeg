@@ -11,12 +11,14 @@ const worlds = [{
   color:       colors.green,
   targetColor: colors.orange,
   deadColor:   colors.darkgreen,
+  lightColor:  colors.lightgreen,
   levels: require('./Demo')(xcenter, ycenter, width, height, config.sizes.target)
 }, {
   name:        '1',
   color:       colors.green,
   targetColor: colors.orange,
   deadColor:   colors.darkgreen,
+  lightColor:  colors.green,
   levels: require('./1')(xcenter, ycenter, width, height, config.sizes.target)
 },
 {
@@ -24,6 +26,7 @@ const worlds = [{
   color:       colors.yellow,
   targetColor: colors.purple,
   deadColor:   colors.darkyellow,
+  lightColor:  colors.lightyellow,
   yolkColor:   'orange',
   locked: true,
   levels: require('./2')(xcenter, ycenter, width, height, config.sizes.target)
@@ -32,6 +35,7 @@ const worlds = [{
   color:       colors.orange,
   targetColor: colors.blue,
   deadColor:   colors.darkorange,
+  lightColor:  colors.lightorange,
   locked: true,
   levels: require('./3')(xcenter, ycenter, width, height, config.sizes.target)
 }]
