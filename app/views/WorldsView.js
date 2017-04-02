@@ -147,7 +147,7 @@ class World extends Component {
                         <Text style={[style.status, style.points]}>pts</Text>
                       </View>
                     :
-                      <Text style={[style.status, {fontSize: 32}]}>{props.world.name}</Text>
+                      <Text style={[style.status, {fontSize: 64}]}>{props.world.name}</Text>
                     }
                 </Animated.View>
               }
