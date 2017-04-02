@@ -2,13 +2,9 @@
 
 import React                        from 'react'
 import Component                    from './Component'
-import Text                         from './Text'
+import ContinueBundlesView          from '../views/ContinueBundlesView'
 import {connect}                    from 'react-redux'
 import {purchase, restorePurchases} from '../actions/purchases'
-import {
-  TouchableOpacity,
-  View,
-} from 'react-native';
 
 class ContinueBundles extends Component {
   constructor(props) {
@@ -16,20 +12,6 @@ class ContinueBundles extends Component {
     this.state = { purchasing: false }
     this.restorePurchases = this.restorePurchases.bind(this)
     this.processPurchase  = this.processPurchase.bind(this)
-  }
-
-  processPurchase(productId) {
-    const count =
-      productId == 'com.superserious.eggpeg.continue4' ? 4 :
-      productId == 'com.superserious.eggpeg.continue50' ? 50 :
-      productId == 'com.superserious.eggpeg.continue5000' ? 5000 :
-      null;
-
-    if( !count ) {
-      return alert('Oh no! Something went wrong on our end. Please contact help@superserious.co.')
-    }
-
-    this.props.dispatch({type: 'continues:add', pack: productId, count: count})
   }
 
   restorePurchases() {
@@ -66,30 +48,22 @@ class ContinueBundles extends Component {
     })
   }
 
+  processPurchase(productId) {
+    const count =
+      productId == 'com.superserious.eggpeg.continue4' ? 4 :
+      productId == 'com.superserious.eggpeg.continue50' ? 50 :
+      productId == 'com.superserious.eggpeg.continue5000' ? 5000 :
+      null;
+
+    if( !count ) {
+      return alert('Oh no! Something went wrong on our end. Please contact help@superserious.co.')
+    }
+
+    this.props.dispatch({type: 'continues:add', pack: productId, count: count})
+  }
+
   render() { return (
-    <View style={{padding: 80}}>
-      { (this.props.products || []).map((p, key) => (
-        <TouchableOpacity key={key} onPress={() => this.buy(p.identifier)}>
-          <Text style={{marginBottom: 20}}>
-            { p.identifier === 'com.superserious.eggpeg.continue4' ?
-              `4 for ${p.priceString}`
-            : p.identifier === 'com.superserious.eggpeg.continue5000' ?
-              `5,000! ${p.priceString}`
-            :
-              `${p.title} for ${p.priceString}`
-            }
-          </Text>
-        </TouchableOpacity>
-      ))}
-
-      <TouchableOpacity onPress={this.restorePurchases}>
-        <Text>Restore Purchases</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => this.props.dispatch({type: 'scene:pop'})}>
-        <Text>Back</Text>
-      </TouchableOpacity>
-    </View>
+    <ContinueBundlesView {...this.props} buy={this.buy} restorePurchases={this.restorePurchases} />
   )}
 }
 
@@ -101,4 +75,12 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(ContinueBundles)
+function mapDispatchToProps(dispatch) {
+  return {
+    back: () => {
+      this.props.dispatch({type: 'scene:pop'})
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContinueBundles)
