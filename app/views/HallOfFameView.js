@@ -5,6 +5,7 @@ import Component from '../components/Component'
 import Text      from '../components/Text'
 import {colors}   from '../styles/base'
 import {
+  Dimensions,
   Image,
   Platform,
   RefreshControl,
@@ -17,6 +18,8 @@ import {
   View,
 } from 'react-native';
 
+const {width} = Dimensions.get('window')
+
 // Can't be stateless bc of the ref
 export default class HallOfFameView extends Component {
   render() {
@@ -27,7 +30,7 @@ export default class HallOfFameView extends Component {
       <StatusBar hidden/>
 
       <View style={style.header}>
-        <View style={{position: 'absolute', paddingTop: 20, left: 0, right: 0, flexDirection: 'row', justifyContent: 'center'}}>
+        <View style={style.title}>
           <Text>HALL OF FAME</Text>
         </View>
         <TouchableOpacity style={[style.leftNav, {justifyContent: 'center'}]} onPress={props.back}>
@@ -91,12 +94,12 @@ export default class HallOfFameView extends Component {
 function RainbowBackground(props) {
   return (
     <View style={{position: 'absolute'}}>
-      <View style={{width: '100%', height: 14, backgroundColor: colors.green }} />
-      <View style={{width: '100%', height: 14, backgroundColor: colors.yellow }} />
-      <View style={{width: '100%', height: 14, backgroundColor: colors.orange }} />
-      <View style={{width: '100%', height: 14, backgroundColor: colors.red }} />
-      <View style={{width: '100%', height: 14, backgroundColor: colors.purple }} />
-      <View style={{width: '100%', height: 14, backgroundColor: colors.blue }} />
+      <View style={{width: width, height: 14, backgroundColor: colors.green }} />
+      <View style={{width: width, height: 14, backgroundColor: colors.yellow }} />
+      <View style={{width: width, height: 14, backgroundColor: colors.orange }} />
+      <View style={{width: width, height: 14, backgroundColor: colors.red }} />
+      <View style={{width: width, height: 14, backgroundColor: colors.purple }} />
+      <View style={{width: width, height: 14, backgroundColor: colors.blue }} />
     </View>
   )
 }
@@ -168,6 +171,14 @@ const style = StyleSheet.create({
   },
   leaderboard: {
     flex: 1,
+  },
+  title: {
+    position: 'absolute',
+    paddingTop: 20,
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   place: {
     fontSize: 18,
