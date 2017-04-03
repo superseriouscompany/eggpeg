@@ -327,6 +327,12 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       velocity: 1,
     },
     {
+      name: 'circle jam',
+      max: 50,
+      targets: circleJam(10),
+      velocity: 1,
+    },
+    {
       name: 'X Marks the Spot',
       max: 80,
       targets: [
@@ -395,6 +401,16 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       ],
     }
   ]
+
+  function circleJam(count) {
+    const targets = []
+    for( var i = 0; i < count; i++ ) {
+      targets.push({
+        points: circle(xcenter, ycenter, 150, i * (360/count))
+      })
+    }
+    return targets
+  }
 
   function jam(count, distance) {
     const targets = []
