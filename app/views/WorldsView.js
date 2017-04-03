@@ -162,7 +162,7 @@ class World extends Component {
                           : props.world.percentage === 1 ?
                             `/${props.world.maxScore}`
                           :
-                            `${Math.round(props.world.percentage*100)}%`
+                            ` ${Math.round(props.world.percentage*100)}%`
                           }
                         </Text>
                       </View>
@@ -205,9 +205,10 @@ const style = StyleSheet.create({
   },
   scoresContainer: {
     justifyContent: 'center',
-    alignItems:     'center',
-    marginTop: 40,
-    paddingBottom: 25,
+    alignItems:     'flex-end',
+    paddingBottom: 10,
+    paddingRight: 17,
+    paddingTop: 7
   },
   activeContainer: {
     zIndex: 1,
@@ -225,7 +226,7 @@ const style = StyleSheet.create({
   },
   topScore: {
     fontSize: 64,
-    textAlign: 'center',
+    textAlign: 'right',
   },
   hint: {
     marginTop: 15,
@@ -237,6 +238,8 @@ const style = StyleSheet.create({
     fontSize: 18,
     fontStyle: 'italic',
     marginTop: -5,
+    textAlign: 'right',
+    paddingRight: 5,
   },
   greyedOut: {
     opacity: 0.5,
