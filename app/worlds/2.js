@@ -16,25 +16,6 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       ],
     },
     {
-      name: 'hyperactive brother',
-      max: 20,
-      targets: [
-        {
-          points: [
-            { x: 0, y: ycenter },
-            { x: width, y: ycenter },
-          ],
-          velocity: 1,
-        },
-        {
-          points: [
-            { x: xcenter, y: ycenter },
-          ],
-          velocity: 0,
-        },
-      ],
-    },
-    {
       name: 'linked',
       max: 20,
       targets: [
