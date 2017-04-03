@@ -1,4 +1,4 @@
-import {concentric, backtrack} from './patterns'
+import {circle, concentric, backtrack} from './patterns'
 
 module.exports = function(xcenter, ycenter, width, height, targetWidth) {
   return [
@@ -111,6 +111,28 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
             { x: xcenter, y: ycenter - 60 },
             { x: xcenter, y: ycenter + 60 },
           ]
+        },
+      ],
+      velocity: 2,
+    },
+    {
+      name: 'Synchronized swimming',
+      max: 25,
+      targets: [
+        {
+          points: circle(xcenter, ycenter, 40, 270),
+        },
+        {
+          points: circle(xcenter - 100, ycenter - 100, 40, 270),
+        },
+        {
+          points: circle(xcenter + 100, ycenter - 100, 40, 270),
+        },
+        {
+          points: circle(xcenter - 100, ycenter + 100, 40, 270),
+        },
+        {
+          points: circle(xcenter + 100, ycenter + 100, 40, 270),
         },
       ],
       velocity: 2,
