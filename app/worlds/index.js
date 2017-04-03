@@ -12,24 +12,26 @@ const worlds = [{
   targetColor: colors.red,
   deadColor:   colors.darkbeige,
   lightColor:  colors.white,
-  levels: require('./Demo')(xcenter, ycenter, width, height, config.sizes.target)
+  levels:      require('./Demo')(xcenter, ycenter, width, height, config.sizes.target)
 }, {
   name:        '1',
   color:       colors.green,
   targetColor: colors.orange,
   deadColor:   colors.darkgreen,
   lightColor:  colors.lightgreen,
-  levels: require('./1')(xcenter, ycenter, width, height, config.sizes.target)
+  velocity:    .5,
+  levels:      require('./1')(xcenter, ycenter, width, height, config.sizes.target)
 },
 {
-  name: '2',
+  name:        '2',
   color:       colors.yellow,
   targetColor: colors.purple,
   deadColor:   colors.darkyellow,
   lightColor:  colors.lightyellow,
   yolkColor:   'orange',
-  locked: true,
-  levels: require('./2')(xcenter, ycenter, width, height, config.sizes.target)
+  locked:      true,
+  velocity:    1,
+  levels:      require('./2')(xcenter, ycenter, width, height, config.sizes.target)
 }, {
   name:        '3',
   color:       colors.orange,
@@ -58,7 +60,8 @@ export default worlds.map((w) => {
       yolkColor:   w.yolkColor,
       deadColor:   w.deadColor,
       targets: l.targets.map((t) => {
-        if( !t.velocity ) { console.warn('no velocity set for a target', l.name)}
+        if( !t.velocity && !w.velocity ) { console.warn('no velocity set for a target', l.name)}
+        t.velocity = t.velocity || l.velocity || w.velocity
 
         const radius = (t.width || config.sizes.target)/2
         // flatten points array
