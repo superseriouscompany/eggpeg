@@ -154,7 +154,17 @@ class World extends Component {
                     { props.world.score ?
                       <View>
                         <Text style={style.status}>{props.world.score || '---'}</Text>
-                        <Text style={[style.status, style.points]}>pts</Text>
+                        <Text style={[style.status, style.points]}>
+                          { !props.world.percentage ?
+                            '0%'
+                          : props.world.percentage === 1 && props.world.score == props.world.maxScore ?
+                            'complete!'
+                          : props.world.percentage === 1 ?
+                            `/${props.world.maxScore}`
+                          :
+                            `${Math.round(props.world.percentage*100)}%`
+                          }
+                        </Text>
                       </View>
                     :
                       <Text style={[style.status, {fontSize: 64}]}>{props.world.name}</Text>
@@ -162,19 +172,6 @@ class World extends Component {
                 </Animated.View>
               }
           </Animated.View>
-          <Text style={style.maxScore}>
-            { props.world.comingSoon ?
-              'coming soon'
-            : props.world.locked ?
-              'locked'
-            : !props.world.percentage ?
-              '0%'
-            : props.world.percentage === 1 ?
-              `${props.world.score}/${props.world.maxScore}`
-            :
-              `${Math.round(props.world.percentage*100)}%`
-            }
-          </Text>
         </View>
       </TouchableWithoutFeedback>
     )
@@ -276,9 +273,9 @@ const style = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   points: {
-    marginTop: -20,
+    marginTop: -10,
     marginBottom: 4,
-    fontSize: 32,
+    fontSize: 18,
     backgroundColor: 'transparent',
   },
   maxScore: {
