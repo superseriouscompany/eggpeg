@@ -61,10 +61,10 @@ export default class WorldsView extends Component {
 
             <View>
               { props.shouldInduct ?
-                <TouchableOpacity onPress={() => props.induct(props.topScore)}>
-                  <Text style={style.topScore}>{props.topScore}</Text>
-                  <Text key={'enter-hof'} style={[style.leaderboard, {textDecorationLine: 'underline'}]}>
-                    Enter the Hall of Fame!
+                <TouchableOpacity style={style.hofButton} onPress={() => props.induct(props.topScore)}>
+                  <Text key={'enter-hof-score'} style={[style.topScore, {color: 'white'}]}>{props.topScore}</Text>
+                  <Text key={'enter-hof'} style={[style.leaderboard, {color: 'white'}]}>
+                    Enter Hall of Fame!
                   </Text>
                 </TouchableOpacity>
               :
@@ -224,9 +224,21 @@ const style = StyleSheet.create({
     zIndex:          1,
     backgroundColor: 'transparent',
   },
+  hofButton: {
+    backgroundColor: colors.green,
+    borderRadius:   5,
+    borderBottomWidth: 2,
+    borderColor:       'rgba(0,0,0,0.5)',
+    paddingRight: 10,
+    paddingBottom: 5,
+    paddingLeft: 50,
+    marginRight: -10,
+    marginBottom: -5,
+  },
   topScore: {
     fontSize: 64,
     textAlign: 'right',
+    backgroundColor: 'transparent',
   },
   hint: {
     marginTop: 15,
@@ -240,6 +252,7 @@ const style = StyleSheet.create({
     marginTop: -5,
     textAlign: 'right',
     paddingRight: 5,
+    backgroundColor: 'transparent',
   },
   greyedOut: {
     opacity: 0.5,
