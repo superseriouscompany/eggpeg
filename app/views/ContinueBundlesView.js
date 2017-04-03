@@ -2,6 +2,7 @@ import React    from 'react'
 import Text     from '../components/Text'
 import {colors} from '../styles/base'
 import {
+  Image,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -10,8 +11,10 @@ import {
 export default function ContinueBundlesView(props) {
   return (
     <View style={style.container}>
-      <TouchableOpacity style={style.back} onPress={props.exit}>
-        <Text style={style.backText}>&lt;</Text>
+      <TouchableOpacity style={style.leftNav} onPress={props.exit}>
+        <View style={[style.backButton, {height: 38, width: 38, paddingRight: 2}]}>
+          <Image source={require('../images/LeftBackArrow.png')}/>
+        </View>
       </TouchableOpacity>
       <TouchableOpacity style={style.restore} onPress={props.restorePurchases}>
         <Text style={style.restoreText}>Restore Purchases</Text>
@@ -63,15 +66,19 @@ const style = StyleSheet.create({
     paddingRight:    30,
     alignItems:      'center',
   },
-  back: {
+  leftNav: {
     position: 'absolute',
-    left: 21,
-    top: 20,
-    backgroundColor: 'white',
-    padding: 9,
+    top: 0,
+    left: 0,
+    padding: 20,
+    paddingRight: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0)'
   },
-  backText: {
-    color: 'hotpink',
+  backButton: {
+    backgroundColor: 'white',
+    borderRadius:    5,
+    alignItems:      'center',
+    justifyContent:  'center',
   },
   restore: {
     position: 'absolute',
