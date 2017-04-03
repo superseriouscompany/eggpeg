@@ -321,6 +321,12 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       velocity: 2,
     },
     {
+      name: 'traffic jam',
+      max: 100,
+      targets: jam(10, 50),
+      velocity: 1,
+    },
+    {
       name: 'X Marks the Spot',
       max: 80,
       targets: [
@@ -389,4 +395,19 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       ],
     }
   ]
+
+  function jam(count, distance) {
+    const targets = []
+    for( var i = 0; i < count; i++ ) {
+      targets.push({
+        points: [
+          { x: xcenter, y: 70 + (distance * i) },
+          { x: xcenter, y: height },
+          { x: xcenter, y: 0},
+        ]
+      })
+    }
+
+    return targets
+  }
 }
