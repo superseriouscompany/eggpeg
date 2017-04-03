@@ -7,13 +7,14 @@ import config                        from '../config'
 import StartView                     from '../views/StartView'
 import RatingRequestor               from 'react-native-rating-requestor'
 const RatingTracker = new RatingRequestor('1212152764', {
-  title: 'Do you like us?',
-  message: 'Do you think we\'re cool',
+  title: 'Rate us, for the love of God',
+  message: 'We need this to survive.',
   actionLabels: {
     decline: 'Nope',
     delay: 'Maybe later...',
     accept: 'Sure!',
   },
+  order: ['delay', 'decline', 'accept'],
   timingFunction: (count) => {
     return true
   },
