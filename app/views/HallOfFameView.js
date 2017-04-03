@@ -108,7 +108,7 @@ function RainbowBackground(props) {
 function Score(props) {
   return (
     <View style={[style.scoreContainer, {backgroundColor: props.color}, props.mine ? style.mine : null]}>
-      { props.mine ? <RainbowBar/> : null }
+      { props.mine ? <RainbowBackground/> : null }
       <Text style={style.place}>{props.place}</Text>
       <Text style={style.name} adjustsFontSizeToFit={true} numberOfLines={1}>
         {props.name}
@@ -166,6 +166,7 @@ const style = StyleSheet.create({
     color: 'white',
     fontSize: 32,
     marginRight: 20,
+    paddingLeft: 20,
   },
   leaderboard: {
     flex: 1,
