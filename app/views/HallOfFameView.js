@@ -3,7 +3,9 @@
 import React     from 'react'
 import Component from '../components/Component'
 import Text      from '../components/Text'
+import {colors}   from '../styles/base'
 import {
+  Dimensions,
   Image,
   Platform,
   RefreshControl,
@@ -15,6 +17,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+
+const screenWidth = Dimensions.get('window').width;
 
 // Can't be stateless bc of the ref
 export default class HallOfFameView extends Component {
@@ -62,8 +66,16 @@ export default class HallOfFameView extends Component {
               <Score place={key+1} name={s.name} mine={s.score == props.myScore.score && s.name == props.myScore.name } score={s.score} color={color(key)}/>
             :
               <View style={[style.scoreContainer, style.scoreInputContainer, style.mine, {
-                backgroundColor: color(key),
+                backgroundColor: 'color(key)',
               }]}>
+                <View style={{position: 'absolute'}}>
+                  <View style={{width: screenWidth, height: 14, backgroundColor: colors.green }} />
+                  <View style={{width: screenWidth, height: 14, backgroundColor: colors.yellow }} />
+                  <View style={{width: screenWidth, height: 14, backgroundColor: colors.orange }} />
+                  <View style={{width: screenWidth, height: 14, backgroundColor: colors.red }} />
+                  <View style={{width: screenWidth, height: 14, backgroundColor: colors.purple }} />
+                  <View style={{width: screenWidth, height: 14, backgroundColor: colors.blue }} />
+                </View>
                 <Text style={style.place}>{key+1}</Text>
                 <TextInput
                   autoCapitalize={'none'}
