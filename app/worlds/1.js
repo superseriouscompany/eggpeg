@@ -120,6 +120,20 @@ module.exports = function(xcenter, ycenter, width, height, left, top) {
         }
       ]
     },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     {
       name: 'Slow line and circle',
       max: 20,
