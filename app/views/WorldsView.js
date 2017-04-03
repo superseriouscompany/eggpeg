@@ -225,7 +225,7 @@ const style = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   hofButton: {
-    backgroundColor: colors.blue,
+    backgroundColor: colors.green,
     borderRadius:   5,
     borderBottomWidth: 2,
     borderColor:       'rgba(0,0,0,0.5)',
