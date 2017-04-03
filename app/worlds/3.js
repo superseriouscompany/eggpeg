@@ -3,34 +3,6 @@ import {concentric, backtrack} from './patterns'
 module.exports = function(xcenter, ycenter, width, height, targetWidth) {
   return [
     {
-      name: 'Concentric Box',
-      max: 5,
-      targets: [
-        {
-          points: concentric({x: xcenter, y: ycenter, step: 20, max: 200}),
-          velocity: 1,
-        }
-      ],
-    },
-    {
-      name: 'Jagged Edge',
-      max: 5,
-      targets: [
-        {
-          points: backtrack([
-            { x: xcenter - 150, y: ycenter - 100 },
-            { x: xcenter - 100, y: ycenter + 100 },
-            { x: xcenter - 50, y: ycenter - 100 },
-            { x: xcenter, y: ycenter + 100 },
-            { x: xcenter + 50, y: ycenter - 100 },
-            { x: xcenter + 100, y: ycenter + 100 },
-            { x: xcenter + 150, y: ycenter - 100 },
-          ]),
-          velocity: 1,
-        }
-      ],
-    },
-    {
       name: 'Fast Guy',
       max: 5,
       targets: [
@@ -62,6 +34,58 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
           velocity: 0.5,
         },
       ],
+    },
+
+    {
+      name: 'Superfast drop',
+      max: 5,
+      targets: [
+        {
+          points: [
+            { x: xcenter, y: 0 },
+            { x: xcenter, y: height, velocity: 3 },
+          ],
+          velocity: .5,
+        }
+      ]
+    },
+    {
+      name: 'Superfast',
+      max: 5,
+      targets: [
+        {
+          points: [
+            { x: 0, y: height },
+            { x: width, y: 0},
+          ],
+          velocity: 3,
+        }
+      ],
+    },
+    {
+      name: 'Fast asterisk',
+      max: 5 * 3 * 3,
+      targets: [
+        {
+          points: [
+            { x: xcenter - 60, y: ycenter + 60 },
+            { x: xcenter + 60, y: ycenter - 60 },
+          ]
+        },
+        {
+          points: [
+            { x: xcenter + 60, y: ycenter + 60 },
+            { x: xcenter - 60, y: ycenter - 60 },
+          ]
+        },
+        {
+          points: [
+            { x: xcenter, y: ycenter - 60 },
+            { x: xcenter, y: ycenter + 60 },
+          ]
+        },
+      ],
+      velocity: 2,
     },
     {
       name: 'X Marks the Spot',
@@ -95,19 +119,6 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
           ],
           velocity: 1,
         },
-      ],
-    },
-    {
-      name: 'Superfast',
-      max: 5,
-      targets: [
-        {
-          points: [
-            { x: 0, y: height },
-            { x: width, y: 0},
-          ],
-          velocity: 3,
-        }
       ],
     },
     {

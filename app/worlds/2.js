@@ -234,6 +234,7 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
         },
       ]
     },
+
     {
       name: 'vesuvian man',
       max: 10,
@@ -251,6 +252,6 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
           ],
         }
       ],
-    }
+    },
   ]
 }
