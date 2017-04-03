@@ -351,6 +351,15 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       velocity: 1,
     },
     {
+      name: 'guitar',
+      max: 70,
+      targets: [
+        guitarStrings(60),
+        guitarFrets(60),
+      ],
+      velocity: 1,
+    },
+    {
       name: 'X Marks the Spot',
       max: 80,
       targets: [
@@ -419,6 +428,34 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       ],
     }
   ]
+
+  function guitarFrets(distance) {
+    const targets = []
+    for( var i = 0; i < 5; i++ ) {
+      const x = xcenter - 120 + (i * 60)
+      targets.push({
+        points: [
+          { x: x, y: ycenter - distance },
+          { x: x, y: ycenter + distance }
+        ]
+      })
+    }
+    return targets
+  }
+
+  function guitarStrings(separation) {
+    const targets = []
+    for( var i = 0; i < 3; i++ ) {
+      const y = ycenter - separation + (i * separation);
+      targets.push({
+        points: [
+          { x: xcenter - 60 * 2, y: y, },
+          { x: xcenter + 60 * 2, y: y},
+        ]
+      })
+    }
+    return targets
+  }
 
   function pigeon(options) {
     const {x,y} = options
