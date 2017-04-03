@@ -17,7 +17,7 @@ export default function ContinueBundlesView(props) {
         </View>
       </TouchableOpacity>
       <TouchableOpacity style={style.restore} onPress={props.restorePurchases}>
-        <Text style={style.restoreText}>Restore Purchases</Text>
+        <Text style={style.restoreText}>restore purchases</Text>
       </TouchableOpacity>
 
       <Text style={style.proclamation}>
@@ -82,11 +82,14 @@ const style = StyleSheet.create({
   },
   restore: {
     position: 'absolute',
-    right: 21,
-    top: 20,
+    top: 0,
+    right: 0,
+    padding: 26,
+    paddingRight: 21,
   },
   restoreText: {
     color: 'white',
+    fontStyle: 'italic',
   },
   buttonsContainer: {
     flex: 1,
