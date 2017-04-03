@@ -68,14 +68,7 @@ export default class HallOfFameView extends Component {
               <View style={[style.scoreContainer, style.scoreInputContainer, style.mine, {
                 backgroundColor: 'color(key)',
               }]}>
-                <View style={{position: 'absolute'}}>
-                  <View style={{width: screenWidth, height: 14, backgroundColor: colors.green }} />
-                  <View style={{width: screenWidth, height: 14, backgroundColor: colors.yellow }} />
-                  <View style={{width: screenWidth, height: 14, backgroundColor: colors.orange }} />
-                  <View style={{width: screenWidth, height: 14, backgroundColor: colors.red }} />
-                  <View style={{width: screenWidth, height: 14, backgroundColor: colors.purple }} />
-                  <View style={{width: screenWidth, height: 14, backgroundColor: colors.blue }} />
-                </View>
+                <RainbowBackground/>
                 <Text style={style.place}>{key+1}</Text>
                 <TextInput
                   autoCapitalize={'none'}
@@ -95,6 +88,19 @@ export default class HallOfFameView extends Component {
       </ScrollView>
     </View>
   )}
+}
+
+function RainbowBackground(props) {
+  return (
+    <View style={{position: 'absolute'}}>
+      <View style={{width: screenWidth, height: 14, backgroundColor: colors.green }} />
+      <View style={{width: screenWidth, height: 14, backgroundColor: colors.yellow }} />
+      <View style={{width: screenWidth, height: 14, backgroundColor: colors.orange }} />
+      <View style={{width: screenWidth, height: 14, backgroundColor: colors.red }} />
+      <View style={{width: screenWidth, height: 14, backgroundColor: colors.purple }} />
+      <View style={{width: screenWidth, height: 14, backgroundColor: colors.blue }} />
+    </View>
+  )
 }
 
 function Score(props) {
