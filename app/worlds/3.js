@@ -360,6 +360,14 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       velocity: 1,
     },
     {
+      name: 'triple double',
+      max: 90,
+      targets: [
+        triple(ycenter - 150),
+        triple(ycenter + 150),
+      ]
+    },
+    {
       name: 'X Marks the Spot',
       max: 80,
       targets: [
@@ -428,6 +436,33 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       ],
     }
   ]
+
+  function triple(y) {
+    const targets = [
+      {
+        velocity: .5,
+        points: [
+          { x: 0, y: y, },
+          { x: width, y: y, },
+        ],
+      },
+      {
+        velocity: 1,
+        points: [
+          { x: 0, y: y, },
+          { x: width, y: y, },
+        ],
+      },
+      {
+        velocity: 2,
+        points: [
+          { x: 0, y: y, },
+          { x: width, y: y, },
+        ],
+      },
+    ]
+    return targets
+  }
 
   function guitarFrets(distance) {
     const targets = []
