@@ -49,6 +49,8 @@ export function steps(opts) {
 
 // http://gamedev.stackexchange.com/questions/9607/moving-an-object-in-a-circular-path
 export function circle(x, y, radius) {
+  if( !x || !y || !radius ) { console.warn('Bad inputs to circle:', x, y, radius) }
+
   let points = []
   for( var deg = 0; deg < 360; deg += 10 ) {
     // http://www.rapidtables.com/convert/number/degrees-to-radians.htm

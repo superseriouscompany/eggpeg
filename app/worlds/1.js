@@ -1,4 +1,5 @@
-import {steps} from './patterns'
+import {steps, circle} from './patterns'
+import config from '../config'
 
 module.exports = function(xcenter, ycenter, width, height) {
   const levels = [
@@ -12,28 +13,49 @@ module.exports = function(xcenter, ycenter, width, height) {
             { x: xcenter + 10, y: ycenter },
           ],
           velocity: .5,
-      }
+        },
       ],
     },
     {
-      name: 'two headed vibrator',
-      max: 10,
+      name: 'slow circle',
+      max: 5,
+      targets: [
+        {
+          points: circle(xcenter, ycenter, 20),
+          velocity: .5,
+        },
+      ]
+    },
+    {
+      name: 'slow t',
+      max: 5,
       targets: [
         {
           points: [
-            { x: xcenter - 50, y: ycenter - 10 - 100},
-            { x: xcenter - 50, y: ycenter + 10 - 100},
+            { x: xcenter, y: ycenter - 40 },
+            { x: xcenter, y: ycenter },
+            { x: xcenter + 40, y: ycenter },
+            { x: xcenter - 40, y: ycenter },
+            { x: xcenter, y: ycenter },
           ],
           velocity: .5,
-        },
+        }
+      ]
+    },
+    {
+      name: 'slow line circle',
+      max: 5,
+      targets: [
         {
           points: [
-            { x: xcenter + 50, y: ycenter - 10 + 100},
-            { x: xcenter + 50, y: ycenter + 10 + 100},
+            { x: width, y: ycenter },
+            { x: xcenter + 100, y: ycenter },
+            circle(xcenter +50, ycenter, 50),
+            { x: width, y: ycenter },
           ],
           velocity: .5,
-        },
-      ],
+        }
+      ]
     },
     {
       name: 'Solo slow',
@@ -53,62 +75,51 @@ module.exports = function(xcenter, ycenter, width, height) {
       max: 5,
       targets: [
         {
-          points: steps({x: xcenter - 100, y: ycenter - 100, distance: 20, steps: 10}),
+          points: steps({x: xcenter - 100, y: ycenter - 100, distance: 20, steps: 10}).reverse(),
           velocity: .5,
         }
       ],
     },
     {
-      name: 'Slow Meeting',
-      max: 20,
+      name: 'Slow drop',
+      max: 5,
       targets: [
         {
           points: [
-            { x: xcenter - 100, y: ycenter - 50 },
-            { x: xcenter - 4,   y: ycenter - 50 },
-            { x: xcenter - 4,   y: ycenter + 50, velocity: 0.3 },
-            { x: xcenter - 100, y: ycenter + 50 },
+            { x: xcenter, y: 0 },
+            { x: xcenter, y: ycenter, velocity: 1, },
           ],
-          velocity: 1,
-        },
-        {
-          points: [
-            { x: xcenter + 100, y: ycenter - 50 },
-            { x: xcenter + 4,   y: ycenter - 50 },
-            { x: xcenter + 4,   y: ycenter + 50, velocity: 0.3 },
-            { x: xcenter + 100, y: ycenter + 50 },
-          ],
-          velocity: 1,
-        },
-      ],
+          velocity: .5,
+        }
+      ]
     },
     {
-      name: 'three headed vibrator',
-      max: 15,
+      name: 'Slow triangle',
+      max: 5,
       targets: [
         {
           points: [
-            { x: xcenter - 50, y: ycenter - 10 - 100},
-            { x: xcenter - 50, y: ycenter + 10 - 100},
+            { x: 0, y: 0 },
+            { x: 0, y: 50 },
+            { x: 50, y: 50 },
           ],
           velocity: .5,
-        },
-        {
-          points: [
-            { x: xcenter - 10, y: ycenter },
-            { x: xcenter + 10, y: ycenter },
-          ],
-          velocity: .5,
-        },
-        {
-          points: [
-            { x: xcenter + 50, y: ycenter - 10 + 100},
-            { x: xcenter + 50, y: ycenter + 10 + 100},
-          ],
-          velocity: .5,
-        },
-      ],
+        }
+      ]
     },
+    {
+      name: 'Slow diagonal',
+      max: 5,
+      targets: [
+        {
+          points: [
+            { x: xcenter - 100, y: ycenter + 100 },
+            { x: xcenter + 100, y: ycenter - 100 },
+          ],
+          velocity: .5,
+        }
+      ]
+    }
   ]
-  return __DEV__ ? levels.slice(0,1) : levels
+  return config.shortWorld ? levels.slice(0,1) : levels
 }
