@@ -34,7 +34,6 @@ export default class Victory extends Component {
     score: PropTypes.number.isRequired,
     reset: PropTypes.func.isRequired,
     isHighScore: PropTypes.bool.isRequired,
-    highScores:  PropTypes.arrayOf(PropTypes.number).isRequired,
   }
 
   componentDidMount() {
