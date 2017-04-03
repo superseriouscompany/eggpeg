@@ -6,10 +6,26 @@ import HallOfFameView                     from '../views/HallOfFameView'
 import {connect}                          from 'react-redux'
 import {enqueueRetry}                     from '../actions/retry'
 import {postScore, stubScore, loadScores} from '../actions/leaderboard'
+import RatingRequestor                    from 'react-native-rating-requestor'
+import config                             from '../config'
 import {
   Platform,
   Share,
 } from 'react-native';
+
+const RatingTracker = new RatingRequestor('1212152764', {
+  title: 'Rate us, for the love of God',
+  message: 'We need this to survive.',
+  actionLabels: {
+    decline: 'Nope',
+    delay: 'Maybe later...',
+    accept: 'Sure!',
+  },
+  order: ['delay', 'decline', 'accept'],
+  timingFunction: (count) => {
+    return true
+  },
+});
 
 class HallOfFame extends Component {
   constructor(props) {
@@ -53,6 +69,9 @@ class HallOfFame extends Component {
 
     this.props.dispatch(stubScore(this.props.score, this.state.name))
     this.props.dispatch({type: 'score:record', top: this.props.score, name: this.state.name })
+    setTimeout(() => {
+      RatingTracker.handlePositiveEvent()
+    }, config.timings.ratingDelay)
     this.props.back()
     return this.props.dispatch(postScore(this.props.score, this.state.name)).catch((err) => {
       this.props.dispatch(enqueueRetry({type: 'postScore', score: this.props.score, name: this.state.name}))
