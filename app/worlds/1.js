@@ -1,7 +1,7 @@
 import {steps, circle} from './patterns'
 import config from '../config'
 
-module.exports = function(xcenter, ycenter, width, height) {
+module.exports = function(xcenter, ycenter, width, height, left, top) {
   const levels = [
     {
       name: 'vibrator',
@@ -100,8 +100,8 @@ module.exports = function(xcenter, ycenter, width, height) {
         {
           points: [
             { x: 0, y: 0 },
-            { x: 0, y: 50 },
-            { x: 50, y: 50 },
+            { x: 20 + 50, y: 0 },
+            { x: 0, y: 70 + 50 },
           ],
           velocity: .5,
         }
