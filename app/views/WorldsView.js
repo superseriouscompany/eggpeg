@@ -153,7 +153,9 @@ class World extends Component {
                 } : null]}>
                     { props.world.score ?
                       <View>
-                        <Text style={style.status}>{props.world.score || '---'}</Text>
+                        <Text style={style.status}>
+                          {props.world.score || '---'}
+                        </Text>
                         <Text style={[style.status, style.points]}>
                           { !props.world.percentage ?
                             '0%'
@@ -194,7 +196,7 @@ const style = StyleSheet.create({
     width:           '50%',
     alignItems:     'center',
     justifyContent: 'center',
-    paddingBottom: 11,
+    paddingBottom: 0,
   },
   leftNav: {
     position:        'absolute',
