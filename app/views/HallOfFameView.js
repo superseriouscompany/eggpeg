@@ -162,6 +162,7 @@ const style = StyleSheet.create({
   input: {
     height: 52,
     flex: 1,
+    borderRadius: 1,
     alignItems: 'center',
     color: 'white',
     fontSize: 32,
