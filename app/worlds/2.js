@@ -47,7 +47,7 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
         },
         {
           points: [
-            { x: 30, y: ycenter },
+            { x: 40, y: ycenter },
             { x: width, y:ycenter },
             { x: 0, y: ycenter },
           ],
