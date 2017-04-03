@@ -167,8 +167,9 @@ const style = StyleSheet.create({
     color: 'white',
     fontSize: 32,
     marginRight: 20,
-    paddingLeft: 6,
     marginLeft: -6,
+    paddingLeft: 6,
+    fontFamily: 'Futura-Medium'
   },
   leaderboard: {
     flex: 1,
