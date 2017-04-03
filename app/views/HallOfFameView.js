@@ -3,7 +3,9 @@
 import React     from 'react'
 import Component from '../components/Component'
 import Text      from '../components/Text'
+import {colors}   from '../styles/base'
 import {
+  Dimensions,
   Image,
   Platform,
   RefreshControl,
@@ -16,6 +18,8 @@ import {
   View,
 } from 'react-native';
 
+const {width} = Dimensions.get('window')
+
 // Can't be stateless bc of the ref
 export default class HallOfFameView extends Component {
   render() {
@@ -26,7 +30,7 @@ export default class HallOfFameView extends Component {
       <StatusBar hidden/>
 
       <View style={style.header}>
-        <View style={{position: 'absolute', paddingTop: 20, left: 0, right: 0, flexDirection: 'row', justifyContent: 'center'}}>
+        <View style={style.title}>
           <Text>HALL OF FAME</Text>
         </View>
         <TouchableOpacity style={[style.leftNav, {justifyContent: 'center'}]} onPress={props.back}>
@@ -64,18 +68,20 @@ export default class HallOfFameView extends Component {
               <View style={[style.scoreContainer, style.scoreInputContainer, style.mine, {
                 backgroundColor: color(key),
               }]}>
-                <Text style={style.place}>{key+1}</Text>
+                <RainbowBackground/>
                 <TextInput
                   autoCapitalize={'none'}
                   autoCorrect={false}
                   autoFocus={true}
                   placeholder={'your name'}
                   returnKeyType={'go'}
-                  style={style.input}
+                  style={[style.input, {
+                    backgroundColor: color(key),
+                  }]}
                   onSubmitEditing={props.postScore}
                   onChangeText={props.setName}
                   value={props.text} />
-                <Text style={style.score}>{s.score}!</Text>
+                <Text style={[style.score, {fontStyle: 'italic'}]}>{s.score}!</Text>
               </View>
             }
           </View>
@@ -85,9 +91,23 @@ export default class HallOfFameView extends Component {
   )}
 }
 
+function RainbowBackground(props) {
+  return (
+    <View style={{position: 'absolute'}}>
+      <View style={{width: width, height: 14, backgroundColor: colors.green }} />
+      <View style={{width: width, height: 14, backgroundColor: colors.yellow }} />
+      <View style={{width: width, height: 14, backgroundColor: colors.orange }} />
+      <View style={{width: width, height: 14, backgroundColor: colors.red }} />
+      <View style={{width: width, height: 14, backgroundColor: colors.purple }} />
+      <View style={{width: width, height: 14, backgroundColor: colors.blue }} />
+    </View>
+  )
+}
+
 function Score(props) {
   return (
     <View style={[style.scoreContainer, {backgroundColor: props.color}, props.mine ? style.mine : null]}>
+      { props.mine ? <RainbowBackground/> : null }
       <Text style={style.place}>{props.place}</Text>
       <Text style={style.name} adjustsFontSizeToFit={true} numberOfLines={1}>
         {props.name}
@@ -140,15 +160,27 @@ const style = StyleSheet.create({
     justifyContent: 'space-between',
   },
   input: {
-    height: 40,
+    height: 52,
     flex: 1,
-    backgroundColor: 'cornflowerblue',
+    borderRadius: 1,
+    alignItems: 'center',
     color: 'white',
     fontSize: 32,
     marginRight: 20,
+    marginLeft: -6,
+    paddingLeft: 6,
+    fontFamily: 'Futura-Medium'
   },
   leaderboard: {
     flex: 1,
+  },
+  title: {
+    position: 'absolute',
+    paddingTop: 20,
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
   place: {
     fontSize: 18,
@@ -161,14 +193,12 @@ const style = StyleSheet.create({
   },
   scoreContainer: {
     flexDirection: 'row',
-    backgroundColor: 'cornflowerblue',
     paddingLeft: 23,
     paddingTop: 19,
     paddingBottom: 22,
     paddingRight: 21,
   },
   scoreInputContainer: {
-    backgroundColor: 'hotpink',
   },
   name: {
     flex: 1,
@@ -180,6 +210,7 @@ const style = StyleSheet.create({
   score: {
     fontSize: 32,
     color: 'white',
+    backgroundColor: 'transparent',
   },
   mine: {
     backgroundColor: 'hotpink',

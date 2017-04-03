@@ -21,17 +21,17 @@ export default class WorldScore extends Component {
     setTimeout(() => {
       Animated.spring(this.state.anim, {
         toValue: 1,
-        friction: 3,
+        friction: 3.5,
         tension: 40,
       }).start()
     }, config.timings.worldScoreDelay)
   }
 
   render() { return (
-    <Animated.Text style={[{color: this.props.color}, {
+    <Animated.Text style={[{color: this.props.color, fontFamily: 'Futura-Medium'}, {
       fontSize: this.state.anim.interpolate({
         inputRange:  [0, 1],
-        outputRange: [256, 64],
+        outputRange: [256, 72],
       }),
       opacity: this.state.anim.interpolate({
         inputRange: [0, 0.1],

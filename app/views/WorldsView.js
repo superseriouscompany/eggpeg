@@ -63,14 +63,14 @@ export default class WorldsView extends Component {
               { props.shouldInduct ?
                 <TouchableOpacity onPress={() => props.induct(props.topScore)}>
                   <Text style={style.topScore}>{props.topScore}</Text>
-                  <Text style={style.leaderboard}>
-                    Put your name in the Hall of Fame!
+                  <Text key={'enter-hof'} style={[style.leaderboard, {textDecorationLine: 'underline'}]}>
+                    Enter the Hall of Fame!
                   </Text>
                 </TouchableOpacity>
               :
                 <TouchableOpacity onPress={props.showLeaderboard}>
                   <Text style={style.topScore}>{props.topScore}</Text>
-                  <Text style={style.leaderboard}>see top scores</Text>
+                  <Text key={'see-top-scores'} style={style.leaderboard}>see top scores</Text>
                 </TouchableOpacity>
               }
             </View>
@@ -129,7 +129,7 @@ class World extends Component {
           <Animated.View style={[style.preview, props.world.locked || props.world.comingSoon ? null : style.shadow, {
             backgroundColor: this.state.pulse.interpolate({
               inputRange: [0, 0.5, 1],
-              outputRange: [props.world.color, props.world.deadColor || colors.grey, props.world.color]
+              outputRange: [props.world.color, props.world.lightColor || 'hotpink', props.world.color]
             }),
           }, isActivating ? {
             transform: [{
@@ -157,7 +157,7 @@ class World extends Component {
                         <Text style={[style.status, style.points]}>pts</Text>
                       </View>
                     :
-                      <Text style={[style.status, {fontSize: 32}]}>{props.world.name}</Text>
+                      <Text style={[style.status, {fontSize: 64}]}>{props.world.name}</Text>
                     }
                 </Animated.View>
               }

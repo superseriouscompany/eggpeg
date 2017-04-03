@@ -27,7 +27,7 @@ export default function(props) {
       { props.beat ?
         <Victory
           score={props.score}
-          reset={props.reset}
+          reset={() => props.dispatch({type: 'scene:change', scene: 'Worlds'})}
           isHighScore={true} />
       :
         <View style={{flex: 1, backgroundColor: props.level.color}}>
@@ -52,11 +52,10 @@ export default function(props) {
           : null}
           <Level done={props.worldDone}/>
           { props.world.name !== 'Demo' && !props.worldDone ?
-            <View style={style.pauseContainer}>
-              <TouchableOpacity style={style.pauseButton} onPress={props.pause}>
-                <Text>||</Text>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity style={style.pauseContainer} onPress={props.pause}>
+              <View style={[style.pauseBar, {backgroundColor: props.level.deadColor}]}></View>
+              <View style={[style.pauseBar, {backgroundColor: props.level.deadColor}]}></View>
+            </TouchableOpacity>
           : null }
           <ProgressBar style={style.progressBar} progress={props.progress} color={props.level.deadColor}/>
 
@@ -109,9 +108,18 @@ const style = StyleSheet.create({
   pauseContainer: {
     position: 'absolute',
     left: 0,
-    bottom: 15,
+    padding: 20,
+    paddingLeft: 22,
+    paddingBottom: 23,
+    bottom: 0,
+    marginBottom: -7,
+    flexDirection: 'row',
   },
-  pauseButton: {
-    padding: 5,
+  pauseBar: {
+    height: 14,
+    width: 4,
+    marginLeft: 1.5,
+    marginRight: 1.5,
+    borderRadius: 1,
   },
 })

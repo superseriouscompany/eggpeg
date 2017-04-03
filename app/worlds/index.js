@@ -8,15 +8,17 @@ const ycenter    = height / 2;
 
 const worlds = [{
   name:        'Demo',
-  color:       colors.green,
-  targetColor: colors.orange,
-  deadColor:   colors.darkgreen,
+  color:       colors.beige,
+  targetColor: colors.red,
+  deadColor:   colors.darkbeige,
+  lightColor:  colors.white,
   levels: require('./Demo')(xcenter, ycenter, width, height, config.sizes.target)
 }, {
   name:        '1',
   color:       colors.green,
   targetColor: colors.orange,
   deadColor:   colors.darkgreen,
+  lightColor:  colors.lightgreen,
   levels: require('./1')(xcenter, ycenter, width, height, config.sizes.target)
 },
 {
@@ -24,6 +26,7 @@ const worlds = [{
   color:       colors.yellow,
   targetColor: colors.purple,
   deadColor:   colors.darkyellow,
+  lightColor:  colors.lightyellow,
   yolkColor:   'orange',
   locked: true,
   levels: require('./2')(xcenter, ycenter, width, height, config.sizes.target)
@@ -32,6 +35,7 @@ const worlds = [{
   color:       colors.orange,
   targetColor: colors.blue,
   deadColor:   colors.darkorange,
+  lightColor:  colors.lightorange,
   locked: true,
   levels: require('./3')(xcenter, ycenter, width, height, config.sizes.target)
 }]
