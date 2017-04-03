@@ -138,6 +138,53 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       velocity: 2,
     },
     {
+      name: 'hamsterdam',
+      max: 40,
+      targets: [
+        {
+          points: [
+            { x: xcenter - 150, y: ycenter - 20 },
+            { x: xcenter - 150, y: ycenter + 20 },
+          ]
+        },
+        {
+          points: [
+            { x: xcenter + 150, y: ycenter - 20 },
+            { x: xcenter + 150, y: ycenter + 20 },
+          ]
+        },
+        {
+          points: [
+            { x: xcenter - 20, y: ycenter - 150 },
+            { x: xcenter + 20, y: ycenter - 150 },
+          ]
+        },
+        {
+          points: [
+            { x: xcenter - 20, y: ycenter + 150 },
+            { x: xcenter + 20, y: ycenter + 150 },
+          ]
+        },
+        {
+          points: [
+            { x: xcenter, y: ycenter },
+            { x: xcenter, y: ycenter + 150 },
+            { x: xcenter, y: ycenter - 150 },
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: xcenter, y: ycenter },
+            { x: xcenter + 150, y: ycenter },
+            { x: xcenter - 150, y: ycenter },
+          ],
+          velocity: 1,
+        }
+      ],
+      velocity: 2,
+    },
+    {
       name: 'X Marks the Spot',
       max: 80,
       targets: [
