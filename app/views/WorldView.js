@@ -27,7 +27,7 @@ export default function(props) {
       { props.beat ?
         <Victory
           score={props.score}
-          reset={props.reset}
+          reset={() => props.dispatch({type: 'scene:change', scene: 'Worlds'})}
           isHighScore={true} />
       :
         <View style={{flex: 1, backgroundColor: props.level.color}}>
