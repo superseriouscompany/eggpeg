@@ -172,7 +172,7 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
     },
     {
       name: 'hamsterdam',
-      max: 40,
+      max: 50,
       targets: [
         {
           points: [
