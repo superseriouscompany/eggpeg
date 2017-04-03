@@ -82,7 +82,7 @@ const persistence = persistStore(store, {storage: AsyncStorage, whitelist: [
   'retry',
   'shareLink',
   'tutorial',
-  'worlds',
+  // 'worlds',
   'score',
 ]})
 
