@@ -16,6 +16,7 @@
     "react-native-device-info": "^0.9.9",
     "react-native-in-app-utils": "^5.1.0",
     "react-native-md5": "^1.0.0",
+    "react-native-rating-requestor": "^2.0.0",
     "react-native-sound": "^0.9.1",
     "react-redux": "^5.0.3",
     "redux": "^3.6.0",

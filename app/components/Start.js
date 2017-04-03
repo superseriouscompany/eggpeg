@@ -5,11 +5,29 @@ import {connect}                     from 'react-redux'
 import {clear}                       from '../reducers'
 import config                        from '../config'
 import StartView                     from '../views/StartView'
+import RatingRequestor               from 'react-native-rating-requestor'
+const RatingTracker = new RatingRequestor('1212152764', {
+  title: 'Do you like us?',
+  message: 'Do you think we\'re cool',
+  actionLabels: {
+    decline: 'Nope',
+    delay: 'Maybe later...',
+    accept: 'Sure!',
+  },
+  timingFunction: (count) => {
+    return true
+  },
+});
+
 
 class Start extends Component {
   constructor(props) {
     super(props)
     this.startGame = this.startGame.bind(this)
+  }
+
+  componentDidMount() {
+    RatingTracker.handlePositiveEvent()
   }
 
   clearStore() {
