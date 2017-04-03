@@ -64,7 +64,7 @@ export default class WorldsView extends Component {
                 <TouchableOpacity onPress={() => props.induct(props.topScore)}>
                   <Text style={style.topScore}>{props.topScore}</Text>
                   <Text style={style.leaderboard}>
-                    Put your name in the Hall of Fame!
+                    Enter the Hall of Fame!
                   </Text>
                 </TouchableOpacity>
               :
