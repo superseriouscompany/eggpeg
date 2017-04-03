@@ -66,7 +66,7 @@ export default class HallOfFameView extends Component {
               <Score place={key+1} name={s.name} mine={s.score == props.myScore.score && s.name == props.myScore.name } score={s.score} color={color(key)}/>
             :
               <View style={[style.scoreContainer, style.scoreInputContainer, style.mine, {
-                backgroundColor: 'color(key)',
+                backgroundColor: color(key),
               }]}>
                 <RainbowBackground/>
                 <Text style={style.place}>{key+1}</Text>
@@ -76,7 +76,9 @@ export default class HallOfFameView extends Component {
                   autoFocus={true}
                   placeholder={'your name'}
                   returnKeyType={'go'}
-                  style={style.input}
+                  style={[style.input, {
+                    backgroundColor: color(key),
+                  }]}
                   onSubmitEditing={props.postScore}
                   onChangeText={props.setName}
                   value={props.text} />
@@ -160,7 +162,6 @@ const style = StyleSheet.create({
   input: {
     height: 40,
     flex: 1,
-    backgroundColor: 'cornflowerblue',
     color: 'white',
     fontSize: 32,
     marginRight: 20,
