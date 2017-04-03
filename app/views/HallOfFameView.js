@@ -87,7 +87,7 @@ export default class HallOfFameView extends Component {
                   onSubmitEditing={props.postScore}
                   onChangeText={props.setName}
                   value={props.text} />
-                <Text style={style.score}>{s.score}!</Text>
+                <Text style={[style.score, {fontStyle: 'italic'}]}>{s.score}!</Text>
               </View>
             }
           </View>
@@ -173,14 +173,12 @@ const style = StyleSheet.create({
   },
   scoreContainer: {
     flexDirection: 'row',
-    backgroundColor: 'cornflowerblue',
     paddingLeft: 23,
     paddingTop: 19,
     paddingBottom: 22,
     paddingRight: 21,
   },
   scoreInputContainer: {
-    backgroundColor: 'hotpink',
   },
   name: {
     flex: 1,
@@ -192,6 +190,7 @@ const style = StyleSheet.create({
   score: {
     fontSize: 32,
     color: 'white',
+    backgroundColor: 'transparent',
   },
   mine: {
     backgroundColor: 'hotpink',
