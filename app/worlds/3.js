@@ -138,6 +138,39 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       velocity: 2,
     },
     {
+      name: 'v-neck',
+      max: 80,
+      targets: [
+        {
+          points: [
+            { x: 0, y: 0 },
+            { x: xcenter, y: height },
+          ]
+        },
+        {
+          points: [
+            { x: width, y: 0 },
+            { x: xcenter, y: height },
+          ]
+        },
+        {
+          points: [
+            { x: xcenter, y: height },
+            { x: 0, y: 0 },
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: xcenter, y: height },
+            { x: width, y: 0 },
+          ],
+          velocity: 1,
+        }
+      ],
+      velocity: 2,
+    },
+    {
       name: 'hamsterdam',
       max: 40,
       targets: [
