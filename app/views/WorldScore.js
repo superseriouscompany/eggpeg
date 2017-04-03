@@ -28,10 +28,10 @@ export default class WorldScore extends Component {
   }
 
   render() { return (
-    <Animated.Text style={[{color: this.props.color}, {
+    <Animated.Text style={[{color: this.props.color, fontFamily: 'Futura-Medium'}, {
       fontSize: this.state.anim.interpolate({
         inputRange:  [0, 1],
-        outputRange: [256, 64],
+        outputRange: [256, 72],
       }),
       opacity: this.state.anim.interpolate({
         inputRange: [0, 0.1],
