@@ -218,6 +218,109 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       velocity: 2,
     },
     {
+      name: 'wave',
+      max: 5,
+      targets: [
+        {
+          points: [
+            { x: xcenter - 150, y: ycenter },
+            { x: xcenter - 150, y: ycenter - 120 },
+            { x: xcenter - 150, y: ycenter + 120 },
+          ],
+        },
+        {
+          points: [
+            { x: xcenter - 150, y: ycenter },
+            { x: xcenter - 150, y: ycenter + 120 },
+            { x: xcenter - 150, y: ycenter - 120 },
+          ],
+        },
+        {
+          points: [
+            { x: xcenter - 100, y: ycenter + 20 },
+            { x: xcenter - 100, y: ycenter - 120 },
+            { x: xcenter - 100, y: ycenter + 120 },
+          ],
+        },
+        {
+          points: [
+            { x: xcenter - 100, y: ycenter - 20 },
+            { x: xcenter - 100, y: ycenter + 120 },
+            { x: xcenter - 100, y: ycenter - 120 },
+          ],
+        },
+        {
+          points: [
+            { x: xcenter - 50, y: ycenter + 40 },
+            { x: xcenter - 50, y: ycenter - 120 },
+            { x: xcenter - 50, y: ycenter + 120 },
+          ],
+        },
+        {
+          points: [
+            { x: xcenter - 50, y: ycenter - 40 },
+            { x: xcenter - 50, y: ycenter + 120 },
+            { x: xcenter - 50, y: ycenter - 120 },
+          ],
+        },
+        {
+          points: [
+            { x: xcenter, y: ycenter + 60 },
+            { x: xcenter, y: ycenter - 120 },
+            { x: xcenter, y: ycenter + 120 },
+          ],
+        },
+        {
+          points: [
+            { x: xcenter, y: ycenter - 60 },
+            { x: xcenter, y: ycenter + 120 },
+            { x: xcenter, y: ycenter - 120 },
+          ],
+        },
+        {
+          points: [
+            { x: xcenter + 50, y: ycenter + 80 },
+            { x: xcenter + 50, y: ycenter - 120 },
+            { x: xcenter + 50, y: ycenter + 120 },
+          ],
+        },
+        {
+          points: [
+            { x: xcenter + 50, y: ycenter - 80 },
+            { x: xcenter + 50, y: ycenter + 120 },
+            { x: xcenter + 50, y: ycenter - 120 },
+          ],
+        },
+        {
+          points: [
+            { x: xcenter + 100, y: ycenter + 100 },
+            { x: xcenter + 100, y: ycenter - 120 },
+            { x: xcenter + 100, y: ycenter + 120 },
+          ],
+        },
+        {
+          points: [
+            { x: xcenter + 100, y: ycenter - 100 },
+            { x: xcenter + 100, y: ycenter + 120 },
+            { x: xcenter + 100, y: ycenter - 120 },
+          ],
+        },
+        {
+          points: [
+            { x: xcenter + 150, y: ycenter - 120 },
+            { x: xcenter + 150, y: ycenter + 120 },
+          ],
+        },
+        {
+          points: [
+            { x: xcenter + 150, y: ycenter + 120 },
+            { x: xcenter + 150, y: ycenter - 120 },
+          ],
+        },
+      ],
+      velocity: 2,
+    },
+    {
       name: 'X Marks the Spot',
       max: 80,
       targets: [
