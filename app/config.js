@@ -2,7 +2,7 @@ const DeviceInfo = require('react-native-device-info')
 
 const config = {
   startingScene:     __DEV__ ? 'Start': 'Start',
-  startingLevel:     __DEV__ ? 'pyramid':    null,
+  startingLevel:     __DEV__ ? 'pigeons':    null,
   skipDemo:          __DEV__ ? true:    false,
   startingContinues: __DEV__ ? 0:       10,
   shortWorld:        __DEV__ ? false:    false,

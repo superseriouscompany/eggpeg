@@ -339,6 +339,18 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       velocity: 1,
     },
     {
+      name: 'pigeons',
+      max: 100,
+      targets: [
+        pigeon({x: xcenter, y: ycenter - 100}),
+        pigeon({x: xcenter, y: ycenter }),
+        pigeon({x: xcenter + 100, y: ycenter }),
+        pigeon({x: xcenter - 100, y: ycenter }),
+        pigeon({x: xcenter, y: ycenter + 100 }),
+      ],
+      velocity: 1,
+    },
+    {
       name: 'X Marks the Spot',
       max: 80,
       targets: [
@@ -407,6 +419,26 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       ],
     }
   ]
+
+  function pigeon(options) {
+    const {x,y} = options
+    const targets = [
+      {
+        points: [
+          {x: x - 40, y: y },
+          {x: x + 40, y: y}
+        ],
+      },
+      {
+        points: [
+          {x: x, y: y - 40 },
+          {x: x, y: y + 40 },
+        ],
+      },
+    ]
+
+    return targets
+  }
 
   function pyramid(count, xspread, yspread) {
     const targets = [{

@@ -52,6 +52,8 @@ export default worlds.map((w) => {
 
     if( !l.max ) { console.warn('no max score set for', l.name)}
 
+    const targets = [].concat.apply([], l.targets)
+
     return {
       ...l,
       index: li,
@@ -59,7 +61,7 @@ export default worlds.map((w) => {
       targetColor: w.targetColor,
       yolkColor:   w.yolkColor,
       deadColor:   w.deadColor,
-      targets: l.targets.map((t) => {
+      targets: targets.map((t) => {
         if( !t.velocity && !w.velocity ) { console.warn('no velocity set for a target', l.name)}
         t.velocity = t.velocity || l.velocity || w.velocity
 
