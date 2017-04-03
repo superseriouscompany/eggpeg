@@ -233,6 +233,24 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
           points: circle(xcenter, ycenter + 75, 75, 270),
         },
       ]
+    },
+    {
+      name: 'vesuvian man',
+      max: 10,
+      targets: [
+        {
+          points: circle(xcenter, ycenter, 100, 90),
+        },
+        {
+          points: [
+            { x: xcenter, y: ycenter - 100 },
+            { x: xcenter - 100, y: ycenter - 100 },
+            { x: xcenter - 100, y: ycenter + 100 },
+            { x: xcenter + 100, y: ycenter + 100 },
+            { x: xcenter + 100, y: ycenter - 100 },
+          ],
+        }
+      ],
     }
   ]
 }
