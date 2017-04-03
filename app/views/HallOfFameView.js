@@ -108,6 +108,7 @@ function RainbowBackground(props) {
 function Score(props) {
   return (
     <View style={[style.scoreContainer, {backgroundColor: props.color}, props.mine ? style.mine : null]}>
+      { props.mine ? <RainbowBar/> : null }
       <Text style={style.place}>{props.place}</Text>
       <Text style={style.name} adjustsFontSizeToFit={true} numberOfLines={1}>
         {props.name}
