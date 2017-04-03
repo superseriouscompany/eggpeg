@@ -333,6 +333,12 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       velocity: 1,
     },
     {
+      name: 'pyramid',
+      max: 40,
+      targets: pyramid(8, 20, 60),
+      velocity: 1,
+    },
+    {
       name: 'X Marks the Spot',
       max: 80,
       targets: [
@@ -401,6 +407,24 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       ],
     }
   ]
+
+  function pyramid(count, xspread, yspread) {
+    const targets = [{
+      points: [{x: xcenter, y: 0}],
+      velocity: 0,
+    }]
+    for( var i = 0; i < count; i++ ) {
+      const y = 70 + (i+1) * yspread;
+      targets.push({
+        points: [
+          { x: xcenter, y: y },
+          { x: xcenter + (i+1) * xspread, y: y },
+          { x: xcenter - (i+1) * xspread, y: y },
+        ]
+      })
+    }
+    return targets
+  }
 
   function circleJam(count) {
     const targets = []
