@@ -66,7 +66,6 @@ export default class HallOfFameView extends Component {
                 backgroundColor: color(key),
               }]}>
                 <RainbowBackground/>
-                <Text style={style.place}>{key+1}</Text>
                 <TextInput
                   autoCapitalize={'none'}
                   autoCorrect={false}
@@ -158,12 +157,14 @@ const style = StyleSheet.create({
     justifyContent: 'space-between',
   },
   input: {
-    height: 40,
+    height: 52,
     flex: 1,
+    alignItems: 'center',
     color: 'white',
     fontSize: 32,
     marginRight: 20,
-    paddingLeft: 20,
+    paddingLeft: 6,
+    marginLeft: -6,
   },
   leaderboard: {
     flex: 1,
