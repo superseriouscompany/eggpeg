@@ -63,6 +63,34 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       ],
     },
     {
+      name: 'contained triangle',
+      max: 25,
+      targets: [
+        {
+          points: [
+            { x: xcenter - 100, y: ycenter - 100 },
+            { x: xcenter + 100, y: ycenter - 100 },
+          ],
+          velocity: 2,
+        },
+        {
+          points: [
+            { x: xcenter + 100, y: ycenter + 100 },
+            { x: xcenter - 100, y: ycenter + 100 },
+          ],
+          velocity: 2,
+        },
+        {
+          points: [
+            { x: xcenter - 100, y: ycenter + 58 * Math.sqrt(3)},
+            { x: xcenter, y: ycenter - 58 * Math.sqrt(3) },
+            { x: xcenter + 100, y: ycenter + 58 * Math.sqrt(3)},
+          ],
+          velocity: 1,
+        },
+      ]
+    },
+    {
       name: 'Fast asterisk',
       max: 5 * 3 * 3,
       targets: [
