@@ -5,7 +5,9 @@ import Component          from './Component';
 import Text               from './Text';
 import LinksHeader        from './LinksHeader'
 import HighScores         from './HighScores'
+import config             from '../config'
 import sounds             from '../sounds'
+import RatingRequestor    from 'react-native-rating-requestor'
 import {
   Image,
   StyleSheet,
@@ -13,18 +15,35 @@ import {
   View,
 } from 'react-native';
 
+const RatingTracker = new RatingRequestor('1212152764', {
+  title: 'Rate us, for the love of God',
+  message: 'We need this to survive.',
+  actionLabels: {
+    decline: 'Nope',
+    delay: 'Maybe later...',
+    accept: 'Sure!',
+  },
+  order: ['delay', 'decline', 'accept'],
+  timingFunction: (count) => {
+    return true
+  },
+});
+
 export default class Victory extends Component {
   static propTypes = {
     score: PropTypes.number.isRequired,
     reset: PropTypes.func.isRequired,
     isHighScore: PropTypes.bool.isRequired,
-    highScores:  PropTypes.arrayOf(PropTypes.number).isRequired,
   }
 
   componentDidMount() {
     sounds.youdabest.play(null, (err) => {
       console.error(err)
     })
+
+    setTimeout(() => {
+      RatingTracker.handlePositiveEvent()
+    }, config.timings.ratingDelay)
   }
 
   render() { return (
