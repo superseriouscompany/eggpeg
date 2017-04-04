@@ -5,6 +5,7 @@ const config = {
   startingLevel:     __DEV__ ? null:    null,
   skipDemo:          __DEV__ ? true:    false,
   startingContinues: __DEV__ ? 0:       10,
+  shortWorld:        __DEV__ ? false:    false,
   bullet: {
     delay:  2800,
     linger: 100,

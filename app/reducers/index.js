@@ -62,7 +62,11 @@ if( __DEV__ ) {
               ...w,
               levels: 'TOO LAWNG TO PRINT',
             }
-          })
+          }),
+          current: {
+            ...state.worlds.current,
+            levels: 'TOO LAWNG TO PRINT',
+          },
         }
       }
     },

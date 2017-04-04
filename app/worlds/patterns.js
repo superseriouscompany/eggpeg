@@ -48,9 +48,12 @@ export function steps(opts) {
 }
 
 // http://gamedev.stackexchange.com/questions/9607/moving-an-object-in-a-circular-path
-export function circle(x, y, radius) {
+export function circle(x, y, radius, startDegree) {
+  if( !x || !y || !radius ) { console.warn('Bad inputs to circle:', x, y, radius) }
+
+  startDegree = startDegree || 0
   let points = []
-  for( var deg = 0; deg < 360; deg += 10 ) {
+  for( var deg = startDegree; deg < startDegree + 360; deg += 10 ) {
     // http://www.rapidtables.com/convert/number/degrees-to-radians.htm
     const radians = deg * Math.PI / 180;
     points.push({x: x + Math.cos(radians) * radius, y: y + Math.sin(radians) * radius})
