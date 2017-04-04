@@ -12,24 +12,26 @@ const worlds = [{
   targetColor: colors.red,
   deadColor:   colors.darkbeige,
   lightColor:  colors.white,
-  levels: require('./Demo')(xcenter, ycenter, width, height, config.sizes.target)
+  levels:      require('./Demo')(xcenter, ycenter, width, height, config.sizes.target)
 }, {
   name:        '1',
   color:       colors.green,
   targetColor: colors.orange,
   deadColor:   colors.darkgreen,
   lightColor:  colors.lightgreen,
-  levels: require('./1')(xcenter, ycenter, width, height, config.sizes.target)
+  velocity:    .5,
+  levels:      require('./1')(xcenter, ycenter, width, height, config.sizes.target)
 },
 {
-  name: '2',
+  name:        '2',
   color:       colors.yellow,
   targetColor: colors.purple,
   deadColor:   colors.darkyellow,
   lightColor:  colors.lightyellow,
   yolkColor:   'orange',
-  locked: true,
-  levels: require('./2')(xcenter, ycenter, width, height, config.sizes.target)
+  locked:      true,
+  velocity:    1,
+  levels:      require('./2')(xcenter, ycenter, width, height, config.sizes.target)
 }, {
   name:        '3',
   color:       colors.orange,
@@ -47,6 +49,11 @@ export default worlds.map((w) => {
   w.levels = w.levels.map((l, li) => {
     if( !l.max && w.name !== 'Demo' ) { console.warn('No max score defined for', l.name)}
     w.maxScore += l.max || 0
+
+    if( !l.max ) { console.warn('no max score set for', l.name)}
+
+    const targets = [].concat.apply([], l.targets)
+
     return {
       ...l,
       index: li,
@@ -54,9 +61,15 @@ export default worlds.map((w) => {
       targetColor: w.targetColor,
       yolkColor:   w.yolkColor,
       deadColor:   w.deadColor,
-      targets: l.targets.map((t) => {
+      targets: targets.map((t) => {
+        if( !t.velocity && !w.velocity ) { console.warn('no velocity set for a target', l.name)}
+        t.velocity = t.velocity || l.velocity || w.velocity
+
         const radius = (t.width || config.sizes.target)/2
-        t.points = t.points.map((p) => {
+        // flatten points array
+        const points = [].concat.apply([], t.points);
+
+        t.points = points.map((p) => {
           p.x = Math.max(radius, p.x);
           p.x = Math.min(width - radius, p.x);
           p.y = Math.max(50 + radius, p.y);
