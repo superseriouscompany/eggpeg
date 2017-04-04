@@ -66,12 +66,7 @@ export default function(props) { return (
           })
         }]}>
 
-          <TouchableOpacity style={[style.button, {height: 75, width: 75, marginRight: 9}]} onPress={() => {
-            if( props.level.index === 0 ) { return props.continue(true); }
-            if( props.paused ) { props.resume() }
-            // TODO: fix this bug in a better way
-            props.reset();
-          }}>
+          <TouchableOpacity style={[style.button, {height: 75, width: 75, marginRight: 9}]} onPress={props.retry}>
             <Image source={require('../images/ReplayIcon.png')}/>
           </TouchableOpacity>
 
