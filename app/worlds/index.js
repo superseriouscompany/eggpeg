@@ -12,7 +12,7 @@ const worlds = [{
   targetColor: colors.red,
   deadColor:   colors.darkgreen,
   lightColor:  colors.lightgreen,
-  levels: require('./Demo')(xcenter, ycenter, width, height, config.sizes.target)
+  levels:      require('./Demo')(xcenter, ycenter, width, height, config.sizes.target)
 }, {
   name:        '1',
   color:       colors.green,
@@ -29,7 +29,7 @@ const worlds = [{
   deadColor:   colors.darkyellow,
   lightColor:  colors.lightyellow,
   yolkColor:   'orange',
-  locked:      false,
+  locked:      true,
   levels:      require('./2')(xcenter, ycenter, width, height, config.sizes.target),
   velocity:    .5,
 }, {
@@ -38,7 +38,7 @@ const worlds = [{
   targetColor: colors.blue,
   deadColor:   colors.darkorange,
   lightColor:  colors.lightorange,
-  locked:      false,
+  locked:      true,
   levels:      require('./3')(xcenter, ycenter, width, height, config.sizes.target),
   velocity:    1,
 }, {
@@ -47,7 +47,7 @@ const worlds = [{
   targetColor: colors.yellow,
   deadColor:   colors.darkred,
   lightColor:  colors.lightred,
-  locked:      false,
+  locked:      true,
   levels:      require('./4')(xcenter, ycenter, width, height, config.sizes.target),
   velocity:    1,
 }, {
@@ -56,7 +56,7 @@ const worlds = [{
   targetColor: colors.red,
   deadColor:   colors.darkpurple,
   lightColor:  colors.lightpurple,
-  locked:      false,
+  locked:      true,
   levels:      require('./5')(xcenter, ycenter, width, height, config.sizes.target),
   velocity:    2,
 }, {
@@ -65,7 +65,7 @@ const worlds = [{
   targetColor: colors.green,
   deadColor:   colors.darkblue,
   lightColor:  colors.lightblue,
-  locked:      false,
+  locked:      true,
   levels:      require('./6')(xcenter, ycenter, width, height, config.sizes.target),
   velocity:    1,
 }]
