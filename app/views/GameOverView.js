@@ -66,7 +66,12 @@ export default function(props) { return (
           })
         }]}>
 
-          <TouchableOpacity style={[style.button, {height: 75, width: 75, marginRight: 9}]} onPress={() => {props.paused && props.resume(); props.reset();}}>
+          <TouchableOpacity style={[style.button, {height: 75, width: 75, marginRight: 9}]} onPress={() => {
+            if( props.level.index === 0 ) { return props.continue(true); }
+            if( props.paused ) { props.resume() }
+            // TODO: fix this bug in a better way
+            props.reset();
+          }}>
             <Image source={require('../images/ReplayIcon.png')}/>
           </TouchableOpacity>
 
@@ -74,6 +79,8 @@ export default function(props) { return (
             <TouchableOpacity style={[style.button, style.continueButton]} onPress={props.resume}>
               <Text style={style.buttonText}>resume</Text>
             </TouchableOpacity>
+          : props.level.index === 0 ?
+            null
           : props.continues > 0 ?
             <TouchableOpacity style={[style.button, style.continueButton]} onPress={props.continue}>
               <Text style={{position: 'absolute', color: 'white', backgroundColor: 'transparent', top: -31}}>{props.continues} left</Text>

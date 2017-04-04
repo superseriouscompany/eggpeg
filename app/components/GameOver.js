@@ -71,6 +71,7 @@ function mapStateToProps(state) {
     firstRun:    !state.session.goal,
     totalScore:  state.worlds.all.reduce((acc, w) => { return acc + (w.score || 0)}, 0),
     continues:   state.continues.count || 0,
+    level:       state.level,
   }
 }
 
@@ -89,6 +90,8 @@ function mapDispatchToProps(dispatch) {
     },
 
     continue: (remaining) => {
+      // TODO: don't overload this argument
+      if( remaining === true ) { return dispatch({type: 'level:continue'}) }
       if( remaining == 0 ) {
         return alert('no continues remaining.')
       }
