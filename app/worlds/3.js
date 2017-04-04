@@ -368,6 +368,15 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       ]
     },
     {
+      name: 'black diamond',
+      max: 80,
+      targets: [
+        diamonds(xcenter - 25, 100),
+        diamonds(xcenter + 25, 100, true),
+      ],
+      velocity: 1,
+    },
+    {
       name: 'X Marks the Spot',
       max: 80,
       targets: [
@@ -488,6 +497,35 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
           { x: xcenter + 60 * 2, y: y},
         ]
       })
+    }
+    return targets
+  }
+
+  function diamonds(x, radius, clockwise) {
+    const targets = []
+
+    for( var i = 0; i < 4; i++ ) {
+      const y = 70 + i * radius
+
+      if( clockwise ) {
+        targets.push({
+          points: [
+            { x: x, y: y },
+            { x: x + radius/2, y: y + radius/2 },
+            { x: x, y: y + radius },
+            { x: x - radius/2, y: y + radius/2 },
+          ]
+        })
+      } else {
+        targets.push({
+          points: [
+            { x: x, y: y },
+            { x: x - radius/2, y: y + radius/2 },
+            { x: x, y: y + radius },
+            { x: x + radius/2, y: y + radius/2 },
+          ]
+        })
+      }
     }
     return targets
   }
