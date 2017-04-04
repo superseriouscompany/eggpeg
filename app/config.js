@@ -17,6 +17,7 @@ const config = {
     bullet: 7,
   },
   timings: {
+    continuesSlide:        269,
     dropIn:                1069,
     dropOut:               1069,
     levelIn:               250,
