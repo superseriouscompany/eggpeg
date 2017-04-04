@@ -12,26 +12,24 @@ const worlds = [{
   targetColor: colors.red,
   deadColor:   colors.darkgreen,
   lightColor:  colors.lightgreen,
-  levels:      require('./Demo')(xcenter, ycenter, width, height, config.sizes.target)
+  levels: require('./Demo')(xcenter, ycenter, width, height, config.sizes.target)
 }, {
   name:        '1',
   color:       colors.green,
   targetColor: colors.orange,
   deadColor:   colors.darkgreen,
   lightColor:  colors.lightgreen,
-  velocity:    .5,
-  levels:      require('./1')(xcenter, ycenter, width, height, config.sizes.target)
+  levels: require('./1')(xcenter, ycenter, width, height, config.sizes.target)
 },
 {
-  name:        '2',
+  name: '2',
   color:       colors.yellow,
   targetColor: colors.purple,
   deadColor:   colors.darkyellow,
   lightColor:  colors.lightyellow,
   yolkColor:   'orange',
-  locked:      true,
-  velocity:    1,
-  levels:      require('./2')(xcenter, ycenter, width, height, config.sizes.target)
+  locked: true,
+  levels: require('./2')(xcenter, ycenter, width, height, config.sizes.target)
 }, {
   name:        '3',
   color:       colors.orange,
@@ -40,6 +38,30 @@ const worlds = [{
   lightColor:  colors.lightorange,
   locked: true,
   levels: require('./3')(xcenter, ycenter, width, height, config.sizes.target)
+}, {
+  name:        '4',
+  color:       colors.red,
+  targetColor: colors.yellow,
+  deadColor:   colors.darkred,
+  lightColor:  colors.lightred,
+  locked: true,
+  levels: []
+}, {
+  name:        '5',
+  color:       colors.purple,
+  targetColor: colors.red,
+  deadColor:   colors.darkpurple,
+  lightColor:  colors.lightpurple,
+  locked: true,
+  levels: []
+}, {
+  name:        '6',
+  color:       colors.blue,
+  targetColor: colors.green,
+  deadColor:   colors.darkblue,
+  lightColor:  colors.lightblue,
+  locked: true,
+  levels: []
 }]
 
 
