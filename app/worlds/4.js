@@ -63,26 +63,6 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       velocity: 1,
     },
     {
-      name: 'Two Speed',
-      max: 20,
-      targets: [
-        {
-          points: [
-            { x: 0, y:     ycenter },
-            { x: width, y: ycenter}
-          ],
-          velocity: 1,
-        },
-        {
-          points: [
-            { x: width, y: ycenter },
-            { x: 0, y:     ycenter },
-          ],
-          velocity: 2,
-        }
-      ],
-    },
-    {
       name: 'Star of David',
       max: 20,
       targets: [
@@ -123,20 +103,15 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       ]
     },
     {
-      name: 'vesuvian man',
-      max: 10,
+      name: 'Fast Guy',
+      max: 5,
       targets: [
         {
-          points: circle(xcenter, ycenter, 100, 90),
-        },
-        {
           points: [
-            { x: xcenter, y: ycenter - 100 },
-            { x: xcenter - 100, y: ycenter - 100 },
-            { x: xcenter - 100, y: ycenter + 100 },
-            { x: xcenter + 100, y: ycenter + 100 },
-            { x: xcenter + 100, y: ycenter - 100 },
+            { x: 0, y: ycenter },
+            { x: width, y: ycenter },
           ],
+          velocity: 2,
         }
       ],
     },

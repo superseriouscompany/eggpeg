@@ -3,6 +3,72 @@ import {circle, concentric, backtrack} from './patterns'
 module.exports = function(xcenter, ycenter, width, height, targetWidth) {
   return [
     {
+      name: 'The Santi Special',
+      max: 45,
+      targets: [
+        {
+          points: [
+            { x: xcenter - 50, y: ycenter },
+            { x: xcenter - 50, y: ycenter - 50 },
+            { x: xcenter, y: ycenter - 50 },
+            { x: xcenter, y: ycenter }
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: xcenter - 50, y: ycenter },
+            { x: xcenter - 50, y: ycenter + 50 },
+            { x: xcenter, y: ycenter + 50 },
+            { x: xcenter, y: ycenter }
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: xcenter, y: ycenter },
+            { x: xcenter, y: ycenter - 25 },
+            { x: xcenter + 125, y: ycenter - 25 },
+            { x: xcenter + 125, y: ycenter + 25 },
+            { x: xcenter, y: ycenter + 25 },
+          ],
+          velocity: 1,
+        }
+      ],
+    },
+    {
+      name: 'guitar',
+      max: 70,
+      targets: [
+        guitarStrings(60),
+        guitarFrets(60),
+      ],
+      velocity: 1,
+    },
+    {
+      name: 'triple double',
+      max: 90,
+      targets: [
+        triple(ycenter - 150),
+        triple(ycenter + 150),
+      ]
+    },
+    {
+      name: 'black diamond',
+      max: 80,
+      targets: [
+        diamonds(xcenter - 25, 100),
+        diamonds(xcenter + 25, 100, true),
+      ],
+      velocity: 1,
+    },
+    {
+      name: 'pyramid',
+      max: 40,
+      targets: pyramid(8, 20, 60),
+      velocity: 1,
+    },
+    {
       name: 'wave',
       max: 5,
       targets: [
@@ -115,72 +181,6 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       name: 'circle jam',
       max: 50,
       targets: circleJam(10),
-      velocity: 1,
-    },
-    {
-      name: 'pyramid',
-      max: 40,
-      targets: pyramid(8, 20, 60),
-      velocity: 1,
-    },
-    {
-      name: 'guitar',
-      max: 70,
-      targets: [
-        guitarStrings(60),
-        guitarFrets(60),
-      ],
-      velocity: 1,
-    },
-    {
-      name: 'triple double',
-      max: 90,
-      targets: [
-        triple(ycenter - 150),
-        triple(ycenter + 150),
-      ]
-    },
-    {
-      name: 'The Santi Special',
-      max: 45,
-      targets: [
-        {
-          points: [
-            { x: xcenter - 50, y: ycenter },
-            { x: xcenter - 50, y: ycenter - 50 },
-            { x: xcenter, y: ycenter - 50 },
-            { x: xcenter, y: ycenter }
-          ],
-          velocity: 1,
-        },
-        {
-          points: [
-            { x: xcenter - 50, y: ycenter },
-            { x: xcenter - 50, y: ycenter + 50 },
-            { x: xcenter, y: ycenter + 50 },
-            { x: xcenter, y: ycenter }
-          ],
-          velocity: 1,
-        },
-        {
-          points: [
-            { x: xcenter, y: ycenter },
-            { x: xcenter, y: ycenter - 25 },
-            { x: xcenter + 125, y: ycenter - 25 },
-            { x: xcenter + 125, y: ycenter + 25 },
-            { x: xcenter, y: ycenter + 25 },
-          ],
-          velocity: 1,
-        }
-      ],
-    },
-    {
-      name: 'black diamond',
-      max: 80,
-      targets: [
-        diamonds(xcenter - 25, 100),
-        diamonds(xcenter + 25, 100, true),
-      ],
       velocity: 1,
     },
   ]
