@@ -46,7 +46,7 @@ export default class WorldsView extends Component {
 
     this.state.expandAnim.setValue(1)
     Animated.timing(this.state.expandAnim, {
-      toValue: 0, duration: config.timings.worldIn,
+      toValue: 0, duration: config.timings.worldOut,
     }).start()
   }
 
@@ -61,10 +61,10 @@ export default class WorldsView extends Component {
 
             <View>
               { props.shouldInduct ?
-                <TouchableOpacity onPress={() => props.induct(props.topScore)}>
-                  <Text style={style.topScore}>{props.topScore}</Text>
-                  <Text key={'enter-hof'} style={[style.leaderboard, {textDecorationLine: 'underline'}]}>
-                    Enter the Hall of Fame!
+                <TouchableOpacity style={style.hofButton} onPress={() => props.induct(props.topScore)}>
+                  <Text key={'enter-hof-score'} style={[style.topScore, {color: 'white'}]}>{props.topScore}</Text>
+                  <Text key={'enter-hof'} style={[style.leaderboard, {color: 'white'}]}>
+                    Enter Hall of Fame!
                   </Text>
                 </TouchableOpacity>
               :
@@ -153,8 +153,20 @@ class World extends Component {
                 } : null]}>
                     { props.world.score ?
                       <View>
-                        <Text style={style.status}>{props.world.score || '---'}</Text>
-                        <Text style={[style.status, style.points]}>pts</Text>
+                        <Text style={style.status}>
+                          {props.world.score || '---'}
+                        </Text>
+                        <Text style={[style.status, style.points]}>
+                          { !props.world.percentage ?
+                            '0%'
+                          : props.world.percentage === 1 && props.world.score >= props.world.maxScore ?
+                            'complete!'
+                          : props.world.percentage === 1 ?
+                            `/${props.world.maxScore}`
+                          :
+                            ` ${Math.round(props.world.percentage*100)}%`
+                          }
+                        </Text>
                       </View>
                     :
                       <Text style={[style.status, {fontSize: 64}]}>{props.world.name}</Text>
@@ -162,19 +174,6 @@ class World extends Component {
                 </Animated.View>
               }
           </Animated.View>
-          <Text style={style.maxScore}>
-            { props.world.comingSoon ?
-              'coming soon'
-            : props.world.locked ?
-              'locked'
-            : !props.world.percentage ?
-              '0%'
-            : props.world.percentage === 1 ?
-              `${props.world.score}/${props.world.maxScore}`
-            :
-              `${Math.round(props.world.percentage*100)}%`
-            }
-          </Text>
         </View>
       </TouchableWithoutFeedback>
     )
@@ -197,7 +196,7 @@ const style = StyleSheet.create({
     width:           '50%',
     alignItems:     'center',
     justifyContent: 'center',
-    paddingBottom: 11,
+    paddingBottom: 0,
   },
   leftNav: {
     position:        'absolute',
@@ -208,9 +207,10 @@ const style = StyleSheet.create({
   },
   scoresContainer: {
     justifyContent: 'center',
-    alignItems:     'center',
-    marginTop: 40,
-    paddingBottom: 25,
+    alignItems:     'flex-end',
+    paddingBottom: 10,
+    paddingRight: 17,
+    paddingTop: 7
   },
   activeContainer: {
     zIndex: 1,
@@ -226,9 +226,21 @@ const style = StyleSheet.create({
     zIndex:          1,
     backgroundColor: 'transparent',
   },
+  hofButton: {
+    backgroundColor: colors.green,
+    borderRadius:   5,
+    borderBottomWidth: 2,
+    borderColor:       'rgba(0,0,0,0.5)',
+    paddingRight: 10,
+    paddingBottom: 5,
+    paddingLeft: 50,
+    marginRight: -10,
+    marginBottom: -5,
+  },
   topScore: {
     fontSize: 64,
-    textAlign: 'center',
+    textAlign: 'right',
+    backgroundColor: 'transparent',
   },
   hint: {
     marginTop: 15,
@@ -240,6 +252,9 @@ const style = StyleSheet.create({
     fontSize: 18,
     fontStyle: 'italic',
     marginTop: -5,
+    textAlign: 'right',
+    paddingRight: 5,
+    backgroundColor: 'transparent',
   },
   greyedOut: {
     opacity: 0.5,
@@ -276,9 +291,9 @@ const style = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   points: {
-    marginTop: -20,
+    marginTop: -10,
     marginBottom: 4,
-    fontSize: 32,
+    fontSize: 18,
     backgroundColor: 'transparent',
   },
   maxScore: {

@@ -37,7 +37,7 @@ const config = {
     scoreIncrement:        525,
     scoreExplanationLeave: 500,
     worldIn:               400,
-    worldOut:              350,
+    worldOut:              275,
     worldBeatDelay:        2500,
     worldScoreDelay:       1150,
     worldPulse:            1750,

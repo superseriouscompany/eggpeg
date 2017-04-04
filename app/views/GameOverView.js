@@ -52,7 +52,7 @@ export default function(props) { return (
           </TouchableOpacity>
 
           <TouchableOpacity style={style.leftNav} onPress={props.visitWorlds}>
-            <View style={[style.button, {height: 38, width: 38, paddingLeft: 1}]}>
+            <View style={[style.button, {height: 38, width: 38}]}>
               <Image source={require('../images/HomeIcon.png')}/>
             </View>
           </TouchableOpacity>
