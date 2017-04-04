@@ -46,7 +46,7 @@ export default class WorldsView extends Component {
 
     this.state.expandAnim.setValue(1)
     Animated.timing(this.state.expandAnim, {
-      toValue: 0, duration: config.timings.worldIn,
+      toValue: 0, duration: config.timings.worldOut,
     }).start()
   }
 
