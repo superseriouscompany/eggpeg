@@ -19,49 +19,55 @@ const worlds = [{
   targetColor: colors.orange,
   deadColor:   colors.darkgreen,
   lightColor:  colors.lightgreen,
-  levels: require('./1')(xcenter, ycenter, width, height, config.sizes.target)
+  levels:      require('./1')(xcenter, ycenter, width, height, config.sizes.target),
+  velocity:    .5,
 },
 {
-  name: '2',
+  name:        '2',
   color:       colors.yellow,
   targetColor: colors.purple,
   deadColor:   colors.darkyellow,
   lightColor:  colors.lightyellow,
   yolkColor:   'orange',
-  locked: true,
-  levels: require('./2')(xcenter, ycenter, width, height, config.sizes.target)
+  locked:      false,
+  levels:      require('./2')(xcenter, ycenter, width, height, config.sizes.target),
+  velocity:    .5,
 }, {
   name:        '3',
   color:       colors.orange,
   targetColor: colors.blue,
   deadColor:   colors.darkorange,
   lightColor:  colors.lightorange,
-  locked: true,
-  levels: require('./3')(xcenter, ycenter, width, height, config.sizes.target)
+  locked:      false,
+  levels:      require('./3')(xcenter, ycenter, width, height, config.sizes.target),
+  velocity:    1,
 }, {
   name:        '4',
   color:       colors.red,
   targetColor: colors.yellow,
   deadColor:   colors.darkred,
   lightColor:  colors.lightred,
-  locked: true,
-  levels: require('./4')(xcenter, ycenter, width, height, config.sizes.target)
+  locked:      false,
+  levels:      require('./4')(xcenter, ycenter, width, height, config.sizes.target),
+  velocity:    1,
 }, {
   name:        '5',
   color:       colors.purple,
   targetColor: colors.red,
   deadColor:   colors.darkpurple,
   lightColor:  colors.lightpurple,
-  locked: true,
-  levels: require('./5')(xcenter, ycenter, width, height, config.sizes.target)
+  locked:      false,
+  levels:      require('./5')(xcenter, ycenter, width, height, config.sizes.target),
+  velocity:    2,
 }, {
   name:        '6',
   color:       colors.blue,
   targetColor: colors.green,
   deadColor:   colors.darkblue,
   lightColor:  colors.lightblue,
-  locked: true,
-  levels: require('./6')(xcenter, ycenter, width, height, config.sizes.target)
+  locked:      false,
+  levels:      require('./6')(xcenter, ycenter, width, height, config.sizes.target),
+  velocity:    1,
 }]
 
 
