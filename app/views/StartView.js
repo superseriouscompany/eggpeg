@@ -1,9 +1,11 @@
-import React       from 'react'
-import Text        from '../components/Text'
-import EggDrop     from '../components/EggDrop'
-import LinksHeader from '../components/LinksHeader'
-import base        from '../styles/base'
+import React             from 'react'
+import Text              from '../components/Text'
+import EggDrop           from '../components/EggDrop'
+import LinksHeader       from '../components/LinksHeader'
+import RainbowButtonView from './RainbowButtonView'
+import base              from '../styles/base'
 import {
+  Animated,
   StatusBar,
   StyleSheet,
   TouchableOpacity,
@@ -20,9 +22,9 @@ export default function(props) {
         <View style={style.main}>
           <EggDrop />
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <TouchableOpacity onPress={props.startGame} style={style.startButton}>
-              <Text style={style.startButtonText}>play</Text>
-            </TouchableOpacity>
+            <RainbowButtonView style={style.startButton} textStyle={style.startButtonText} onPress={props.startGame}>
+              play
+            </RainbowButtonView>
           </View>
         </View>
         { __DEV__ ?
@@ -58,6 +60,7 @@ const style = StyleSheet.create({
   startButtonText: {
     fontStyle: 'italic',
     fontSize: 32,
-    color: base.colors.grey,
-  }
+    color: 'white',
+    fontFamily: 'Futura-Medium',
+  },
 })
