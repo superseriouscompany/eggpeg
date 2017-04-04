@@ -50,7 +50,7 @@ export default worlds.map((w) => {
     if( !l.max && w.name !== 'Demo' ) { console.warn('No max score defined for', l.name)}
     w.maxScore += l.max || 0
 
-    if( !l.max ) { console.warn('no max score set for', l.name)}
+    if( !l.max && w.name !== 'Demo' ) { console.warn('no max score set for', l.name)}
 
     const targets = [].concat.apply([], l.targets)
 
@@ -62,7 +62,7 @@ export default worlds.map((w) => {
       yolkColor:   w.yolkColor,
       deadColor:   w.deadColor,
       targets: targets.map((t) => {
-        if( !t.velocity && !w.velocity ) { console.warn('no velocity set for a target', l.name)}
+        if( !t.velocity && !l.velocity && !w.velocity && w.name !== 'Demo' ) { console.warn('no velocity set for a target', l.name)}
         t.velocity = t.velocity || l.velocity || w.velocity
 
         const radius = (t.width || config.sizes.target)/2

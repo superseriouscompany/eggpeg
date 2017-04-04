@@ -1,29 +1,106 @@
-import {concentric, backtrack, circle} from './patterns'
+import {steps, circle} from './patterns'
+import config from '../config'
 
-module.exports = function(xcenter, ycenter, width, height, targetWidth) {
-  return [
+module.exports = function(xcenter, ycenter, width, height) {
+  const levels = [
     {
-      name: 'Solo',
-      max: 5,
+      name: 'Slow line and circle',
+      max: 20,
       targets: [
         {
           points: [
-            { x: 0, y: ycenter },
-            { x: width, y: ycenter }
+            { x: 0, y: ycenter, },
+            { x: width, y: ycenter, },
           ],
+          velocity: .5,
+        },
+        {
+          points: circle(xcenter, ycenter, 20),
+          velocity: .5,
         }
-      ],
+      ]
     },
     {
-      name: 'Whole Phone',
+      name: 'Slow triangle',
       max: 5,
       targets: [
         {
           points: [
             { x: 0, y: 0 },
-            { x: width, y: 0 },
-            { x: width, y: height },
-            { x: 0, y: height },
+            { x: 20 + 50, y: 0 },
+            { x: 0, y: 70 + 50 },
+          ],
+          velocity: .5,
+        }
+      ]
+    },
+    {
+      name: 'corner handoff',
+      max: 20,
+      targets: [
+        {
+          points: [
+            { x: xcenter + 100, y: ycenter - 100 },
+            { x: xcenter, y: ycenter },
+          ],
+          velocity: .5,
+        },
+        {
+          points: [
+            { x: xcenter - 100, y: ycenter + 100 },
+            { x: xcenter, y: ycenter },
+          ],
+          velocity: .5,
+        }
+      ],
+    },
+    {
+      name: 'hyperactive brother',
+      max: 20,
+      targets: [
+        {
+          points: [
+            { x: 0, y: ycenter },
+            { x: width, y: ycenter },
+          ],
+          velocity: .5,
+        },
+        {
+          points: [
+            { x: xcenter, y: ycenter },
+          ],
+          velocity: 0,
+        },
+      ],
+    },
+    {
+      name: 'venn diagram',
+      max: 20,
+      targets: [
+        {
+          points: circle(xcenter + 50, ycenter, 50),
+          velocity: .5,
+        },
+        {
+          points: circle(xcenter - 50, ycenter, 50, 180),
+          velocity: .5,
+        }
+      ]
+    },
+    {
+      name: 'vibrator marks the spot',
+      max: 20,
+      targets: [
+        {
+          points: [
+            { x: xcenter, y: ycenter - 20},
+            { x: xcenter, y: ycenter + 20},
+          ],
+          velocity: .5,
+        },
+        {
+          points: [
+            { x: xcenter, y: ycenter },
           ],
         },
       ],
@@ -41,217 +118,28 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
           ],
         }
       ],
+      velocity: .5,
     },
     {
-      name: 'stop to party',
-      max: 5,
+      name: 'target ad',
+      max: 15,
       targets: [
         {
           points: [
-            { x: xcenter, y: ycenter - 100 },
-            { x: xcenter + 100, y: ycenter - 100 },
-            circle(xcenter + 100, ycenter - 150, 50, 90, false),
-            { x: xcenter + 100, y: ycenter + 100 },
-            circle(xcenter + 100, ycenter + 150, 50, 270 ),
-            { x: xcenter - 100, y: ycenter + 100 },
-            circle(xcenter - 100, ycenter + 150, 50, 270, false),
-            { x: xcenter - 100, y: ycenter - 100 },
-            circle(xcenter - 100, ycenter - 150, 50, 90),
+            { x: xcenter, y: ycenter },
           ],
+          velocity: .5,
+        },
+        {
+          points: circle(xcenter, ycenter, 60, 90),
+          velocity: .5,
+        },
+        {
+          points: circle(xcenter, ycenter, 120, 270),
+          velocity: .5,
         }
       ]
-    },
-    {
-      name: 'linked',
-      max: 20,
-      targets: [
-        {
-          points: [
-            { x: 0, y: ycenter },
-            { x: width, y:ycenter },
-          ],
-        },
-        {
-          points: [
-            { x: 40, y: ycenter },
-            { x: width, y:ycenter },
-            { x: 0, y: ycenter },
-          ],
-        },
-      ],
-    },
-    {
-      name: 'Concentric Box',
-      max: 5,
-      targets: [
-        {
-          points: concentric({x: xcenter, y: ycenter, step: 20, max: 200}),
-          velocity: 1,
-        }
-      ],
-    },
-    {
-      name: 'Jagged Edge',
-      max: 5,
-      targets: [
-        {
-          points: backtrack([
-            { x: xcenter - 150, y: ycenter - 100 },
-            { x: xcenter - 100, y: ycenter + 100 },
-            { x: xcenter - 50, y: ycenter - 100 },
-            { x: xcenter, y: ycenter + 100 },
-            { x: xcenter + 50, y: ycenter - 100 },
-            { x: xcenter + 100, y: ycenter + 100 },
-            { x: xcenter + 150, y: ycenter - 100 },
-          ]),
-          velocity: 1,
-        }
-      ],
-    },
-    {
-      name: 'Circle',
-      max: 5,
-      targets: [
-        {
-          points: circle(xcenter, ycenter, 80),
-        },
-      ],
-    },
-
-
-
-
-
-
-    {
-      name: 'Crossing',
-      max: 20,
-      targets: [
-        {
-          points: [
-            { x: 0, y: ycenter },
-            { x: width, y: ycenter },
-          ],
-        },
-        {
-          points: [
-            { x: xcenter, y: ycenter - (width - targetWidth) / 2},
-            { x: xcenter, y: ycenter + (width - targetWidth) / 2},
-          ],
-        }
-      ],
-    },
-    {
-      name: 'Two Speed',
-      max: 20,
-      targets: [
-        {
-          points: [
-            { x: 0, y:     ycenter },
-            { x: width, y: ycenter}
-          ],
-          velocity: 1,
-        },
-        {
-          points: [
-            { x: width, y: ycenter },
-            { x: 0, y:     ycenter },
-          ],
-          velocity: 2,
-        }
-      ],
-    },
-
-    {
-      name: 'Star of David',
-      max: 20,
-      targets: [
-        {
-          points: [
-            { x: xcenter - 50, y: ycenter - 10 + 25 * Math.sqrt(3)},
-            { x: xcenter, y: ycenter - 10 - 25 * Math.sqrt(3) },
-            { x: xcenter + 50, y: ycenter - 10 + 25 * Math.sqrt(3)},
-          ],
-          velocity: 1,
-        },
-        {
-          points: [
-            { x: xcenter + 50, y: ycenter + 10 - 25 * Math.sqrt(3)},
-            { x: xcenter - 50, y: ycenter + 10 - 25 * Math.sqrt(3)},
-            { x: xcenter, y: ycenter + 10 + 25 * Math.sqrt(3) },
-          ],
-          velocity: 1,
-        },
-      ],
-    },
-
-    {
-      name: 'Argyle',
-      max: 20,
-      targets: [
-        {
-          points: backtrack([
-            { x: xcenter - 150, y: ycenter - 100 },
-            { x: xcenter - 100, y: ycenter + 100 },
-            { x: xcenter - 50, y: ycenter - 100 },
-            { x: xcenter, y: ycenter + 100 },
-            { x: xcenter + 50, y: ycenter - 100 },
-            { x: xcenter + 100, y: ycenter + 100 },
-            { x: xcenter + 150, y: ycenter - 100 },
-          ]),
-          velocity: 1,
-        },
-        {
-          points: backtrack([
-            { x: xcenter - 150, y: ycenter + 100 },
-            { x: xcenter - 100, y: ycenter - 100 },
-            { x: xcenter - 50, y: ycenter + 100 },
-            { x: xcenter, y: ycenter - 100 },
-            { x: xcenter + 50, y: ycenter + 100 },
-            { x: xcenter + 100, y: ycenter - 100 },
-            { x: xcenter + 150, y: ycenter + 100 },
-          ]),
-          velocity: 1,
-        },
-      ],
-    },
-
-    {
-      name: 'Olympic Rings',
-      max: 125,
-      targets: [
-        {
-          points: circle(xcenter - 75, ycenter, 75, 0),
-        },
-        {
-          points: circle(xcenter, ycenter - 75, 75, 90),
-        },
-        {
-          points: circle(xcenter + 75, ycenter, 75, 180),
-        },
-        {
-          points: circle(xcenter, ycenter + 75, 75, 270),
-        },
-      ]
-    },
-
-    {
-      name: 'vesuvian man',
-      max: 10,
-      targets: [
-        {
-          points: circle(xcenter, ycenter, 100, 90),
-        },
-        {
-          points: [
-            { x: xcenter, y: ycenter - 100 },
-            { x: xcenter - 100, y: ycenter - 100 },
-            { x: xcenter - 100, y: ycenter + 100 },
-            { x: xcenter + 100, y: ycenter + 100 },
-            { x: xcenter + 100, y: ycenter - 100 },
-          ],
-        }
-      ],
     },
   ]
+  return levels
 }
