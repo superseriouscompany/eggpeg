@@ -45,7 +45,7 @@ const worlds = [{
   deadColor:   colors.darkred,
   lightColor:  colors.lightred,
   locked: true,
-  levels: []
+  levels: require('./4')(xcenter, ycenter, width, height, config.sizes.target)
 }, {
   name:        '5',
   color:       colors.purple,
@@ -53,7 +53,7 @@ const worlds = [{
   deadColor:   colors.darkpurple,
   lightColor:  colors.lightpurple,
   locked: true,
-  levels: []
+  levels: require('./5')(xcenter, ycenter, width, height, config.sizes.target)
 }, {
   name:        '6',
   color:       colors.blue,
@@ -61,7 +61,7 @@ const worlds = [{
   deadColor:   colors.darkblue,
   lightColor:  colors.lightblue,
   locked: true,
-  levels: []
+  levels: require('./6')(xcenter, ycenter, width, height, config.sizes.target)
 }]
 
 

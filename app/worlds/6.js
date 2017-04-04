@@ -269,26 +269,6 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
     return targets
   }
 
-  function pigeon(options) {
-    const {x,y} = options
-    const targets = [
-      {
-        points: [
-          {x: x - 40, y: y },
-          {x: x + 40, y: y}
-        ],
-      },
-      {
-        points: [
-          {x: x, y: y - 40 },
-          {x: x, y: y + 40 },
-        ],
-      },
-    ]
-
-    return targets
-  }
-
   function pyramid(count, xspread, yspread) {
     const targets = [{
       points: [{x: xcenter, y: 0}],

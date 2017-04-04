@@ -191,4 +191,24 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       velocity: 2,
     },
   ]
+
+  function pigeon(options) {
+    const {x,y} = options
+    const targets = [
+      {
+        points: [
+          {x: x - 40, y: y },
+          {x: x + 40, y: y}
+        ],
+      },
+      {
+        points: [
+          {x: x, y: y - 40 },
+          {x: x, y: y + 40 },
+        ],
+      },
+    ]
+
+    return targets
+  }
 }
