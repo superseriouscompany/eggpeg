@@ -62,7 +62,8 @@ class World extends Component {
       this.props.dispatch({type: 'worlds:beat', score: score})
     }
     this.props.dispatch({type: 'worlds:unlock'})
-    if( this.props.world.name == '3' ) {
+    // TODO: don't hardcode this.
+    if( this.props.world.name === '6' ) {
       return this.props.dispatch({type: 'victory:yes'})
     } else {
       if( this.props.world.name == 'Demo' ) {

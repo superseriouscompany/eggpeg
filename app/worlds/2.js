@@ -4,21 +4,41 @@ import config from '../config'
 module.exports = function(xcenter, ycenter, width, height) {
   const levels = [
     {
-      name: 'Slow line and circle',
+      name: 'hyperactive brother',
       max: 20,
       targets: [
         {
           points: [
-            { x: 0, y: ycenter, },
-            { x: width, y: ycenter, },
+            { x: 0, y: ycenter },
+            { x: width, y: ycenter },
           ],
           velocity: .5,
         },
         {
-          points: circle(xcenter, ycenter, 20),
+          points: [
+            { x: xcenter, y: ycenter },
+          ],
+          velocity: 0,
+        },
+      ],
+    },
+    {
+      name: 'vibrator marks the spot',
+      max: 20,
+      targets: [
+        {
+          points: [
+            { x: xcenter, y: ycenter - 20},
+            { x: xcenter, y: ycenter + 20},
+          ],
           velocity: .5,
-        }
-      ]
+        },
+        {
+          points: [
+            { x: xcenter, y: ycenter },
+          ],
+        },
+      ],
     },
     {
       name: 'Slow triangle',
@@ -55,23 +75,19 @@ module.exports = function(xcenter, ycenter, width, height) {
       ],
     },
     {
-      name: 'hyperactive brother',
-      max: 20,
+      name: 'diamond',
+      max: 5,
       targets: [
         {
           points: [
-            { x: 0, y: ycenter },
-            { x: width, y: ycenter },
+            { x: xcenter - 100, y: ycenter },
+            { x: xcenter, y: ycenter - 150 },
+            { x: xcenter + 100, y: ycenter },
+            { x: xcenter, y: ycenter + 150 },
           ],
-          velocity: .5,
-        },
-        {
-          points: [
-            { x: xcenter, y: ycenter },
-          ],
-          velocity: 0,
-        },
+        }
       ],
+      velocity: .5,
     },
     {
       name: 'venn diagram',
@@ -88,37 +104,21 @@ module.exports = function(xcenter, ycenter, width, height) {
       ]
     },
     {
-      name: 'vibrator marks the spot',
+      name: 'Slow line and circle',
       max: 20,
       targets: [
         {
           points: [
-            { x: xcenter, y: ycenter - 20},
-            { x: xcenter, y: ycenter + 20},
+            { x: 0, y: ycenter, },
+            { x: width, y: ycenter, },
           ],
           velocity: .5,
         },
         {
-          points: [
-            { x: xcenter, y: ycenter },
-          ],
-        },
-      ],
-    },
-    {
-      name: 'diamond',
-      max: 5,
-      targets: [
-        {
-          points: [
-            { x: xcenter - 100, y: ycenter },
-            { x: xcenter, y: ycenter - 150 },
-            { x: xcenter + 100, y: ycenter },
-            { x: xcenter, y: ycenter + 150 },
-          ],
+          points: circle(xcenter, ycenter, 20),
+          velocity: .5,
         }
-      ],
-      velocity: .5,
+      ]
     },
     {
       name: 'target ad',

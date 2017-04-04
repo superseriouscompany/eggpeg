@@ -27,6 +27,29 @@ module.exports = function(xcenter, ycenter, width, height) {
       ]
     },
     {
+      name: 'Solo slow',
+      max: 5,
+      targets: [
+        {
+          points: [
+            { x: 0, y: ycenter },
+            { x: width, y: ycenter }
+          ],
+          velocity: .5,
+        }
+      ],
+    },
+    {
+      name: 'Slow Stairs',
+      max: 5,
+      targets: [
+        {
+          points: steps({x: xcenter + 100, y: ycenter + 100, distance: -20, steps: 10}),
+          velocity: .5,
+        }
+      ],
+    },
+    {
       name: 'slow t',
       max: 5,
       targets: [
@@ -50,35 +73,12 @@ module.exports = function(xcenter, ycenter, width, height) {
           points: [
             { x: width, y: ycenter },
             { x: xcenter + 100, y: ycenter },
-            circle(xcenter +50, ycenter, 50),
+            circle(xcenter + 50, ycenter, 50),
             { x: width, y: ycenter },
           ],
           velocity: .5,
         }
       ]
-    },
-    {
-      name: 'Solo slow',
-      max: 5,
-      targets: [
-        {
-          points: [
-            { x: 0, y: ycenter },
-            { x: width, y: ycenter }
-          ],
-          velocity: .5,
-        }
-      ],
-    },
-    {
-      name: 'Slow Stairs',
-      max: 5,
-      targets: [
-        {
-          points: steps({x: xcenter + 100, y: ycenter + 100, distance: -20, steps: 10}),
-          velocity: .5,
-        }
-      ],
     },
     {
       name: 'Slow drop',
