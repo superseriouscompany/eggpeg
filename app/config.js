@@ -41,6 +41,8 @@ const config = {
     worldBeatDelay:        2500,
     worldScoreDelay:       1150,
     worldPulse:            1750,
+    worldScorePulseIn:       269,
+    worldScorePulseOut:    269,
     winDelay:              1000,
     targetGhost:           1750,
   },

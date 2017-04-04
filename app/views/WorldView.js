@@ -30,7 +30,12 @@ export default function(props) {
           reset={() => props.dispatch({type: 'scene:change', scene: 'Worlds'})}
           isHighScore={true} />
       :
-        <View style={{flex: 1, backgroundColor: props.level.color}}>
+        <Animated.View style={{flex: 1,
+          backgroundColor: props.pulse.interpolate({
+            inputRange: [0,1],
+            outputRange: [props.level.color, props.world.lightColor],
+          })
+        }}>
           { props.level.done && !props.level.win ?
             <GameOver
               reset={props.reset}
@@ -66,7 +71,7 @@ export default function(props) {
           :
             <ScoreText textColor={props.level.deadColor}/>
           }
-        </View>
+        </Animated.View>
       }
     </View>
   )

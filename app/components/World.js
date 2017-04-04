@@ -22,12 +22,27 @@ class World extends Component {
     this.loadLevel = this.loadLevel.bind(this)
     this.endLevel  = this.endLevel.bind(this)
     this.victory   = this.victory.bind(this)
-    this.state     = { progress: false }
+    this.state     = {
+      pulse:    new Animated.Value(0),
+      progress: false,
+    }
   }
 
   componentWillReceiveProps(props) {
     if( props.level.done && props.level.win && !props.beat ) {
       this.nextLevel()
+    }
+
+    if( props.score > this.props.score ) {
+      Animated.timing(this.state.pulse, {
+        toValue: 1,
+        duration: config.timings.worldScorePulseIn,
+      }).start(() => {
+        Animated.timing(this.state.pulse, {
+          toValue: 0,
+          duration: config.timings.worldScorePulseOut,
+        }).start()
+      })
     }
   }
 
@@ -89,6 +104,7 @@ class World extends Component {
     <WorldView
       {...this.props}
       progress={this.state.progress || this.props.progress}
+      pulse={this.state.pulse}
       reset={this.reset}
       worldDone={this.state.progress == 1}
        />
