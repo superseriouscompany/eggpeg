@@ -159,7 +159,7 @@ class World extends Component {
                         <Text style={[style.status, style.points]}>
                           { !props.world.percentage ?
                             '0%'
-                          : props.world.percentage === 1 && props.world.score == props.world.maxScore ?
+                          : props.world.percentage === 1 && props.world.score >= props.world.maxScore ?
                             'complete!'
                           : props.world.percentage === 1 ?
                             `/${props.world.maxScore}`
