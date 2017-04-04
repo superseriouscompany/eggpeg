@@ -44,7 +44,7 @@ module.exports = function(xcenter, ycenter, width, height) {
       max: 5,
       targets: [
         {
-          points: steps({x: xcenter + 100, y: ycenter + 100, distance: -20, steps: 10}),
+          points: steps({x: xcenter - 100, y: ycenter - 100, distance: 20, steps: 10}),
           velocity: .5,
         }
       ],

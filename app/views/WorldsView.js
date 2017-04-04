@@ -85,7 +85,7 @@ export default class WorldsView extends Component {
               { w.comingSoon || w.locked ?
                   <World world={w} />
               :
-                <World expandAnim={this.state.expandAnim} world={w} selectedName={props.selectedName} onPress={() => props.loadLevel(w.name)}/>
+                <World expandAnim={this.state.expandAnim} world={w} isActivating={w.name === props.selectedName} onPress={() => props.loadLevel(w.name)}/>
               }
             </View>
           ))}
@@ -112,17 +112,24 @@ class World extends Component {
     }
   }
 
+  componentWillReceiveProps(props) {
+    if( props.isActivating ) {
+      this.state.pulse.setValue(0)
+    }
+  }
+
   pulse() {
     this.state.pulse.setValue(0)
     Animated.timing(this.state.pulse, {
       toValue:  1,
       duration: config.timings.worldPulse,
-    }).start(this.pulse)
+    }).start(() => {
+      if( !this.props.isActivating ) { this.pulse() }
+    })
   }
 
   render() {
     const props = this.props
-    const isActivating = props.selectedName && props.selectedName == props.world.name;
     return (
       <TouchableWithoutFeedback onPress={props.onPress}>
         <View style={[style.world, props.world.locked || props.world.comingSoon ? style.greyedOut : null]}>
@@ -131,7 +138,7 @@ class World extends Component {
               inputRange: [0, 0.5, 1],
               outputRange: [props.world.color, props.world.lightColor || 'hotpink', props.world.color]
             }),
-          }, isActivating ? {
+          }, props.isActivating ? {
             transform: [{
               scale: props.expandAnim.interpolate({
                 inputRange:  [0, 1],
@@ -145,7 +152,7 @@ class World extends Component {
               : props.world.comingSoon ?
                 <Text style={style.status}>...</Text>
               :
-                <Animated.View style={[isActivating ? {
+                <Animated.View style={[props.isActivating ? {
                   opacity: props.expandAnim.interpolate({
                     inputRange:  [0, 0.0001, 1],
                     outputRange: [1, 0, 0],
