@@ -46,7 +46,7 @@ const reducers = combineReducers({
 
 // Add middleware http://redux.js.org/docs/advanced/Middleware.html
 const middleware = [thunk]
-if( __DEV__ && false ) {
+if( __DEV__ ) {
   middleware.push(createLogger({
     stateTransformer: (state) => {
       return {
@@ -86,7 +86,7 @@ const persistence = persistStore(store, {storage: AsyncStorage, whitelist: [
   'retry',
   'shareLink',
   'tutorial',
-  // 'worlds',
+  'worlds',
   'score',
 ]})
 

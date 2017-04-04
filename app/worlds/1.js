@@ -1,7 +1,7 @@
 import {steps, circle} from './patterns'
 import config from '../config'
 
-module.exports = function(xcenter, ycenter, width, height, left, top) {
+module.exports = function(xcenter, ycenter, width, height) {
   const levels = [
     {
       name: 'vibrator',
