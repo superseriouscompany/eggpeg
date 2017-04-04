@@ -101,7 +101,7 @@ const style = StyleSheet.create({
     width: '100%',
   },
   hint: {
-    fontSize:     16,
+    fontSize:     18,
     marginBottom: 20,
     color:        'white',
   },

@@ -21,7 +21,7 @@ export default function ContinueBundlesView(props) {
       </TouchableOpacity>
 
       <Text style={style.proclamation}>
-        you can buy {"\n"} more continues
+        you can buy{"\n"}more continues
       </Text>
 
       <View style={style.buttonsContainer}>

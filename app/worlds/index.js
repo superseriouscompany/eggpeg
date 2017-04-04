@@ -8,10 +8,10 @@ const ycenter    = height / 2;
 
 const worlds = [{
   name:        'Demo',
-  color:       colors.beige,
+  color:       colors.green,
   targetColor: colors.red,
-  deadColor:   colors.darkbeige,
-  lightColor:  colors.white,
+  deadColor:   colors.darkgreen,
+  lightColor:  colors.lightgreen,
   levels: require('./Demo')(xcenter, ycenter, width, height, config.sizes.target)
 }, {
   name:        '1',
