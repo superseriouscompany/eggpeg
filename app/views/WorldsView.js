@@ -203,7 +203,6 @@ const style = StyleSheet.create({
     left:            20,
     top:             20,
     backgroundColor: 'transparent',
-    zIndex:          -1,
   },
   scoresContainer: {
     justifyContent: 'center',
