@@ -35,17 +35,15 @@ export default class Foo extends Component {
   }
 
   render() { return (
-    <Animated.View style={[this.props.style, {
-      backgroundColor: this.state.shimmer.interpolate({
-        inputRange: [0, 1/6, 2/6, 3/6, 4/6, 1],
-        outputRange: [colors.green, colors.yellow, colors.orange, colors.red, colors.purple, colors.blue, ],
-      }),
-    }]}>
-      <TouchableOpacity onPress={this.props.onPress}>
-        <Text style={this.props.textStyle}>
+    <TouchableOpacity onPress={this.props.onPress}>
+      <Animated.View onPress={this.props.onPress} style={[this.props.style, {
+        backgroundColor: this.state.shimmer.interpolate({
+          inputRange: [0, 1/6, 2/6, 3/6, 4/6, 1],
+          outputRange: [colors.green, colors.yellow, colors.orange, colors.red, colors.purple, colors.blue, ],
+        }),
+      }]}>
           {this.props.children}
-        </Text>
-      </TouchableOpacity>
-    </Animated.View>
+      </Animated.View>
+    </TouchableOpacity>
   )}
 }

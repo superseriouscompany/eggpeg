@@ -22,8 +22,8 @@ export default function(props) {
         <View style={style.main}>
           <EggDrop />
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <RainbowButtonView style={style.startButton} textStyle={style.startButtonText} onPress={props.startGame}>
-              play
+            <RainbowButtonView style={style.startButton} onPress={props.startGame}>
+              <Text style={style.startButtonText}>play</Text>
             </RainbowButtonView>
           </View>
         </View>
@@ -48,14 +48,15 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   startButton: {
-    borderWidth: 1,
-    borderColor: base.colors.grey,
     borderRadius: 5,
     width: 200,
     height: 75,
+    marginTop: 1,
     paddingBottom: 6,
     justifyContent: 'center',
     alignItems: 'center',
+    borderBottomWidth: 2,
+    borderColor:       'rgba(0,0,0,0.5)',
   },
   startButtonText: {
     fontStyle: 'italic',

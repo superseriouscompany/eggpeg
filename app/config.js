@@ -31,7 +31,7 @@ const config = {
     rainbow:               500,
     rainbowLeaveDuration:  150,
     rainbowLeaveDelay:     650,
-    rainbowShimmer:        2069,
+    rainbowShimmer:        750,
     ratingDelay:           1000,
     sceneDropIn:           500,
     sceneFadeIn:           1069,
