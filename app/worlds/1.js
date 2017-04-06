@@ -12,7 +12,7 @@ module.exports = function(xcenter, ycenter, width, height) {
             { x: xcenter - 10, y: ycenter },
             { x: xcenter + 10, y: ycenter },
           ],
-          velocity: .5,
+          velocity: 1,
         },
       ],
     },
@@ -33,6 +33,26 @@ module.exports = function(xcenter, ycenter, width, height) {
           velocity: 0,
         },
 
+      ],
+    },
+    {
+      name: 'double vibrator',
+      max: 5,
+      targets: [
+        {
+          points: [
+            { x: (xcenter/2) - 10, y: ycenter/2 },
+            { x: (xcenter/2) + 10, y: ycenter/2 },
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: (3 * xcenter/2) - 10, y: (3 * ycenter/2) },
+            { x: (3 * xcenter/2) + 10, y: (3 * ycenter/2) },
+          ],
+          velocity: 1,
+        },
       ],
     },
     {
