@@ -2,6 +2,7 @@ import React, {Component}      from 'react'
 import {colors}   from '../styles/base'
 import Text       from '../components/Text'
 import WorldScore from './WorldScore'
+import RainbowButtonView from './RainbowButtonView'
 import config     from '../config'
 import {
   Animated,
@@ -61,12 +62,12 @@ export default class WorldsView extends Component {
 
             <View>
               { props.shouldInduct ?
-                <TouchableOpacity style={style.hofButton} onPress={() => props.induct(props.topScore)}>
+                <RainbowButtonView style={style.hofButton} onPress={() => props.induct(props.topScore)}>
                   <Text key={'enter-hof-score'} style={[style.topScore, {color: 'white'}]}>{props.topScore}</Text>
                   <Text key={'enter-hof'} style={[style.leaderboard, {color: 'white'}]}>
                     Enter Hall of Fame!
                   </Text>
-                </TouchableOpacity>
+                </RainbowButtonView>
               :
                 <TouchableOpacity onPress={props.showLeaderboard}>
                   <Text style={style.topScore}>{props.topScore}</Text>
@@ -233,15 +234,14 @@ const style = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   hofButton: {
-    backgroundColor: colors.green,
-    borderRadius:   5,
-    borderBottomWidth: 2,
-    borderColor:       'rgba(0,0,0,0.5)',
+    borderRadius: 5,
+    marginRight: -10,
+    marginBottom: -5,
     paddingRight: 10,
     paddingBottom: 5,
     paddingLeft: 50,
-    marginRight: -10,
-    marginBottom: -5,
+    borderBottomWidth: 2,
+    borderColor:       'rgba(0,0,0,0.5)',
   },
   topScore: {
     fontSize: 64,
