@@ -15,35 +15,74 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       ],
     },
     {
-      name: 'Whole Phone',
+      name: 'diamond',
       max: 5,
       targets: [
         {
           points: [
-            { x: 0, y: 0 },
-            { x: width, y: 0 },
-            { x: width, y: height },
-            { x: 0, y: height },
+            { x: xcenter - 100, y: ycenter },
+            { x: xcenter, y: ycenter - 150 },
+            { x: xcenter + 100, y: ycenter },
+            { x: xcenter, y: ycenter + 150 },
           ],
+        }
+      ],
+      velocity: .5,
+    },
+    {
+      name: 'corner handoff',
+      max: 20,
+      targets: [
+        {
+          points: [
+            { x: xcenter + 100, y: ycenter - 100 },
+            { x: xcenter, y: ycenter },
+          ],
+          velocity: .5,
         },
+        {
+          points: [
+            { x: xcenter - 100, y: ycenter + 100 },
+            { x: xcenter, y: ycenter },
+          ],
+          velocity: .5,
+        }
       ],
     },
     {
-      name: 'stop to party',
-      max: 5,
+      name: 'Slow line and circle',
+      max: 20,
       targets: [
         {
           points: [
-            { x: xcenter, y: ycenter - 100 },
-            { x: xcenter + 100, y: ycenter - 100 },
-            circle(xcenter + 100, ycenter - 150, 50, 90, false),
-            { x: xcenter + 100, y: ycenter + 100 },
-            circle(xcenter + 100, ycenter + 150, 50, 270 ),
-            { x: xcenter - 100, y: ycenter + 100 },
-            circle(xcenter - 100, ycenter + 150, 50, 270, false),
-            { x: xcenter - 100, y: ycenter - 100 },
-            circle(xcenter - 100, ycenter - 150, 50, 90),
+            { x: 0, y: ycenter, },
+            { x: width, y: ycenter, },
           ],
+          velocity: .5,
+        },
+        {
+          points: circle(xcenter, ycenter, 20),
+          velocity: .5,
+        }
+      ]
+    },
+    {
+      name: 'target ad',
+      max: 15,
+      targets: [
+        {
+          points: [
+            { x: xcenter, y: ycenter },
+          ],
+          velocity: .5,
+        },
+        {
+          points: circle(xcenter, ycenter, 60, 90),
+          velocity: .5,
+        },
+        {
+          points: circle(xcenter, ycenter, 120, 270),
+          velocity: .5,
         }
       ]
     },
@@ -67,20 +106,20 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       ],
     },
     {
-      name: 'Jagged Edge',
-      max: 5,
+      name: 'Crossing',
+      max: 20,
       targets: [
         {
-          points: backtrack([
-            { x: xcenter - 150, y: ycenter - 100 },
-            { x: xcenter - 100, y: ycenter + 100 },
-            { x: xcenter - 50, y: ycenter - 100 },
-            { x: xcenter, y: ycenter + 100 },
-            { x: xcenter + 50, y: ycenter - 100 },
-            { x: xcenter + 100, y: ycenter + 100 },
-            { x: xcenter + 150, y: ycenter - 100 },
-          ]),
-          velocity: 1,
+          points: [
+            { x: 0, y: ycenter },
+            { x: width, y: ycenter },
+          ],
+        },
+        {
+          points: [
+            { x: xcenter, y: ycenter - (width - targetWidth) / 2},
+            { x: xcenter, y: ycenter + (width - targetWidth) / 2},
+          ],
         }
       ],
     },
@@ -94,6 +133,34 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       ],
     },
     {
+      name: 'venn diagram',
+      max: 20,
+      targets: [
+        {
+          points: circle(xcenter + 50, ycenter, 50),
+          velocity: .5,
+        },
+        {
+          points: circle(xcenter - 50, ycenter, 50, 180),
+          velocity: .5,
+        }
+      ]
+    },
+    {
+      name: 'Whole Phone',
+      max: 5,
+      targets: [
+        {
+          points: [
+            { x: 0, y: 0 },
+            { x: width, y: 0 },
+            { x: width, y: height },
+            { x: 0, y: height },
+          ],
+        },
+      ],
+    },
+    {
       name: 'Concentric Box',
       max: 5,
       targets: [
@@ -101,40 +168,6 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
           points: concentric({x: xcenter, y: ycenter, step: 20, max: 200}),
           velocity: 1,
         }
-      ],
-    },
-    {
-      name: 'X Marks the Spot',
-      max: 80,
-      targets: [
-        {
-          points: [
-            { x: xcenter - 100, y: ycenter - 100 },
-            { x: xcenter + 100, y: ycenter + 100 }
-          ],
-          velocity: 1,
-        },
-        {
-          points: [
-            { x: xcenter + 100, y: ycenter - 100 },
-            { x: xcenter - 100, y: ycenter + 100 }
-          ],
-          velocity: 1,
-        },
-        {
-          points: [
-            { x: xcenter - 100, y: ycenter + 100 },
-            { x: xcenter + 100, y: ycenter - 100 }
-          ],
-          velocity: 1,
-        },
-        {
-          points: [
-            { x: xcenter + 100, y: ycenter + 100 },
-            { x: xcenter - 100, y: ycenter - 100 }
-          ],
-          velocity: 1,
-        },
       ],
     },
   ]

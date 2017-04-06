@@ -3,26 +3,62 @@ import {concentric, backtrack, circle} from './patterns'
 module.exports = function(xcenter, ycenter, width, height, targetWidth) {
   return [
     {
-      name: 'Crossing',
+      name: 'Fast Meeting',
       max: 20,
       targets: [
         {
           points: [
-            { x: 0, y: ycenter },
-            { x: width, y: ycenter },
+            { x: 0,       y: ycenter },
+            { x: xcenter, y: ycenter, velocity: 2 },
           ],
+          velocity: 0.5,
         },
         {
           points: [
-            { x: xcenter, y: ycenter - (width - targetWidth) / 2},
-            { x: xcenter, y: ycenter + (width - targetWidth) / 2},
+            { x: width, y: ycenter },
+            { x: xcenter,   y: ycenter, velocity: 2},
           ],
-        }
+          velocity: 0.5,
+        },
       ],
     },
     {
-      name: 'Argyle',
-      max: 20,
+      name: 'X Marks the Spot',
+      max: 80,
+      targets: [
+        {
+          points: [
+            { x: xcenter - 100, y: ycenter - 100 },
+            { x: xcenter + 100, y: ycenter + 100 }
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: xcenter + 100, y: ycenter - 100 },
+            { x: xcenter - 100, y: ycenter + 100 }
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: xcenter - 100, y: ycenter + 100 },
+            { x: xcenter + 100, y: ycenter - 100 }
+          ],
+          velocity: 1,
+        },
+        {
+          points: [
+            { x: xcenter + 100, y: ycenter + 100 },
+            { x: xcenter - 100, y: ycenter - 100 }
+          ],
+          velocity: 1,
+        },
+      ],
+    },
+    {
+      name: 'Jagged Edge',
+      max: 5,
       targets: [
         {
           points: backtrack([
@@ -35,20 +71,27 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
             { x: xcenter + 150, y: ycenter - 100 },
           ]),
           velocity: 1,
-        },
-        {
-          points: backtrack([
-            { x: xcenter - 150, y: ycenter + 100 },
-            { x: xcenter - 100, y: ycenter - 100 },
-            { x: xcenter - 50, y: ycenter + 100 },
-            { x: xcenter, y: ycenter - 100 },
-            { x: xcenter + 50, y: ycenter + 100 },
-            { x: xcenter + 100, y: ycenter - 100 },
-            { x: xcenter + 150, y: ycenter + 100 },
-          ]),
-          velocity: 1,
-        },
+        }
       ],
+    },
+    {
+      name: 'stop to party',
+      max: 5,
+      targets: [
+        {
+          points: [
+            { x: xcenter, y: ycenter - 100 },
+            { x: xcenter + 100, y: ycenter - 100 },
+            circle(xcenter + 100, ycenter - 150, 50, 90, false),
+            { x: xcenter + 100, y: ycenter + 100 },
+            circle(xcenter + 100, ycenter + 150, 50, 270 ),
+            { x: xcenter - 100, y: ycenter + 100 },
+            circle(xcenter - 100, ycenter + 150, 50, 270, false),
+            { x: xcenter - 100, y: ycenter - 100 },
+            circle(xcenter - 100, ycenter - 150, 50, 90),
+          ],
+        }
+      ]
     },
     {
       name: 'pigeons',
@@ -85,24 +128,6 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       ],
     },
     {
-      name: 'Olympic Rings',
-      max: 125,
-      targets: [
-        {
-          points: circle(xcenter - 75, ycenter, 75, 0),
-        },
-        {
-          points: circle(xcenter, ycenter - 75, 75, 90),
-        },
-        {
-          points: circle(xcenter + 75, ycenter, 75, 180),
-        },
-        {
-          points: circle(xcenter, ycenter + 75, 75, 270),
-        },
-      ]
-    },
-    {
       name: 'Fast Guy',
       max: 5,
       targets: [
@@ -113,6 +138,36 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
           ],
           velocity: 2,
         }
+      ],
+    },
+    {
+      name: 'Argyle',
+      max: 20,
+      targets: [
+        {
+          points: backtrack([
+            { x: xcenter - 150, y: ycenter - 100 },
+            { x: xcenter - 100, y: ycenter + 100 },
+            { x: xcenter - 50, y: ycenter - 100 },
+            { x: xcenter, y: ycenter + 100 },
+            { x: xcenter + 50, y: ycenter - 100 },
+            { x: xcenter + 100, y: ycenter + 100 },
+            { x: xcenter + 150, y: ycenter - 100 },
+          ]),
+          velocity: 1,
+        },
+        {
+          points: backtrack([
+            { x: xcenter - 150, y: ycenter + 100 },
+            { x: xcenter - 100, y: ycenter - 100 },
+            { x: xcenter - 50, y: ycenter + 100 },
+            { x: xcenter, y: ycenter - 100 },
+            { x: xcenter + 50, y: ycenter + 100 },
+            { x: xcenter + 100, y: ycenter - 100 },
+            { x: xcenter + 150, y: ycenter + 100 },
+          ]),
+          velocity: 1,
+        },
       ],
     },
     {

@@ -102,8 +102,8 @@ module.exports = function(xcenter, ycenter, width, height) {
         {
           width: config.sizes.largestTarget,
           points: [
-            { x: xcenter + 10, y: ycenter },
             { x: xcenter - 10, y: ycenter },
+            { x: xcenter + 10, y: ycenter },
           ],
           velocity: 0.5,
         },
