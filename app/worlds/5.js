@@ -73,47 +73,6 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       ],
     },
     {
-      name: 'contained triangle',
-      max: 25,
-      targets: [
-        {
-          points: [
-            { x: xcenter - 100, y: ycenter - 100 },
-            { x: xcenter + 100, y: ycenter - 100 },
-          ],
-          velocity: 2,
-        },
-        {
-          points: [
-            { x: xcenter + 100, y: ycenter + 100 },
-            { x: xcenter - 100, y: ycenter + 100 },
-          ],
-          velocity: 2,
-        },
-        {
-          points: [
-            { x: xcenter - 100, y: ycenter + 58 * Math.sqrt(3)},
-            { x: xcenter, y: ycenter - 58 * Math.sqrt(3) },
-            { x: xcenter + 100, y: ycenter + 58 * Math.sqrt(3)},
-          ],
-          velocity: 1,
-        },
-      ]
-    },
-    {
-      name: 'Superfast',
-      max: 5,
-      targets: [
-        {
-          points: [
-            { x: 0, y: height },
-            { x: width, y: 0},
-          ],
-          velocity: 3,
-        }
-      ],
-    },
-    {
       name: 'vesuvian man',
       max: 10,
       targets: [
@@ -131,6 +90,19 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
         }
       ],
       velocity: 1,
+    },
+    {
+      name: 'Superfast',
+      max: 5,
+      targets: [
+        {
+          points: [
+            { x: 0, y: height },
+            { x: width, y: 0},
+          ],
+          velocity: 3,
+        }
+      ],
     },
     {
       name: 'Fast asterisk',
@@ -220,7 +192,7 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       velocity: 1,
     },
   ]
-  
+
   function jam(count, distance) {
     const targets = []
     for( var i = 0; i < count; i++ ) {

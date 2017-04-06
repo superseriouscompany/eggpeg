@@ -3,47 +3,32 @@ import {circle, concentric, backtrack} from './patterns'
 module.exports = function(xcenter, ycenter, width, height, targetWidth) {
   return [
     {
-      name: 'The Santi Special',
-      max: 45,
+      name: 'contained triangle',
+      max: 25,
       targets: [
         {
           points: [
-            { x: xcenter - 50, y: ycenter },
-            { x: xcenter - 50, y: ycenter - 50 },
-            { x: xcenter, y: ycenter - 50 },
-            { x: xcenter, y: ycenter }
+            { x: xcenter - 100, y: ycenter - 100 },
+            { x: xcenter + 100, y: ycenter - 100 },
           ],
-          velocity: 1,
+          velocity: 2,
         },
         {
           points: [
-            { x: xcenter - 50, y: ycenter },
-            { x: xcenter - 50, y: ycenter + 50 },
-            { x: xcenter, y: ycenter + 50 },
-            { x: xcenter, y: ycenter }
+            { x: xcenter + 100, y: ycenter + 100 },
+            { x: xcenter - 100, y: ycenter + 100 },
           ],
-          velocity: 1,
+          velocity: 2,
         },
         {
           points: [
-            { x: xcenter, y: ycenter },
-            { x: xcenter, y: ycenter - 25 },
-            { x: xcenter + 125, y: ycenter - 25 },
-            { x: xcenter + 125, y: ycenter + 25 },
-            { x: xcenter, y: ycenter + 25 },
+            { x: xcenter - 100, y: ycenter + 58 * Math.sqrt(3)},
+            { x: xcenter, y: ycenter - 58 * Math.sqrt(3) },
+            { x: xcenter + 100, y: ycenter + 58 * Math.sqrt(3)},
           ],
           velocity: 1,
-        }
-      ],
-    },
-    {
-      name: 'guitar',
-      max: 70,
-      targets: [
-        guitarStrings(60),
-        guitarFrets(60),
-      ],
-      velocity: 1,
+        },
+      ]
     },
     {
       name: 'triple double',
@@ -59,6 +44,15 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
       targets: [
         diamonds(xcenter - 25, 100),
         diamonds(xcenter + 25, 100, true),
+      ],
+      velocity: 1,
+    },
+    {
+      name: 'guitar',
+      max: 70,
+      targets: [
+        guitarStrings(60),
+        guitarFrets(60),
       ],
       velocity: 1,
     },
@@ -170,12 +164,6 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
         },
       ],
       velocity: 2,
-    },
-    {
-      name: 'traffic jam',
-      max: 100,
-      targets: jam(10, 50),
-      velocity: 1,
     },
     {
       name: 'circle jam',
@@ -297,18 +285,4 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
     return targets
   }
 
-  function jam(count, distance) {
-    const targets = []
-    for( var i = 0; i < count; i++ ) {
-      targets.push({
-        points: [
-          { x: xcenter, y: 70 + (distance * i) },
-          { x: xcenter, y: height },
-          { x: xcenter, y: 0},
-        ]
-      })
-    }
-
-    return targets
-  }
 }
