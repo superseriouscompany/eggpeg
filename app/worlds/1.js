@@ -1,8 +1,6 @@
 import {steps, circle} from './patterns'
 import config from '../config'
 
-const worldOneTargetWidth = 100;
-
 module.exports = function(xcenter, ycenter, width, height) {
   const levels = [
     {
@@ -10,7 +8,7 @@ module.exports = function(xcenter, ycenter, width, height) {
       max: 5,
       targets: [
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: [
             { x: xcenter - 10, y: ycenter },
             { x: xcenter + 10, y: ycenter },
@@ -24,14 +22,14 @@ module.exports = function(xcenter, ycenter, width, height) {
       max: 10,
       targets: [
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: [
             { x: xcenter/2, y: ycenter },
           ],
           velocity: 0,
         },
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: [
             { x: 3 * xcenter/2, y: ycenter },
           ],
@@ -45,7 +43,7 @@ module.exports = function(xcenter, ycenter, width, height) {
       max: 10,
       targets: [
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: [
             { x: (xcenter/2) - 10, y: ycenter/2 },
             { x: (xcenter/2) + 10, y: ycenter/2 },
@@ -53,7 +51,7 @@ module.exports = function(xcenter, ycenter, width, height) {
           velocity: 0.5,
         },
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: [
             { x: (3 * xcenter/2) - 10, y: (3 * ycenter/2) },
             { x: (3 * xcenter/2) + 10, y: (3 * ycenter/2) },
@@ -67,21 +65,21 @@ module.exports = function(xcenter, ycenter, width, height) {
       max: 15,
       targets: [
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: [
             { x: xcenter - 60, y: ycenter + 50 },
           ],
           velocity: 0,
         },
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: [
             { x: xcenter, y: ycenter - 50 },
           ],
           velocity: 0,
         },
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: [
             { x: xcenter + 60, y: ycenter + 50 },
           ],
@@ -94,15 +92,15 @@ module.exports = function(xcenter, ycenter, width, height) {
       max: 15,
       targets: [
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: [
-            { x: (xcenter/2) - 10, y: ycenter },
-            { x: (xcenter/2) + 10, y: ycenter },
+            { x: xcenter - 10, y: ycenter/2 },
+            { x: xcenter + 10, y: ycenter/2 },
           ],
           velocity: 0.5,
         },
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: [
             { x: xcenter + 10, y: ycenter },
             { x: xcenter - 10, y: ycenter },
@@ -110,10 +108,10 @@ module.exports = function(xcenter, ycenter, width, height) {
           velocity: 0.5,
         },
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: [
-            { x: (3 * xcenter/2) - 10, y: ycenter },
-            { x: (3 * xcenter/2) + 10, y: ycenter },
+            { x: xcenter/2 - 10, y: (3 * ycenter/2) },
+            { x: xcenter/2 + 10, y: (3 * ycenter/2) },
           ],
           velocity: 0.5,
         },
@@ -124,7 +122,7 @@ module.exports = function(xcenter, ycenter, width, height) {
       max: 5,
       targets: [
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: circle(xcenter, ycenter, 10),
           velocity: 0.5,
         },
@@ -135,7 +133,7 @@ module.exports = function(xcenter, ycenter, width, height) {
       max: 20,
       targets: [
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: [
             { x: xcenter, y: ycenter - 40},
             { x: xcenter, y: ycenter + 40},
@@ -143,7 +141,7 @@ module.exports = function(xcenter, ycenter, width, height) {
           velocity: .5,
         },
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: [
             { x: xcenter, y: ycenter },
           ],
@@ -151,31 +149,31 @@ module.exports = function(xcenter, ycenter, width, height) {
       ],
     },
     {
-      name: 'the world one special',
+      name: 'the world juan special',
       max: 35,
       targets: [
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: [
-            { x: xcenter - 10, y: ycenter/2 },
-            { x: xcenter + 10, y: ycenter/2 },
+            { x: xcenter - 10, y: 10 },
+            { x: xcenter + 10, y: 10 },
           ],
           velocity: 0.5,
         },
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: [
             { x: width, y: height },
           ],
           velocity: 0,
         },
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: circle(xcenter/2, (3 * ycenter/2), 10),
           velocity: 0.5,
         },
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: [
             { x: xcenter, y: ycenter - 40},
             { x: xcenter, y: ycenter + 40},
@@ -183,7 +181,7 @@ module.exports = function(xcenter, ycenter, width, height) {
           velocity: .5,
         },
         {
-          width: worldOneTargetWidth,
+          width: config.sizes.largestTarget,
           points: [
             { x: xcenter, y: ycenter },
           ],

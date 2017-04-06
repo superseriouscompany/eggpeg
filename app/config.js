@@ -12,6 +12,7 @@ const config = {
   },
   chamber: 3,
   sizes: {
+    largestTarget: 100,
     target: 40,
     shadow: 75,
     bullet: 7,
