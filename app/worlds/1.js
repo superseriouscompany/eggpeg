@@ -37,7 +37,7 @@ module.exports = function(xcenter, ycenter, width, height) {
     },
     {
       name: 'double vibrator',
-      max: 5,
+      max: 10,
       targets: [
         {
           points: [
@@ -52,6 +52,30 @@ module.exports = function(xcenter, ycenter, width, height) {
             { x: (3 * xcenter/2) + 10, y: (3 * ycenter/2) },
           ],
           velocity: 1,
+        },
+      ],
+    },
+    {
+      name: 'triple static',
+      max: 15,
+      targets: [
+        {
+          points: [
+            { x: xcenter, y: ycenter/2 },
+          ],
+          velocity: 0,
+        },
+        {
+          points: [
+            { x: xcenter, y: ycenter },
+          ],
+          velocity: 0,
+        },
+        {
+          points: [
+            { x: xcenter, y: (3 * ycenter/2) },
+          ],
+          velocity: 0,
         },
       ],
     },
