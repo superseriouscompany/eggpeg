@@ -23,24 +23,6 @@ module.exports = function(xcenter, ycenter, width, height) {
       ],
     },
     {
-      name: 'vibrator marks the spot',
-      max: 20,
-      targets: [
-        {
-          points: [
-            { x: xcenter, y: ycenter - 20},
-            { x: xcenter, y: ycenter + 20},
-          ],
-          velocity: .5,
-        },
-        {
-          points: [
-            { x: xcenter, y: ycenter },
-          ],
-        },
-      ],
-    },
-    {
       name: 'Slow triangle',
       max: 5,
       targets: [
