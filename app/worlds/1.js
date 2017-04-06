@@ -17,6 +17,25 @@ module.exports = function(xcenter, ycenter, width, height) {
       ],
     },
     {
+      name: 'double static',
+      max: 10,
+      targets: [
+        {
+          points: [
+            { x: xcenter/2, y: ycenter },
+          ],
+          velocity: 0,
+        },
+        {
+          points: [
+            { x: 3 * xcenter/2, y: ycenter },
+          ],
+          velocity: 0,
+        },
+
+      ],
+    },
+    {
       name: 'slow circle',
       max: 5,
       targets: [
