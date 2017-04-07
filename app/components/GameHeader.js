@@ -75,14 +75,19 @@ class GameHeader extends Component {
         <Egg filled={this.props.tries >= 2} />
         <Egg filled={this.props.tries >= 3} />
       </View>
-      <Animated.Text style={[style.score, {
-        fontSize: this.state.scoreAnim.interpolate({
-          inputRange:  [0, .5, 1],
-          outputRange: [18, 21, 18],
-        })
-      }]}>
-        {this.state.score}
-      </Animated.Text>
+
+      { this.props.isDemo ?
+        null
+      :
+        <Animated.Text style={[style.score, {
+          fontSize: this.state.scoreAnim.interpolate({
+            inputRange:  [0, .5, 1],
+            outputRange: [18, 21, 18],
+          })
+        }]}>
+          {this.state.score}
+        </Animated.Text>
+      }
     </View>
   )}
 }
