@@ -58,8 +58,8 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
     },
     {
       name: 'pyramid',
-      max: 40,
-      targets: pyramid(8, 20, 60),
+      max: 35,
+      targets: pyramid(7, 20, 60),
       velocity: 1,
     },
     {
