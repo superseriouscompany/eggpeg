@@ -32,8 +32,8 @@ export default function(props) {
       :
         <Animated.View style={{flex: 1,
           backgroundColor: props.pulse.interpolate({
-            inputRange: [0,1],
-            outputRange: [props.level.color, props.world.lightColor],
+            inputRange: [0, 0.7, 1],
+            outputRange: [props.level.color, props.world.lightColor, props.world.lightColor],
           })
         }}>
           { props.level.done && !props.level.win ?
