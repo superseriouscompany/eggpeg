@@ -211,13 +211,15 @@ const style = StyleSheet.create({
     left:            20,
     top:             20,
     backgroundColor: 'transparent',
+    zIndex: -1,
   },
   scoresContainer: {
     justifyContent: 'center',
     alignItems:     'flex-end',
     paddingBottom: 10,
     paddingRight: 17,
-    paddingTop: 7
+    paddingTop: 7,
+    zIndex: -2,
   },
   activeContainer: {
     zIndex: 1,
