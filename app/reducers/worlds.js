@@ -1,5 +1,6 @@
 import worlds from '../worlds'
 import {colors} from '../styles/base'
+import {REHYDRATE} from 'redux-persist/constants'
 
 const initialState = {
   all: worlds,
@@ -54,6 +55,13 @@ export default function(state = initialState, action) {
         ...state,
         current: null,
       }
+    case REHYDRATE:
+      const incoming = action.payload.worlds
+      if( !incoming ) { return state }
+      return {
+        current: state.current,
+        all:     mergeScores(state.all, incoming.all),
+      }
     default:
       return state
   }
@@ -87,6 +95,19 @@ function reachLevel(state, index) {
     if( w.name == state.current.name ) {
       const percentage = index / w.levels.length
       w.percentage = Math.max(w.percentage || 0, percentage)
+    }
+    return w
+  })
+}
+
+function mergeScores(initial, loaded) {
+  return initial.map((w) => {
+    const match = (loaded || []).find((lw) => { return lw.name === w.name })
+    if( match ) {
+      return {
+        ...match,
+        ...w,
+      }
     }
     return w
   })
