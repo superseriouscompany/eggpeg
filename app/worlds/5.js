@@ -187,7 +187,7 @@ module.exports = function(xcenter, ycenter, width, height, targetWidth) {
     },
     {
       name: 'traffic jam',
-      max: 100,
+      max: 85,
       targets: jam(9, 50),
       velocity: 1,
     },
