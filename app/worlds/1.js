@@ -18,22 +18,24 @@ module.exports = function(xcenter, ycenter, width, height) {
       ],
     },
     {
-      name: 'double static',
+      name: 'double up down vibrator',
       max: 10,
       targets: [
         {
           width: config.sizes.largestTarget,
           points: [
-            { x: xcenter/2, y: ycenter },
+            { x: xcenter/2, y: ycenter - 10 },
+            { x: xcenter/2, y: ycenter + 10 },
           ],
-          velocity: 0,
+          velocity: 0.5,
         },
         {
           width: config.sizes.largestTarget,
           points: [
-            { x: 3 * xcenter/2, y: ycenter },
+            { x: 3 * xcenter/2, y: ycenter - 10 },
+            { x: 3 * xcenter/2, y: ycenter + 10 },
           ],
-          velocity: 0,
+          velocity: 0.5,
         },
 
       ],
@@ -61,29 +63,32 @@ module.exports = function(xcenter, ycenter, width, height) {
       ],
     },
     {
-      name: 'triple static',
+      name: 'triple triangle vibrator',
       max: 15,
       targets: [
         {
           width: config.sizes.largestTarget,
           points: [
-            { x: xcenter - 60, y: ycenter + 50 },
+            { x: xcenter - 60 + 5.6, y: ycenter + 50 - 5.6},
+            { x: xcenter - 60 - 5.6, y: ycenter + 50 + 5.6},
           ],
-          velocity: 0,
+          velocity: 0.5,
         },
         {
           width: config.sizes.largestTarget,
           points: [
-            { x: xcenter, y: ycenter - 50 },
+            { x: xcenter, y: ycenter - 50 - 10},
+            { x: xcenter, y: ycenter - 50 + 10},
           ],
-          velocity: 0,
+          velocity: 0.5,
         },
         {
           width: config.sizes.largestTarget,
           points: [
-            { x: xcenter + 60, y: ycenter + 50 },
+            { x: xcenter + 60 - 5.6, y: ycenter + 50 - 5.6},
+            { x: xcenter + 60 + 5.6, y: ycenter + 50 + 5.6},
           ],
-          velocity: 0,
+          velocity: 0.5,
         },
       ],
     },
@@ -162,14 +167,12 @@ module.exports = function(xcenter, ycenter, width, height) {
         },
         {
           width: config.sizes.largestTarget,
-          points: [
-            { x: width, y: height },
-          ],
-          velocity: 0,
+          points: circle(xcenter/2, (3 * ycenter/2), 10),
+          velocity: 0.5,
         },
         {
           width: config.sizes.largestTarget,
-          points: circle(xcenter/2, (3 * ycenter/2), 10),
+          points: circle((3 * xcenter/2), (3 * ycenter/2), 10),
           velocity: 0.5,
         },
         {
