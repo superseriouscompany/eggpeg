@@ -1,11 +1,11 @@
 'use strict'
 
 import React, {Component} from 'react'
-import {connect}          from 'react-redux';
+import {connect}          from 'react-redux'
 import FollowUs           from './FollowUs'
 import Start              from './Start'
 import Settings           from './Settings'
-import World              from './World';
+import World              from './World'
 import Worlds             from './Worlds'
 import HallOfFame         from './HallOfFame'
 import ContinueBundles    from './ContinueBundles'

@@ -119,7 +119,11 @@ function mapStateToProps(state) {
 
   return {
     myScore:   myScore,
-    scores:    state.leaderboard.scores,
+    scores:    state.leaderboard.scores.map((s) => {
+      // http://crocodillon.com/blog/parsing-emoji-unicode-in-javascript
+      s.hasEmoji = s.name.match(/(\ud83c[\udf00-\udfff]|\ud83d[\udc00-\ude4f]|\ud83d[\ude80-\udeff])/g)
+      return s
+    }),
     shareLink: state.shareLink,
     loading:   state.leaderboard.loading,
   }
