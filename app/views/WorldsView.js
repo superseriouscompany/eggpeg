@@ -24,6 +24,15 @@ const lockImages = {
   '6': require('../images/Lock6.png'),
 }
 
+const eggImages = {
+  '1': require('../images/GreenEgg.png'),
+  '2': require('../images/YellowEgg.png'),
+  '3': require('../images/OrangeEgg.png'),
+  '4': require('../images/RedEgg.png'),
+  '5': require('../images/PurpleEgg.png'),
+  '6': require('../images/BlueEgg.png'),
+}
+
 const {width, height} = Dimensions.get('window')
 
 export default class WorldsView extends Component {
@@ -151,7 +160,7 @@ class World extends Component {
               { props.world.locked ?
                 <Image source={lockImages[props.world.name]}/>
               : props.world.comingSoon ?
-                <Text style={style.status}>...</Text>
+                <Text style={[style.status, {color: props.world.deadColor}]}>...</Text>
               :
                 <Animated.View style={[props.isActivating ? {
                   opacity: props.expandAnim.interpolate({
@@ -161,10 +170,13 @@ class World extends Component {
                 } : null]}>
                     { props.world.score ?
                       <View>
-                        <Text style={style.status}>
+                        <View style={style.eggImageContainer}>
+                          <Image source={eggImages[props.world.name]}/>
+                        </View>
+                        <Text style={[style.status, {color: props.world.deadColor}]}>
                           {props.world.score || '---'}
                         </Text>
-                        <Text style={[style.status, style.points]}>
+                        <Text style={[style.status, style.points, {color: props.world.deadColor}]}>
                           { !props.world.percentage ?
                             '0%'
                           : props.world.percentage === 1 && props.world.score >= props.world.maxScore ?
@@ -177,7 +189,12 @@ class World extends Component {
                         </Text>
                       </View>
                     :
-                      <Text style={[style.status, {fontSize: 64}]}>{props.world.name}</Text>
+                      <View>
+                        <View style={style.eggImageContainer}>
+                          <Image source={eggImages[props.world.name]}/>
+                        </View>
+                        <Text style={[style.status, {fontSize: 64, color: props.world.deadColor}]}>{props.world.name}</Text>
+                      </View>
                     }
                 </Animated.View>
               }
@@ -208,8 +225,7 @@ const style = StyleSheet.create({
   },
   leftNav: {
     position:        'absolute',
-    left:            20,
-    top:             20,
+    padding: 20,
     backgroundColor: 'transparent',
     zIndex: -1,
   },
@@ -284,6 +300,15 @@ const style = StyleSheet.create({
   },
   shadow: {
     borderColor:       'rgba(0,0,0,0.5)',
+  },
+  eggImageContainer: {
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
   number: {
     fontSize: 32,

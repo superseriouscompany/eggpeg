@@ -51,6 +51,7 @@ class ScoreText extends Component {
     }]}>
       <Animated.Text style={{
         color: this.props.textColor,
+        backgroundColor: 'transparent',
         fontSize: this.state.leaveAnim.interpolate({
           inputRange:  [0, 1],
           outputRange: [32, 64],
@@ -67,6 +68,7 @@ const style = StyleSheet.create({
     left: 0,
     right: 0,
     alignItems: 'center',
+    backgroundColor: 'transparent',
   },
 })
 
