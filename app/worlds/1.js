@@ -10,8 +10,8 @@ module.exports = function(xcenter, ycenter, width, height) {
         {
           width: config.sizes.largestTarget,
           points: [
-            { x: xcenter - 10, y: ycenter },
-            { x: xcenter + 10, y: ycenter },
+            { x: xcenter - 15, y: ycenter },
+            { x: xcenter + 15, y: ycenter },
           ],
           velocity: 0.5,
         },
@@ -24,42 +24,20 @@ module.exports = function(xcenter, ycenter, width, height) {
         {
           width: config.sizes.largestTarget,
           points: [
-            { x: xcenter/2, y: ycenter - 10 },
-            { x: xcenter/2, y: ycenter + 10 },
+            { x: xcenter/2, y: ycenter - 20 },
+            { x: xcenter/2, y: ycenter + 20 },
           ],
           velocity: 0.5,
         },
         {
           width: config.sizes.largestTarget,
           points: [
-            { x: 3 * xcenter/2, y: ycenter - 10 },
-            { x: 3 * xcenter/2, y: ycenter + 10 },
+            { x: 3 * xcenter/2, y: ycenter - 20 },
+            { x: 3 * xcenter/2, y: ycenter + 20 },
           ],
           velocity: 0.5,
         },
 
-      ],
-    },
-    {
-      name: 'double vibrator',
-      max: 10,
-      targets: [
-        {
-          width: config.sizes.largestTarget,
-          points: [
-            { x: (xcenter/2) - 10, y: ycenter/2 },
-            { x: (xcenter/2) + 10, y: ycenter/2 },
-          ],
-          velocity: 0.5,
-        },
-        {
-          width: config.sizes.largestTarget,
-          points: [
-            { x: (3 * xcenter/2) - 10, y: (3 * ycenter/2) },
-            { x: (3 * xcenter/2) + 10, y: (3 * ycenter/2) },
-          ],
-          velocity: 0.5,
-        },
       ],
     },
     {
@@ -70,7 +48,7 @@ module.exports = function(xcenter, ycenter, width, height) {
           width: config.sizes.largestTarget,
           points: [
             { x: xcenter - 60 + 5.6, y: ycenter + 50 - 5.6},
-            { x: xcenter - 60 - 5.6, y: ycenter + 50 + 5.6},
+            { x: xcenter - 60 - 50.6, y: ycenter + 50 + 50.6},
           ],
           velocity: 0.5,
         },
@@ -86,7 +64,7 @@ module.exports = function(xcenter, ycenter, width, height) {
           width: config.sizes.largestTarget,
           points: [
             { x: xcenter + 60 - 5.6, y: ycenter + 50 - 5.6},
-            { x: xcenter + 60 + 5.6, y: ycenter + 50 + 5.6},
+            { x: xcenter + 60 + 50.6, y: ycenter + 50 + 50.6},
           ],
           velocity: 0.5,
         },
@@ -107,16 +85,16 @@ module.exports = function(xcenter, ycenter, width, height) {
         {
           width: config.sizes.largestTarget,
           points: [
-            { x: xcenter - 10, y: ycenter },
-            { x: xcenter + 10, y: ycenter },
+            { x: xcenter - 30, y: ycenter },
+            { x: xcenter + 30, y: ycenter },
           ],
           velocity: 0.5,
         },
         {
           width: config.sizes.largestTarget,
           points: [
-            { x: xcenter - 10, y: (3 * ycenter/2) },
-            { x: xcenter + 10, y: (3 * ycenter/2) },
+            { x: xcenter - 50, y: (3 * ycenter/2) },
+            { x: xcenter + 50, y: (3 * ycenter/2) },
           ],
           velocity: 0.5,
         },
@@ -128,51 +106,33 @@ module.exports = function(xcenter, ycenter, width, height) {
       targets: [
         {
           width: config.sizes.largestTarget,
-          points: circle(xcenter, ycenter, 10),
+          points: circle(xcenter, ycenter, 20),
           velocity: 0.5,
         },
       ]
     },
     {
-      name: 'vibrator marks the spot',
-      max: 20,
-      targets: [
-        {
-          width: config.sizes.largestTarget,
-          points: [
-            { x: xcenter, y: ycenter - 40},
-            { x: xcenter, y: ycenter + 40},
-          ],
-          velocity: .5,
-        },
-        {
-          width: config.sizes.largestTarget,
-          points: [
-            { x: xcenter, y: ycenter },
-          ],
-        },
-      ],
-    },
-    {
       name: 'the world juan special',
-      max: 35,
+      max: 40,
       targets: [
         {
           width: config.sizes.largestTarget,
-          points: [
-            { x: xcenter - 10, y: 10 },
-            { x: xcenter + 10, y: 10 },
-          ],
+          points: circle(xcenter/2, ycenter/2, 10),
           velocity: 0.5,
         },
         {
           width: config.sizes.largestTarget,
-          points: circle(xcenter/2, (3 * ycenter/2), 10),
+          points: circle((3 * xcenter/2), ycenter/2, 10),
           velocity: 0.5,
         },
         {
           width: config.sizes.largestTarget,
-          points: circle((3 * xcenter/2), (3 * ycenter/2), 10),
+          points: circle(xcenter/2, (3 * ycenter/2), 20),
+          velocity: 0.5,
+        },
+        {
+          width: config.sizes.largestTarget,
+          points: circle((3 * xcenter/2), (3 * ycenter/2), 20),
           velocity: 0.5,
         },
         {
