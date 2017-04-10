@@ -12,6 +12,11 @@ export default function(state=initialState, action) {
         name:     action.name,
         recorded: +new Date,
       }
+    case 'score:tag':
+      return {
+        ...state,
+        id: action.id,
+      }
     default:
       return state
   }

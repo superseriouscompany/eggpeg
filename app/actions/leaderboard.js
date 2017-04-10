@@ -16,9 +16,17 @@ export function loadScores() {
 
 export function postScore(score, name) {
   return function(dispatch) {
-    return api.signedPost('/leaderboard', {score, name}).then(() => {
-      return loadScores()(dispatch)
+    return api.signedPost('/leaderboard', {score, name}).then((json) => {
+      loadScores()(dispatch)
+      return json.id
     })
+  }
+}
+
+export function clearScore(id) {
+  if( !id ) { return console.warn('id is empty for clearScore') }
+  return function(dispatch) {
+    return api.request(`/leaderboard/${id}`, { method: 'DELETE'})
   }
 }
 

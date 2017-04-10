@@ -55,6 +55,7 @@ const api = {
       options,
     ).then((response) => {
       if( !response.ok ) { throw new Error('' + response.status) }
+      if( response.status === 204 ) { return true }
       return response.json()
     })
   }

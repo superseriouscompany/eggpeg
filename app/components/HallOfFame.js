@@ -1,13 +1,13 @@
 'use strict';
 
-import React                              from 'react'
-import Component                          from './Component'
-import HallOfFameView                     from '../views/HallOfFameView'
-import {connect}                          from 'react-redux'
-import {enqueueRetry}                     from '../actions/retry'
-import {postScore, stubScore, loadScores} from '../actions/leaderboard'
-import RatingRequestor                    from 'react-native-rating-requestor'
-import config                             from '../config'
+import React                                          from 'react'
+import Component                                      from './Component'
+import HallOfFameView                                 from '../views/HallOfFameView'
+import {connect}                                      from 'react-redux'
+import {enqueueRetry}                                 from '../actions/retry'
+import {postScore, stubScore, loadScores, clearScore} from '../actions/leaderboard'
+import RatingRequestor                                from 'react-native-rating-requestor'
+import config                                         from '../config'
 import {
   Platform,
   Share,
@@ -68,12 +68,19 @@ class HallOfFame extends Component {
     if( this.state.name.length > 20 ) { return alert('Your name can only be 20 characters') }
 
     this.props.dispatch(stubScore(this.props.score, this.state.name))
+    if( this.props.myScore.id ) {
+      this.props.dispatch(clearScore(this.props.myScore.id)).catch((err) => {
+        this.props.dispatch(enqueueRetry({type: 'clearScore', scoreId: this.props.myScore.id}))
+      })
+    }
     this.props.dispatch({type: 'score:record', top: this.props.score, name: this.state.name })
     setTimeout(() => {
       RatingTracker.handlePositiveEvent()
     }, config.timings.ratingDelay)
     this.props.back()
-    return this.props.dispatch(postScore(this.props.score, this.state.name)).catch((err) => {
+    return this.props.dispatch(postScore(this.props.score, this.state.name)).then((id) => {
+      this.props.dispatch({type: 'score:tag', id: id})
+    }).catch((err) => {
       this.props.dispatch(enqueueRetry({type: 'postScore', score: this.props.score, name: this.state.name}))
     })
   }
@@ -115,6 +122,7 @@ function mapStateToProps(state) {
   const myScore = state.score.top ? {
     score: state.score.top,
     name:  state.score.name,
+    id:    state.score.id,
   } : {};
 
   return {
