@@ -46,16 +46,16 @@ export default class HallOfFameView extends Component {
                   style={style.leaderboard}
                   refreshControl={
                     <RefreshControl
-                      tintColor={'hotpink'}
+                      tintColor={colors.grey}
                       refreshing={props.loading || false}
                       onRefresh={props.retry} />}>
 
         { !props.scores || !props.scores.length ?
-          <Text>
+          <Text style={{textAlign: 'center'}}>
             { props.loading ?
               'Loading scores...'
             :
-              'Scores didn\'t load. Pull to try again.'
+              'Scores failed to load. Pull to retry.'
             }
           </Text>
         : null }
