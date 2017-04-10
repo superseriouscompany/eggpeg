@@ -23,6 +23,17 @@ export function postScore(score, name) {
   }
 }
 
+export function clearScore(id) {
+  if( !id ) { return console.warn('id is empty for clearScore') }
+  return function(dispatch) {
+    return api.request(`/leaderboard/${id}`, { method: 'DELETE'}).then((ok) => {
+      alert('ok')
+    }).catch((err) => {
+      alert(err.message || JSON.stringify(err))
+    })
+  }
+}
+
 export function stubScore(score, name) {
   return function(dispatch) {
     dispatch({type: 'leaderboard:insert', score: score, name: name})

@@ -68,6 +68,9 @@ class HallOfFame extends Component {
     if( this.state.name.length > 20 ) { return alert('Your name can only be 20 characters') }
 
     this.props.dispatch(stubScore(this.props.score, this.state.name))
+    if( this.props.myScore.id ) {
+      this.props.dispatch(clearScore(this.props.myScore.id))
+    }
     this.props.dispatch({type: 'score:record', top: this.props.score, name: this.state.name })
     setTimeout(() => {
       RatingTracker.handlePositiveEvent()
@@ -117,6 +120,7 @@ function mapStateToProps(state) {
   const myScore = state.score.top ? {
     score: state.score.top,
     name:  state.score.name,
+    id:    state.score.id,
   } : {};
 
   return {
