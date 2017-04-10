@@ -1,13 +1,13 @@
 'use strict';
 
-import React                              from 'react'
-import Component                          from './Component'
-import HallOfFameView                     from '../views/HallOfFameView'
-import {connect}                          from 'react-redux'
-import {enqueueRetry}                     from '../actions/retry'
-import {postScore, stubScore, loadScores} from '../actions/leaderboard'
-import RatingRequestor                    from 'react-native-rating-requestor'
-import config                             from '../config'
+import React                                          from 'react'
+import Component                                      from './Component'
+import HallOfFameView                                 from '../views/HallOfFameView'
+import {connect}                                      from 'react-redux'
+import {enqueueRetry}                                 from '../actions/retry'
+import {postScore, stubScore, loadScores, clearScore} from '../actions/leaderboard'
+import RatingRequestor                                from 'react-native-rating-requestor'
+import config                                         from '../config'
 import {
   Platform,
   Share,
@@ -69,7 +69,9 @@ class HallOfFame extends Component {
 
     this.props.dispatch(stubScore(this.props.score, this.state.name))
     if( this.props.myScore.id ) {
-      this.props.dispatch(clearScore(this.props.myScore.id))
+      this.props.dispatch(clearScore(this.props.myScore.id)).catch((err) => {
+        this.props.dispatch(enqueueRetry({type: 'clearScore', scoreId: this.props.myScore.id}))
+      })
     }
     this.props.dispatch({type: 'score:record', top: this.props.score, name: this.state.name })
     setTimeout(() => {

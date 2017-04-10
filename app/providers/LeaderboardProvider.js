@@ -46,6 +46,12 @@ class LeaderboardProvider extends Component {
           }).catch((err) => {
             console.warn('Queued postScore request failed', request, err.message, err)
           })
+        } else if( request.type === 'clearScore' ) {
+          this.props.dispatch(clearScore(request.scoreId)).then((ok) => {
+            this.props.dispatch(clearRetry(request.id))
+          }).catch((err) => {
+            console.warn('Queued postScore request failed', request, err.message, err)
+          })
         } else {
           console.warn('Unknown request type to retry', request.type)
         }
