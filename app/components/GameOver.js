@@ -108,9 +108,6 @@ function mapDispatchToProps(dispatch) {
       }
       dispatch({type: 'continues:use'})
       dispatch({type: 'level:continue'})
-      if( remaining == 1 ) {
-        alert('Should consume purchase here')
-      }
     },
 
     buyContinues: () => {
