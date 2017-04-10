@@ -225,8 +225,7 @@ const style = StyleSheet.create({
   },
   leftNav: {
     position:        'absolute',
-    left:            20,
-    top:             20,
+    padding: 20,
     backgroundColor: 'transparent',
     zIndex: -1,
   },
