@@ -40,7 +40,14 @@ class LeaderboardProvider extends Component {
             console.warn('Queued loadScores request failed', request, err)
           })
         } else if( request.type === 'postScore' ) {
-          this.props.dispatch(postScore(request.score, request.name)).then(() => {
+          this.props.dispatch(postScore(request.score, request.name)).then((id) => {
+            this.props.dispatch({type: 'score:tag', id: id})
+            this.props.dispatch(clearRetry(request.id))
+          }).catch((err) => {
+            console.warn('Queued postScore request failed', request, err.message, err)
+          })
+        } else if( request.type === 'clearScore' ) {
+          this.props.dispatch(clearScore(request.scoreId)).then((ok) => {
             this.props.dispatch(clearRetry(request.id))
           }).catch((err) => {
             console.warn('Queued postScore request failed', request, err.message, err)
