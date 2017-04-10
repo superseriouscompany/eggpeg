@@ -2,13 +2,15 @@ const DeviceInfo = require('react-native-device-info')
 
 const config = {
   startingScene:     __DEV__ ? 'Start': 'Start',
-  startingLevel:     __DEV__ ? 'solo' :    null,
+  startingLevel:     __DEV__ ? 'solo':  null,
   skipDemo:          __DEV__ ? true:    false,
   startingContinues: __DEV__ ? 0:       10,
-  shortWorld:        __DEV__ ? false:    false,
+  shortWorld:        __DEV__ ? false:   false,
+  useScratch:        __DEV__ ? false:   false,
   bullet: {
     delay:  2800,
     linger: 100,
+    yOffset: -20,
   },
   chamber: 3,
   sizes: {

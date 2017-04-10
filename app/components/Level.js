@@ -32,6 +32,7 @@ class Level extends Component {
   constructor(props) {
     super(props)
     this.shoot = this.shoot.bind(this)
+    this.move  = this.move.bind(this)
     this.state = {
       swapAnim: new Animated.Value(.5),
       targets:     [],
@@ -82,11 +83,20 @@ class Level extends Component {
     }
   }
 
+  move(e) {
+    if( this.props.level.done || this.props.level.finishTime || this.props.level.loading ) { return false; }
+    if( !this.props.chamber ) { return false; }
+    const {pageX, pageY} = e.nativeEvent
+    this.setState({x: pageX, y: Math.max(0, pageY + config.bullet.yOffset})
+    return true;
+  }
+
   shoot(e) {
     if( this.props.level.done || this.props.level.finishTime || this.props.level.loading ) { return; }
     if( !this.props.chamber ) { return; }
     const {pageX, pageY} = e.nativeEvent;
-    this.props.dispatch({type: 'bullets:fire', x: pageX, y: pageY})
+    this.setState({x: null, y: null})
+    this.props.dispatch({type: 'bullets:fire', x: pageX, y: Math.max(0, pageY + config.bullet.yOffset)})
     bombwhistleTimeout && clearTimeout(bombwhistleTimeout);
     sounds.bombwhistle.stop()
     sounds.bombwhistle.play(null, (err) => {
@@ -100,7 +110,12 @@ class Level extends Component {
 
   render() { return (
     <GameLoop>
-      <TouchableWithoutFeedback onPress={this.shoot}>
+      <View
+        style={{flex: 1}}
+        onStartShouldSetResponder={this.move}
+        onResponderMove={this.move}
+        onResponderRelease={this.shoot}
+      >
         <Animated.View style={{
           flex: 1,
           transform: [
@@ -115,11 +130,23 @@ class Level extends Component {
           { this.state.targets.map((target, key) => (
             <Target key={this.props.level.name + '-' + key} target={target} hit={target.hit} color={this.props.level.targetColor} deadColor={this.props.level.deadColor} swapAnim={this.state.swapAnim}/>
           ))}
+
+          { this.state.x && this.state.y ?
+            <Bullet key={'crosshair'} shadowColor={this.props.level.color} bullet={{
+              width: config.sizes.shadow,
+              shadow: 1,
+              x: this.state.x,
+              y: this.state.y,
+              visible: false,
+              spent: false,
+            }}/>
+          : null}
+
           { this.props.bullets.map((bullet, key) => (
             <Bullet key={this.props.level.name + '-' + key} bullet={bullet} hit={bullet.hit} yolkColor={this.props.level.yolkColor} shadowColor={this.props.level.color}/>
           ))}
         </Animated.View>
-      </TouchableWithoutFeedback>
+      </View>
     </GameLoop>
   )}
 }

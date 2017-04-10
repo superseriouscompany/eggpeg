@@ -10,6 +10,7 @@ import LeaderboardProvider from '../providers/LeaderboardProvider'
 import store               from '../reducers'
 import Stage               from './Stage'
 import Scratch             from './Scratch'
+import config              from '../config'
 import {
   View,
 } from 'react-native';
@@ -18,7 +19,7 @@ export default function Root() {
   return (
     <Provider store={store}>
       <View style={{flex: 1}}>
-        { __DEV__ ?
+        { __DEV__ && config.useScratch ?
           <Scratch />
         :
           <Stage />
