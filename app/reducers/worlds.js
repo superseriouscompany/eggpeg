@@ -107,7 +107,7 @@ function mergeScores(initial, loaded) {
       return {
         ...match,
         ...w,
-        locked: match.locked,
+        locked: match.locked && w.locked,
       }
     }
     return w

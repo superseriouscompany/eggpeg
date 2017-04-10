@@ -12,6 +12,7 @@ const worlds = [{
   targetColor: colors.red,
   deadColor:   colors.darkgreen,
   lightColor:  colors.lightgreen,
+  background:  'GreenBackground.png',
   levels:      require('./Demo')(xcenter, ycenter, width, height, config.sizes.target)
 }, {
   name:        '1',
@@ -20,6 +21,7 @@ const worlds = [{
   deadColor:   colors.darkgreen,
   lightColor:  colors.lightgreen,
   levels:      require('./1')(xcenter, ycenter, width, height, config.sizes.target),
+  background:  'GreenBackground.png',
   velocity:    .5,
 },
 {
@@ -29,7 +31,8 @@ const worlds = [{
   deadColor:   colors.darkyellow,
   lightColor:  colors.lightyellow,
   yolkColor:   'orange',
-  locked:      true,
+  locked:      false,
+  background:  'YellowBackground.png',
   levels:      require('./2')(xcenter, ycenter, width, height, config.sizes.target),
   velocity:    .5,
 }, {
@@ -38,7 +41,8 @@ const worlds = [{
   targetColor: colors.blue,
   deadColor:   colors.darkorange,
   lightColor:  colors.lightorange,
-  locked:      true,
+  locked:      false,
+  background:  'OrangeBackground.png',
   levels:      require('./3')(xcenter, ycenter, width, height, config.sizes.target),
   velocity:    1,
 }, {
@@ -47,7 +51,8 @@ const worlds = [{
   targetColor: colors.yellow,
   deadColor:   colors.darkred,
   lightColor:  colors.lightred,
-  locked:      true,
+  locked:      false,
+  background:  'RedBackground.png',
   levels:      require('./4')(xcenter, ycenter, width, height, config.sizes.target),
   velocity:    1,
 }, {
@@ -56,7 +61,8 @@ const worlds = [{
   targetColor: colors.red,
   deadColor:   colors.darkpurple,
   lightColor:  colors.lightpurple,
-  locked:      true,
+  locked:      false,
+  background:  'PurpleBackground.png',
   levels:      require('./5')(xcenter, ycenter, width, height, config.sizes.target),
   velocity:    2,
 }, {
@@ -65,7 +71,8 @@ const worlds = [{
   targetColor: colors.green,
   deadColor:   colors.darkblue,
   lightColor:  colors.lightblue,
-  locked:      true,
+  locked:      false,
+  background:  'BlueBackground.png',
   levels:      require('./6')(xcenter, ycenter, width, height, config.sizes.target),
   velocity:    1,
 }]
