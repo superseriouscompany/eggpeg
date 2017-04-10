@@ -73,7 +73,9 @@ class HallOfFame extends Component {
       RatingTracker.handlePositiveEvent()
     }, config.timings.ratingDelay)
     this.props.back()
-    return this.props.dispatch(postScore(this.props.score, this.state.name)).catch((err) => {
+    return this.props.dispatch(postScore(this.props.score, this.state.name)).then((id) => {
+      this.props.dispatch({type: 'score:tag', id: id})
+    }).catch((err) => {
       this.props.dispatch(enqueueRetry({type: 'postScore', score: this.props.score, name: this.state.name}))
     })
   }
