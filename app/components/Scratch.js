@@ -10,34 +10,36 @@ import {
 } from 'react-native'
 
 class Scratch extends Component {
-  render() { console.warn(this.props.scores.length); return (
-    <View style={{flex: 1}}>
-      <Text style={{backgroundColor: 'cornflowerblue'}}>Hey</Text>
-      <ScrollView style={{flex: 1, backgroundColor: 'hotpink'}}>
-          { this.props.scores.map((s, key) => (
-            <View key={key} style={{width: '100%', backgroundColor: 'lawngreen', flexDirection: 'row'}}>
-              <Text>
-                {s.hasEmoji ? 'Yep' : 'Nope'}
-              </Text>
-              <Text adjustsFontSizeToFit={!s.hasEmoji} numberOfLines={1} style={{flex: 1, fontFamily: 'Futura-Medium', color: 'white'}}>{s.name}</Text>
-              <Text>420</Text>
-            </View>
-          ))}
-      </ScrollView>
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+
+  onStartShouldSetResponder(e) {
+    console.warn('started')
+    return true
+  }
+
+  move(e) {
+    const {pageX, pageY} = e.nativeEvent
+    console.warn('moved', pageX, pageY)
+  }
+
+  render() { return (
+    <View
+      style={{flex: 1, backgroundColor: 'hotpink'}}
+      onStartShouldSetResponder={() => true}
+      onResponderMove={(evt) => this.setState({x: evt.nativeEvent.pageX, y: evt.nativeEvent.pageY})}
+    >
+      <Text>
+        x: {this.state.x}, y: {this.state.y}
+      </Text>
     </View>
   )}
 }
 
 function mapStateToProps(state) {
-  return {
-    scores: state.leaderboard.scores.map((s) => {
-      return {
-        ...s,
-        name: s.name + 'abcdefghijklmnopqrstuvwxyz',
-        hasEmoji: s.name.match(/(\ud83c[\udf00-\udfff]|\ud83d[\udc00-\ude4f]|\ud83d[\ude80-\udeff])/g),
-      }
-    }),
-  }
+  return {}
 }
 
 export default connect(mapStateToProps)(Scratch)
