@@ -137,16 +137,18 @@ const style = StyleSheet.create({
     bottom: 10,
     zIndex: -1,
     width: '100%',
+    backgroundColor: 'transparent',
   },
   tiled: {
     position: 'absolute',
     left: 0, top: 0, bottom: 0, right: 0,
-    zIndex: -1,
+    zIndex: -2,
   },
   hint: {
     fontSize:     18,
     marginBottom: 20,
     color:        'white',
+    backgroundColor: 'transparent',
   },
   pauseContainer: {
     position: 'absolute',
