@@ -63,7 +63,9 @@ export default function(props) {
           : null}
           { image ?
             <View style={style.tiled}>
-              <Image source={image} resizeMode="repeat" style={{width: width, height: height}}/>
+              <Image source={image} style={{width: width, aspectRatio: 1, }}/>
+              <Image source={image} style={{width: width, aspectRatio: 1, }}/>
+              <Image source={image} style={{width: width, aspectRatio: 1, }}/>
             </View>
           : null }
           <Level done={props.worldDone}/>
@@ -138,6 +140,7 @@ const style = StyleSheet.create({
   },
   tiled: {
     position: 'absolute',
+    left: 0, top: 0, bottom: 0, right: 0,
     zIndex: -1,
   },
   hint: {
