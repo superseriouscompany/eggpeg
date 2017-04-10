@@ -65,7 +65,7 @@ export default class GameOverView extends Component {
         transform: [{
           translateX: this.state.slide.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, -width],
+            outputRange: [0, -(width*2)],
           })
         }]
       }]}>
