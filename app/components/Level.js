@@ -87,7 +87,7 @@ class Level extends Component {
     if( this.props.level.done || this.props.level.finishTime || this.props.level.loading ) { return false; }
     if( !this.props.chamber ) { return false; }
     const {pageX, pageY} = e.nativeEvent
-    this.setState({x: pageX, y: Math.max(0, pageY + config.bullet.yOffset})
+    this.setState({x: pageX, y: Math.max(0, pageY + config.bullet.yOffset)})
     return true;
   }
 
