@@ -70,10 +70,10 @@ class GameLoop extends Component {
       if( hits.length ) {
         if( hits.find((h) => { return h.ring == 'bullseye'}) ) {
           sounds.ding.stop()
-          sounds.ding.play(null, console.error)
+          sounds.ding.play()
         } else {
           sounds.splat.stop()
-          sounds.splat.play(null, console.error)
+          sounds.splat.play()
         }
 
         let score = hits.reduce((a, v) => { return a + v.score}, 0)
@@ -84,7 +84,7 @@ class GameLoop extends Component {
         this.props.dispatch({type: 'bullets:hit', index: bi, score: score, count: hits.length})
       } else if( bullet.spent && !bullet.hit && !bullet.missed ){
         sounds.whiff.stop()
-        sounds.whiff.play(null, console.error)
+        sounds.whiff.play()
         this.props.dispatch({type: 'bullets:miss', index: bi})
         if( this.props.world.name == 'Demo' ) {
           this.props.dispatch({type: 'chamber:reload'})

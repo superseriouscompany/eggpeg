@@ -89,9 +89,7 @@ class Level extends Component {
     this.props.dispatch({type: 'bullets:fire', x: pageX, y: pageY})
     bombwhistleTimeout && clearTimeout(bombwhistleTimeout);
     sounds.bombwhistle.stop()
-    sounds.bombwhistle.play(null, (err) => {
-      console.error(err)
-    })
+    sounds.bombwhistle.play()
 
     bombwhistleTimeout = setTimeout(() => {
       sounds.bombwhistle.stop()

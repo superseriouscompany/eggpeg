@@ -57,7 +57,7 @@ class GameHeader extends Component {
       });
       if( props.isHighScore && !this.props.isHighScore ) {
         sounds.bugles.stop()
-        sounds.bugles.play(null, console.error)
+        sounds.bugles.play()
       }
     }
   }

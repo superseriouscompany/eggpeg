@@ -45,11 +45,11 @@ export default class Bullet extends Component {
       const betweenDelay = config.timings.multiplierBetween;
       setTimeout(() => {
         sounds.multiplier.stop()
-        sounds.multiplier.play(null, console.error)
+        sounds.multiplier.play()
       }, startDelay)
       setTimeout(() => {
         sounds.incrementer.stop()
-        sounds.incrementer.play(null, console.error)
+        sounds.incrementer.play()
       }, startDelay + betweenDelay + 250)
 
       Animated.stagger(betweenDelay, [
