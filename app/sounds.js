@@ -2,14 +2,20 @@ import Sound  from 'react-native-sound'
 import config from './config'
 
 const files = [
-  'bombwhistle.m4a', // egg drop
-  'bugles.m4a',      // high score surpassed
-  'ding.m4a',        // bullseye
-  'fart.m4a',        // game over
-  'multiplier.m4a',  // multiplier
-  'splat.m4a',       // hit
-  'woohoo.m4a',      // game over high score
-  'youdabest.m4a',   // victory
+  'bombwhistle.mp3', // egg drop
+  'bugles.mp3',      // high score surpassed
+  'ding.mp3',        // bullseye
+  'splat.mp3',       // hit
+  'whiff.mp3',       // miss
+  'fart.mp3',        // game over
+  'multiplier.mp3',  // multiplier
+  'woohoo.mp3',      // game over high score
+  'incrementer.mp3', // incrementing after multiplier
+
+  'buttonTap.mp3',   // menu button tap
+  'youdabest.wav',   // victory
+  'musicMenu.wav',  // menu music
+  'musicGame.wav',  // in-game music
 ]
 
 const sounds = {}

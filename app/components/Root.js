@@ -7,6 +7,7 @@ import IAPProvider         from '../providers/IAPProvider'
 import MigrateProvider     from '../providers/MigrateProvider'
 import DevProvider         from '../providers/DevProvider'
 import LeaderboardProvider from '../providers/LeaderboardProvider'
+import MusicProvider       from '../providers/MusicProvider'
 import store               from '../reducers'
 import Stage               from './Stage'
 import {
@@ -24,6 +25,7 @@ export default function Root() {
           <MigrateProvider />
           <LeaderboardProvider />
           <DevProvider />
+          <MusicProvider />
         </View>
       </View>
     </Provider>

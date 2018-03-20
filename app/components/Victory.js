@@ -37,9 +37,7 @@ export default class Victory extends Component {
   }
 
   componentDidMount() {
-    sounds.youdabest.play(null, (err) => {
-      console.error(err)
-    })
+    sounds.youdabest.play(null, console.error)
 
     setTimeout(() => {
       RatingTracker.handlePositiveEvent()

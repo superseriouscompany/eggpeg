@@ -6,6 +6,7 @@ import WorldView          from '../views/WorldView'
 import config             from '../config'
 import {loadLevel}        from '../actions/levels'
 import {AsyncStorage}     from 'react-native'
+import sounds             from '../sounds'
 import {
   Animated,
   Easing,

@@ -55,10 +55,9 @@ class GameHeader extends Component {
           score: props.score,
         })
       });
-      if( props.newHighScore ) {
-        sounds.bugles.play(null, (err) => {
-          console.error(err)
-        })
+      if( props.isHighScore && !this.props.isHighScore ) {
+        sounds.bugles.stop()
+        sounds.bugles.play(null, console.error)
       }
     }
   }

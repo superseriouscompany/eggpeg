@@ -9,6 +9,10 @@
 
     $ open ios/eggpeg.xcodeproj
 
+## Adding Sounds
+
+Drag and drop into xcode folder: eggpeg/sounds
+
 ## Running Android
 
     $ react-native run-android

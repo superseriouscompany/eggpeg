@@ -2,10 +2,10 @@ const DeviceInfo = require('react-native-device-info')
 
 const config = {
   startingScene:     __DEV__ ? 'Start': 'Start',
-  startingLevel:     __DEV__ ? null :    null,
+  startingLevel:     __DEV__ ? 'circle jam':    null,
   skipDemo:          __DEV__ ? true:    false,
   startingContinues: __DEV__ ? 0:       10,
-  shortWorld:        __DEV__ ? false:    false,
+  shortWorld:        __DEV__ ? false:   false,
   bullet: {
     delay:  2800,
     linger: 100,
@@ -50,8 +50,9 @@ const config = {
     targetGhost:           1750,
   },
   gravity: 0,//9.80665,
-  playSounds: false,
+  playSounds: true,
 }
+
 
 if( DeviceInfo.isEmulator() ) {
   config.bullet.delay      = 0;

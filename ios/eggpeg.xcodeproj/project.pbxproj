@@ -34,25 +34,30 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* eggpegTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* eggpegTests.m */; };
-		34345645F1B04D34AD098AD0 /* libreact-native-branch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D707CA305F3A4BDD8F00C383 /* libreact-native-branch.a */; };
+		3F20F86C206169F10029D2BF /* libreact-native-branch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F076C051E8C00BD00AD73C0 /* libreact-native-branch.a */; };
+		3F20F88C20616A9E0029D2BF /* musicGame.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3F20F88120616A9D0029D2BF /* musicGame.wav */; };
+		3F20F88D20616A9E0029D2BF /* bugles.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F20F88220616A9D0029D2BF /* bugles.mp3 */; };
+		3F20F88E20616A9E0029D2BF /* ding.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F20F88320616A9D0029D2BF /* ding.mp3 */; };
+		3F20F88F20616A9E0029D2BF /* incrementer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F20F88420616A9D0029D2BF /* incrementer.mp3 */; };
+		3F20F89020616A9E0029D2BF /* multiplier.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F20F88520616A9D0029D2BF /* multiplier.mp3 */; };
+		3F20F89120616A9E0029D2BF /* bombwhistle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F20F88620616A9D0029D2BF /* bombwhistle.mp3 */; };
+		3F20F89220616A9E0029D2BF /* musicMenu.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3F20F88720616A9E0029D2BF /* musicMenu.wav */; };
+		3F20F89320616A9E0029D2BF /* fart.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F20F88820616A9E0029D2BF /* fart.mp3 */; };
+		3F20F89420616A9E0029D2BF /* levelSelect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F20F88920616A9E0029D2BF /* levelSelect.mp3 */; };
+		3F20F89520616A9E0029D2BF /* woohoo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F20F88A20616A9E0029D2BF /* woohoo.mp3 */; };
+		3F20F89620616A9E0029D2BF /* youdabest.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3F20F88B20616A9E0029D2BF /* youdabest.wav */; };
+		3F20F89720616BAD0029D2BF /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F2EEC861E6C71CF004CBD06 /* libRNDeviceInfo.a */; };
+		3F20F89820616D750029D2BF /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE053511E832594005B7F8A /* libRNSound.a */; };
+		3F20F89920616DD00029D2BF /* libInAppUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FBEF9C31E6A52B000782101 /* libInAppUtils.a */; };
+		3F20F89D206174270029D2BF /* whiff.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F20F89A206174270029D2BF /* whiff.mp3 */; };
+		3F20F89E206174270029D2BF /* splat.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F20F89B206174270029D2BF /* splat.mp3 */; };
+		3F20F89F206174270029D2BF /* buttonTap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F20F89C206174270029D2BF /* buttonTap.mp3 */; };
 		3F4E11A01E6A38CC00FB18A3 /* Branch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F4E119F1E6A38CC00FB18A3 /* Branch.framework */; };
 		3FBEF9E11E6A53AF00782101 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FBEF9E01E6A53AF00782101 /* StoreKit.framework */; };
 		3FD77C0E1E6D0D0100E199DD /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FD77C0C1E6D0D0100E199DD /* Fabric.framework */; };
 		3FD77C0F1E6D0D0100E199DD /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FD77C0D1E6D0D0100E199DD /* Crashlytics.framework */; };
-		3FE053581E833C75005B7F8A /* bombwhistlehigh.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053571E833C75005B7F8A /* bombwhistlehigh.m4a */; };
-		3FE0535B1E834BCE005B7F8A /* fart.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053591E834BCE005B7F8A /* fart.m4a */; };
-		3FE0535C1E834BCE005B7F8A /* splat.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE0535A1E834BCE005B7F8A /* splat.m4a */; };
-		3FE053D71E84230B005B7F8A /* bugles.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053D21E84230B005B7F8A /* bugles.m4a */; };
-		3FE053D81E84230B005B7F8A /* ding.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053D31E84230B005B7F8A /* ding.m4a */; };
-		3FE053D91E84230B005B7F8A /* multiplier.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053D41E84230B005B7F8A /* multiplier.m4a */; };
-		3FE053DA1E84230B005B7F8A /* woohoo.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053D51E84230B005B7F8A /* woohoo.m4a */; };
-		3FE053DB1E84230B005B7F8A /* youdabest.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053D61E84230B005B7F8A /* youdabest.m4a */; };
-		3FE053FD1E842ECA005B7F8A /* bombwhistle.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3FE053FC1E842ECA005B7F8A /* bombwhistle.m4a */; };
-		47349FA9561C46CE8D2EC3E2 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1AE8C64E049467BAED014CD /* libRNSound.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		E7E695A656B948B5A11C2D64 /* libInAppUtils.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C28CF7EA9F8548DC859FF959 /* libInAppUtils.a */; };
-		F8AEAB55904C44269D3B43A7 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5E73C3AF9754E33AEA7379D /* libRNDeviceInfo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -304,20 +309,25 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* eggpeg-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "eggpeg-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* eggpeg-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "eggpeg-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F20F88120616A9D0029D2BF /* musicGame.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = musicGame.wav; sourceTree = "<group>"; };
+		3F20F88220616A9D0029D2BF /* bugles.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bugles.mp3; sourceTree = "<group>"; };
+		3F20F88320616A9D0029D2BF /* ding.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ding.mp3; sourceTree = "<group>"; };
+		3F20F88420616A9D0029D2BF /* incrementer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = incrementer.mp3; sourceTree = "<group>"; };
+		3F20F88520616A9D0029D2BF /* multiplier.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = multiplier.mp3; sourceTree = "<group>"; };
+		3F20F88620616A9D0029D2BF /* bombwhistle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bombwhistle.mp3; sourceTree = "<group>"; };
+		3F20F88720616A9E0029D2BF /* musicMenu.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = musicMenu.wav; sourceTree = "<group>"; };
+		3F20F88820616A9E0029D2BF /* fart.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fart.mp3; sourceTree = "<group>"; };
+		3F20F88920616A9E0029D2BF /* levelSelect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = levelSelect.mp3; sourceTree = "<group>"; };
+		3F20F88A20616A9E0029D2BF /* woohoo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = woohoo.mp3; sourceTree = "<group>"; };
+		3F20F88B20616A9E0029D2BF /* youdabest.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = youdabest.wav; sourceTree = "<group>"; };
+		3F20F89A206174270029D2BF /* whiff.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = whiff.mp3; sourceTree = "<group>"; };
+		3F20F89B206174270029D2BF /* splat.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = splat.mp3; sourceTree = "<group>"; };
+		3F20F89C206174270029D2BF /* buttonTap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = buttonTap.mp3; sourceTree = "<group>"; };
 		3F4E119F1E6A38CC00FB18A3 /* Branch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Branch.framework; path = Carthage/Build/iOS/Branch.framework; sourceTree = "<group>"; };
 		3F4E11A21E6A3BCD00FB18A3 /* eggpeg.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = eggpeg.entitlements; sourceTree = "<group>"; };
 		3FBEF9E01E6A53AF00782101 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		3FD77C0C1E6D0D0100E199DD /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		3FD77C0D1E6D0D0100E199DD /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		3FE053571E833C75005B7F8A /* bombwhistlehigh.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = bombwhistlehigh.m4a; sourceTree = "<group>"; };
-		3FE053591E834BCE005B7F8A /* fart.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = fart.m4a; sourceTree = "<group>"; };
-		3FE0535A1E834BCE005B7F8A /* splat.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = splat.m4a; sourceTree = "<group>"; };
-		3FE053D21E84230B005B7F8A /* bugles.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = bugles.m4a; sourceTree = "<group>"; };
-		3FE053D31E84230B005B7F8A /* ding.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = ding.m4a; sourceTree = "<group>"; };
-		3FE053D41E84230B005B7F8A /* multiplier.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = multiplier.m4a; sourceTree = "<group>"; };
-		3FE053D51E84230B005B7F8A /* woohoo.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = woohoo.m4a; sourceTree = "<group>"; };
-		3FE053D61E84230B005B7F8A /* youdabest.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = youdabest.m4a; sourceTree = "<group>"; };
-		3FE053FC1E842ECA005B7F8A /* bombwhistle.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = bombwhistle.m4a; sourceTree = "<group>"; };
 		4909137A3E2E418A8444FD90 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -325,10 +335,6 @@
 		99AFB7B02EFB4911A3B7111D /* InAppUtils.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = InAppUtils.xcodeproj; path = "../node_modules/react-native-in-app-utils/InAppUtils.xcodeproj"; sourceTree = "<group>"; };
 		AA17798806FD4DCA865D8657 /* RNBranch.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNBranch.xcodeproj; path = "../node_modules/react-native-branch/ios/RNBranch.xcodeproj"; sourceTree = "<group>"; };
 		AC0C1F15203D4C7F992BC4F0 /* RNSound.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
-		C1AE8C64E049467BAED014CD /* libRNSound.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSound.a; sourceTree = "<group>"; };
-		C28CF7EA9F8548DC859FF959 /* libInAppUtils.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libInAppUtils.a; sourceTree = "<group>"; };
-		D707CA305F3A4BDD8F00C383 /* libreact-native-branch.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libreact-native-branch.a"; sourceTree = "<group>"; };
-		E5E73C3AF9754E33AEA7379D /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -344,6 +350,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F20F89920616DD00029D2BF /* libInAppUtils.a in Frameworks */,
+				3F20F89820616D750029D2BF /* libRNSound.a in Frameworks */,
+				3F20F89720616BAD0029D2BF /* libRNDeviceInfo.a in Frameworks */,
+				3F20F86C206169F10029D2BF /* libreact-native-branch.a in Frameworks */,
 				3FBEF9E11E6A53AF00782101 /* StoreKit.framework in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
@@ -358,11 +368,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				3F4E11A01E6A38CC00FB18A3 /* Branch.framework in Frameworks */,
-				E7E695A656B948B5A11C2D64 /* libInAppUtils.a in Frameworks */,
 				3FD77C0E1E6D0D0100E199DD /* Fabric.framework in Frameworks */,
-				F8AEAB55904C44269D3B43A7 /* libRNDeviceInfo.a in Frameworks */,
-				47349FA9561C46CE8D2EC3E2 /* libRNSound.a in Frameworks */,
-				34345645F1B04D34AD098AD0 /* libreact-native-branch.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,15 +552,20 @@
 		3FE0535D1E834F37005B7F8A /* sounds */ = {
 			isa = PBXGroup;
 			children = (
-				3FE053FC1E842ECA005B7F8A /* bombwhistle.m4a */,
-				3FE053D21E84230B005B7F8A /* bugles.m4a */,
-				3FE053D31E84230B005B7F8A /* ding.m4a */,
-				3FE053D41E84230B005B7F8A /* multiplier.m4a */,
-				3FE053D51E84230B005B7F8A /* woohoo.m4a */,
-				3FE053D61E84230B005B7F8A /* youdabest.m4a */,
-				3FE053591E834BCE005B7F8A /* fart.m4a */,
-				3FE0535A1E834BCE005B7F8A /* splat.m4a */,
-				3FE053571E833C75005B7F8A /* bombwhistlehigh.m4a */,
+				3F20F89C206174270029D2BF /* buttonTap.mp3 */,
+				3F20F89B206174270029D2BF /* splat.mp3 */,
+				3F20F89A206174270029D2BF /* whiff.mp3 */,
+				3F20F88620616A9D0029D2BF /* bombwhistle.mp3 */,
+				3F20F88220616A9D0029D2BF /* bugles.mp3 */,
+				3F20F88320616A9D0029D2BF /* ding.mp3 */,
+				3F20F88820616A9E0029D2BF /* fart.mp3 */,
+				3F20F88420616A9D0029D2BF /* incrementer.mp3 */,
+				3F20F88920616A9E0029D2BF /* levelSelect.mp3 */,
+				3F20F88520616A9D0029D2BF /* multiplier.mp3 */,
+				3F20F88120616A9D0029D2BF /* musicGame.wav */,
+				3F20F88720616A9E0029D2BF /* musicMenu.wav */,
+				3F20F88A20616A9E0029D2BF /* woohoo.mp3 */,
+				3F20F88B20616A9E0029D2BF /* youdabest.wav */,
 			);
 			name = sounds;
 			path = ../../sounds;
@@ -1053,17 +1064,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FE0535C1E834BCE005B7F8A /* splat.m4a in Resources */,
-				3FE053581E833C75005B7F8A /* bombwhistlehigh.m4a in Resources */,
-				3FE053DA1E84230B005B7F8A /* woohoo.m4a in Resources */,
-				3FE053FD1E842ECA005B7F8A /* bombwhistle.m4a in Resources */,
-				3FE053DB1E84230B005B7F8A /* youdabest.m4a in Resources */,
-				3FE0535B1E834BCE005B7F8A /* fart.m4a in Resources */,
+				3F20F89620616A9E0029D2BF /* youdabest.wav in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				3FE053D71E84230B005B7F8A /* bugles.m4a in Resources */,
-				3FE053D91E84230B005B7F8A /* multiplier.m4a in Resources */,
+				3F20F89320616A9E0029D2BF /* fart.mp3 in Resources */,
+				3F20F88E20616A9E0029D2BF /* ding.mp3 in Resources */,
+				3F20F89520616A9E0029D2BF /* woohoo.mp3 in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				3FE053D81E84230B005B7F8A /* ding.m4a in Resources */,
+				3F20F88F20616A9E0029D2BF /* incrementer.mp3 in Resources */,
+				3F20F89E206174270029D2BF /* splat.mp3 in Resources */,
+				3F20F88D20616A9E0029D2BF /* bugles.mp3 in Resources */,
+				3F20F89120616A9E0029D2BF /* bombwhistle.mp3 in Resources */,
+				3F20F89020616A9E0029D2BF /* multiplier.mp3 in Resources */,
+				3F20F88C20616A9E0029D2BF /* musicGame.wav in Resources */,
+				3F20F89F206174270029D2BF /* buttonTap.mp3 in Resources */,
+				3F20F89220616A9E0029D2BF /* musicMenu.wav in Resources */,
+				3F20F89420616A9E0029D2BF /* levelSelect.mp3 in Resources */,
+				3F20F89D206174270029D2BF /* whiff.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
