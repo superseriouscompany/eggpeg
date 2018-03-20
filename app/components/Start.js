@@ -5,6 +5,7 @@ import {connect}                     from 'react-redux'
 import {clear}                       from '../reducers'
 import config                        from '../config'
 import StartView                     from '../views/StartView'
+import sounds                        from '../sounds'
 
 class Start extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class Start extends Component {
   )}
 
   startGame() {
+    sounds.buttonTap.play()
     if( this.props.showDemo ) {
       this.props.dispatch({type: 'worlds:select', name: 'Demo'})
       this.props.dispatch({type: 'scene:change', scene: 'World'})

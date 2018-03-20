@@ -39,6 +39,9 @@ class FollowUs extends Component {
       </View>
 
       <View style={style.footer}>
+        <TouchableOpacity style={style.creditsCnr} onPress={() => Linking.openURL('http://marcdolgin.com')}>
+          <Text style={style.credits}>marc dolgin (music + sfx)</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={this.visitSite}>
           <Text style={{fontStyle: 'italic'}}>superseriouscompany.com</Text>
         </TouchableOpacity>
@@ -75,6 +78,12 @@ const style = StyleSheet.create({
     paddingRight: 20,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  creditsCnr: {
+    marginBottom: 10,
+  },
+  credits: {
+    fontStyle: 'italic'
   },
   footer: {
     paddingLeft: 20,

@@ -6,6 +6,7 @@ import RainbowButtonView from './RainbowButtonView'
 import base              from '../styles/base'
 import {
   Animated,
+  Linking,
   StatusBar,
   StyleSheet,
   TouchableOpacity,
@@ -25,6 +26,9 @@ export default function(props) {
             <RainbowButtonView style={style.startButton} onPress={props.startGame}>
               <Text style={style.startButtonText}>play</Text>
             </RainbowButtonView>
+            <TouchableOpacity style={style.creditsCnr} onPress={() => Linking.openURL('http://marcdolgin.com')}>
+              <Text style={style.credits}>Music and SFX by Marc Dolgin</Text>
+            </TouchableOpacity>
           </View>
         </View>
         { __DEV__ ?
@@ -63,5 +67,11 @@ const style = StyleSheet.create({
     fontSize: 32,
     color: 'white',
     fontFamily: 'Futura-Medium',
+  },
+  creditsCnr: {
+    marginTop: 30,
+  },
+  credits: {
+    fontSize: 14,
   },
 })

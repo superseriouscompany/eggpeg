@@ -5,6 +5,7 @@ import Component        from './Component'
 import {connect}        from 'react-redux'
 import config           from '../config'
 import WorldsView       from '../views/WorldsView'
+import sounds           from '../sounds'
 import {
   Animated,
   StyleSheet,
@@ -20,6 +21,8 @@ class Worlds extends Component {
   }
 
   loadLevel(name) {
+    sounds.musicGame.stop()
+    sounds.levelSelect.play()
     this.setState({
       selectedName: name,
       animateOut:   true,

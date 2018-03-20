@@ -12,10 +12,11 @@ const files = [
   'woohoo.mp3',      // game over high score
   'incrementer.mp3', // incrementing after multiplier
 
+  'levelSelect.mp3', // level selection
   'buttonTap.mp3',   // menu button tap
   'youdabest.wav',   // victory
-  'musicMenu.wav',  // menu music
-  'musicGame.wav',  // in-game music
+  'musicMenu.wav',   // menu music
+  'musicGame.wav',   // in-game music
 ]
 
 const sounds = {}
